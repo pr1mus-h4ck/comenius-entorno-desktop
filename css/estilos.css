@@ -8,11 +8,85 @@
     font-family: Lato;
     src: url(../fonts/Lato-Regular.ttf);
 }
-/* Fin de las Fuentes */
 
-/* Pisando estilos de Bootstrap */
 h1,
 h2 {
     font-family: Milimalust;
+    text-align: center;
 }
-/* Fin de Pisando estilos Bootstrap */
+
+.bg-primary {
+    background-color: palegreen;
+}
+
+.bg-secondary {
+    background-color: aliceblue;
+    padding: 5%;
+}
+
+label {
+    font-family: Lato;
+}
+/* Fin de las Fuentes */
+
+/* Estilos propios */
+
+/* Background */
+.bg-primary {
+    background-color: green;
+}
+
+.bg-secondary {
+    background-color: grey;
+}
+
+.btn-primary {
+    background-color: green;
+}
+/* Fin de Background */
+
+.text-center {
+    text-align: center;
+}
+
+/* Padding */
+.p-3 {
+    padding: 3%;
+}
+
+.py-3 {
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
+/* Fin de Padding */
+
+/* Margin */
+.mb-3 {
+    margin-bottom: 3%;
+}
+/* Fin de Margin */
+
+
+/* FlexBox */
+.d-flex {
+    display: flex;
+}
+
+.justify-content-center {
+    justify-content: center;
+}
+
+.aling-items-center {
+    align-items: center;
+}
+/* Fin de FlexBox */
+
+
+.h-100 {
+    height: 100vh;
+}
+
+.w-100 {
+    width: 100%;
+}
+/* Fin de Estilos propios */
