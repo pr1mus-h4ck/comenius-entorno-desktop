@@ -1,6 +1,11 @@
-/* Fuentes */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 @font-face {
-    font-family: Milimalust;
+    font-family: Minimalust;
     src: url(../fonts/Minimalust\ Small\ Cap.otf);
 }
 
@@ -9,65 +14,15 @@
     src: url(../fonts/Lato-Regular.ttf);
 }
 
-h1,
-h2 {
-    font-family: Milimalust;
-    text-align: center;
-}
-
-.bg-primary {
-    background-color: palegreen;
-}
-
-.bg-secondary {
-    background-color: aliceblue;
-    padding: 5%;
-}
-
-label {
-    font-family: Lato;
-}
-/* Fin de las Fuentes */
-
-/* Estilos propios */
-
-/* Background */
-.bg-primary {
-    background-color: green;
-}
-
-.bg-secondary {
-    background-color: grey;
-}
-
+.bg-primary,
 .btn-primary {
-    background-color: green;
-}
-/* Fin de Background */
-
-.text-center {
-    text-align: center;
+    background-image: linear-gradient(to right, #01ce1c, #0ffe37);
 }
 
-/* Padding */
-.p-3 {
-    padding: 3%;
+.btn-primary:hover {
+    background-image: linear-gradient(to right, #0ffe37, #01ce1c );
 }
 
-.py-3 {
-    padding-top: 3%;
-    padding-bottom: 3%;
-}
-/* Fin de Padding */
-
-/* Margin */
-.mb-3 {
-    margin-bottom: 3%;
-}
-/* Fin de Margin */
-
-
-/* FlexBox */
 .d-flex {
     display: flex;
 }
@@ -79,14 +34,129 @@ label {
 .aling-items-center {
     align-items: center;
 }
-/* Fin de FlexBox */
-
 
 .h-100 {
     height: 100vh;
 }
 
+.bg-secondary {
+    background-color: white;
+    
+}
+
+.p-3 {
+    padding: 3%;
+}
+
+.rounded {
+    border-radius: 12px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.mb-5 {
+    margin-bottom:12%;
+}
+
+h1,
+h2 {
+    font-family: Minimalust;
+}
+
+input,
+label,
+small,
+.btn {
+    font-family: Lato;
+}
+
+.btn {
+    font-weight: bold;
+}
+
+.form-content {
+    display: none;
+}
+
+.form-content:nth-child(2) {
+    display: block;
+}
+
+.login{
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.form-control {
+    border: none;
+    border-bottom: 2px solid black;
+    background: transparent;
+    height: 30px;
+    font-size: 14px;
+    padding-left: 10px;
+}
+
+.form-control:focus {
+    outline: none;
+}
+
 .w-100 {
     width: 100%;
 }
-/* Fin de Estilos propios */
+
+.form-label {
+    font-size: 16px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding-left: 10px;
+    cursor: text;
+    transition: all 0.3s ease;
+}
+
+.form-label,
+.form-control {
+    color: rgb(13, 189, 13);
+}
+
+.form-control:focus + label {
+    top: -14px;
+    font-size: 12px;
+    color: #666565;
+}
+
+.active {
+    top: -14px;
+    font-size: 12px;
+    color: #666565;
+}
+
+.error {
+    color: #ff0000;
+}
+
+.check {
+    color: #01ce1c;
+}
+
+.py-3 {
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
+
+.mt-5 { 
+    margin-top: 5%;
+}
+
+.btn {
+    border: none;
+    border-radius: 12px;
+    padding: 10px;
+    cursor:pointer;
+}
+
+.text-white {
+    color: white;
+}
