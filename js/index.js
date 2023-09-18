@@ -33,8 +33,8 @@ window.onload = function () {
 };
 
 //EJEMPLO función
-function inicioSesion() {
+/*function inicioSesion() {
     const email = document.getElementById('email').value;
     setCookie('usuario', email, 30); //COOKIE expira en 30 días
     alert('Inicio de sesión exitoso. Se ha guardado la sesión');
-}
+}*/
