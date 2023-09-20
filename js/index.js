@@ -45,4 +45,8 @@ formularioLogin.addEventListener('submit', (event) => {
         loginContrasena: loginContrasena
     }
     let iniciarJson = JSON.stringify(iniciar);
+    fetch('http://localhost:3000/login', {
+        method: 'Post',
+        body: iniciarJson
+    })
 })
