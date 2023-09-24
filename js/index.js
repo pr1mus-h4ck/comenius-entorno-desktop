@@ -4,6 +4,7 @@ formularioLogin.addEventListener('submit', (event) => {
     event.preventDefault();
     // Guardo los valores del formulario en variables
     let loginCorreo = document.getElementById('correo');
+    // TODO: Agregar validación del formato 'email'
     let loginContrasena = document.getElementById('contrasena');
     // Si ambos campos tienen valores
     if (loginCorreo.value && loginContrasena.value){
@@ -19,6 +20,7 @@ formularioLogin.addEventListener('submit', (event) => {
             method: 'Post',
             body: iniciarJson
         })
+        .then(recibir => recibir.json()).then(alert);
         // Imprime en consola los valores ingresados en cada campo
         console.log(iniciarJson);
     // sino
@@ -26,4 +28,4 @@ formularioLogin.addEventListener('submit', (event) => {
         // Muestra un alert con un mensaje
         alert('Todos los campos son obligatorios');
     }
-})
+});
