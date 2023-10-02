@@ -20,10 +20,56 @@ formularioLogin.addEventListener('submit', (event) => {
             method: 'Post',
             body: iniciarJson
         })
-        // .then(recibir => recibir.json()).then(alert);
+        .then(recibir => recibir.json())
+        .then(recibido => {
+            if (recibido[0] !== '') {
+                // alert(recibido[0]);
+                if (recibido[0] === 'Desactivado'){
+                    Swal.fire({
+                        title: 'Sesión Autenticado',
+                        text: '¡Haz iniciado sesión exitosamente!',
+                        icon: 'success',
+                        timer: 1500,
+                        showConfirmButton: false
+                    }).then(redireccionar => {
+                        window.location = 'app/index.html'
+                    })
+                } else {
+                    Swal.fire({
+                        title: 'Sesión Autenticado',
+                        text: '¡Haz iniciado sesión exitosamente!',
+                        icon: 'success',
+                        timer: 1500,
+                        showConfirmButton: false
+                    }).then(redireccionar => {
+                        window.location = 'otp.html'
+                    })
+                }
+            } else if (recibido[1] !== '') {
+                // alert(recibido[1]);
+                Swal.fire({
+                    title: 'Advertencia',
+                    icon: 'warning',
+                    text: recibido[1]
+                })
+            } else if (recibido[2] !== '') {
+                // alert(recibido[2]);
+                Swal.fire({
+                    title: 'Atención',
+                    icon: 'error',
+                    showConfirmButton: false,
+                    text: recibido[2]
+                })
+            }
+        })
     // sino
     } else {
-        // Muestra un alert con un mensaje
-        alert('Todos los campos son obligatorios');
+        // Muestra un sweetalert2 con un mensaje de atención
+        Swal.fire({
+            title: 'Atención',
+            icon: 'error',
+            // timer: 1500,
+            text: 'Todos los campos son obligatorios'
+        })
     }
 });
