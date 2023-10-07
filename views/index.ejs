@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+</head>
+<body>
+    <h1>Index</h1>
+    <p>La sesión iniciada <%= sesiones.correo %></p>
+    <% if (sesiones.rol !== '') { %>
+        <% if (sesiones.rol === 'alumno') { %>
+            <%- include('dash-alumno.html') %>
+        <% } else if (sesiones.rol === 'profesor') { %>
+            <%- include('dash-profesor.html') %>
+        <% } else if (sesiones.rol === 'coordinador') { %>
+            <%- include('dash-coordinador.html') %>
+        <% } else if (sesiones.rol === '') { %>
+            <%- include('dash-secretaria.html') %>
+        <% } else if (sesiones.rol === 'departamento de alumnos') { %>
+            <%- include('dash-departamento-alumno.html') %>
+        <% } else if (sesiones.rol === 'usuario especial') { %>
+            <%- include('dash-usuario-especial.html') %>
+        <% } else if (sesiones.rol === 'soporte') { %>
+            <%- include('dash-soporte-sistemas.html') %>
+        <% } %>
+    <% } %>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio Sesión</title>
+</head>
+<body>
+    <main>
+        <div>
+            <h1>Inicio Sesión</h1>
+        </div> 
+        <!--DESDE ACÁ EL LOGIN-->
+        <form action="/login" method="post"> 
+            <!--casilla de email-->
+            <div>
+                <label for="correo">Correo</label>
+                <input type="email" name='correo' required>
+            </div>
+            <!--casilla de contraseña-->
+            <div>
+                <label for="contrasena">Contraseña</label>
+                <input type="password" name='contrasena' required>
+            </div>
+            <div>
+                <div>
+                    <label for="###">
+                    <input type="checkbox" id="###">
+                        Recordar correo
+                    </label>
+                </div>
+            </div>
+            <div>
+                <button type="submit">Submit</button>
+            </div>
+        </form> 
+        <!--ACÁ TERMINA EL LOGIN-->
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <% if (typeof alert != 'undefined') { %>
+        <script>
+            Swal.fire({
+                title: '<%= alertTitle %>',
+                text: '<%= alertMessage %>',
+                icon: '<%= alertIcon %>',
+                timer: <%= timer %>,
+                showConfirmButton: <%= showConfirButton %>,
+            }).then(recibido => {
+                window.location = '<%= ruta %>'
+            })
+        </script>
+    <% } %>
+</body>
+</html>
