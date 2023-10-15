@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio Sesión</title>
 </head>
+
+<% if (typeof alert != 'undefined') { %> <!--if que pregunta si la sesion existe, redirrecionar a raiz (/)-->
+    
+
+<% } %>
+
 <body>
     <main>
         <div>
@@ -31,8 +37,12 @@
                 </div>
             </div>
             <div>
+                <a href="#"> ¿Desea cambiar su contraseña?</a>
+            </div>
+            <div>
                 <button type="submit">Submit</button>
             </div>
+
         </form> 
         <!--ACÁ TERMINA EL LOGIN-->
     </main>
