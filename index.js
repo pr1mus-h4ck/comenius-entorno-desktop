@@ -39,9 +39,14 @@ app.get('/', (req,res)=>{
         res.render('index', {sesiones});
     } else if (verificacion === true) {
         // Renderizar la página de otp
-        res.render('otp');
+        res.render('otp', {sesiones});
     }
 });
+
+app.get ('/contrasenia', (req, res) => {
+    verificacion = true;
+    res.redirect('/');
+}) 
 app.post('/login', (req, res) => {
     // Guardo los valores del formulario en constantes
     const correo = req.body.correo;
@@ -91,6 +96,8 @@ app.post('/login', (req, res) => {
                         timer: 1500,
                         ruta: '/'
                     })
+                    mail = recibido[3];
+                    rol = recibido[4];
                     verificacion = true;
                 }
             // Compruebo si el segundo elemento no está vacío
@@ -130,6 +137,22 @@ app.post('/login', (req, res) => {
             timer: false,
             ruta: '/'
         })
+    }
+});
+
+app.post ( '/reseteo', (req, res) => {
+    const correo = req.body.email; 
+    if (req.body.email !== '') {
+        let email = {
+            correo: correo
+        }
+        let emailJSON = JSON.stringify(email);
+        fetch(`http://localhost:3000/reseteo`, {
+            method: 'Post',
+            body: emailJSON
+        })
+        .then(recibir => recibir.json())
+        .then(console.log)
     }
 });
 app.listen(puerto, (req, res) => {

@@ -5,40 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OTP</title>
 </head>
-
-<% if (typeof alert != 'undefined') { %> <!--if que pregunta si la sesion existe, redirrecionar a raiz (/)-->
-    
-
-<% } %>
-
 <body>
-    <div>
-        <h1>OTP</h1>
-    </div>
-    <form>
-        <div>
-            <!--TODO: los labels deben ser ocultados desde el CSS-->
-            <label for="#">Digito 1</label>
-            <input id="#" type="text" name="#">
-            <label for="##">Digito 2</label>
-            <input id="##" type="text" name="##">
-            <label for="###">Digito 3</label>
-            <input id="###" type="text" name="###">
-            <label for="####">Digito 4</label>
-            <input id="####" type="text" name="####">
-            <label for="#####">Digito 5</label>
-            <input id="#####" type="text" name="#####">
-            <label for="######">Digito 6</label>
-            <input id="######" type="text" name="######">
-        </div>
-        <div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-        <div>
-            <p>
-                ¿No recibió el código? <a href="#">Haga click aquí</a>
-            </p>
-        </div>
-    </form>
+    <% if (sesiones.correo !== '') { %> 
+        <%- include('otp-elegir-opcion.html') %> 
+    <% } else { %>
+        <%- include('otp-ingresar-correo.html') %>
+    <% } %>
 </body>
 </html>
