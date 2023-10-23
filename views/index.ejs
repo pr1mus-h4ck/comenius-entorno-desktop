@@ -4,8 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Index</title>
+    <style>
+        #menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 200px;
+            height: 100%;
+            padding: 20px;
+            color: green;
+        }
+        #menu ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        #menu ul li {
+            margin-bottom: 5px;
+        }
+        
+        #menu ul li a {
+            text-decoration: none;
+        }
+
+        #contenido {
+            margin-left: 220px;
+        }
+    </style>
 </head>
 <body>
+    <div id="menu">
+        <ul>
+            <li><a href="/notificaciones">notificaciones</a></li>
+            <li><a href="/mensajes">mensajes</a></li>
+            <li><a href="/mensajes">videollamada</a></li>
+
+        </ul>
+    </div>
+    <div id="contenido">
     <h1>Index</h1>
     <p>La sesión iniciada <%= sesiones.correo %></p>
     <% if (sesiones.rol !== '') { %>
@@ -25,5 +61,6 @@
             <%- include('dash-soporte-sistemas.html') %>
         <% } %>
     <% } %>
+</div>
 </body>
 </html>
