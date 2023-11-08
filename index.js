@@ -47,6 +47,11 @@ app.get ('/contrasenia', (req, res) => {
     verificacion = true;
     res.redirect('/');
 }) 
+
+app.get ('/cancelar-otp', (req,res) => {
+    verificacion = '';
+    res.redirect('/');
+})
 app.post('/login', (req, res) => {
     // Guardo los valores del formulario en constantes
     const correo = req.body.correo;
