@@ -1,0 +1,29 @@
+* {
+    box-sizing: border-box;
+    margin: 0px;
+
+}
+
+.menuV{
+    float: left;
+    width: 7%;
+    overflow: hidden;
+    border: 5px double;
+}
+.menuV a{
+    background-color: black;
+    color: white;
+    text-decoration: none;
+    padding: 50%;
+    display: block;
+
+}
+
+.menuV a:hover{
+    background-color: white;
+    color: black;
+}
+
+i {
+
+}
