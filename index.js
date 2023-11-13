@@ -48,9 +48,19 @@ app.get ('/contrasenia', (req, res) => {
     res.redirect('/');
 }) 
 
-app.get ('/cancelar-otp', (req,res) => {
+app.get ('/cancelar', (req,res) => {
     verificacion = '';
     res.redirect('/');
+})
+
+app.get('/cancelar-otp', (req, res) => {
+    req.session.correo = '',
+    verificacion = '',
+    res.redirect('/');
+})
+
+app.get('/logout', (req, res)=>{
+    
 })
 app.post('/login', (req, res) => {
     // Guardo los valores del formulario en constantes
