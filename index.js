@@ -58,9 +58,13 @@ app.get('/cancelar-otp', (req, res) => {
     verificacion = '',
     res.redirect('/');
 })
-
 app.get('/logout', (req, res)=>{
-    
+    req.session.destroy((err) => {
+        if(err) {
+            console.log('no se cerró la sesión'); 
+    }
+        res.redirect('/'); 
+    });
 })
 app.post('/login', (req, res) => {
     // Guardo los valores del formulario en constantes
