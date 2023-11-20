@@ -10,9 +10,18 @@
     <div id="contenido">
     <h1>Index</h1>
     <p>La sesión iniciada <%= sesiones.correo %></p>
+    <aside class="menu-vertical">
+        <a href=""><i class="fa-solid fa-house-user"></i>Inicio</a>
+        <a href=""><i class="fa-solid fa-bookmark"></i>Panel de materias</a>
+        <a href=""><i class="fa-solid fa-people-group"></i>Grupos</a>
+        <a href=""><i class="fa-regular fa-calendar-days"></i>Calendario</a>
+        <a href=""><i class="fa-solid fa-volume-high"></i>Notificaciones</a>
+        <a href=""><i class="fa-solid fa-credit-card"></i>Metodos de pago</a>
+    </aside>
     <% if (sesiones.rol !== '') { %>
         <% if (sesiones.rol === 'alumno') { %>
             <%- include('dash-alumno.html') %>
+            <% if (sesiones.rol === 'alumno') { %>
         <% } else if (sesiones.rol === 'profesor') { %>
             <%- include('dash-profesor.html') %>
         <% } else if (sesiones.rol === 'coordinador') { %>
@@ -28,14 +37,5 @@
         <% } %>
     <% } %>
 </div>
-    <aside class="menuV">
-        <a href=""><i class="fa-solid fa-house-user"></i>Inicio</a>
-        <a href=""><i class="fa-solid fa-bookmark"></i>Materias</a>
-        <a href=""><i class="fa-solid fa-people-group"></i>Grupos</a>
-        <a href=""><i class="fa-regular fa-calendar-days"></i>Calendario</a>
-        <a href=""><i class="fa-solid fa-volume-high"></i>Notificaciones</a>
-        <a href=""><i class="fa-solid fa-credit-card"></i>Metodos de pago</a>
-        <a href=""><i class="fa-solid fa-credit-card"></i>Videollamada</a>
-    </aside>
 </body>
 </html>

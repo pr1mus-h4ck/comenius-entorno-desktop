@@ -1,16 +1,15 @@
+/*CSS de menú vertical del dashboard*/
 * {
     box-sizing: border-box;
     margin: 0px;
-
 }
-
-.menuV{
+.menu-vertical{
     float: left;
     width: 7%;
     overflow: hidden;
     border: 5px double;
 }
-.menuV a{
+.menu-vertical a{
     background-color: black;
     color: white;
     text-decoration: none;
@@ -19,11 +18,9 @@
 
 }
 
-.menuV a:hover{
+.menu-vertical a:hover{
     background-color: white;
     color: black;
 }
 
-i {
-
-}
+/*CSS de menú vertical de la videollamada*/
