@@ -7,13 +7,16 @@
     <link rel="stylesheet" href="/public/css/estilos.css">
 </head>
 <body>
-    <h1>esto es la videollamada</h1>
     <div class="menu-v">
-        <ul>
-            <li><a href="#">Panel de la clase</a></li>
-            <li><a href="#">Clase virtual trabajos</a></li>
-            <li><a href="#">Panel de la clase</a></li>
-        </ul>
+    <% if (sesiones.rol !== '') { %>
+            <%- include('panel-de-clase.html') %>
+            <%- include('clase-virtual.html') %>
+            <%- include('trabajos.html') %>
+    </div>
+    <div class="menu-v-chat">
+        <% if (sesiones.rol !== '') { %>
+            <%- include('chat.html') %>
+            <%- include('participantes.html') %>
     </div>
 </body>
 </html>
