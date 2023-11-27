@@ -8,13 +8,11 @@
 </head>
 <body>
     <div class="menu-v">
-    <% if (sesiones.rol !== '') { %>
             <%- include('panel-de-clase.html') %>
             <%- include('clase-virtual.html') %>
             <%- include('trabajos.html') %>
     </div>
     <div class="menu-v-chat">
-        <% if (sesiones.rol !== '') { %>
             <%- include('chat.html') %>
             <%- include('participantes.html') %>
     </div>
