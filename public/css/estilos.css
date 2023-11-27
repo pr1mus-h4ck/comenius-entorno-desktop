@@ -1,26 +1,22 @@
 /*CSS de menú vertical del dashboard*/
-* {
-    box-sizing: border-box;
-    margin: 0px;
-}
-.menu-vertical{
-    float: left;
-    width: 7%;
-    overflow: hidden;
-    border: 5px double;
-}
-.menu-vertical a{
-    background-color: black;
+.menu-vertical {
+    background-color: #333;
+    padding: 15px;
+    width: 200px;
     color: white;
-    text-decoration: none;
-    padding: 50%;
-    display: block;
-
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
-.menu-vertical a:hover{
-    background-color: white;
-    color: black;
+.menu-vertical a {
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+    display: block;
+}
+.menu-vertical i {
+    margin-right: 8px;
 }
 
 /*CSS de menú vertical de la videollamada*/
