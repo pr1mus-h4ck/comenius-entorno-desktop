@@ -1,18 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Videollamada</title>
     <link rel="stylesheet" href="/public/css/estilos.css">
 </head>
+
 <body>
-    <%- include('panel-de-clase.html') %> 
-    <%- include('clase-virtual.html') %>
-    <%- include('trabajos.html') %>
+    <% if (sesiones.rol === 'alumno' || sesiones.rol ===  'profesor' || sesiones.rol ===  'coordinador' || sesiones.rol ===  'secretaria') { %> 
+        <%- include('panel-de-clase.html') %>
+    <% } else if ( sesiones.rol === 'alumno' || sesiones.rol ===  'profesor' || sesiones.rol ===  'coordinador' || sesiones.rol ===  'secretaria' || sesiones.rol === 'usuario especial') { %>
+        <%- include('clase-virtual.html') %>
+    <% } else if ( sesiones.rol === 'alumno' || sesiones.rol ===  'profesor' || sesiones.rol === 'coordinador') { %>
+        <%- include('trabajos.html') %>
+    <% } %>
 <!--    
     <div class="menu-v-chat">
     INCLUDES del chat de la videollamada (chat y participantes)
     </div> -->
 </body>
+
 </html>

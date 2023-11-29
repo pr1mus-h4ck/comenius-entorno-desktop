@@ -10,18 +10,17 @@
     <div id="contenido">
     <h1>Index</h1>
     <p>La sesión iniciada <%= sesiones.correo %></p>
-    <aside class="menu-vertical">
-        <a href=""><i class="fa-solid fa-house-user"></i>Inicio</a>
-        <a href="panel-de-materia.html"><i class="fa-solid fa-bookmark"></i>Panel de materias</a>
-        <a href=""><i class="fa-solid fa-people-group"></i>Grupos</a>
-        <a href=""><i class="fa-regular fa-calendar-days"></i>Calendario</a>
-        <a href=""><i class="fa-solid fa-volume-high"></i>Notificaciones</a>
-        <a href=""><i class="fa-solid fa-credit-card"></i>Metodos de pago</a>
-    </aside>
+        <ul>
+            <li>Inicio</li>
+            <li>Panel de materias</li>
+            <li>Grupos</li>
+            <li>Calendario</li>
+            <li>Notificaciones</li>
+            <li>Metodos de pago</li>
+        </ul>
     <% if (sesiones.rol !== '') { %>
         <% if (sesiones.rol === 'alumno') { %>
             <%- include('dash-alumno.html') %>
-            <% if (sesiones.rol === 'alumno') { %>
         <% } else if (sesiones.rol === 'profesor') { %>
             <%- include('dash-profesor.html') %>
         <% } else if (sesiones.rol === 'coordinador') { %>
@@ -36,7 +35,7 @@
             <%- include('dash-soporte-sistemas.html') %>
         <% } %>
 <% } %>
-<% } %>
+<!--TODO: primero configurar el active en JS, luego hacer los INCLUDE por cada opción del menú y convertir el valor del ACTIVE e incrustarlo en una variable-->  
 </div>
 </body>
 </html>
