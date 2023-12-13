@@ -10,14 +10,50 @@
     <div id="contenido">
     <h1>Index</h1>
     <p>La sesión iniciada <%= sesiones.correo %></p>
+    <!--MENÚ inicio-->
         <ul>
-            <li>Inicio</li>
-            <li>Panel de materias</li>
-            <li>Grupos</li>
-            <li>Calendario</li>
-            <li>Notificaciones</li>
-            <li>Metodos de pago</li>
+            <% 
+            let menu = [
+            inicio, 
+            panel_de_materias, 
+            grupos,
+            notificaciones,
+            calendario,
+            registro
+            ] 
+            %>  
+            <% array.foreach(menu =>  { %>     <!--LISTA EL MENÚ--> 
+                <li name="opcion"><a href="/redireccionar"><%menu%></a></li>
+                <% }); %>
         </ul>
+
+    <!--includes del menú-->
+    <% if (isfileexist('/views')) %>  
+        <% if (menu[0]) { %> <!--SI la posicion del menu está en 0-->
+            <% if (sesiones.rol !== '') { %> <!--SI tiene un rol-->
+                <% if (sesiones.rol === 'alumno')  %>  <!--SI el usuario tiene ROL ALUMNO y continua con el resto de los roles -->
+                    <%- include('dash-alumno.html') %>
+                <% } else if (sesiones.rol === 'profesor') { %>
+                    <%- include('dash-profesor.html') %>
+                <% } else if (sesiones.rol === 'coordinador') { %>
+                    <%- include('dash-coordinador.html') %>
+                <% } else if (sesiones.rol === 'secretaria') { %>
+                    <%- include('dash-secretaria.html') %>
+                <% } else if (sesiones.rol === 'departamento de alumnos') { %>
+                    <%- include('dash-departamento-alumno.html') %>
+                <% } else if (sesiones.rol === 'usuario especial') { %>
+                    <%- include('dash-usuario-especial.html') %>
+                <% } else if (sesiones.rol === 'soporte') { %>
+                    <%- include('dash-soporte.html') %>
+                <% } else { %>
+                    <!-- CERRAR SESIÓN > llamar a metodo /logout y mostrar un ALERT para notificar problema -->
+                    <%- include ('/logout') %>
+                <% } else { %>
+        <%- include ('404.html') %>
+                <% } %>
+            <% } %>
+
+    <!--include de los dash en general-->
     <% if (sesiones.rol !== '') { %>
         <% if (sesiones.rol === 'alumno') { %>
             <%- include('dash-alumno.html') %>
@@ -35,7 +71,7 @@
             <%- include('dash-soporte-sistemas.html') %>
         <% } %>
 <% } %>
-<!--TODO: primero configurar el active en JS, luego hacer los INCLUDE por cada opción del menú y convertir el valor del ACTIVE e incrustarlo en una variable-->  
+
 </div>
 </body>
 </html>

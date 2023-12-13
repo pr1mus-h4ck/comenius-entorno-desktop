@@ -6,6 +6,7 @@ const cors = require('cors');
 let mail = '';
 let rol = '';
 let verificacion = '';
+let opcion = '';
 app.use(session({
     secret: 'keyboard cat',
     resave: false,
@@ -66,6 +67,11 @@ app.get('/logout', (req, res)=>{
         res.redirect('/'); 
     });
 })
+//METODO para redirección menú
+app.get('/redireccionar', (req, res) => {
+    opcion = req.body.opcion;
+    res.redirect('/');
+});
 app.post('/login', (req, res) => {
     // Guardo los valores del formulario en constantes
     const correo = req.body.correo;
