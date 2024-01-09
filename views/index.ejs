@@ -10,10 +10,8 @@
     <div id="contenido">
     <h1>Index</h1>
     <p>La sesión iniciada <%= sesiones.correo %></p>
-    <!--MENÚ inicio-->
         <ul>
-            <% 
-            let menu = [
+            <% let menu = [
             inicio, 
             panel_de_materias, 
             grupos,
@@ -22,16 +20,16 @@
             registro
             ] 
             %>  
-            <% array.foreach(menu =>  { %>     <!--LISTA EL MENÚ--> 
+            <% menu.foreach(menu =>  { %>     
                 <li name="opcion"><a href="/redireccionar"><%menu%></a></li>
                 <% }); %>
         </ul>
 
     <!--includes del menú-->
-    <% if (isfileexist('/views')) %>  
+    <% if (isfileexist('/views')) { %>  
         <% if (menu[0]) { %> <!--SI la posicion del menu está en 0-->
             <% if (sesiones.rol !== '') { %> <!--SI tiene un rol-->
-                <% if (sesiones.rol === 'alumno')  %>  <!--SI el usuario tiene ROL ALUMNO y continua con el resto de los roles -->
+                <% if (sesiones.rol === 'alumno') { %>  <!--SI el usuario tiene ROL ALUMNO y continua con el resto de los roles -->
                     <%- include('dash-alumno.html') %>
                 <% } else if (sesiones.rol === 'profesor') { %>
                     <%- include('dash-profesor.html') %>
@@ -45,12 +43,9 @@
                     <%- include('dash-usuario-especial.html') %>
                 <% } else if (sesiones.rol === 'soporte') { %>
                     <%- include('dash-soporte.html') %>
-                <% } else { %>
-                    <!-- CERRAR SESIÓN > llamar a metodo /logout y mostrar un ALERT para notificar problema -->
-                    <%- include ('/logout') %>
-                <% } else { %>
-        <%- include ('404.html') %>
+                    <% } %>
                 <% } %>
+            <% } %>
             <% } %>
 
     <!--include de los dash en general-->

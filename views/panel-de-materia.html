@@ -6,30 +6,10 @@
     <title>Panel de materias</title>
 </head>
 <body>
-    <%- include('listado-materias.html') %>
-    <!--1ra Materia-->
-    <div class="card">
-        <div class="card-body">
-        <h5 class="card-title">Sistemas operativos</h5>
-        <%- include('videollamada.html') %>
-        <h5 class="card-subtitle mb-2">Misael Cudeck</h5>
-        <h6 class="card-subtitle mb-2 text-muted">Primer cuatrimestre</h6>
-        <h6 class="card-subtitle mb-2 text-muted">Comision XX</h6>
-        <h6 class="card-subtitle mb-2 text-muted">Turno tarde</h6>
-        <h6 class="card-subtitle mb-2 text-muted">16:00 - 18:00</h6>
-        </div>
-    </div>
-        <!--2da Materia-->
-        <div class="card">
-            <div class="card-body">
-            <h5 class="card-title">Sistemas operativos</h5>
-            <%- include('videollamada.html') %>
-            <h5 class="card-subtitle mb-2">Misael Cudeck</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Primer cuatrimestre</h6>
-            <h6 class="card-subtitle mb-2 text-muted">Comision XX</h6>
-            <h6 class="card-subtitle mb-2 text-muted">Turno tarde</h6>
-            <h6 class="card-subtitle mb-2 text-muted">16:00 - 18:00</h6>
-            </div>
-        </div>
+<!--TODO: listado de las materias a las que el USUARIO ALUMNO está registrado/ listado de materias a las que el USUARIO PROFESOR está designado-->
+<!--include de lista de materias y videollamada/include opcion para el 404-->
+<%- include('lista-de-materias-html') %>
+<%- include('videollamada.html') %>
+<%- include('404.html') %>
 </body>
 </html>

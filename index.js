@@ -72,6 +72,11 @@ app.get('/redireccionar', (req, res) => {
     opcion = req.body.opcion;
     res.redirect('/');
 });
+
+//METODO de lista de materias.html para redireccionar a RAIZ
+app.get('/', (req, res) => {
+    res.redirect('/');
+});
 app.post('/login', (req, res) => {
     // Guardo los valores del formulario en constantes
     const correo = req.body.correo;
