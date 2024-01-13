@@ -69,7 +69,6 @@ app.get('/logout', (req, res)=>{
 })
 //METODO para redirección menú
 app.get('/redireccionar', (req, res) => {
-    opcion = req.body.opcion;
     res.redirect('/');
 });
 
@@ -77,6 +76,22 @@ app.get('/redireccionar', (req, res) => {
 app.get('/', (req, res) => {
     res.redirect('/');
 });
+
+app.get('/', (req, res) =>{
+    if (req.session.loggedin) {
+        let menu = [
+            "inicio", 
+            "panel de materias", 
+            "grupos", 
+            "notificaciones", 
+            "calendario", 
+            "registro"
+        ]
+        res.render('index', {login:true, user:req.session.user, rol:req.session.rol, menuMain: menu})
+    } else {
+        res.render('index', {login: false, user:null})
+    }
+})
 app.post('/login', (req, res) => {
     // Guardo los valores del formulario en constantes
     const correo = req.body.correo;

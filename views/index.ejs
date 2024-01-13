@@ -11,42 +11,19 @@
     <h1>Index</h1>
     <p>La sesión iniciada <%= sesiones.correo %></p>
         <ul>
-            <% let menu = [
-            inicio, 
-            panel_de_materias, 
-            grupos,
-            notificaciones,
-            calendario,
-            registro
-            ] 
-            %>  
-            <% menu.foreach(menu =>  { %>     
-                <li name="opcion"><a href="/redireccionar"><%menu%></a></li>
-                <% }); %>
-        </ul>
-
-    <!--includes del menú-->
-    <% if (isfileexist('/views')) { %>  
-        <% if (menu[0]) { %> <!--SI la posicion del menu está en 0-->
-            <% if (sesiones.rol !== '') { %> <!--SI tiene un rol-->
-                <% if (sesiones.rol === 'alumno') { %>  <!--SI el usuario tiene ROL ALUMNO y continua con el resto de los roles -->
-                    <%- include('dash-alumno.html') %>
-                <% } else if (sesiones.rol === 'profesor') { %>
-                    <%- include('dash-profesor.html') %>
-                <% } else if (sesiones.rol === 'coordinador') { %>
-                    <%- include('dash-coordinador.html') %>
-                <% } else if (sesiones.rol === 'secretaria') { %>
-                    <%- include('dash-secretaria.html') %>
-                <% } else if (sesiones.rol === 'departamento de alumnos') { %>
-                    <%- include('dash-departamento-alumno.html') %>
-                <% } else if (sesiones.rol === 'usuario especial') { %>
-                    <%- include('dash-usuario-especial.html') %>
-                <% } else if (sesiones.rol === 'soporte') { %>
-                    <%- include('dash-soporte.html') %>
+            <% let menu = [ "inicio", "panel de materias", "notificaciones", "grupos", "contactos", "registro"]
+            
+            <% foreach(menu =>  { %>
+                <% if(rol === "profesor") { %>
+                    <li name="opcion"><a href="/redireccionar"> <%=menu %> </a></li>
+                <%} else { %>
+                    <% if (menu != registro) { %>
+                        <li name="opcion"><a href="/redireccionar"> <%=menu %> </a></li>
                     <% } %>
                 <% } %>
-            <% } %>
-            <% } %>
+            <% }) %>
+        </ul>
+
 
     <!--include de los dash en general-->
     <% if (sesiones.rol !== '') { %>
