@@ -10,7 +10,7 @@
     <p>La sesión iniciada <%= sesiones.correo %></p>
     <% if (sesiones.rol !== '') { %>
         <% if (sesiones.rol === 'alumno') { %>
-            <%- include('dash-alumno.html') %>
+            <%- include('dash-alumno.html') %> 
         <% } else if (sesiones.rol === 'profesor') { %>
             <%- include('dash-profesor.html') %>
         <% } else if (sesiones.rol === 'coordinador') { %>
