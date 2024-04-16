@@ -156,7 +156,7 @@ app.post('/login', (req, res) => {
 app.post('/enviar-otp', (req, res) => {
     // Comprobar si existe sesión
     req.session.correo = mail;
-    // Creo un objeto con lel valor del correo de la sesión
+    // Creo un objeto con el valor del correo de la sesión
     let correo = {
         correo : req.session.correo
     }
