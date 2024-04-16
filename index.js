@@ -3,7 +3,7 @@ const app = express();
 const puerto = 4000;
 const session = require('express-session');
 const cors = require('cors');
-let mail = ''; // pedro.perez
+let mail = '';
 let rol = '';
 let verificacion = '';
 app.use(session({
@@ -56,18 +56,18 @@ app.post('/login', (req, res) => {
     const correo = req.body.correo;
     const contrasena = req.body.contrasena;
     req.session.login = mail;
-    // Si ambos campos tienen valores
-    if (req.body.correo !== '' && req.body.contrasena !== '') {
-        // Creo un objeto con los valores del formulario
-        let iniciar = {
-            correo : correo,
-            contrasena : contrasena
-        }
-        // Convierto el objeto en un JSON
-        let iniciarJson = JSON.stringify(iniciar);
-        if (req.session.login) {
-            res.redirect('/');
-        } else {
+    if (req.session.login) {
+        res.redirect('/');
+    } else {
+        // Si ambos campos tienen valores
+        if (req.body.correo !== '' && req.body.contrasena !== '') {
+            // Creo un objeto con los valores del formulario
+            let iniciar = {
+                correo : correo,
+                contrasena : contrasena
+            }
+            // Convierto el objeto en un JSON
+            let iniciarJson = JSON.stringify(iniciar);
             // Envío en método POST al servidor con los datos del JSON
             fetch(`http://localhost:3000/login`, {
                 method: 'Post',
@@ -136,18 +136,18 @@ app.post('/login', (req, res) => {
                     res.redirect('/');
                 }
             })
+        } else {
+            // Muestro un alert indicando que debe completar los campos obligatorios del formulario llevandolo nuevamente al 'login'
+            res.render('login', {
+                alert: true,
+                alertTitle: 'Campos Obligatorios',
+                alertMessage: '¡Todos los campos del formulario son obligatorios!',
+                alertIcon: 'error',
+                showConfirButton: true,
+                timer: false,
+                ruta: '/'
+            })
         }
-    } else {
-        // Muestro un alert indicando que debe completar los campos obligatorios del formulario llevandolo nuevamente al 'login'
-        res.render('login', {
-            alert: true,
-            alertTitle: 'Campos Obligatorios',
-            alertMessage: '¡Todos los campos del formulario son obligatorios!',
-            alertIcon: 'error',
-            showConfirButton: true,
-            timer: false,
-            ruta: '/'
-        })
     }
 });
 app.post('/enviar-otp', (req, res) => {
