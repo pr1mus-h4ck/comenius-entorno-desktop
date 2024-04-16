@@ -52,13 +52,16 @@ app.get('/login', (req, res) => {
     res.redirect('/');
 })
 app.post('/login', (req, res) => {
-    // Guardo los valores del formulario en constantes
-    const correo = req.body.correo;
-    const contrasena = req.body.contrasena;
+    // Comprobar si existe sesión
     req.session.login = mail;
+    // Si existe sesión, redireccionar a la página principal
     if (req.session.login) {
         res.redirect('/');
+    // Si no existe sesión, hacer validación del formulario
     } else {
+        // Guardo los valores del formulario en constantes
+        const correo = req.body.correo;
+        const contrasena = req.body.contrasena;
         // Si ambos campos tienen valores
         if (req.body.correo !== '' && req.body.contrasena !== '') {
             // Creo un objeto con los valores del formulario
@@ -151,17 +154,22 @@ app.post('/login', (req, res) => {
     }
 });
 app.post('/enviar-otp', (req, res) => {
+    // Comprobar si existe sesión
     req.session.correo = mail;
+    // Creo un objeto con lel valor del correo de la sesión
     let correo = {
         correo : req.session.correo
     }
+    // Convierto el objeto en un JSON
     let correoJson = JSON.stringify(correo);
+    // Envío en método POST al servidor con los datos del JSON
     fetch(`http://localhost:3000/enviar-otp`, {
         method: 'Post',
         body: correoJson
     })
     .then(recibir => recibir.json())
     .then(recibido => {
+        // Imprimo en consola el objeto recibido
         console.log(recibido);
     });
 });
