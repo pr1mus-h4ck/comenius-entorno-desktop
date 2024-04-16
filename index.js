@@ -3,13 +3,9 @@ const app = express();
 const puerto = 4000;
 const session = require('express-session');
 const cors = require('cors');
-let mail = '';
+let mail = ''; // pedro.perez
 let rol = '';
 let verificacion = '';
-app.use((req, res, next) => {
-    res.setHeader('Cache-Control', 'no-store');
-    next();
-})
 app.use(session({
     secret: 'keyboard cat',
     resave: false,
@@ -23,6 +19,10 @@ app.use(express.urlencoded({
 app.use(express.json({
     type: '*/*'
 }));
+app.use((req, res, next) => {
+    res.setHeader('Cache-Control', 'no-store');
+    next();
+});
 app.set('view engine', 'ejs');
 // Renderizar la página de index
 app.get('/', (req,res) => {
@@ -35,15 +35,15 @@ app.get('/', (req,res) => {
         rol: req.session.rol
     }
     // Comprobar si los datos de la sesión están vacíos
-    if (sesiones.correo){
-        if (verificacion === 'true') {
-            // Renderizar la página de otp
-            res.render('otp', {sesiones});
-        } else {
+    if (req.session.correo) {
+        if (verificacion === false) {
             // Renderizar la página de index con datos de sesión
             res.render('index', {sesiones});
+        } else if (verificacion === true) {
+            // Renderizar la página de otp
+            res.render('otp', {sesiones});
         }
-    }else{
+    } else {
         // Renderizar la página de inicio de sesión
         res.render('login');
     }
@@ -55,19 +55,19 @@ app.post('/login', (req, res) => {
     // Guardo los valores del formulario en constantes
     const correo = req.body.correo;
     const contrasena = req.body.contrasena;
-    req.session.correo = mail;
-    if (req.session.correo) {
-        res.redirect('/');
-    } else {
-        // Si ambos campos tienen valores
-        if (req.body.correo !== '' && req.body.contrasena !== '') {
-            // Creo un objeto con los valores del formulario
-            let iniciar = {
-                correo : correo,
-                contrasena : contrasena
-            }
-            // Convierto el objeto en un JSON
-            let iniciarJson = JSON.stringify(iniciar);
+    req.session.login = mail;
+    // Si ambos campos tienen valores
+    if (req.body.correo !== '' && req.body.contrasena !== '') {
+        // Creo un objeto con los valores del formulario
+        let iniciar = {
+            correo : correo,
+            contrasena : contrasena
+        }
+        // Convierto el objeto en un JSON
+        let iniciarJson = JSON.stringify(iniciar);
+        if (req.session.login) {
+            res.redirect('/');
+        } else {
             // Envío en método POST al servidor con los datos del JSON
             fetch(`http://localhost:3000/login`, {
                 method: 'Post',
@@ -132,44 +132,39 @@ app.post('/login', (req, res) => {
                         timer: false,
                         ruta: '/'
                     })
+                } else {
+                    res.redirect('/');
                 }
             })
-        } else {
-            // Muestro un alert indicando que debe completar los campos obligatorios del formulario llevandolo nuevamente al 'login'
-            res.render('login', {
-                alert: true,
-                alertTitle: 'Campos Obligatorios',
-                alertMessage: '¡Todos los campos del formulario son obligatorios!',
-                alertIcon: 'error',
-                showConfirButton: true,
-                timer: false,
-                ruta: '/'
-            })
         }
+    } else {
+        // Muestro un alert indicando que debe completar los campos obligatorios del formulario llevandolo nuevamente al 'login'
+        res.render('login', {
+            alert: true,
+            alertTitle: 'Campos Obligatorios',
+            alertMessage: '¡Todos los campos del formulario son obligatorios!',
+            alertIcon: 'error',
+            showConfirButton: true,
+            timer: false,
+            ruta: '/'
+        })
     }
 });
-app.get('/enviar-otp', (req, res) => {
-    res.redirect('/');
-})
 app.post('/enviar-otp', (req, res) => {
-    // Comprobar si existe sesión
     req.session.correo = mail;
-    // Crear objeto con datos de sesión
-    let enviarCorreo = {
-        correo: req.session.correo
+    let correo = {
+        correo : req.session.correo
     }
-    // Convierto el objeto en un JSON
-    let enviarCorreoJson = JSON.stringify(enviarCorreo);
-    // Envío en método POST al servidor con los datos del JSON
+    let correoJson = JSON.stringify(correo);
     fetch(`http://localhost:3000/enviar-otp`, {
         method: 'Post',
-        body: enviarCorreoJson
+        body: correoJson
     })
     .then(recibir => recibir.json())
     .then(recibido => {
         console.log(recibido);
     });
-})
+});
 app.listen(puerto, (req, res) => {
     console.log(`Servidor corriendo en http://localhost:${puerto}`);
 });

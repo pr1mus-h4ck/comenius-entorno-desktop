@@ -1,5 +1,4 @@
-<h2>Vamos a enviar un correo electrónico: <%= sesiones.correo %></h2>
-
-<form action="/enviar-otp">
-    <button type="submit">Enviar OTP</button>
+<h2>Te vamos a enviar un correo a esta casilla: <%= sesiones.correo %></h2>
+<form action="/enviar-otp" method="post">
+    <button type="submit">Submit</button>
 </form>
