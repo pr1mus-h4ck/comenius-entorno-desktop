@@ -82,6 +82,7 @@ app.post('/login', (req, res) => {
             })
             .then(recibir => recibir.json())
             .then(recibido => {
+                // TODO: Reducir el res.render alert en uno solo
                 // Si la validación es correcta guardo la ID de la sesión y verificación de OTP
                 if (recibido.usuarioID && recibido.sessionID) {
                     // Crear la cookie de la ID del usuario
