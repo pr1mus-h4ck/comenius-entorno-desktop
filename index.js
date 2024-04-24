@@ -145,9 +145,12 @@ app.get('/enviar-otp', (req, res) => {
     res.redirect('/');
 })
 app.post('/enviar-otp', (req, res) => {
+    // Si la variable 'envioOTP' es true, redirecciono a la raíz
     if (envioOTP){
         res.redirect('/');
+    // Si no es true, generar petición del envío de OTP a la casilla de correo electrónico del usuario
     } else{
+        // Creo un objeto con los valores de las Cookies de la sesión
         let sesiones = {
             id: usuariosID,
             session: sessionsID
