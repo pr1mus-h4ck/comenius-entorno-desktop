@@ -1,11 +1,3 @@
-/* TODO: Guardar en la cookie del navegador los datos de la sesión desde el back-end
-1) Desinstalar la librería express-session
-2) Instalar la librería express-session en el back-end
-3) Crear sesión en el back-end
-4) Guardar la cookie de la session en el navegador desde el back-end
-5) Leer la cookie de la session en el navegador desde el back-end
-6) Eliminar la cookie de la session en el navegador al mismo tiempo que se elimina la sesión en el back-end
-*/
 const express = require('express');
 const app = express();
 const puerto = 4000;
