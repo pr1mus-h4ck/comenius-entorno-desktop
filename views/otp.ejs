@@ -9,6 +9,10 @@
     <div>
         <h1>OTP</h1>
     </div>
-    <%- include('otp-enviar.html') %>
+    <% if (procesoOTP.envio === true) { %>
+        <%- include('otp-confirmar.html') %>
+    <% } else { %>
+        <%- include('otp-enviar.html') %>
+    <% } %>
 </body>
 </html>
