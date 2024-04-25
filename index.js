@@ -82,7 +82,6 @@ app.post('/login', (req, res) => {
             })
             .then(recibir => recibir.json())
             .then(recibido => {
-                // TODO: Reducir el res.render alert en uno solo
                 // Si la validación es correcta guardo la ID de la sesión y verificación de OTP
                 if (recibido.usuarioID && recibido.sessionID) {
                     // Crear la cookie de la ID del usuario
@@ -101,29 +100,19 @@ app.post('/login', (req, res) => {
                     verificacionOTP = cookies.get('verificacion');
                     // Guardar la cookie de correo
                     correoOTP =  cookies.get("correo");
-                    // Muestro un alert indicando que inicio correctamente llevandolo al archivo 'otp'
+                } 
+                if (recibido.usuarioID && recibido.sessionID || recibido.aviso || recibido.limiteAlcanzado){
+                    // Muestro un alert indicando la respuesta recibida del BACK-END
                     res.render('login', {
                         alert: true,
-                        alertTitle: 'Autenticación exitosa',
-                        alertMessage: '¡Haz iniciado sesión correctamente!',
-                        alertIcon: 'success',
-                        showConfirButton: false,
-                        timer: 1500,
+                        alertTitle: recibido.alertTitle,
+                        alertMessage: recibido.alertMessage || recibido.aviso || recibido.limiteAlcanzado,
+                        alertIcon: recibido.alertIcon,
+                        showConfirButton: recibido.showConfirButton,
+                        timer: recibido.timer,
                         ruta: '/'
                     })
-                // Si la validación es incorrecta o se alcanzó el límite de intentos, muestro un alert indicando el error y/o los intentos de validación restantes
-                } else if (recibido.aviso || recibido.limiteAlcanzado){
-                    // Muestro un alert indicando el error y los intentos disponibles llevandolo nuevamente al 'login'
-                    res.render('login', {
-                        alert: true,
-                        alertTitle: 'Error',
-                        alertMessage: recibido.aviso || recibido.limiteAlcanzado,
-                        alertIcon: 'error',
-                        showConfirButton: true,
-                        timer: false,
-                        ruta: '/'
-                    })
-                // En cualquier caso distinto a los anteriores muestro redireccionar siempre a raíz
+                // En cualquier caso redireccionar siempre a raíz
                 } else {
                     res.redirect('/');
                 }
