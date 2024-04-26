@@ -154,9 +154,10 @@ app.post('/enviar-otp', (req, res) => {
         })
         .then(recibir => recibir.json())
         .then(recibido => {
+            // Guardar el objeto recibido
+            envioOTP = recibido;
             // Imprimo en consola el objeto recibido
-            console.log(recibido);
-            envioOTP = true;
+            console.log(envioOTP);
             res.redirect('/');
         });
     }
