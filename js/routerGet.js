@@ -27,10 +27,7 @@ app.get('/', (req,res) => {
         res.render('login');
     }
 });
-app.get('/login', (req, res) => {
-    res.redirect('/');
-})
-app.get('/enviar-otp', (req, res) => {
+app.get('/:any', (req, res) => {
     res.redirect('/');
 })
 module.exports = { routerGet: app }

@@ -46,7 +46,7 @@ app.post('/login', (req, res) => {
                 } 
                 if (recibido.usuarioID && recibido.sessionID || recibido.aviso || recibido.limiteAlcanzado){
                     // Muestro un alert indicando la respuesta recibida del BACK-END
-                    res.render('login', {
+                    res.render('validacion', {
                         alert: true,
                         alertTitle: recibido.alertTitle,
                         alertMessage: recibido.alertMessage || recibido.aviso || recibido.limiteAlcanzado,
@@ -62,7 +62,7 @@ app.post('/login', (req, res) => {
             })
         } else {
             // Muestro un alert indicando que debe completar los campos obligatorios del formulario llevandolo nuevamente al 'login'
-            res.render('login', {
+            res.render('validacion', {
                 alert: true,
                 alertTitle: 'Campos Obligatorios',
                 alertMessage: '¡Todos los campos del formulario son obligatorios!',
@@ -96,10 +96,61 @@ app.post('/enviar-otp', (req, res) => {
         .then(recibido => {
             // Guardar el objeto recibido
             config.envioOTP = recibido;
-            // Imprimo en consola el objeto recibido
-            console.log(config.envioOTP);
             res.redirect('/');
         });
     }
 });
+app.post('/confirmar-otp', (req, res) => {
+    // Guardo los valores del formulario en constantes
+    const input1 = req.body.input1;
+    const input2 = req.body.input2;
+    const input3 = req.body.input3;
+    const input4 = req.body.input4;
+    const input5 = req.body.input5;
+    const input6 = req.body.input6;
+    if (req.body.input1 !== '' && req.body.input2 !== '' && req.body.input3 !== '' && req.body.input4 !== '' && req.body.input5 !== '' && req.body.input6 !== '') {
+        let otp = input1+input2+input3+input4+input5+input6;
+        let sesiones = {
+            id: cookieSession.usuariosID,
+            session: cookieSession.sessionsID,
+            otp: otp,
+        }
+        // Convierto el objeto en un JSON
+        let otpJson = JSON.stringify(sesiones);
+        // Envío en método POST al servidor con los datos del JSON
+        fetch(`http://localhost:3000/confirmar-otp`, {
+            method: 'Post',
+            body: otpJson
+        })
+        .then(recibir => recibir.json())
+        .then(recibido => {
+            // Crear la cookie de si se requiere OTP o no
+            cookies.set('verificacion', recibido.verificacion, {path: '/' });
+            // Guardar la cookie de verificacion
+            cookieSession.verificacionOTP = cookies.get('verificacion');
+            if (recibido.alertMessage || recibido.aviso || recibido.limiteAlcanzado) {
+                res.render('validacion', {
+                    alert: true,
+                    alertTitle: recibido.alertTitle,
+                    alertMessage: recibido.alertMessage || recibido.aviso || recibido.limiteAlcanzado,
+                    alertIcon: recibido.alertIcon,
+                    showConfirButton: recibido.showConfirButton,
+                    timer: recibido.timer,
+                    ruta: '/'
+                })
+            }
+        })
+    } else {
+        // Muestro un alert indicando que debe completar los campos obligatorios del formulario llevandolo nuevamente al 'login'
+        res.render('validacion', {
+            alert: true,
+            alertTitle: 'Campos Obligatorios',
+            alertMessage: '¡Todos los campos del formulario son obligatorios!',
+            alertIcon: 'error',
+            showConfirButton: true,
+            timer: false,
+            ruta: '/'
+        })
+    }
+})
 module.exports = { routerGet: app }

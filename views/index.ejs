@@ -7,17 +7,6 @@
 </head>
 <body>
     <h1>Index</h1>
-    <p>La sesión iniciada <%= sesiones.correo %></p>
-    <% if (sesiones.rol) { %>
-        <% if (sesiones.rol === 'alumno') { %>
-            <%- include('dash-alumno.html') %> 
-        <% } else if (sesiones.rol === 'profesor') { %>
-            <%- include('dash-profesor.html') %>
-        <% } else if (sesiones.rol === 'usuario especial') { %>
-            <%- include('dash-usuario-especial.html') %>
-        <% } else if (sesiones.rol === 'soporte') { %>
-            <%- include('dash-soporte-sistemas.html') %>
-        <% } %>
-    <% } %>
+    <p>La sesión iniciada <%= sesiones.sesion %></p>
 </body>
 </html>
