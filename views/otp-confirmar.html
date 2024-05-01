@@ -1,34 +1,58 @@
 <h2>ESTOY EN OTP-CONFIRMAR</h2>
-
-<!--DESDE ACÁ EL LOGIN-->
 <form action="/confirmar-otp" method="post"> 
-    <!--casilla de email-->
     <div>
         <label for="input1"></label>
-        <input type="text" name='input1' maxlength="1">
+        <input type="text" name='input1' maxlength="1" id="input1" oninput="activateNextInput(this, 2)">
     </div>
     <div>
         <label for="input2"></label>
-        <input type="text" name='input2' maxlength="1">
+        <input type="text" name='input2' maxlength="1" id="input2" oninput="activateNextInput(this, 3)" disabled>
     </div>
     <div>
         <label for="input3"></label>
-        <input type="text" name='input3' maxlength="1">
+        <input type="text" name='input3' maxlength="1" id="input3" oninput="activateNextInput(this, 4)" disabled>
     </div>
     <div>
         <label for="input4"></label>
-        <input type="text" name='input4' maxlength="1">
+        <input type="text" name='input4' maxlength="1" id="input4" oninput="activateNextInput(this, 5)" disabled>
     </div>
     <div>
         <label for="input5"></label>
-        <input type="text" name='input5' maxlength="1">
+        <input type="text" name='input5' maxlength="1" id="input5" oninput="activateNextInput(this, 6)" disabled>
     </div>
     <div>
         <label for="input6"></label>
-        <input type="text" name='input6' maxlength="1">
+        <input type="text" name='input6' maxlength="1" id="input6" oninput="activateNextInput(this, 7)" disabled>
     </div>
     <div>
         <button type="submit">Submit</button>
     </div>
-</form> 
-<!--ACÁ TERMINA EL LOGIN-->
+</form>
+<script>
+    function activateNextInput(currentInput, nextInputIndex) {
+        if (currentInput.value.length === 1) {
+            if (nextInputIndex <= 6) {
+                let nextInput = document.getElementById("input" + nextInputIndex);
+                nextInput.disabled = false;
+                nextInput.focus();
+            }
+        } else {
+            let previousInputIndex = nextInputIndex - 2;
+            if (previousInputIndex >= 1) {
+                let previousInput = document.getElementById("input" + previousInputIndex);
+                previousInput.focus();
+            }
+        }
+    }
+    document.addEventListener('paste', function(event) {
+        let clipboardData = event.clipboardData || window.clipboardData;
+        let pastedText = clipboardData.getData('text');
+        let inputs = document.getElementsByTagName('input');
+        for (var i = 0; i < pastedText.length; i++) {
+            if (i < inputs.length) {
+                inputs[i].value = pastedText[i];
+                inputs[i].disabled = false;
+            }
+        }
+    });
+</script>

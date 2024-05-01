@@ -5,8 +5,8 @@ app.post('/login', (req, res) => {
     // Si existe sesión, redireccionar a la página principal
     if (cookieSession.sessionsID) {
         res.redirect('/');
-    // Si no existe sesión, hacer validación del formulario
-    }else{
+        // Si no existe sesión, hacer validación del formulario
+    } else {
         // Guardo los valores del formulario en constantes
         const correo = req.body.correo;
         const contrasena = req.body.contrasena;
@@ -26,19 +26,17 @@ app.post('/login', (req, res) => {
             })
             .then(recibir => recibir.json())
             .then(recibido => {
-                // Si la validación es correcta, creo y guardo cookies
+                // Si la validación es correcta guardo la ID de la sesión y verificación de OTP
                 if (recibido.usuarioID && recibido.sessionID) {
-                    // Crear las cookies
                     funciones.setCookies(recibido, cookies);
-                    // Guardar las cookies
                     funciones.getCookies(cookieSession, cookies);
                 } 
-                if (recibido.usuarioID && recibido.sessionID || recibido.aviso || recibido.limiteAlcanzado){
+                if (recibido.usuarioID && recibido.sessionID){
                     // Muestro un alert indicando la respuesta recibida del BACK-END
                     res.render('validacion', {
                         alert: true,
                         alertTitle: recibido.alertTitle,
-                        alertMessage: recibido.alertMessage || recibido.aviso || recibido.limiteAlcanzado,
+                        alertMessage: recibido.alertMessage,
                         alertIcon: recibido.alertIcon,
                         showConfirButton: recibido.showConfirButton,
                         timer: recibido.timer,
@@ -69,7 +67,7 @@ app.post('/enviar-otp', (req, res) => {
         res.redirect('/');
     // Si no es true, generar petición del envío de OTP a la casilla de correo electrónico del usuario
     } else{
-        // Crear un objeto con los valores de las Cookies de la sesión
+        // Creo un objeto con los valores de las Cookies de la sesión
         let sesiones = {
             id: cookieSession.usuariosID,
             session: cookieSession.sessionsID
@@ -90,56 +88,60 @@ app.post('/enviar-otp', (req, res) => {
     }
 });
 app.post('/confirmar-otp', (req, res) => {
-    // Crear la constante 'inputFields' y la inicializamos con un array que contemga los nombres de los campos de entrada para asignar a la constante 'inputs'
-    const inputNombres = ['input2', 'input3', 'input4', 'input5', 'input6'];
-    // Utilizar el método map() en 'inputNombres' para crear un nuevo array inputs. El método map() itera sobre cada elemento de 'inputNombres' y ejecuta una función para cada elemento.
-    const inputs = inputNombres.map(nombre => req.body[nombre]);
-    // Verificando si todos los campos de entrada tienen un valor distinto a una cadena vacía ('').
-    if ([req.body.input1, ...inputs].every(input => input !== '')) {
-        // Cerar la variable 'otp' que contenga la concatenación de todos los valores de los campos de entrada
-        let otp = [req.body.input1, ...inputs].join('');
-        // Crear un objeto con los valores de las Cookies de la sesión y le asigno el OTP ingresado por el usuario
-        let sesiones = {
-            id: cookieSession.usuariosID,
-            session: cookieSession.sessionsID,
-            otp: otp,
-        }
-        // Convierto el objeto en un JSON
-        let otpJson = JSON.stringify(sesiones);
-        // Envío en método POST al servidor con los datos del JSON
-        fetch(`http://localhost:3000/confirmar-otp`, {
-            method: 'Post',
-            body: otpJson
-        })
-        .then(recibir => recibir.json())
-        .then(recibido => {
-            // Crear la cookie de si se requiere OTP o no
-            cookies.set('verificacion', recibido.verificacion, {path: '/' });
-            // Guardar la cookie de verificacion
-            cookieSession.verificacionOTP = cookies.get('verificacion');
-            if (recibido.alertMessage || recibido.aviso || recibido.limiteAlcanzado) {
-                res.render('validacion', {
-                    alert: true,
-                    alertTitle: recibido.alertTitle,
-                    alertMessage: recibido.alertMessage || recibido.aviso || recibido.limiteAlcanzado,
-                    alertIcon: recibido.alertIcon,
-                    showConfirButton: recibido.showConfirButton,
-                    timer: recibido.timer,
-                    ruta: '/'
-                })
-            }
-        })
+    if (cookieSession.verificacionOTP || !cookieSession.sessionsID){
+        res.redirect('/');
     } else {
-        // Muestro un alert indicando que debe completar los campos obligatorios del formulario llevandolo nuevamente al 'login'
-        res.render('validacion', {
-            alert: true,
-            alertTitle: 'Campos Obligatorios',
-            alertMessage: '¡Todos los campos del formulario son obligatorios!',
-            alertIcon: 'error',
-            showConfirButton: true,
-            timer: false,
-            ruta: '/'
-        })
+        // Crear la constante 'inputFields' y la inicializamos con un array que contemga los nombres de los campos de entrada para asignar a la constante 'inputs'
+        const inputNombres = ['input2', 'input3', 'input4', 'input5', 'input6'];
+        // Utilizar el método map() en 'inputNombres' para crear un nuevo array inputs. El método map() itera sobre cada elemento de 'inputNombres' y ejecuta una función para cada elemento.
+        const inputs = inputNombres.map(nombre => req.body[nombre]);
+        // Verificando si todos los campos de entrada tienen un valor distinto a una cadena vacía ('').
+        if ([req.body.input1, ...inputs].every(input => input !== '')) {
+            // Cerar la variable 'otp' que contenga la concatenación de todos los valores de los campos de entrada
+            let otp = [req.body.input1, ...inputs].join('');
+            // Crear un objeto con los valores de las Cookies de la sesión y le asigno el OTP ingresado por el usuario
+            let sesiones = {
+                id: cookieSession.usuariosID,
+                session: cookieSession.sessionsID,
+                otp: otp,
+            }
+            // Convierto el objeto en un JSON
+            let otpJson = JSON.stringify(sesiones);
+            // Envío en método POST al servidor con los datos del JSON
+            fetch(`http://localhost:3000/confirmar-otp`, {
+                method: 'Post',
+                body: otpJson
+            })
+            .then(recibir => recibir.json())
+            .then(recibido => {
+                // Crear la cookie de si se requiere OTP o no
+                cookies.set('verificacion', recibido.verificacion, {path: '/' });
+                // Guardar la cookie de verificacion
+                cookieSession.verificacionOTP = cookies.get('verificacion');
+                if (recibido.alertMessage) {
+                    res.render('validacion', {
+                        alert: true,
+                        alertTitle: recibido.alertTitle,
+                        alertMessage: recibido.alertMessage,
+                        alertIcon: recibido.alertIcon,
+                        showConfirButton: recibido.showConfirButton,
+                        timer: recibido.timer,
+                        ruta: '/'
+                    })
+                }
+            })
+        } else {
+            // Muestro un alert indicando que debe completar los campos obligatorios del formulario llevandolo nuevamente al 'login'
+            res.render('validacion', {
+                alert: true,
+                alertTitle: 'Campos Obligatorios',
+                alertMessage: '¡Todos los campos del formulario son obligatorios!',
+                alertIcon: 'error',
+                showConfirButton: true,
+                timer: false,
+                ruta: '/'
+            })
+        }
     }
 });
 app.post('/cerrar-sesion', (req, res) => {
@@ -156,11 +158,20 @@ app.post('/cerrar-sesion', (req, res) => {
     })
     .then(recibir => recibir.json())
     .then(recibido => {
-        console.log(recibido.sesion);
-        funciones.eliminarCookies(cookies);
-        funciones.getCookies(cookieSession, cookies);
-        config.envioOTP =  false;
-        res.redirect('/');
+        if(recibido.cerrarSesion) {
+            funciones.eliminarCookies(cookies);
+            funciones.getCookies(cookieSession, cookies);
+            config.envioOTP =  false;
+            res.render('validacion', {
+                alert: true,
+                alertTitle: recibido.alertTitle,
+                alertMessage: recibido.alertMessage,
+                alertIcon: recibido.alertIcon,
+                showConfirButton: recibido.showConfirButton,
+                timer: recibido.timer,
+                ruta: '/'
+            })
+        }
     })
 });
 module.exports = { routerGet: app }
