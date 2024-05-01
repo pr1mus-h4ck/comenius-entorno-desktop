@@ -1,6 +1,6 @@
 const { app, cookies, cookieSession } = require('./config');
 const config = require('./config');
-const funsiones = require('./funsiones');
+const funciones = require('./funciones');
 app.post('/login', (req, res) => {
     // Si existe sesión, redireccionar a la página principal
     if (cookieSession.sessionsID) {
@@ -29,9 +29,9 @@ app.post('/login', (req, res) => {
                 // Si la validación es correcta, creo y guardo cookies
                 if (recibido.usuarioID && recibido.sessionID) {
                     // Crear las cookies
-                    funsiones.setCookies(recibido, cookies);
+                    funciones.setCookies(recibido, cookies);
                     // Guardar las cookies
-                    funsiones.getCookies(cookieSession, cookies);
+                    funciones.getCookies(cookieSession, cookies);
                 } 
                 if (recibido.usuarioID && recibido.sessionID || recibido.aviso || recibido.limiteAlcanzado){
                     // Muestro un alert indicando la respuesta recibida del BACK-END
