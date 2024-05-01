@@ -141,5 +141,26 @@ app.post('/confirmar-otp', (req, res) => {
             ruta: '/'
         })
     }
-})
+});
+app.post('/cerrar-sesion', (req, res) => {
+    let sesiones = {
+        id: cookieSession.usuariosID,
+        session: cookieSession.sessionsID
+    }
+    // Convierto el objeto en un JSON
+    let sesionesJson = JSON.stringify(sesiones);
+    // Envío en método POST al servidor con los datos del JSON
+    fetch(`http://localhost:3000/cerrar-sesion`, {
+        method: 'Post',
+        body: sesionesJson
+    })
+    .then(recibir => recibir.json())
+    .then(recibido => {
+        console.log(recibido.sesion);
+        funciones.eliminarCookies(cookies);
+        funciones.getCookies(cookieSession, cookies);
+        config.envioOTP =  false;
+        res.redirect('/');
+    })
+});
 module.exports = { routerGet: app }

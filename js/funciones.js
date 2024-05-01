@@ -20,7 +20,18 @@ function getCookies (objeto, cookies) {
     objeto.correoOTP =  cookies.get("correo");
     return objeto;
 }
+function eliminarCookies(cookies) {
+    // Eliminar la cookie de la ID del usuario
+    cookies.remove('usuarioID', { path: '/' });
+    // Eliminar la cookie de la ID de la sesión
+    cookies.remove('sessionID', { path: '/' });
+    // Eliminar la cookie de si se requiere OTP o no
+    cookies.remove('verificacion', { path: '/' });
+    // Eliminar la cookie de correo encriptado
+    cookies.remove('correo', { path: '/' });
+}
 module.exports = {
     setCookies: setCookies,
-    getCookies: getCookies   
+    getCookies: getCookies,
+    eliminarCookies: eliminarCookies 
 }

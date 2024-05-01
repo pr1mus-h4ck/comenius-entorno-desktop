@@ -8,5 +8,8 @@
 <body>
     <h1>Index</h1>
     <p>La sesión iniciada <%= sesiones.sesion %></p>
+    <form action="/cerrar-sesion" method="post">
+        <button type="submit">Cerrar Sesión</button>
+    </form>
 </body>
 </html>
