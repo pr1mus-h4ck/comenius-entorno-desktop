@@ -69,7 +69,7 @@ app.post('/enviar-otp', (req, res) => {
         res.redirect('/');
     // Si no es true, generar petición del envío de OTP a la casilla de correo electrónico del usuario
     } else{
-        // Creo un objeto con los valores de las Cookies de la sesión
+        // Crear un objeto con los valores de las Cookies de la sesión
         let sesiones = {
             id: cookieSession.usuariosID,
             session: cookieSession.sessionsID
@@ -90,15 +90,15 @@ app.post('/enviar-otp', (req, res) => {
     }
 });
 app.post('/confirmar-otp', (req, res) => {
-    // Guardo los valores del formulario en constantes
-    const input1 = req.body.input1;
-    const input2 = req.body.input2;
-    const input3 = req.body.input3;
-    const input4 = req.body.input4;
-    const input5 = req.body.input5;
-    const input6 = req.body.input6;
-    if (req.body.input1 !== '' && req.body.input2 !== '' && req.body.input3 !== '' && req.body.input4 !== '' && req.body.input5 !== '' && req.body.input6 !== '') {
-        let otp = input1+input2+input3+input4+input5+input6;
+    // Crear la constante 'inputFields' y la inicializamos con un array que contemga los nombres de los campos de entrada para asignar a la constante 'inputs'
+    const inputNombres = ['input2', 'input3', 'input4', 'input5', 'input6'];
+    // Utilizar el método map() en 'inputNombres' para crear un nuevo array inputs. El método map() itera sobre cada elemento de 'inputNombres' y ejecuta una función para cada elemento.
+    const inputs = inputNombres.map(nombre => req.body[nombre]);
+    // Verificando si todos los campos de entrada tienen un valor distinto a una cadena vacía ('').
+    if ([req.body.input1, ...inputs].every(input => input !== '')) {
+        // Cerar la variable 'otp' que contenga la concatenación de todos los valores de los campos de entrada
+        let otp = [req.body.input1, ...inputs].join('');
+        // Crear un objeto con los valores de las Cookies de la sesión y le asigno el OTP ingresado por el usuario
         let sesiones = {
             id: cookieSession.usuariosID,
             session: cookieSession.sessionsID,
