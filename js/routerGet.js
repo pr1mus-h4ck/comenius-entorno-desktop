@@ -27,7 +27,7 @@ app.get('/', (req,res) => {
         res.render('login');
     }
 });
-app.get('/:any', (req, res) => {
+app.get('*', (req, res) => {
     res.redirect('/');
 })
 module.exports = { routerGet: app }
