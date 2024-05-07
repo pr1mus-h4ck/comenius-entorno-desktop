@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio Sesión</title>
+    <link rel="stylesheet" href="recursos/css/index.css">
+    <link rel="stylesheet" href="recursos/css/alerta.css">
 </head>
 <body>
     <main>
@@ -35,6 +37,31 @@
             </div>
         </form> 
         <!--ACÁ TERMINA EL LOGIN-->
+        <div id="alerta-personalizada" class="alerta-personalizada">
+            <div class="contenido-alerta-personalizada">
+            <h2 id="titulo-alerta-personalizada"></h2>
+            <p id="mensaje-alerta-personalizada"></p>
+            <button id="boton-alerta-personalizada">Aceptar</button>
+        </div>
     </main>
+    <% if (typeof alert != 'undefined') { %>
+        <script>
+            // Lógica para mostrar u ocultar la alerta personalizada
+            document.getElementById('alerta').style.display = 'block';
+            document.getElementById('tituloAlerta').innerText = '<%= alert.alertTitle %>';
+            document.getElementById('mensajeAlerta').innerText = '<%= alert.alertMessage %>';
+            if ('<%= alert.type %>' === 'error' || '<%= alert.type %>' === 'aviso') {
+                document.getElementById('botonAlerta').style.display = 'block'; // Mostrar el botón en caso de error o advertencia
+            }
+            if ('<%= alert.type %>' === 'exito') {
+                setTimeout(function(){
+                    window.location.href = '/'; // Redireccionar a la página principal después de 1500 milisegundos en caso de éxito
+                }, 1500);
+            }
+            function redirigir() {
+                window.location.href = '/'; // Redireccionar a la página principal al presionar el botón "Aceptar" en caso de error o aviso
+            }
+        </script>
+    <% } %>
 </body>
 </html>

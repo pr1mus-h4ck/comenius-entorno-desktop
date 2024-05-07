@@ -1,5 +1,6 @@
 const { app, cookies, cookieSession } = require('./config');
 const config = require('./config');
+const {inputNombres} = require('./array');
 const funciones = require('./funciones');
 app.post('/login', (req, res) => {
     // Si existe sesión, redireccionar a la página principal
@@ -91,8 +92,6 @@ app.post('/confirmar-otp', (req, res) => {
     if (cookieSession.verificacionOTP || !cookieSession.sessionsID){
         res.redirect('/');
     } else {
-        // Crear la constante 'inputFields' y la inicializamos con un array que contemga los nombres de los campos de entrada para asignar a la constante 'inputs'
-        const inputNombres = ['input2', 'input3', 'input4', 'input5', 'input6'];
         // Utilizar el método map() en 'inputNombres' para crear un nuevo array inputs. El método map() itera sobre cada elemento de 'inputNombres' y ejecuta una función para cada elemento.
         const inputs = inputNombres.map(nombre => req.body[nombre]);
         // Verificando si todos los campos de entrada tienen un valor distinto a una cadena vacía ('').
@@ -119,7 +118,7 @@ app.post('/confirmar-otp', (req, res) => {
                 // Guardar la cookie de verificacion
                 cookieSession.verificacionOTP = cookies.get('verificacion');
                 if (recibido.alertMessage) {
-                    res.render('validacion', {
+                    res.render('index', {
                         alert: true,
                         alertTitle: recibido.alertTitle,
                         alertMessage: recibido.alertMessage,

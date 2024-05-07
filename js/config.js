@@ -27,6 +27,7 @@ app.use((req, res, next) => {
     res.setHeader('Cache-Control', 'no-store');
     next();
 });
+app.use('/recursos', express.static('public'));
 module.exports = {
     app,
     puerto,

@@ -1,7 +1,9 @@
 const { app, cookies, cookieSession } = require('./config');
 const config = require('./config');
+const funciones = require('./funciones');
+const {menuRol} = require('./array');
 // Renderizar la página de index
-app.get('/', (req,res) => {
+app.get('/', (req, res) => {
     // Crear un objeto de sesión
     let sesiones = {
         id: cookieSession.usuariosID,
@@ -12,19 +14,20 @@ app.get('/', (req,res) => {
         envio: config.envioOTP,
         correo: cookieSession.correoOTP
     }
+    let rol = 'Estudiante';
     // Verificar si hay una sesión activa
     if (cookieSession.sessionsID) {
         // Si OTP fue virificado mostrar el index
         if (cookieSession.verificacionOTP) {
             // Mostrar Index
-            res.render('index', {sesiones});
+            funciones.redireccionarIndex(req, res, sesiones, rol, menuRol)
         } else {
             // Mostrar OTP
-            res.render('otp', {sesiones, procesoOTP});
+            funciones.redireccionarOTP(req, res, sesiones, procesoOTP);
         }
     } else {
         // Mostrar Login
-        res.render('login');
+        funciones.redericcionarLogin(req, res);
     }
 });
 app.get('*', (req, res) => {
