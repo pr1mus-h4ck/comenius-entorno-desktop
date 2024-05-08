@@ -20,14 +20,14 @@ app.get('/', (req, res) => {
         // Si OTP fue virificado mostrar el index
         if (cookieSession.verificacionOTP) {
             // Mostrar Index
-            funciones.redireccionarIndex(req, res, sesiones, rol, menuRol)
+            funciones.index(req, res, sesiones, rol, menuRol)
         } else {
             // Mostrar OTP
-            funciones.redireccionarOTP(req, res, sesiones, procesoOTP);
+            funciones.otp(req, res, sesiones, procesoOTP);
         }
     } else {
         // Mostrar Login
-        funciones.redericcionarLogin(req, res);
+        funciones.login(req, res);
     }
 });
 app.get('*', (req, res) => {
