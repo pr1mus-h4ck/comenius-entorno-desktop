@@ -74,9 +74,7 @@ app.post('/enviar-otp', (req, res) => {
                 correo: cookieSession.correoOTP
             }
             datosRecibidos = recibido;
-            if (recibido.tipo) {
-                funciones.otp(req, res, sesiones, procesoOTP, datosRecibidos);
-            }
+            funciones.otp(req, res, sesiones, procesoOTP, datosRecibidos);
         });
     }
 });
