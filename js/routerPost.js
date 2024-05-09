@@ -2,6 +2,7 @@ const { app, cookies, cookieSession } = require('./config');
 const config = require('./config');
 const {inputNombres} = require('./array');
 const funciones = require('./funciones');
+let datosRecibidos = '';
 app.post('/login', (req, res) => {
     // Si existe sesión, redireccionar a la página principal
     if (cookieSession.sessionsID) {
@@ -32,33 +33,23 @@ app.post('/login', (req, res) => {
                     funciones.setCookies(recibido, cookies);
                     funciones.getCookies(cookieSession, cookies);
                 } 
-                if (recibido.usuarioID && recibido.sessionID){
-                    // Muestro un alert indicando la respuesta recibida del BACK-END
-                    res.render('validacion', {
-                        alert: true,
-                        alertTitle: recibido.alertTitle,
-                        alertMessage: recibido.alertMessage,
-                        alertIcon: recibido.alertIcon,
-                        showConfirButton: recibido.showConfirButton,
-                        timer: recibido.timer,
-                        ruta: '/'
-                    })
-                // En cualquier caso redireccionar siempre a raíz
+                datosRecibidos = recibido;
+                if (recibido.tipo === 'aviso') {
+                    funciones.login(req, res, datosRecibidos);
+                } else if (recibido.tipo === 'error') {
+                    funciones.login(req, res, datosRecibidos);
+                } else if (recibido.tipo === 'exito') {
+                    funciones.login(req, res, datosRecibidos);
                 } else {
-                    res.redirect('/');
+                    console.log(Error); 
                 }
             })
         } else {
             // Muestro un alert indicando que debe completar los campos obligatorios del formulario llevandolo nuevamente al 'login'
-            res.render('validacion', {
-                alert: true,
-                alertTitle: 'Campos Obligatorios',
-                alertMessage: '¡Todos los campos del formulario son obligatorios!',
-                alertIcon: 'error',
-                showConfirButton: true,
-                timer: false,
-                ruta: '/'
-            })
+            datosRecibidos = {
+                tipo: 'obligatorio',
+            }
+            funciones.login(req, res, datosRecibidos);
         }
     }
 });

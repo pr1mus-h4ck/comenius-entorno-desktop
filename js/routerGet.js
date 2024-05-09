@@ -26,8 +26,11 @@ app.get('/', (req, res) => {
             funciones.otp(req, res, sesiones, procesoOTP);
         }
     } else {
+        let datosRecibidos = {
+            intentos: null,
+        }
         // Mostrar Login
-        funciones.login(req, res);
+        funciones.login(req, res, datosRecibidos);
     }
 });
 app.get('*', (req, res) => {

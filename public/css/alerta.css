@@ -1,3 +1,13 @@
+.contenido {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro transparente */
+    z-index: 999; /* Asegura que esté por encima de todo el contenido */
+    display: none; /* Inicialmente oculto */
+}
 .alerta-personalizada {
     position: fixed;
     top: 50%;
@@ -8,6 +18,8 @@
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: none;
+    z-index: 1000; /* Asegura que esté por encima del modal */
+    pointer-events: auto; /* Permite la interacción con la alerta */
 }
 .contenido-alerta-personalizada {
     text-align: center;
@@ -19,6 +31,13 @@
 .contenido-alerta-personalizada p {
     margin-bottom: 20px;
 }
+.boton-alerta-personalizada {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
 #boton-alerta-personalizada {
     display: none;
 }
@@ -29,5 +48,8 @@
     background-color: #ffc107;
 }
 .alerta-personalizada.error {
+    background-color: #f44336;
+}
+.alerta-personalizada.obligatorio {
     background-color: #f44336;
 }
