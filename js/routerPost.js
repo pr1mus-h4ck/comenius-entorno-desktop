@@ -34,14 +34,8 @@ app.post('/login', (req, res) => {
                     funciones.getCookies(cookieSession, cookies);
                 } 
                 datosRecibidos = recibido;
-                if (recibido.tipo === 'aviso') {
+                if (recibido.tipo) {
                     funciones.login(req, res, datosRecibidos);
-                } else if (recibido.tipo === 'error') {
-                    funciones.login(req, res, datosRecibidos);
-                } else if (recibido.tipo === 'exito') {
-                    funciones.login(req, res, datosRecibidos);
-                } else {
-                    console.log(Error); 
                 }
             })
         } else {
