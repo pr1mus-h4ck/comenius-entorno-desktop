@@ -14,6 +14,9 @@ app.get('/', (req, res) => {
         envio: config.envioOTP,
         correo: cookieSession.correoOTP
     }
+    let datosRecibidos = {
+        intentos: null,
+    }
     let rol = 'Estudiante';
     // Verificar si hay una sesión activa
     if (cookieSession.sessionsID) {
@@ -23,12 +26,9 @@ app.get('/', (req, res) => {
             funciones.index(req, res, sesiones, rol, menuRol)
         } else {
             // Mostrar OTP
-            funciones.otp(req, res, sesiones, procesoOTP);
+            funciones.otp(req, res, sesiones, procesoOTP, datosRecibidos);
         }
     } else {
-        let datosRecibidos = {
-            intentos: null,
-        }
         // Mostrar Login
         funciones.login(req, res, datosRecibidos);
     }

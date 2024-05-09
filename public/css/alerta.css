@@ -37,8 +37,12 @@
     color: #fff;
     border: none;
     cursor: pointer;
+    display: none;
 }
-#boton-alerta-personalizada {
+#boton-alerta-personalizada,
+#boton-alerta-cancelar,
+#boton-alerta-no-cancelar,
+#aviso-cancelar {
     display: none;
 }
 .alerta-personalizada.exito {
@@ -47,9 +51,7 @@
 .alerta-personalizada.aviso {
     background-color: #ffc107;
 }
-.alerta-personalizada.error {
-    background-color: #f44336;
-}
+.alerta-personalizada.error,
 .alerta-personalizada.obligatorio {
     background-color: #f44336;
 }

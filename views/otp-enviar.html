@@ -2,3 +2,29 @@
 <form action="/enviar-otp" method="post">
     <button type="submit">Submit</button>
 </form>
+<button onclick="avisoCancelar();">Cancelar</button>
+<div id="contenido" class="contenido"></div>
+<div id="alerta-personalizada" class="alerta-personalizada">
+    <div class="contenido-alerta-personalizada">
+    <h2 id="titulo-alerta-personalizada"></h2>
+    <p id="mensaje-alerta-personalizada"></p>
+    <button id="boton-alerta-personalizada">Aceptar</button>
+    <form id="boton-alerta-cancelar" action="/cancelar-enviar-otp" method="post">
+        <button type="submit">Si, quiero Cancelar</button>
+    </form>
+    <button id="boton-alerta-no-cancelar" onclick="redirigir()">No, no quiero Cancelar</button>
+</div>
+<script>
+    function avisoCancelar() {
+        document.getElementById('contenido').style.display = 'block';
+        document.getElementById('alerta-personalizada').style.display = 'block';
+        document.getElementById('alerta-personalizada').classList.add('aviso');
+        document.getElementById('titulo-alerta-personalizada').innerHTML = 'Estás a punto de Cancelar el<br>Proceso de Autenticación';
+        document.getElementById('mensaje-alerta-personalizada').innerHTML = '¿Estás seguro/a de querer Cancelar el Proceso?';
+        document.getElementById('boton-alerta-cancelar').style.display = 'block';
+        document.getElementById('boton-alerta-no-cancelar').style.display = 'block';
+    }
+    function redirigir() {
+        window.location.href = '/';
+    }
+</script>

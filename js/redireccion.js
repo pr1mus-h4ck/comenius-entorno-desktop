@@ -47,9 +47,32 @@ function redireccionarIndex(req, res, sesiones, rol, menuRol){
     // cancelar o cerrar sesion
     res.render('index', {sesiones, rol, menu: menuRol});
 }
-function redireccionarOTP(req, res, sesiones, procesoOTP){
-    // cancelar y siguiente
-    res.render('otp', {sesiones, procesoOTP});
+function redireccionarOTP(req, res, sesiones, procesoOTP, datosRecibidos){
+    // toda la logica de las ventanas emergentes
+    let envioOtp = {
+        alert: true,
+        alertTitle: 'Se ha Enviado con Éxito',
+        alertMessage: '¡Se ha Enviado el Correo a tu Casilla de E-Mail con Éxito!',
+        type: 'exito',
+        timer: 1500,
+    }
+    let problemaEnvio = {
+        alert: true,
+        alertTitle: 'No se ha Enviado el Código',
+        alertMessage: 'No se ha podido Enviar el Correo a tu Casilla de E-Mail.\nPor favor, intente de nuevo más tarde.',
+        type: 'error',
+    }
+    // si hizo el post tal cosa
+    if (datosRecibidos.tipo === 'exito') {
+        res.locals.alert = envioOtp;
+        res.render('otp', {sesiones, procesoOTP});
+    } else if (datosRecibidos.tipo === 'error') {
+        res.locals.alert = problemaEnvio;
+        res.render('otp', {sesiones, procesoOTP});
+    } else {
+        // si no hizo el post
+        res.render('otp', {sesiones, procesoOTP});
+    }
 }
 module.exports = {
     login: redireccionarLogin,

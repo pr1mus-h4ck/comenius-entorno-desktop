@@ -54,7 +54,7 @@ app.post('/enviar-otp', (req, res) => {
     // Si no es true, generar petición del envío de OTP a la casilla de correo electrónico del usuario
     } else{
         // Creo un objeto con los valores de las Cookies de la sesión
-        let sesiones = {
+        const sesiones = {
             id: cookieSession.usuariosID,
             session: cookieSession.sessionsID
         }
@@ -68,8 +68,15 @@ app.post('/enviar-otp', (req, res) => {
         .then(recibir => recibir.json())
         .then(recibido => {
             // Guardar el objeto recibido
-            config.envioOTP = recibido;
-            res.redirect('/');
+            config.envioOTP = recibido.correoEnviado;
+            const procesoOTP = {
+                envio: config.envioOTP,
+                correo: cookieSession.correoOTP
+            }
+            datosRecibidos = recibido;
+            if (recibido.tipo) {
+                funciones.otp(req, res, sesiones, procesoOTP, datosRecibidos);
+            }
         });
     }
 });
@@ -129,6 +136,36 @@ app.post('/confirmar-otp', (req, res) => {
     }
 });
 app.post('/cerrar-sesion', (req, res) => {
+    let sesiones = {
+        id: cookieSession.usuariosID,
+        session: cookieSession.sessionsID
+    }
+    // Convierto el objeto en un JSON
+    let sesionesJson = JSON.stringify(sesiones);
+    // Envío en método POST al servidor con los datos del JSON
+    fetch(`http://localhost:3000/cerrar-sesion`, {
+        method: 'Post',
+        body: sesionesJson
+    })
+    .then(recibir => recibir.json())
+    .then(recibido => {
+        if(recibido.cerrarSesion) {
+            funciones.eliminarCookies(cookies);
+            funciones.getCookies(cookieSession, cookies);
+            config.envioOTP =  false;
+            res.render('validacion', {
+                alert: true,
+                alertTitle: recibido.alertTitle,
+                alertMessage: recibido.alertMessage,
+                alertIcon: recibido.alertIcon,
+                showConfirButton: recibido.showConfirButton,
+                timer: recibido.timer,
+                ruta: '/'
+            })
+        }
+    })
+});
+app.post('/cancelar-enviar-otp', (req, res) => {
     let sesiones = {
         id: cookieSession.usuariosID,
         session: cookieSession.sessionsID
