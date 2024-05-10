@@ -82,6 +82,10 @@ app.post('/confirmar-otp', (req, res) => {
     if (cookieSession.verificacionOTP || !cookieSession.sessionsID){
         res.redirect('/');
     } else {
+        const procesoOTP = {
+            envio: config.envioOTP,
+            correo: cookieSession.correoOTP
+        }
         // Utilizar el método map() en 'inputNombres' para crear un nuevo array inputs. El método map() itera sobre cada elemento de 'inputNombres' y ejecuta una función para cada elemento.
         const inputs = inputNombres.map(nombre => req.body[nombre]);
         // Verificando si todos los campos de entrada tienen un valor distinto a una cadena vacía ('').
@@ -107,29 +111,19 @@ app.post('/confirmar-otp', (req, res) => {
                 cookies.set('verificacion', recibido.verificacion, {path: '/' });
                 // Guardar la cookie de verificacion
                 cookieSession.verificacionOTP = cookies.get('verificacion');
-                if (recibido.alertMessage) {
-                    res.render('index', {
-                        alert: true,
-                        alertTitle: recibido.alertTitle,
-                        alertMessage: recibido.alertMessage,
-                        alertIcon: recibido.alertIcon,
-                        showConfirButton: recibido.showConfirButton,
-                        timer: recibido.timer,
-                        ruta: '/'
-                    })
-                }
+                datosRecibidos = recibido;
+                funciones.otp(req, res, sesiones, procesoOTP, datosRecibidos);
             })
         } else {
             // Muestro un alert indicando que debe completar los campos obligatorios del formulario llevandolo nuevamente al 'login'
-            res.render('validacion', {
-                alert: true,
-                alertTitle: 'Campos Obligatorios',
-                alertMessage: '¡Todos los campos del formulario son obligatorios!',
-                alertIcon: 'error',
-                showConfirButton: true,
-                timer: false,
-                ruta: '/'
-            })
+            let sesiones = {
+                id: cookieSession.usuariosID,
+                session: cookieSession.sessionsID,
+            }
+            datosRecibidos = {
+                tipo: 'obligatorio',
+            }
+            funciones.otp(req, res, sesiones, procesoOTP, datosRecibidos);
         }
     }
 });
