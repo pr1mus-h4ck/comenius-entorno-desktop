@@ -18,10 +18,10 @@
     <% } %>
     <div id="contenido" class="contenido"></div>
     <div id="alerta-personalizada" class="alerta-personalizada">
-        <div class="contenido-alerta-personalizada">
+    <div class="contenido-alerta-personalizada">
         <h2 id="titulo-alerta-personalizada"></h2>
         <p id="mensaje-alerta-personalizada"></p>
-        <button id="boton-alerta-personalizada">Aceptar</button>
+        <button id="boton-alerta-personalizada" onclick="redirigir()">Aceptar</button>
         <form id="boton-alerta-cancelar" action="/cancelar-enviar-otp" method="post">
             <button type="submit">Si, quiero Cancelar</button>
         </form>
