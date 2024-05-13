@@ -41,7 +41,9 @@
 }
 #boton-alerta-personalizada,
 #boton-alerta-cancelar,
+#boton-alerta-cerrar,
 #boton-alerta-no-cancelar,
+#boton-alerta-no-cerrar,
 #aviso-cancelar {
     display: none;
 }

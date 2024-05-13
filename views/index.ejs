@@ -17,36 +17,31 @@
             <% }) %>
         </ul>
     <% } %>
-    <form action="/cerrar-sesion" method="post">
-        <button type="submit">Cerrar Sesión</button>
-    </form>
+    <button onclick="avisoCerrarSesion();">Cerrar Sesión</button>
     <div id="contenido" class="contenido"></div>
     <div id="alerta-personalizada" class="alerta-personalizada">
         <div class="contenido-alerta-personalizada">
         <h2 id="titulo-alerta-personalizada"></h2>
         <p id="mensaje-alerta-personalizada"></p>
         <button id="boton-alerta-personalizada" onclick="redirigir()">Aceptar</button>
+        <form id="boton-alerta-cerrar" action="/cerrar-sesion" method="post">
+            <button type="submit">Si, quiero Cerrar la Sesión</button>
+        </form>
+        <button id="boton-alerta-no-cerrar" onclick="redirigir()">No, me equivoque</button>
     </div>
-    <% if (typeof alert != 'undefined') { %>
-        <script>
-            // Lógica para mostrar u ocultar la alerta personalizada
+    <script>
+        function avisoCerrarSesion() {
             document.getElementById('contenido').style.display = 'block';
             document.getElementById('alerta-personalizada').style.display = 'block';
-            document.getElementById('titulo-alerta-personalizada').innerText = '<%= alert.alertTitle %>';
-            document.getElementById('mensaje-alerta-personalizada').innerText = '<%= alert.alertMessage %>';
-            document.getElementById('alerta-personalizada').classList.add('<%= alert.type %>');
-            if ('<%= alert.type %>' === 'error' || '<%= alert.type %>' === 'aviso' || '<%= alert.type %>' === 'obligatorio') {
-                document.getElementById('boton-alerta-personalizada').style.display = 'block'; // Mostrar el botón en caso de error o advertencia
-            }
-            if ('<%= alert.type %>' === 'exito') {
-                setTimeout(function(){
-                    window.location.href = '/'; // Redireccionar a la página principal después de 1500 milisegundos en caso de éxito
-                }, 1500);
-            }
-            function redirigir() {
-                window.location.href = '/'; // Redireccionar a la página principal al presionar el botón "Aceptar" en caso de error o aviso
-            }
-        </script>
-    <% } %>
+            document.getElementById('alerta-personalizada').classList.add('aviso');
+            document.getElementById('titulo-alerta-personalizada').innerHTML = 'Estás a punto de Cerrar la Sesión';
+            document.getElementById('mensaje-alerta-personalizada').innerHTML = '¿Estás seguro/a de querer Cerrar la Sesión?';
+            document.getElementById('boton-alerta-cerrar').style.display = 'block';
+            document.getElementById('boton-alerta-no-cerrar').style.display = 'block';
+        }
+        function redirigir() {
+            window.location.href = '/';
+        }
+    </script>
 </body>
 </html>

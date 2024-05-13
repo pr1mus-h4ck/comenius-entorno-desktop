@@ -154,7 +154,7 @@ app.post('/cerrar-sesion', (req, res) => {
         }
     })
 });
-app.post('/cancelar-enviar-otp', (req, res) => {
+app.post('/cancelar-autenticacion', (req, res) => {
     let sesiones = {
         id: cookieSession.usuariosID,
         session: cookieSession.sessionsID
@@ -172,15 +172,8 @@ app.post('/cancelar-enviar-otp', (req, res) => {
             funciones.eliminarCookies(cookies);
             funciones.getCookies(cookieSession, cookies);
             config.envioOTP =  false;
-            res.render('validacion', {
-                alert: true,
-                alertTitle: recibido.alertTitle,
-                alertMessage: recibido.alertMessage,
-                alertIcon: recibido.alertIcon,
-                showConfirButton: recibido.showConfirButton,
-                timer: recibido.timer,
-                ruta: '/'
-            })
+            datosRecibidos = recibido;
+            funciones.login(req, res, datosRecibidos);
         }
     })
 });
