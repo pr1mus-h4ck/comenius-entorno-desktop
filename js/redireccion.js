@@ -59,26 +59,26 @@ function redireccionarOTP(req, res, sesiones, procesoOTP, datosRecibidos){
     let problemaEnvio = {
         alert: true,
         alertTitle: 'No se ha Enviado el Código',
-        alertMessage: 'No se ha podido Enviar el Correo a tu Casilla de E-Mail.\nPor favor, intente de nuevo más tarde.',
+        alertMessage: 'No se ha podido Enviar el Correo a tu Casilla de E-Mail. Por favor, intente de nuevo más tarde.',
         type: 'error',
     }
     let confirmarOtp = {
         alert: true,
         alertTitle: 'Se ha Confirmado con Éxito',
-        alertMessage: '¡Se ha Confirmado el Código que se te proporcionó\na tu Casilla de E-Mail con Éxito!',
+        alertMessage: '¡Se ha Confirmado el Código que se te proporcionó a tu Casilla de E-Mail con Éxito!',
         type: 'exito',
         timer: 1500,
     }
     let avisoIntentosOtp = {
         alert: true,
         alertTitle: 'Error',
-        alertMessage: 'El Código ingresado es incorrecto.\nTe quedan '+datosRecibidos.intentos+' intentos.',
+        alertMessage: 'El Código ingresado es incorrecto. Te quedan '+datosRecibidos.intentos+' intentos.',
         type: 'aviso',
     }
     let sinConfirmarOtp = {
         alert: true,
         alertTitle: 'Error',
-        alertMessage: '¡No se ha Confirmado el Código que se te proporcionó\na tu Casilla de E-Mail con Éxito!',
+        alertMessage: 'Alcanzaste el límite',
         type: 'error',
     }
     let obligatorioOtp = {
@@ -88,30 +88,24 @@ function redireccionarOTP(req, res, sesiones, procesoOTP, datosRecibidos){
         type: 'obligatorio',
     }
     // si hizo el post tal cosa
-    if (datosRecibidos.archivo === 'otp-enviar') {
-        if (datosRecibidos.tipo === 'exito') {
-            res.locals.alert = envioOtp;
-            res.render('otp', {sesiones, procesoOTP});
-        } else if (datosRecibidos.tipo === 'error') {
-            res.locals.alert = problemaEnvio;
-            res.render('otp', {sesiones, procesoOTP});
-        } 
-    } else if (datosRecibidos.archivo === 'otp-confirmar') {
-        if (datosRecibidos.tipo === 'exito') {
-            res.locals.alert = confirmarOtp;
-            res.render('otp', {sesiones, procesoOTP});
-        } else if (datosRecibidos.tipo === 'aviso') {
-            console.log(avisoIntentosOtp);
-            res.locals.alert = avisoIntentosOtp;
-            res.render('otp', {sesiones, procesoOTP});
-        } else if (datosRecibidos.tipo === 'error') {
-            res.locals.alert = sinConfirmarOtp;
-            res.render('otp', {sesiones, procesoOTP});
-        } else if (datosRecibidos.tipo === 'obligatorio') {
-            console.log(obligatorioOtp);
-            res.locals.alert = obligatorioOtp;
-            res.render('otp', {sesiones, procesoOTP});
-        }
+    if  (datosRecibidos.tipo === 'exitoEnvio') {
+        res.locals.alert = envioOtp;
+        res.render('otp', {sesiones, procesoOTP});
+    } else if (datosRecibidos.tipo === 'errorEnvio') {
+        res.locals.alert = problemaEnvio;
+        res.render('otp', {sesiones, procesoOTP});
+    } else if (datosRecibidos.tipo === 'exitoConfirmar') {
+        res.locals.alert = confirmarOtp;
+        res.render('otp', {sesiones, procesoOTP});
+    } else if (datosRecibidos.tipo === 'aviso') {
+        res.locals.alert = avisoIntentosOtp;
+        res.render('otp', {sesiones, procesoOTP});
+    } else if (datosRecibidos.tipo === 'errorConfirmar') {
+        res.locals.alert = sinConfirmarOtp;
+        res.render('otp', {sesiones, procesoOTP});
+    } else if (datosRecibidos.tipo === 'obligatorio') {
+        res.locals.alert = obligatorioOtp;
+        res.render('otp', {sesiones, procesoOTP});
     } else {
         // si no hizo el post
         res.render('otp', {sesiones, procesoOTP});

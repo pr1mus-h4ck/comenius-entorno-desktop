@@ -28,6 +28,7 @@
         <button type="submit">Submit</button>
     </div>
 </form>
+<button onclick="avisoCancelar();">Cancelar</button>
 <script>
     function activateNextInput(currentInput, nextInputIndex) {
         if (currentInput.value.length === 1) {
@@ -55,4 +56,18 @@
             }
         }
     });
+</script>
+<script>
+    function avisoCancelar() {
+        document.getElementById('contenido').style.display = 'block';
+        document.getElementById('alerta-personalizada').style.display = 'block';
+        document.getElementById('alerta-personalizada').classList.add('aviso');
+        document.getElementById('titulo-alerta-personalizada').innerHTML = 'Estás a punto de Cancelar el<br>Proceso de Autenticación';
+        document.getElementById('mensaje-alerta-personalizada').innerHTML = '¿Estás seguro/a de querer Cancelar el Proceso?';
+        document.getElementById('boton-alerta-cancelar').style.display = 'block';
+        document.getElementById('boton-alerta-no-cancelar').style.display = 'block';
+    }
+    function redirigir() {
+        window.location.href = '/';
+    }
 </script>
