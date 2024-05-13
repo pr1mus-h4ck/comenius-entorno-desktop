@@ -17,6 +17,7 @@
             <% }) %>
         </ul>
     <% } %>
+    <!-- TODO: Hacer la funcion include como interacción con el menú -->
     <button onclick="avisoCerrarSesion();">Cerrar Sesión</button>
     <div id="contenido" class="contenido"></div>
     <div id="alerta-personalizada" class="alerta-personalizada">
@@ -29,6 +30,7 @@
         </form>
         <button id="boton-alerta-no-cerrar" onclick="redirigir()">No, me equivoque</button>
     </div>
+    <!-- TODO: Hacer una función que solicite peticiones para cada vista -->
     <script>
         function avisoCerrarSesion() {
             document.getElementById('contenido').style.display = 'block';
