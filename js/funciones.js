@@ -9,6 +9,8 @@ function setCookies (paquete, cookies ) {
     cookies.set('verificacion', paquete.verificacion, {path: '/' });
     // Crear la cookie de correo encriptado
     cookies.set('correo', paquete.correo, {path: '/'});
+    // Crear la cookie de rol del usuario
+    cookies.remove('rol', { path: '/' });
     return paquete;
 }
 function getCookies (objeto, cookies) {
@@ -20,6 +22,8 @@ function getCookies (objeto, cookies) {
     objeto.verificacionOTP = cookies.get('verificacion');
     // Guardar la cookie de correo
     objeto.correoOTP =  cookies.get("correo");
+    // Guardar la cookie de rol
+    objeto.rol = cookies.get("rol");
     return objeto;
 }
 function eliminarCookies(cookies) {
@@ -31,6 +35,8 @@ function eliminarCookies(cookies) {
     cookies.remove('verificacion', { path: '/' });
     // Eliminar la cookie de correo encriptado
     cookies.remove('correo', { path: '/' });
+    // Eliminar la cookie de rol del usuario
+    cookies.remove('rol', { path: '/' });
 }
 function generarMenu(rol, seccionSeleccionada) {
     let menu = '<ul>';

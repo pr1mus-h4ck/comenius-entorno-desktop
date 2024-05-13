@@ -105,8 +105,10 @@ app.post('/confirmar-otp', (req, res) => {
             .then(recibido => {
                 // Crear la cookie de si se requiere OTP o no
                 cookies.set('verificacion', recibido.verificacion, {path: '/' });
+                cookies.set('rol', recibido.rol, {path: '/' });
                 // Guardar la cookie de verificacion
                 cookieSession.verificacionOTP = cookies.get('verificacion');
+                cookieSession.rol = cookies.get('rol');
                 const procesoOTP = {
                     envio: config.envioOTP,
                     correo: cookieSession.correoOTP

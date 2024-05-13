@@ -1,4 +1,4 @@
-function redireccionarLogin(req, res, datosRecibidos){
+function redireccionarLogin(req, res, datosRecibidos) {
     // toda la logica de las ventanas emergentes
     let iniciarSesion = {
         alert: true,
@@ -53,11 +53,10 @@ function redireccionarLogin(req, res, datosRecibidos){
         res.render('login');
     }
 }
-function redireccionarIndex(req, res, sesiones, rol, menuRol){
-    res.render('index', {sesiones, rol, menu: menuRol});
-
+function redireccionarIndex(req, res, sesiones, menuRol) {
+    res.render('index', {sesiones, menu: menuRol});
 }
-function redireccionarOTP(req, res, sesiones, procesoOTP, datosRecibidos){
+function redireccionarOTP(req, res, sesiones, procesoOTP, datosRecibidos) {
     // toda la logica de las ventanas emergentes
     let envioOtp = {
         alert: true,

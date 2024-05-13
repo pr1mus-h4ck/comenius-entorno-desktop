@@ -8,6 +8,7 @@ app.get('/', (req, res) => {
     let sesiones = {
         id: cookieSession.usuariosID,
         sesion: cookieSession.sessionsID,
+        rol: cookieSession.rol,
     }
     // Crear un objeto para el proceso de OTP donde se verifica si se envío el correo al usuario con el código pertinente
     let procesoOTP = {
@@ -18,14 +19,13 @@ app.get('/', (req, res) => {
         tipo: null,
         intentos: null,
     }
-    let rol = 'estudiante';
     // Verificar si hay una sesión activa
     if (cookieSession.sessionsID) {
         // Si OTP fue virificado mostrar el index
         if (cookieSession.verificacionOTP) {
             // Verificar si el rol existe en menuRol antes de pasarlo
-            if (menuRol[rol]) {
-                funciones.index(req, res, sesiones, rol, menuRol[rol]);
+            if (menuRol[sesiones.rol]) {
+                funciones.index(req, res, sesiones, menuRol[sesiones.rol], datosRecibidos);
             }
             } else {
             // Mostrar OTP
