@@ -17,14 +17,16 @@ app.get('/', (req, res) => {
     let datosRecibidos = {
         intentos: null,
     }
-    let rol = 'Estudiante';
+    let rol = 'estudiante';
     // Verificar si hay una sesión activa
     if (cookieSession.sessionsID) {
         // Si OTP fue virificado mostrar el index
         if (cookieSession.verificacionOTP) {
-            // Mostrar Index
-            funciones.index(req, res, sesiones, rol, menuRol)
-        } else {
+            // Verificar si el rol existe en menuRol antes de pasarlo
+            if (menuRol[rol]) {
+                funciones.index(req, res, sesiones, rol, menuRol[rol]);
+            }
+            } else {
             // Mostrar OTP
             funciones.otp(req, res, sesiones, procesoOTP, datosRecibidos);
         }
