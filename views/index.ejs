@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Index</title>
+    <link rel="stylesheet" href="recursos/css/index.css">
+    <link rel="stylesheet" href="recursos/css/alerta.css">
 </head>
 <body>
     <h1>Index</h1>
@@ -14,9 +16,37 @@
                 <li><a href="<%= item %>"><%= item %></a></li>
             <% }) %>
         </ul>
-    <% } %>    
+    <% } %>
     <form action="/cerrar-sesion" method="post">
         <button type="submit">Cerrar Sesión</button>
     </form>
+    <div id="contenido" class="contenido"></div>
+    <div id="alerta-personalizada" class="alerta-personalizada">
+        <div class="contenido-alerta-personalizada">
+        <h2 id="titulo-alerta-personalizada"></h2>
+        <p id="mensaje-alerta-personalizada"></p>
+        <button id="boton-alerta-personalizada" onclick="redirigir()">Aceptar</button>
+    </div>
+    <% if (typeof alert != 'undefined') { %>
+        <script>
+            // Lógica para mostrar u ocultar la alerta personalizada
+            document.getElementById('contenido').style.display = 'block';
+            document.getElementById('alerta-personalizada').style.display = 'block';
+            document.getElementById('titulo-alerta-personalizada').innerText = '<%= alert.alertTitle %>';
+            document.getElementById('mensaje-alerta-personalizada').innerText = '<%= alert.alertMessage %>';
+            document.getElementById('alerta-personalizada').classList.add('<%= alert.type %>');
+            if ('<%= alert.type %>' === 'error' || '<%= alert.type %>' === 'aviso' || '<%= alert.type %>' === 'obligatorio') {
+                document.getElementById('boton-alerta-personalizada').style.display = 'block'; // Mostrar el botón en caso de error o advertencia
+            }
+            if ('<%= alert.type %>' === 'exito') {
+                setTimeout(function(){
+                    window.location.href = '/'; // Redireccionar a la página principal después de 1500 milisegundos en caso de éxito
+                }, 1500);
+            }
+            function redirigir() {
+                window.location.href = '/'; // Redireccionar a la página principal al presionar el botón "Aceptar" en caso de error o aviso
+            }
+        </script>
+    <% } %>
 </body>
 </html>

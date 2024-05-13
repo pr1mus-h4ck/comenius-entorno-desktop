@@ -15,6 +15,7 @@ app.get('/', (req, res) => {
         correo: cookieSession.correoOTP
     }
     let datosRecibidos = {
+        tipo: null,
         intentos: null,
     }
     let rol = 'estudiante';

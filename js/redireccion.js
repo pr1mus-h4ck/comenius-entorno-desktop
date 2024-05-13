@@ -25,6 +25,13 @@ function redireccionarLogin(req, res, datosRecibidos){
         alertMessage: 'Todos los campos del formulario son obligatorios',
         type: 'obligatorio',
     }
+    let cerrarSesion = {
+        alert: true,
+        alertTitle: 'Sesión Finalizada',
+        alertMessage: '¡Se ha Finalizado la Sesión con Éxito!',
+        type: 'exito',
+        timer: 1500,
+    }
     // si hizo el post tal cosa
     if (datosRecibidos.tipo === 'exito') {
         res.locals.alert = iniciarSesion;
@@ -38,14 +45,17 @@ function redireccionarLogin(req, res, datosRecibidos){
     } else if (datosRecibidos.tipo === 'obligatorio') {
         res.locals.alert = obligatorioLogin;
         res.render('login');
+    } else if (datosRecibidos.tipo === 'cerrarSesion') {
+        res.locals.alert = cerrarSesion;
+        res.render('login');
     } else {
         // si no hizo el post
         res.render('login');
     }
 }
 function redireccionarIndex(req, res, sesiones, rol, menuRol){
-    // cancelar o cerrar sesion
     res.render('index', {sesiones, rol, menu: menuRol});
+
 }
 function redireccionarOTP(req, res, sesiones, procesoOTP, datosRecibidos){
     // toda la logica de las ventanas emergentes
