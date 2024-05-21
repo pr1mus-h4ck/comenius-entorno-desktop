@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const puerto = 4000;
+const path = require('path');
 // Invoco la librería 'universal-cookie' para trabajar con cookies en el cliente
 const Cookies = require('universal-cookie');
 //  Creo una instancia de las cookies, que se pasa a todas las funciones que requieren acceso a ellas.
@@ -33,6 +34,7 @@ app.use('/recursos', express.static('public'));
 module.exports = {
     app,
     puerto,
+    path,
     cookies,
     cookieSession,
     // Crear variable de envioOTP inicializasa en false indicando que aún no se envío el código OTP al usuario en su casilla de e-mail

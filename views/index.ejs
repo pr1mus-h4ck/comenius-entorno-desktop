@@ -13,9 +13,14 @@
     <% if (menu) { %>
         <ul>
             <% menu.forEach(item => { %>
-                <li><a href="<%= item %>"><%= item %></a></li>
+                <li><a href="#" onclick="handleMenuClick('<%= item %>')"><%= item %></a></li>
             <% }) %>
         </ul>
+    <% } %>
+    <% if (!selectedItem) { %>
+        <%- console.log(selectedItem) %>
+    <% } else { %>
+        <%- include(selectedItem) %>
     <% } %>
     <!-- TODO: Hacer la funcion include como interacción con el menú -->
     <button onclick="avisoCerrarSesion();">Cerrar Sesión</button>
@@ -32,6 +37,12 @@
     </div>
     <!-- TODO: Hacer una función que solicite peticiones para cada vista -->
     <script>
+        // Función para manejar el clic en un elemento del menú
+        function handleMenuClick(item) {
+            selectedItem = `../public/html/${item}.html`;
+            console.log(selectedItem);
+            console.log('Ruta del archivo HTML a incluir: '+selectedItem);
+        }
         function avisoCerrarSesion() {
             document.getElementById('contenido').style.display = 'block';
             document.getElementById('alerta-personalizada').style.display = 'block';

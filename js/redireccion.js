@@ -54,7 +54,8 @@ function redireccionarLogin(req, res, datosRecibidos) {
     }
 }
 function redireccionarIndex(req, res, sesiones, menuRol) {
-    res.render('index', {sesiones, menu: menuRol});
+    let selectedItem = '';
+    res.render('index', {sesiones, menu: menuRol, selectedItem});
 }
 function redireccionarOTP(req, res, sesiones, procesoOTP, datosRecibidos) {
     // toda la logica de las ventanas emergentes
