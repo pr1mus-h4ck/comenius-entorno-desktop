@@ -9,6 +9,7 @@ app.get('/', (req, res) => {
         id: cookieSession.usuariosID,
         sesion: cookieSession.sessionsID,
         rol: cookieSession.rol,
+        item: cookieSession.item,
     }
     // Crear un objeto para el proceso de OTP donde se verifica si se envío el correo al usuario con el código pertinente
     let procesoOTP = {

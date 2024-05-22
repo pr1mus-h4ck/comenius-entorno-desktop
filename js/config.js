@@ -15,9 +15,11 @@ let cookieSession = {
     // Crear variable de 'verificacionOTP' para guardar como cookie el acceso a OTP o index
     verificacionOTP: cookies.get('verificacion'),
     // Craar variable de 'correoOTP' para guardar como cookie el correo del usuario encriptado
-    correoOTP: cookies.get("correo"),
-    // Craar variable de 'rol' para guardar como cookie el correo del usuario encriptado
-    rol: cookies.get("rol"),
+    correoOTP: cookies.get('correo'),
+    // Craar variable de 'rol' para guardar como cookie el rol del usuario para la visualización del menú
+    rol: cookies.get('rol'),
+    // Craar variable de 'item' para guardar como cookie el item seleccionado del menu para renderizar dicha página en el index.ejs
+    item: cookies.get('item'),
 }
 app.use(cors());
 app.use(express.urlencoded({

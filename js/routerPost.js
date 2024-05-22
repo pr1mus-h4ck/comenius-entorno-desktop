@@ -179,4 +179,12 @@ app.post('/cancelar-autenticacion', (req, res) => {
         }
     })
 });
+app.post('/cargarPagina', (req, res) => {
+    //console.log('Hicieron un POST en /cargarPagina');
+    //console.log(req.body.menu);
+    cookies.set('item', req.body.menu, {path: '/' });
+    cookieSession.item = cookies.get('item');
+    //console.log(cookieSession.item);
+    res.sendStatus(200);
+});
 module.exports = { routerGet: app }

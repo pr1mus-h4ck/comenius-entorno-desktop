@@ -13,14 +13,14 @@
     <% if (menu) { %>
         <ul>
             <% menu.forEach(item => { %>
-                <li><a href="#" onclick="handleMenuClick('<%= item %>')"><%= item %></a></li>
+                <li><a href="#" onclick="manejarMenuClick('<%= item %>')"><%= item %></a></li>
             <% }) %>
         </ul>
     <% } %>
-    <% if (!selectedItem) { %>
-        <%- console.log(selectedItem) %>
+    <% if (sesiones.item) { %>
+        <%- include(`../public/html/${sesiones.item}.html`) %>
     <% } else { %>
-        <%- include(selectedItem) %>
+        <%- include('../public/html/inicio.html') %>
     <% } %>
     <!-- TODO: Hacer la funcion include como interacción con el menú -->
     <button onclick="avisoCerrarSesion();">Cerrar Sesión</button>
@@ -38,10 +38,23 @@
     <!-- TODO: Hacer una función que solicite peticiones para cada vista -->
     <script>
         // Función para manejar el clic en un elemento del menú
-        function handleMenuClick(item) {
-            selectedItem = `../public/html/${item}.html`;
-            console.log(selectedItem);
-            console.log('Ruta del archivo HTML a incluir: '+selectedItem);
+        function manejarMenuClick(item) {
+            console.log(item);
+            datos = { menu: item };
+            fetch('/cargarPagina', {
+                method: 'Post',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(datos)
+            })
+            .then(respuesta => {
+                if (respuesta.ok) {
+                    window.location.href = '/';
+                } else {
+                    console.error('Error al hacer la petición');
+                }
+            })
         }
         function avisoCerrarSesion() {
             document.getElementById('contenido').style.display = 'block';
