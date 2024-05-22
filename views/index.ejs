@@ -18,9 +18,9 @@
         </ul>
     <% } %>
     <% if (sesiones.item) { %>
-        <%- include(`../public/html/${sesiones.item}.html`) %>
+        <%- include(`${sesiones.item}.ejs`) %>
     <% } else { %>
-        <%- include('../public/html/inicio.html') %>
+        <%- include('inicio.ejs') %>
     <% } %>
     <!-- TODO: Hacer la funcion include como interacción con el menú -->
     <button onclick="avisoCerrarSesion();">Cerrar Sesión</button>
