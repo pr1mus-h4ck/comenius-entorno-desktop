@@ -1,9 +1,1 @@
-<% if (sesiones.rol === 'alumno') { %>
-    <%- include(`../public/html/${sesiones.rol}.html`) %>
-<% } else if (sesiones.rol === 'instructor') { %>
-    <%- include('../public/html/instructor.html') %>
-<% } else if (sesiones.rol === 'usuario_especial') { %>
-    <%- include('../public/html/usuario_especial.html') %>
-<% } else { %>
-    <%- include('../public/html/admin.html') %>
-<% } %>
+<%- include(`../public/html/${sesiones.rol}.html`) %>
