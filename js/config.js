@@ -1,11 +1,16 @@
+// Invoco la librería 'express' en la constante llamada igualmente 'express'
 const express = require('express');
+// Guardo la función express() en la constante app para utilizar todos los métodos de la librería 'express'
 const app = express();
+// Guardo la constante 'port' el número 4000 para iniciarlizarlo como el puerto del servidor
 const puerto = 4000;
+// Invoco la librería 'path' en la constante llamada igualmente 'path'
 const path = require('path');
 // Invoco la librería 'universal-cookie' para trabajar con cookies en el cliente
 const Cookies = require('universal-cookie');
 //  Creo una instancia de las cookies, que se pasa a todas las funciones que requieren acceso a ellas.
 const cookies = new Cookies();
+// Invoco la librería 'cors' en la constante llamada igualmente 'cors'
 const cors = require('cors');
 let cookieSession = {
     // Crear variable 'usuariosID' para guardar como cookie la ID del usuario en la DDBB
@@ -21,6 +26,7 @@ let cookieSession = {
     // Craar variable de 'item' para guardar como cookie el item seleccionado del menu para renderizar dicha página en el index.ejs
     item: cookies.get('item'),
 }
+// Hago uso de cors en este archivo 'index.js'. Se agrega antes de cualquier controlador de ruta.
 app.use(cors());
 app.use(express.urlencoded({
     extended: true
