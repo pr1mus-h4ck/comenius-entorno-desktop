@@ -22,10 +22,11 @@ app.get('/', (req, res) => {
     }
     // Verificar si hay una sesión activa
     if (cookieSession.sessionsID) {
-        // Si OTP fue virificado mostrar el index
+        // Si OTP fue virificado mostrar el Index
         if (cookieSession.verificacionOTP) {
             // Verificar si el rol existe en menuRol antes de pasarlo
             if (menuRol[sesiones.rol]) {
+                // Mostrar Index
                 funciones.index(req, res, sesiones, menuRol[sesiones.rol], datosRecibidos);
             }
             } else {

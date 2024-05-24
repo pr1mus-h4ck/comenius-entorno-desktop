@@ -30,11 +30,16 @@ app.post('/login', (req, res) => {
             .then(recibido => {
                 // Si la validación es correcta guardo la ID de la sesión y verificación de OTP
                 if (recibido.usuarioID && recibido.sessionID) {
+                    // Creo las Cookies con los valores recibidos desde el Back-End
                     funciones.setCookies(recibido, cookies);
+                    // Guardo las Cookies creadas
                     funciones.getCookies(cookieSession, cookies);
-                } 
+                }
+                // Guardo el mensaje completo enviado desde el Back-End
                 datosRecibidos = recibido;
+                // Si 'recibido.tipo' es verdadero. Es decir, si 'recibido.tipo' tiene un valor guardado.
                 if (recibido.tipo) {
+                    // Renderizar a Login
                     funciones.login(req, res, datosRecibidos);
                 }
             })
@@ -147,11 +152,17 @@ app.post('/cerrar-sesion', (req, res) => {
     })
     .then(recibir => recibir.json())
     .then(recibido => {
+        // Si la Sesión del Back-End fue cerrada
         if(recibido.cerrarSesion) {
+            // Elimino todas las Cookies de la app
             funciones.eliminarCookies(cookies);
+            // Guardo las Cookies con el valor vacio
             funciones.getCookies(cookieSession, cookies);
+            // Establezco 'config.envioOTP' son su valor de origen
             config.envioOTP =  false;
+            // Todo el mensaje recibido desde el Back-End lo guardo en 'datosRecibidos' para poder renderizar al Login
             datosRecibidos = recibido;
+            // Renderizo el Login
             funciones.login(req, res, datosRecibidos);
         }
     })
@@ -170,21 +181,28 @@ app.post('/cancelar-autenticacion', (req, res) => {
     })
     .then(recibir => recibir.json())
     .then(recibido => {
+        // Si la Sesión del Back-End fue cerrada
         if(recibido.cerrarSesion) {
+            // Elimino todas las Cookies de la app
             funciones.eliminarCookies(cookies);
+            // Guardo las Cookies con el valor vacio
             funciones.getCookies(cookieSession, cookies);
+            // Establezco 'config.envioOTP' son su valor de origen
             config.envioOTP =  false;
+            // Todo el mensaje recibido desde el Back-End lo guardo en 'datosRecibidos' para poder renderizar al Login
             datosRecibidos = recibido;
+            // Renderizo el Login
             funciones.login(req, res, datosRecibidos);
         }
     })
 });
 app.post('/cargarPagina', (req, res) => {
     //console.log('Hicieron un POST en /cargarPagina');
-    //console.log(req.body.menu);
+    // Creo la Cookie 'item' con el valor enviado desde 'index.ejs'
     cookies.set('item', req.body.menu, {path: '/' });
+    // Guardo la Cookie 'item' creada
     cookieSession.item = cookies.get('item');
-    //console.log(cookieSession.item);
+    // Envio la respuesta de éxito a 'index.ejs'
     res.sendStatus(200);
 });
 module.exports = { routerGet: app }

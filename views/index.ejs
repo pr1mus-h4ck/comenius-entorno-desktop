@@ -10,6 +10,7 @@
 <body>
     <h1>Index</h1>
     <p>La sesión iniciada <%= sesiones.sesion %></p>
+    <!-- Iteración del array 'menu' -->
     <% if (menu) { %>
         <ul>
             <% menu.forEach(item => { %>
@@ -17,13 +18,18 @@
             <% }) %>
         </ul>
     <% } %>
+    <!-- Fin de Iteración del array 'menu' -->
+    <!-- Contenido de cada item seleccionado -->
     <% if (sesiones.item) { %>
         <%- include(`${sesiones.item}.ejs`) %>
     <% } else { %>
         <%- include('inicio.ejs') %>
     <% } %>
-    <!-- TODO: Hacer la funcion include como interacción con el menú -->
+    <!-- Fin de Contenido de cada item seleccionado -->
+    <!-- Botón que activa la función 'avisoCerrarSesion()' -->
     <button onclick="avisoCerrarSesion();">Cerrar Sesión</button>
+    <!-- Fin de Botón que activa la función 'avisoCerrarSesion()' -->
+    <!-- Etiquetas cuando se activa una alerta -->
     <div id="contenido" class="contenido"></div>
     <div id="alerta-personalizada" class="alerta-personalizada">
         <div class="contenido-alerta-personalizada">
@@ -35,12 +41,13 @@
         </form>
         <button id="boton-alerta-no-cerrar" onclick="redirigir()">No, me equivoque</button>
     </div>
-    <!-- TODO: Hacer una función que solicite peticiones para cada vista -->
+    <!-- Fin de Etiquetas cuando se activa una alerta -->
     <script>
         // Función para manejar el clic en un elemento del menú
         function manejarMenuClick(item) {
-            console.log(item);
+            // Guardo el valor de 'item' en la variable datos. Con 'menu:' le cambio el nombre item a menu
             datos = { menu: item };
+            // Hace una petición en '/cargarPagina' con el método POST en el mismo puerto que corre el front, enviando 'datos' en formato JSON
             fetch('/cargarPagina', {
                 method: 'Post',
                 headers: {
@@ -49,23 +56,36 @@
                 body: JSON.stringify(datos)
             })
             .then(respuesta => {
+                // Si la respuesta es correcta
                 if (respuesta.ok) {
+                    // Cargar la ventana en la ruta '/'
                     window.location.href = '/';
                 } else {
+                    // Si sale error cargar en la consola del Navegador el error
                     console.error('Error al hacer la petición');
                 }
             })
         }
+        // Función para manejar el clic en el botón de cerrar sesión
         function avisoCerrarSesion() {
+            // Activo el estilo bloqueado, '#contenido' por 'alertas.css'
             document.getElementById('contenido').style.display = 'block';
+            // Activo el estilo bloqueado, '#alerta-personalizada' por 'alertas.css'
             document.getElementById('alerta-personalizada').style.display = 'block';
+            // Agrego una clase a la etiqueca con la ID '#alerta-personalizada' para cambiar el color de la alerta
             document.getElementById('alerta-personalizada').classList.add('aviso');
+            // Agrego texto a la etiqueta con la ID '#titulo-alerta-personalizada'
             document.getElementById('titulo-alerta-personalizada').innerHTML = 'Estás a punto de Cerrar la Sesión';
+            // Agrego texto a la etiqueta con la ID '#mensaje-alerta-personalizada'
             document.getElementById('mensaje-alerta-personalizada').innerHTML = '¿Estás seguro/a de querer Cerrar la Sesión?';
+            // Activo el estilo bloqueado, '#boton-alerta-cerrar' por 'alertas.css'
             document.getElementById('boton-alerta-cerrar').style.display = 'block';
+            // Activo el estilo bloqueado, '#boton-alerta-no-cerrar' por 'alertas.css'
             document.getElementById('boton-alerta-no-cerrar').style.display = 'block';
         }
+        // Función para redirigir a la ruta '/'
         function redirigir() {
+            // Carga la ventana en la ruta '/'
             window.location.href = '/';
         }
     </script>

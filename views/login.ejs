@@ -12,18 +12,21 @@
         <div>
             <h1>Inicio Sesión</h1>
         </div> 
-        <!--DESDE ACÁ EL LOGIN-->
+        <!--Formulario del Login -->
         <form action="/login" method="post"> 
-            <!--casilla de email-->
+            <!-- Casilla de email -->
             <div>
                 <label for="correo">Correo</label>
                 <input type="email" name='correo' >
             </div>
-            <!--casilla de contraseña-->
+            <!-- Fin de Casilla de email -->
+            <!-- Casilla de contraseña-->
             <div>
                 <label for="contrasena">Contraseña</label>
                 <input type="password" name='contrasena' >
             </div>
+            <!-- Fin de Casilla de contraseña-->
+            <!-- Checkbox para recordar el email -->
             <div>
                 <div>
                     <label for="###">
@@ -32,12 +35,16 @@
                     </label>
                 </div>
             </div>
+            <!-- Fin de Checkbox para recordar el email -->
+            <!-- Botón de Inicio de Sesión -->
             <div>
-                <button type="submit">Submit</button>
+                <button type="submit">Iniciar Sesión</button>
             </div>
+            <!-- Fin de Botón de Inicio de Sesión -->
         </form> 
-        <!--ACÁ TERMINA EL LOGIN-->
+        <!-- Fin de Formulario del Login -->
     </main>
+    <!-- Etiquetas cuando se activa una alerta -->
     <div id="contenido" class="contenido"></div>
     <div id="alerta-personalizada" class="alerta-personalizada">
         <div class="contenido-alerta-personalizada">
@@ -45,26 +52,37 @@
         <p id="mensaje-alerta-personalizada"></p>
         <button id="boton-alerta-personalizada" onclick="redirigir()">Aceptar</button>
     </div>
+    <!-- Fin de Etiquetas cuando se activa una alerta -->
+    <!-- Activación del Script si el velor 'arlert' esta activo -->
     <% if (typeof alert != 'undefined') { %>
         <script>
-            // Lógica para mostrar u ocultar la alerta personalizada
+            // Activo el estilo bloqueado, '#contenido' por 'alertas.css'
             document.getElementById('contenido').style.display = 'block';
+            // Activo el estilo bloqueado, '#alerta-personalizada' por 'alertas.css'
             document.getElementById('alerta-personalizada').style.display = 'block';
+            // Agrego texto a la etiqueta con la ID '#titulo-alerta-personalizada'
             document.getElementById('titulo-alerta-personalizada').innerText = '<%= alert.alertTitle %>';
+            // Agrego texto a la etiqueta con la ID '#mensaje-alerta-personalizada'
             document.getElementById('mensaje-alerta-personalizada').innerText = '<%= alert.alertMessage %>';
+            // Agrego una clase a la etiqueca con la ID '#alerta-personalizada' para cambiar el color de la alerta
             document.getElementById('alerta-personalizada').classList.add('<%= alert.type %>');
             if ('<%= alert.type %>' === 'error' || '<%= alert.type %>' === 'aviso' || '<%= alert.type %>' === 'obligatorio') {
-                document.getElementById('boton-alerta-personalizada').style.display = 'block'; // Mostrar el botón en caso de error o advertencia
+                // Mostrar el botón en caso de error o advertencia
+                document.getElementById('boton-alerta-personalizada').style.display = 'block';
             }
             if ('<%= alert.type %>' === 'exito') {
                 setTimeout(function(){
-                    window.location.href = '/'; // Redireccionar a la página principal después de 1500 milisegundos en caso de éxito
+                    // Redireccionar a la página principal después de 1500 milisegundos en caso de éxito
+                    window.location.href = '/';
                 }, 1500);
             }
+            // Función para redirigir a la ruta '/'
             function redirigir() {
-                window.location.href = '/'; // Redireccionar a la página principal al presionar el botón "Aceptar" en caso de error o aviso
+                // Carga la ventana en la ruta '/'
+                window.location.href = '/';
             }
         </script>
     <% } %>
+    <!-- Fin de Activación del Script si el velor 'arlert' esta activo -->
 </body>
 </html>
