@@ -14,7 +14,7 @@
     <% if (menu) { %>
         <ul>
             <% menu.forEach(item => { %>
-                <li><a href="#" onclick="manejarMenuClick('<%= item %>')"><%= item %></a></li>
+                <li><a href="#" onclick="manejarMenuClick('<%= item %>')" title="<%= item %>"><%= item %></a></li>
             <% }) %>
         </ul>
     <% } %>
