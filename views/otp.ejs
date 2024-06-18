@@ -13,9 +13,9 @@
     </div>
     <!-- Contenido de cada proceso del OTP -->
     <% if (procesoOTP.envio === true) { %>
-        <%- include('../public/html/otp-confirmar.html') %>
+        <%- include('otp-confirmar.ejs') %>
     <% } else { %>
-        <%- include('../public/html/otp-enviar.html') %>
+        <%- include('otp-enviar.ejs') %>
     <% } %>
     <!-- Fin de Contenido de cada proceso del OTP -->
     <!-- Etiquetas cuando se activa una alerta -->
