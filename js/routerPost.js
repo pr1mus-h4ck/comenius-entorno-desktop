@@ -205,4 +205,4 @@ app.post('/cargarPagina', (req, res) => {
     // Envio la respuesta de éxito a 'index.ejs'
     res.sendStatus(200);
 });
-module.exports = { routerGet: app }
+module.exports = { routerPost: app }
