@@ -1,16 +1,9 @@
 <!-- TODO: Aquí se utilizará la Videollamda utilizada por la API de Zomm -->
 <!-- TODO que contará con la llamada, mostrar con cámara, activar microfono, chat y asistencia automatica | Contando con los conectados -->
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video clase</title>
-</head>
 <body>
     <h1>Videollamada</h1>
     <iframe id="videoFrame" title="Videollamada" width="800" height="600"></iframe>
+    <button onclick="getMeetingUrl()" >Ingresar a la videollamada</button>
     
     <script>
         fetch('http://localhost:3000/getMeetingUrl')
@@ -23,4 +16,3 @@
         .catch(error => console.error(error));
     </script>
 </body>
-</html>
