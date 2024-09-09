@@ -138,6 +138,22 @@ app.post('/confirmar-otp', (req, res) => {
         }
     }
 });
+app.post('/proxy', (req, res) => {
+    try {
+        const { url } = req.body;
+        https.get(url, (response) => {
+            let data = '';
+            response.on('data', (chunk) => {
+                data += chunk;
+            });
+            response.on('end', () => {
+                res.status(response.statusCode).json(JSON.parse(data));
+            });
+        });
+    } catch (error) {
+        res.status(500).json({ error: 'Error making GET request' });
+    }
+});
 app.post('/cerrar-sesion', (req, res) => {
     let sesiones = {
         id: cookieSession.usuariosID,
