@@ -221,4 +221,8 @@ app.post('/cargarPagina', (req, res) => {
     // Envio la respuesta de éxito a 'index.ejs'
     res.sendStatus(200);
 });
+app.post('/cloudinaryPrueba', (req, res) => {
+    let hola = 'hola';
+    console.log(hola);
+});
 module.exports = { routerPost: app }
