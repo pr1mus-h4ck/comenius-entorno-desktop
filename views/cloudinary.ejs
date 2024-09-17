@@ -6,40 +6,47 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Hola mundo</h1>
-<button onclick="subirFoto()">Enviar</button>
+<form action="/cloudinaryPrueba" method="post" id="uploadForm" enctype="multipart/form-data">
+    <input type="file" id="fileInput" accept=".png">
+    <button type="button" onclick="uploadPhoto()">Subir Foto</button>
+</form>
 <script>
-    function subirFoto() {
-        /*let hola = 'hola';
-        let iniciarJson = JSON.stringify(hola);
-        fetch('/cloudinaryPrueba', {
-                method: 'Post',
-                body: iniciarJson
-            })*/
-    let hola = 'hola';
-    let iniciarJson = JSON.stringify(hola);
-    fetch('/cloudinaryPrueba', {
-        method: 'Post',
-        body: JSON.stringify({ data: iniciarJson }),
-        header:  {
-            'Content-Type': 'application/json'
+    function uploadPhoto() {
+        const fileInput = document.getElementById('fileInput');
+        const file = fileInput.files[0];
+
+        if (file instanceof Blob) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const base64Image = event.target.result;
+                const imageData = { image: base64Image };
+
+                fetch('/upload-photo', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(imageData)
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            };
+
+            reader.readAsDataURL(file);
+        } else {
+            console.error('El archivo seleccionado no es válido');
         }
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log(data);
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-    console.log(iniciarJson);
-    //window.location.href = '/';
-}
+    }
 </script>
 </body>
 </html>

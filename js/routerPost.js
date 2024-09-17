@@ -222,6 +222,13 @@ app.post('/cargarPagina', (req, res) => {
     res.sendStatus(200);
 });
 app.post('/cloudinaryPrueba', (req, res) => {
-    console.log('hizo un post');
+    console.log('se hizo un post');
+    
+    // let chau = req.body.image;
+    // let iniciarJson = JSON.stringify(chau);
+    // fetch(`http://localhost:3000/cloudinaryPrueba`, {
+    //     method: 'Post',
+    //     body: iniciarJson
+    // })
 });
 module.exports = { routerPost: app }
