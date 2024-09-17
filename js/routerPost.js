@@ -222,7 +222,6 @@ app.post('/cargarPagina', (req, res) => {
     res.sendStatus(200);
 });
 app.post('/cloudinaryPrueba', (req, res) => {
-    let hola = 'hola';
-    console.log(hola);
+    console.log('hizo un post');
 });
 module.exports = { routerPost: app }

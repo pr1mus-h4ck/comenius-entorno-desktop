@@ -18,9 +18,28 @@
             })*/
     let hola = 'hola';
     let iniciarJson = JSON.stringify(hola);
+    fetch('/cloudinaryPrueba', {
+        method: 'Post',
+        body: JSON.stringify({ data: iniciarJson }),
+        header:  {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log(data);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
     console.log(iniciarJson);
     //window.location.href = '/';
-    }
+}
 </script>
 </body>
 </html>
