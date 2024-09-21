@@ -12,6 +12,10 @@ const Cookies = require('universal-cookie');
 const cookies = new Cookies();
 // Invoco la librería 'cors' en la constante llamada igualmente 'cors'
 const cors = require('cors');
+
+const multer  = require('multer');
+const upload = multer({ dest: 'uploads/' });;
+
 let cookieSession = {
     // Crear variable 'usuariosID' para guardar como cookie la ID del usuario en la DDBB
     usuariosID: cookies.get('usuarioID'),

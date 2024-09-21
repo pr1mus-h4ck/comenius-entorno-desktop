@@ -7,46 +7,42 @@
 </head>
 <body>
 <form action="/cloudinaryPrueba" method="post" id="uploadForm" enctype="multipart/form-data">
-    <input type="file" id="fileInput" accept=".png">
-    <button type="button" onclick="uploadPhoto()">Subir Foto</button>
+    <input type="file" id="fileInput" accept=".png" name="image">
+    <button type="submit">Subir Foto</button>
 </form>
-<script>
-    function uploadPhoto() {
-        const fileInput = document.getElementById('fileInput');
-        const file = fileInput.files[0];
+<!-- <script>
+function cloudinaryPrueba() {
+    const fileInput = document.getElementById('fileInput');
+    const file = fileInput.files[0];
 
-        if (file instanceof Blob) {
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                const base64Image = event.target.result;
-                const imageData = { image: base64Image };
-
-                fetch('/upload-photo', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(imageData)
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    console.log(data);
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-            };
-
-            reader.readAsDataURL(file);
-        } else {
-            console.error('El archivo seleccionado no es válido');
-        }
+    // Validar el tamaño del archivo (por ejemplo, máximo 5MB)
+    const maxSize = 5 * 1024 * 1024; // 5MB en bytes
+    if (file.size > maxSize) {
+        console.error('El archivo es demasiado grande. Por favor, elige un archivo más pequeño.');
+        return;
     }
-</script>
+
+    // Validar el tipo de archivo (permitir solo imágenes)
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+    if (!allowedTypes.includes(file.type)) {
+        console.error('Formato de archivo no válido. Por favor, elige un archivo de imagen (JPEG, PNG, GIF).');
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append('image', file);
+
+    // Lógica de envío de la imagen al servidor
+    fetch('/cloudinaryPrueba', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data); // Manejar la respuesta del servidor (URL de Cloudinary)
+    })
+    .catch(error => console.error('Error al cargar la imagen:', error));
+}
+</script> -->
 </body>
 </html>

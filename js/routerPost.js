@@ -222,7 +222,7 @@ app.post('/cargarPagina', (req, res) => {
     res.sendStatus(200);
 });
 app.post('/cloudinaryPrueba', (req, res) => {
-    console.log('se hizo un post');
+    console.log('hizo post');
     
     // let chau = req.body.image;
     // let iniciarJson = JSON.stringify(chau);
@@ -231,4 +231,5 @@ app.post('/cloudinaryPrueba', (req, res) => {
     //     body: iniciarJson
     // })
 });
+
 module.exports = { routerPost: app }
