@@ -223,9 +223,14 @@ app.post('/cargarPagina', (req, res) => {
     res.sendStatus(200);
 });
 app.post('/cloudinaryPrueba', upload.single('image'), (req, res) => {
-    //console.log(req.file);
-    console.log(req.body);
-    
+    console.log('se hizo un post'); 
+    let objeto = req.body;
+    let imagen = JSON.stringify(objeto);
+        // Envío en método POST al servidor con los datos del JSON
+        fetch(`http://localhost:3000/cloudinaryPrueba`, {
+            method: 'Post',
+            body: imagen
+    })
 });
 
 module.exports = { routerPost: app }
