@@ -1,7 +1,8 @@
-const { app, cookies, cookieSession } = require('./config');
+const { app, cookies, cookieSession, upload } = require('./config');
 const config = require('./config');
 const {inputNombres, menuRol} = require('./array');
 const funciones = require('./funciones');
+
 let datosRecibidos = '';
 app.post('/login', (req, res) => {
     // Si existe sesión, redireccionar a la página principal
@@ -221,15 +222,10 @@ app.post('/cargarPagina', (req, res) => {
     // Envio la respuesta de éxito a 'index.ejs'
     res.sendStatus(200);
 });
-app.post('/cloudinaryPrueba', (req, res) => {
-    console.log('hizo post');
+app.post('/cloudinaryPrueba', upload.single('image'), (req, res) => {
+    //console.log(req.file);
+    console.log(req.body);
     
-    // let chau = req.body.image;
-    // let iniciarJson = JSON.stringify(chau);
-    // fetch(`http://localhost:3000/cloudinaryPrueba`, {
-    //     method: 'Post',
-    //     body: iniciarJson
-    // })
 });
 
 module.exports = { routerPost: app }
