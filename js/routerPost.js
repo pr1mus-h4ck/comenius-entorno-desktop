@@ -232,5 +232,19 @@ app.post('/cloudinaryPrueba', upload.single('image'), (req, res) => {
             body: imagen
     })
 });
+app.post('/zoomPrueba', (req, res) => {
+    console.log(req.body);
+    let zoomPrueba = req.body;
+    let zoom = JSON.stringify(zoomPrueba);
+    fetch(`http://localhost:3000/zoomPrueba`, {
+        method: 'Post',
+        headers: {
+            'Content-Type': 'application/json'
+            },
+        body: zoom
+    }).then(recibir => recibir.json())
+    .then(recibido =>console.log(recibido))
+    .catch(error => console.error('he recibido un error'));
+})
 
 module.exports = { routerPost: app }
