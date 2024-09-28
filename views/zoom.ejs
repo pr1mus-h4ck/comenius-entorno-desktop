@@ -11,6 +11,7 @@
     <form action="/zoomPrueba" id="testZoom" method="post">
         <button type="submit">Click</button>
     </form>
+    <script src="/js/zoom.js"></script>
     <script>
         document.getElementById('testZoom').addEventListener('submit', (e) => {
             e.preventDefault();
@@ -24,10 +25,8 @@
             }).then(recibir => recibir.json())
             .then(recibido => {
                 const meetingUrl = recibido.meetingUrl;
-                import('/js/zoom.js').then(module => {
-                    module.createIframe(meetingUrl);
-                }); // La llave de cierre del bloque then estaba mal colocada
-            }); // La llave de cierre del bloque then estaba mal colocada
+                createIframe(meetingUrl);
+            }); 
         })
     </script>
 </body>

@@ -1,4 +1,5 @@
 import { ZoomMtg } from '@zoom/meetingsdk';
+console.log(meetingUrl);
 
 // Función que crea el iframe con la URL de la reunión de Zoom
 function createIframe(meetingUrl) {
@@ -15,4 +16,4 @@ function createIframe(meetingUrl) {
 }
 
 // Exporta la función createIframe
-export { createIframe };
+// export { createIframe };
