@@ -21,7 +21,8 @@
                 headers: {
                     'Content-Type': 'application/json'
                 }
-            })
+            }).then(recibir => recibir.json())
+            .then(recibido => console.log(recibido));
         })
     </script>
     <script src="/js/zoom.js"></script>
