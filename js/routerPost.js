@@ -233,7 +233,7 @@ app.post('/cloudinaryPrueba', upload.single('image'), (req, res) => {
     })
 });
 app.post('/zoomPrueba', (req, res) => {
-    console.log(req.body);
+    //console.log(req.body);
     let zoomPrueba = req.body;
     let zoom = JSON.stringify(zoomPrueba);
     fetch(`http://localhost:3000/zoomPrueba`, {
@@ -243,7 +243,7 @@ app.post('/zoomPrueba', (req, res) => {
             },
         body: zoom
     }).then(recibir => recibir.json())
-    .then(recibido => {
+    .then(recibido =>  {
         const url = recibido.join_url;
         const urlJSON = JSON.stringify(url);
         res.send(urlJSON);
