@@ -247,6 +247,7 @@ app.post('/zoomPrueba', (req, res) => {
         const url = recibido.join_url;
         const urlJSON = JSON.stringify(url);
         res.send(urlJSON);
+        //console.log(urlJSON);
     })
     .catch(error => console.error('he recibido un error'));
 })

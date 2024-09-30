@@ -2,17 +2,14 @@
 <!-- TODO que contará con la llamada, mostrar con cámara, activar microfono, chat y asistencia automatica | Contando con los conectados -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="application/javascript; charset=UTF-8">
     <title>Document</title>
 </head>
 <body>
     <form action="/zoomPrueba" id="testZoom" method="post">
         <button type="submit">Click</button>
     </form>
-    <script src="/js/zoom.js"></script>
-    <script>
+    <script> 
         document.getElementById('testZoom').addEventListener('submit', (e) => {
             e.preventDefault();
             const json = { message: 'hola' };
@@ -23,9 +20,8 @@
                     'Content-Type': 'application/json'
                 }
             }).then(recibir => recibir.json())
-            .then(recibido => {
-                const meetingUrl = recibido.meetingUrl;
-                createIframe(meetingUrl);
+            .then(recibido => { 
+                console.log(recibido);
             }); 
         })
     </script>
