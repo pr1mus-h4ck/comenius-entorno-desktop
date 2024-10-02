@@ -244,10 +244,13 @@ app.post('/zoomPrueba', (req, res) => {
         body: zoom
     }).then(recibir => recibir.json())
     .then(recibido =>  {
-        const url = recibido.join_url;
-        const urlJSON = JSON.stringify(url);
-        res.send(urlJSON);
-        //console.log(urlJSON);
+        //const url = recibido.join_url;
+        //console.log(url);
+        cookies.set('zoom', recibido.join_url, {path: '/' });
+        //console.log(cookies.get('zoom'));
+        cookieSession.zoom = cookies.get('zoom');
+        console.log(cookieSession.zoom);
+        res.sendStatus(200);
     })
     .catch(error => console.error('he recibido un error'));
 })

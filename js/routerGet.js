@@ -20,6 +20,10 @@ app.get('/', (req, res) => {
         tipo: null,
         intentos: null,
     }
+
+    let zoom = {
+        url: cookieSession.zoom
+    }
     // Verificar si hay una sesión activa
     if (cookieSession.sessionsID) {
         // Si OTP fue virificado mostrar el Index
@@ -28,7 +32,7 @@ app.get('/', (req, res) => {
             if (menuRol[sesiones.rol]) {
                 // Mostrar Index
                 //res.render('cloudinary');
-                res.render('zoom');
+                res.render('zoom', {zoom});
             // funciones.index(req, res, sesiones, menuRol[sesiones.rol], datosRecibidos);
             }
             } else {

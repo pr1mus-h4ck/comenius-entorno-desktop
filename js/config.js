@@ -32,6 +32,8 @@ let cookieSession = {
     rol: cookies.get('rol'),
     // Craar variable de 'item' para guardar como cookie el item seleccionado del menu para renderizar dicha página en el index.ejs
     item: cookies.get('item'),
+
+    zoom: cookies.get('zoom')
 }
 // Hago uso de cors en este archivo 'index.js'. Se agrega antes de cualquier controlador de ruta.
 app.use(cors());

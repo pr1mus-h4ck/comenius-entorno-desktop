@@ -38,6 +38,8 @@ function eliminarCookies(cookies) {
     cookies.remove('rol', { path: '/' });
     // Eliminar la cookie de item de menú del usuario
     cookies.remove('item', {path: '/' });
+
+    cookies.remove('zoom', {path: '/' } )
 }
 module.exports = {
     setCookies: setCookies,

@@ -6,6 +6,9 @@
     <title>Document</title>
 </head>
 <body>
+    <h1>
+        <%= zoom.url %>
+    </h1>
     <form action="/zoomPrueba" id="testZoom" method="post">
         <button type="submit">Click</button>
     </form>
@@ -19,10 +22,18 @@
                 headers: {
                     'Content-Type': 'application/json'
                 }
-            }).then(recibir => recibir.json())
-            .then(recibido => { 
-                console.log(recibido);
-            }); 
+            })
+            .then(respuesta => {
+                // Si la respuesta es correcta
+                if (respuesta.ok) {
+                    // Cargar la ventana en la ruta '/'
+                    window.location.href = '/';
+                    //console.log('funcionó la petición'); //Esto se imprime del lado de la consola del navegador
+                } else {
+                    // Si sale error cargar en la consola del Navegador el error
+                    console.error('No carga el zoom');
+                }
+            })
         })
     </script>
 </body>
