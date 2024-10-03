@@ -39,7 +39,11 @@ function eliminarCookies(cookies) {
     // Eliminar la cookie de item de menú del usuario
     cookies.remove('item', {path: '/' });
 
-    cookies.remove('zoom', {path: '/' } )
+    cookies.remove('join_url', {path: '/' });
+    cookies.remove('topic', {path: '/' });
+    cookies.remove('start_time', {path: '/' });
+    cookies.remove('duration', {path: '/' });
+    cookies.remove('password', {path: '/' })
 }
 module.exports = {
     setCookies: setCookies,

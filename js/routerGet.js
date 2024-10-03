@@ -1,4 +1,4 @@
-const { app, cookies, cookieSession } = require('./config');
+const { app, cookies, cookieSession, cookieZoom } = require('./config');
 const config = require('./config');
 const funciones = require('./funciones');
 const {menuRol} = require('./array');
@@ -22,8 +22,20 @@ app.get('/', (req, res) => {
     }
 
     let zoom = {
-        url: cookieSession.zoom
+        url: cookieZoom.join_url,
+        topic: cookieZoom.topic,
+        start_time: cookieZoom.start_time,
+        duration: cookieZoom.duration,
+        password: cookieZoom.password
     }
+
+    let zoomSettings = {
+        host_video: cookieZoom.host_video,
+        participant_video: cookieZoom.participant_video,
+        audio: cookieZoom.audio,
+        mute_upon_entry: cookieZoom.mute_upon_entry,
+        waiting_room: cookieZoom.waiting_room
+}
     // Verificar si hay una sesión activa
     if (cookieSession.sessionsID) {
         // Si OTP fue virificado mostrar el Index
@@ -32,7 +44,7 @@ app.get('/', (req, res) => {
             if (menuRol[sesiones.rol]) {
                 // Mostrar Index
                 //res.render('cloudinary');
-                res.render('zoom', {zoom});
+                res.render('zoom', {zoom, zoomSettings});
             // funciones.index(req, res, sesiones, menuRol[sesiones.rol], datosRecibidos);
             }
             } else {

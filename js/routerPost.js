@@ -246,11 +246,11 @@ app.post('/zoomPrueba', (req, res) => {
     .then(recibido =>  {
         //const url = recibido.join_url;
         //console.log(url);
-        cookies.set('zoom', recibido.join_url, {path: '/' });
+        //cookies.set('zoom', recibido.join_url, {path: '/' });
         //console.log(cookies.get('zoom'));
-        cookieSession.zoom = cookies.get('zoom');
-        console.log(cookieSession.zoom);
-        res.sendStatus(200);
+        //cookieSession.zoom = cookies.get('zoom');
+        console.log(recibido.settings.host_video);
+        //res.sendStatus(200);
     })
     .catch(error => console.error('he recibido un error'));
 })
