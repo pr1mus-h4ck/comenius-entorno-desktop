@@ -43,12 +43,10 @@ app.get('/', (req, res) => {
             // Verificar si el rol existe en menuRol antes de pasarlo
             if (menuRol[sesiones.rol]) {
                 // Mostrar Index
-                //res.render('cloudinary');
-                res.render('zoom', {zoom, zoomSettings});
-            // funciones.index(req, res, sesiones, menuRol[sesiones.rol], datosRecibidos);
+                funciones.index(req, res, sesiones, menuRol[sesiones.rol], datosRecibidos);
             }
-            } else {
-            // Mostrar OTP
+                } else {
+                // Mostrar OTP                              
             funciones.otp(req, res, sesiones, procesoOTP, datosRecibidos);
         }
     } else {
