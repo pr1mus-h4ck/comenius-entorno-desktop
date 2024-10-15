@@ -223,7 +223,7 @@ app.post('/cargarPagina', (req, res) => {
     res.sendStatus(200);
 });
 app.post('/cloudinaryPrueba', upload.single('image'), (req, res) => {
-    console.log('se hizo un post'); 
+    console.log('se hizo un post');
     let objeto = req.body;
     let imagen = JSON.stringify(objeto);
         // Envío en método POST al servidor con los datos del JSON
@@ -233,26 +233,32 @@ app.post('/cloudinaryPrueba', upload.single('image'), (req, res) => {
     })
 });
 app.post('/zoomPrueba', (req, res) => {
-    //console.log(req.body);
+     //console.log(req.body);
     let zoomPrueba = req.body;
-    let zoom = JSON.stringify(zoomPrueba);
-    fetch(`http://localhost:3000/zoomPrueba`, {
-        method: 'Post',
-        headers: {
-            'Content-Type': 'application/json'
-            },
-        body: zoom
-    }).then(recibir => recibir.json())
-    .then(recibido =>  {
-        //const url = recibido.join_url;
-        //console.log(url);
-        //cookies.set('zoom', recibido.join_url, {path: '/' });
-        //console.log(cookies.get('zoom'));
-        //cookieSession.zoom = cookies.get('zoom');
-        console.log(recibido.settings.host_video);
-        //res.sendStatus(200);
-    })
-    .catch(error => console.error('he recibido un error'));
-})
+        let zoom = JSON.stringify(zoomPrueba);
+        fetch(`http://localhost:3000/zoomPrueba`, {
+            method: 'Post',
+            headers: {
+                'Content-Type': 'application/json'
+                },
+            body: zoom
+        }).then(recibir => recibir.json())
+        .then(recibido => {
+
+            cookies.set('nombre', 'Mateo' , {path: '/' });
+            cookies.set('id', recibido.id, {path: '/' });
+            cookies.set('password', recibido.password, {path: '/' });
+            cookies.set('zoomFirma', recibido.zoomFirma, {path: '/' });
+            cookies.set('clientId', recibido.clientId, {path: '/' });
+
+            cookieSession.id = cookies.get('id');
+            cookieSession.password = cookies.get('password');
+            cookieSession.zoomFirma = cookies.get('zoomFirma');
+            cookieSession.clientId = cookies.get('clientId');
+            cookieSession.nombre = cookies.get('nombre');
+
+            res.sendStatus(200);
+    })  
+});
 
 module.exports = { routerPost: app }

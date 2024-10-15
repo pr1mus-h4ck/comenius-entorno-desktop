@@ -2,6 +2,7 @@ const { app, cookies, cookieSession, cookieZoom } = require('./config');
 const config = require('./config');
 const funciones = require('./funciones');
 const {menuRol} = require('./array');
+const { json } = require('./zoom');
 // Renderizar la página de index
 app.get('/', (req, res) => {
     // Crear un objeto de sesión
@@ -10,6 +11,7 @@ app.get('/', (req, res) => {
         sesion: cookieSession.sessionsID,
         rol: cookieSession.rol,
         item: cookieSession.item,
+        nombre: cookieSession.nombre,
     }
     // Crear un objeto para el proceso de OTP donde se verifica si se envío el correo al usuario con el código pertinente
     let procesoOTP = {
@@ -20,33 +22,27 @@ app.get('/', (req, res) => {
         tipo: null,
         intentos: null,
     }
-
-    let zoom = {
-        url: cookieZoom.join_url,
-        topic: cookieZoom.topic,
-        start_time: cookieZoom.start_time,
-        duration: cookieZoom.duration,
-        password: cookieZoom.password
+    let almacenamiento = {
+        id: cookieSession.id,
+        password: cookieSession.password,
+        zoomFirma: cookieSession.zoomFirma,
+        clientId: cookieSession.clientId,
     }
 
-    let zoomSettings = {
-        host_video: cookieZoom.host_video,
-        participant_video: cookieZoom.participant_video,
-        audio: cookieZoom.audio,
-        mute_upon_entry: cookieZoom.mute_upon_entry,
-        waiting_room: cookieZoom.waiting_room
-}
     // Verificar si hay una sesión activa
     if (cookieSession.sessionsID) {
-        // Si OTP fue virificado mostrar el Index
+        // Si OTP fue virificado mostrar el I
+                // Mostrar Index
+                //res.render('cloudinary');ndex
         if (cookieSession.verificacionOTP) {
             // Verificar si el rol existe en menuRol antes de pasarlo
             if (menuRol[sesiones.rol]) {
-                // Mostrar Index
-                funciones.index(req, res, sesiones, menuRol[sesiones.rol], datosRecibidos);
-            }
-                } else {
-                // Mostrar OTP                              
+            //res.render('zoom', {sesiones, almacenamiento});
+            res.render('panel_de_la_clase');
+            // funciones.index(req, res, sesiones, menuRol[sesiones.rol], datosRecibidos);
+                }
+            } else {
+            // Mostrar OTP
             funciones.otp(req, res, sesiones, procesoOTP, datosRecibidos);
         }
     } else {
@@ -56,5 +52,7 @@ app.get('/', (req, res) => {
 });
 app.get('*', (req, res) => {
     res.redirect('/');
-})
+});
+
+
 module.exports = { routerGet: app }

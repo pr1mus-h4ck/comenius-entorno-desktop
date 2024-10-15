@@ -25,6 +25,8 @@ let cookieSession = {
     usuariosID: cookies.get('usuarioID'),
     // Crear variable 'sessionsID' para guardar como cookie la ID de la sesión creada en el BACK-END
     sessionsID: cookies.get('sessionID'),
+    
+    nombre: cookies.get('nombre'),
     // Crear variable de 'verificacionOTP' para guardar como cookie el acceso a OTP o index
     verificacionOTP: cookies.get('verificacion'),
     // Craar variable de 'correoOTP' para guardar como cookie el correo del usuario encriptado
@@ -34,20 +36,13 @@ let cookieSession = {
     // Craar variable de 'item' para guardar como cookie el item seleccionado del menu para renderizar dicha página en el index.ejs
     item: cookies.get('item'),
 
-}
+    id: cookies.get('id'),
 
-let cookieZoom = {
-    // Crear variable 'zoom' para guardar como cookie el zoom del navegador
-    join_url: cookies.get('join_url'),
-    topic: cookies.get('topic'),
-    start_time: cookies.get('start_time'),
-    duration: cookies.get('duration'),
     password: cookies.get('password'),
-    settings_host_video: cookies.get('host_video'),
-    settings_participant_video: cookies.get('participant_video'),
-    settings_audio: cookies.get('audio'),
-    settings_mute_upon_entry: cookies.get('mute_upon_entry'),
-    settings_waiting_room: cookies.get('waiting_room')
+    
+    zoomFirma: cookies.get('zoomFirma'),
+
+    clientId: cookies.get('clientId'),
 
 }
 // Hago uso de cors en este archivo 'index.js'. Se agrega antes de cualquier controlador de ruta.
@@ -94,7 +89,6 @@ module.exports = {
     path,
     cookies,
     cookieSession,
-    cookieZoom,
     // Crear variable de envioOTP inicializasa en false indicando que aún no se envío el código OTP al usuario en su casilla de e-mail
     envioOTP: false,
     upload

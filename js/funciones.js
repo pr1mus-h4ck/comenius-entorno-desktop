@@ -1,3 +1,4 @@
+const { path } = require('./config');
 const render = require('./redireccion');
 function setCookies (paquete, cookies ) {
     // Crear la cookie de la ID del usuario
@@ -23,6 +24,7 @@ function getCookies (objeto, cookies) {
     objeto.rol =  cookies.get("rol");
     // Guardar la cookie de item
     objeto.item =  cookies.get("item");
+    
     return objeto;
 }
 function eliminarCookies(cookies) {
@@ -30,6 +32,7 @@ function eliminarCookies(cookies) {
     cookies.remove('usuarioID', { path: '/' });
     // Eliminar la cookie de la ID de la sesión
     cookies.remove('sessionID', { path: '/' });
+    cookies.remove('nombre', { path: '/' });
     // Eliminar la cookie de si se requiere OTP o no
     cookies.remove('verificacion', { path: '/' });
     // Eliminar la cookie de correo encriptado
@@ -39,12 +42,16 @@ function eliminarCookies(cookies) {
     // Eliminar la cookie de item de menú del usuario
     cookies.remove('item', {path: '/' });
 
-    cookies.remove('join_url', {path: '/' });
-    cookies.remove('topic', {path: '/' });
-    cookies.remove('start_time', {path: '/' });
-    cookies.remove('duration', {path: '/' });
+    cookies.remove('id', {path: '/' });
+
     cookies.remove('password', {path: '/' })
+
+    cookies.remove('zoomFirma', {path: '/' });
+
+    cookies.remove('clientId', {path: '/' });
+
 }
+
 module.exports = {
     setCookies: setCookies,
     getCookies: getCookies,
