@@ -17,7 +17,11 @@
     <form action="/zoomPrueba" id="testZoom" method="post">
         <button type="submit">Entrar a la llamada</button>
     </form>
-    <iframe src="https://zoom.us/wc/<%= almacenamiento.id%>/join?pwd=<%=almacenamiento.password%>&wc=true&no_dr=true&no_titlebar=true&cn=<%= sesiones.nombre%>&clientId=<%= almacenamiento.clientId%>&zoomFirma=<%=almacenamiento.zoomFirma%>" frameborder="0" width="500" height="500"></iframe>
+    <% function base64Encode(str) { %>
+        <%= btoa(unescape(encodeURIComponent(str))) %>
+    <% } %>
+
+    <iframe src="https://zoom.us/wc/<%= almacenamiento.id %>/join?pwd=<%= almacenamiento.password %>&wc=true&no_dr=true&no_titlebar=true&un=<%= base64Encode(sesiones.nombre) %>&clientId=<%= almacenamiento.clientId %>&zoomFirma=<%= almacenamiento.zoomFirma %>" frameborder="0" width="500" height="500"></iframe>
     <script> 
     document.getElementById('testZoom').addEventListener('submit', (e) => {
     e.preventDefault();

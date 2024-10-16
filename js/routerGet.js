@@ -29,6 +29,10 @@ app.get('/', (req, res) => {
         clientId: cookieSession.clientId,
     }
 
+    let publicaciones = {
+        publicacion: cookieSession.publicacion,
+    }
+
     // Verificar si hay una sesión activa
     if (cookieSession.sessionsID) {
         // Si OTP fue virificado mostrar el I
@@ -38,7 +42,7 @@ app.get('/', (req, res) => {
             // Verificar si el rol existe en menuRol antes de pasarlo
             if (menuRol[sesiones.rol]) {
             //res.render('zoom', {sesiones, almacenamiento});
-            res.render('panel_de_la_clase');
+            res.render('panel_de_clase', {publicaciones});
             // funciones.index(req, res, sesiones, menuRol[sesiones.rol], datosRecibidos);
                 }
             } else {

@@ -27,8 +27,48 @@
     </div> 
     <!--TODO: modificar de DIV a CARD para el foro de la clase-->
     <!--FIXME: TENGAN CUIDADO CON LA SUPERPOSICIÓN DE ELEMENTOS DE LOS INPUTS PARA EVITAR MODIFICAR LA FUNCIONALIDAD DE LA LOGICA-->
-    <div></div> <!--Foro de la materia-->
+    <div class="publicacion">   <!--Foro de la materia-->
+        <form action="/crearPublicacion" method="POST">
+            <input type="text" id="" placeholder="Crear publicación" name="publicacion">
+            <input type="submit" value="enviar"> <!--EQUIPO FRONTEND: Agregar icono de avion de papel-->
+        </form>
+        <div id="listaPublicacion">
+            <% publicaciones.publicacion.forEach(publicacion => { %>
+                <article>
+                    <%= publicacion.content %>
+                </article>
+            <% }); %>
+        </div>        
+    </div> 
 </div>
 </main>
+<!--TODO: para el equipo del back: modificar los comentarios, JUSTIN MAURO NO TOCAR PORFIS <3-->
+<script>
+    const listaPublicacion = document.getElementById('listaPublicacion');
+
+    function actualizarPublicacion() { // 2. Define una función llamada "updatePublications"
+        fetch('/actualizarPublicacion', { // 3. Realiza una petición fetch con la URL "/update-publications"
+            method: 'POST', // 4. Especifica que el método de la petición es POST
+            headers: { // 5. Define los encabezados de la petición
+                'Content-Type': 'application/json' // 6. Indica que el tipo de contenido de la petición es JSON
+            }
+        })
+        .then(recibir => recibir.json()) // 7. Convierte la respuesta de la petición a JSON
+        .then(recibido => { // 8. Ejecuta una función cuando la conversión a JSON es exitosa
+            console.log(recibido.publicaciones);
+                listaPublicacion.innerHTML = ''; // 9. Limpia el contenido actual de la lista de publicaciones
+                recibido.publicaciones.forEach(publicacion => { // 10. Itera sobre cada publicación en la respuesta
+                const article = document.createElement('article'); // 11. Crea un nuevo elemento <li>
+                article.textContent = publicacion.content; // 12. Asigna el contenido de la publicación al elemento <li>
+                listaPublicacion.appendChild(article); // 13. Agrega el elemento <li> a la lista de publicaciones
+});
+        })
+        .catch(error => { // 14. Ejecuta una función si ocurre un error durante la petición
+            console.error('Error fetching data:', error); // 15. Imprime un mensaje de error en la consola
+        });
+    }
+    // Inicia el bucle de actualización cada 5 segundos
+    setInterval(actualizarPublicacion, 5000); // 16. Ejecuta la función "updatePublications" cada 5000 milisegundos (5 segundos)
+</script>
 </body>
 </html>

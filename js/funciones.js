@@ -50,6 +50,8 @@ function eliminarCookies(cookies) {
 
     cookies.remove('clientId', {path: '/' });
 
+    cookies.remove('publicacion', {path: '/' });
+
 }
 
 module.exports = {
