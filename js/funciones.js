@@ -16,15 +16,26 @@ function getCookies (objeto, cookies) {
     objeto.usuariosID = cookies.get('usuarioID');
     // Guardar la cookie de sessionID
     objeto.sessionsID = cookies.get('sessionID');
+    // Guardar la cookie de nombre
+    objeto.nombre =  cookies.get('nombre');
     // Guardar la cookie de verificacion
     objeto.verificacionOTP = cookies.get('verificacion');
     // Guardar la cookie de correo
-    objeto.correoOTP =  cookies.get("correo");
+    objeto.correoOTP =  cookies.get('correo');
     // Guardar la cookie de rol
-    objeto.rol =  cookies.get("rol");
+    objeto.rol =  cookies.get('rol');
     // Guardar la cookie de item
-    objeto.item =  cookies.get("item");
-    
+    objeto.item =  cookies.get('item');
+    // Guardar la cookie de item
+    objeto.id =  cookies.get('id');
+    // Guardar la cookie de item
+    objeto.password =  cookies.get('password');
+    // Guardar la cookie de item
+    objeto.zoomFirma =  cookies.get('zoomFirma');
+    // Guardar la cookie de item
+    objeto.clientId =  cookies.get('clientId');
+    // Guardar la cookie de item
+    objeto.publicacion =  cookies.get('publicacion');
     return objeto;
 }
 function eliminarCookies(cookies) {
@@ -41,19 +52,17 @@ function eliminarCookies(cookies) {
     cookies.remove('rol', { path: '/' });
     // Eliminar la cookie de item de menú del usuario
     cookies.remove('item', {path: '/' });
-
+    // Eliminar la cookie de item de menú del usuario
     cookies.remove('id', {path: '/' });
-
+    // Eliminar la cookie de item de menú del usuario
     cookies.remove('password', {path: '/' })
-
+    // Eliminar la cookie de item de menú del usuario
     cookies.remove('zoomFirma', {path: '/' });
-
+    // Eliminar la cookie de item de menú del usuario
     cookies.remove('clientId', {path: '/' });
-
+    // Eliminar la cookie de item de menú del usuario
     cookies.remove('publicacion', {path: '/' });
-
 }
-
 module.exports = {
     setCookies: setCookies,
     getCookies: getCookies,

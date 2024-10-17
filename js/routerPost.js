@@ -238,9 +238,6 @@ app.post('/crearPublicacion', (req, res) => {
 app.post('/actualizarPublicacion', (req, res) => {
     // Si existe sesión, redireccionar a la página principal
     if (cookieSession.sessionsID) {
-        res.redirect('/');
-        // Si no existe sesión, hacer validación del formulario
-    } else {
         fetch('http://localhost:3000/actualizarPublicacion', { // 3. Realiza una petición fetch con la URL "/update-publications"
             method: 'POST', // 4. Especifica que el método de la petición es POST
             headers: { // 5. Define los encabezados de la petición
@@ -251,8 +248,22 @@ app.post('/actualizarPublicacion', (req, res) => {
         .then(recibido => {
             cookies.set('publicacion', recibido.publicaciones, {path: '/' });
             cookieSession.publicacion = cookies.get('publicacion');
+            console.log(cookies.get('publicacion'));
             res.status(200).send(recibido);
         })
+        .catch(error => {
+            console.log(error);
+            // Elimino todas las Cookies de la app
+            funciones.eliminarCookies(cookies);
+            // Guardo las Cookies con el valor vacio
+            funciones.getCookies(cookieSession, cookies);
+            // Establezco 'config.envioOTP' son su valor de origen
+            config.envioOTP =  false;
+            res.redirect('/');
+        });
+    } else {
+        res.redirect('/');
+        // Si no existe sesión, hacer validación del formulario
     }
 });
 app.post('/cloudinaryPrueba', upload.single('image'), (req, res) => {

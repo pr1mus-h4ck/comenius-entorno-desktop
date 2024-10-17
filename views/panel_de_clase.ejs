@@ -22,7 +22,7 @@
     <div><!--Lista de integrantes-->
         <h3>Integrantes</h3>
         <div> <!--contenido con el nombre de los alumnos-->
-
+            <p><%- sesiones.sesion %></p>
         </div>
     </div> 
     <!--TODO: modificar de DIV a CARD para el foro de la clase-->
@@ -44,10 +44,10 @@
 </div>
 </main>
 <!--TODO: para el equipo del back: modificar los comentarios, JUSTIN MAURO NO TOCAR PORFIS <3-->
-<script>
-    const listaPublicacion = document.getElementById('listaPublicacion');
-    function actualizarPublicacion() { // 2. Define una función llamada "updatePublications"
-        if (sesiones.sesion) {
+<% if (sesiones.sesion) { %>
+    <script>
+        const listaPublicacion = document.getElementById('listaPublicacion');
+        function actualizarPublicacion() { // 2. Define una función llamada "updatePublications"
             fetch('/actualizarPublicacion', { // 3. Realiza una petición fetch con la URL "/update-publications"
                 method: 'POST', // 4. Especifica que el método de la petición es POST
                 headers: { // 5. Define los encabezados de la petición
@@ -67,12 +67,14 @@
             .catch(error => { // 14. Ejecuta una función si ocurre un error durante la petición
                 console.error('Error fetching data:', error); // 15. Imprime un mensaje de error en la consola
             });
-        } else {
-            window.location.href = '/';
         }
-    }
-    // Inicia el bucle de actualización cada 5 segundos
-    setInterval(actualizarPublicacion, 5000); // 16. Ejecuta la función "updatePublications" cada 5000 milisegundos (5 segundos)
-</script>
+        // Inicia el bucle de actualización cada 5 segundos
+        setInterval(actualizarPublicacion, 5000); // 16. Ejecuta la función "updatePublications" cada 5000 milisegundos (5 segundos)
+    </script>
+<% } else { %>
+    <script>
+        window.location.href = '/';
+    </script>
+<% } %>
 </body>
 </html>
