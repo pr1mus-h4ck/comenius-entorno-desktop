@@ -28,24 +28,22 @@ app.get('/', (req, res) => {
         zoomFirma: cookieSession.zoomFirma,
         clientId: cookieSession.clientId,
     }
-
     let publicaciones = {
-        publicacion: cookieSession.publicacion,
+        publicacion: [
+            { content: cookieSession.publicacion }
+        ]
     }
-
     // Verificar si hay una sesión activa
-    if (cookieSession.sessionsID) {
-        // Si OTP fue virificado mostrar el I
-                // Mostrar Index
-                //res.render('cloudinary');ndex
+    if (sesiones.sesion) {
+        // Si OTP fue virificado mostrar el Index
         if (cookieSession.verificacionOTP) {
             // Verificar si el rol existe en menuRol antes de pasarlo
             if (menuRol[sesiones.rol]) {
-            //res.render('zoom', {sesiones, almacenamiento});
-            //res.render('panel_de_clase', {publicaciones});
-        funciones.index(req, res, sesiones, menuRol[sesiones.rol], datosRecibidos);
-                }
-            } else {
+                //res.render('zoom', {sesiones, almacenamiento});
+                res.render('panel_de_clase', {publicaciones, sesiones});
+                // funciones.index(req, res, sesiones, menuRol[sesiones.rol], datosRecibidos);
+            }
+        } else {
             // Mostrar OTP
             funciones.otp(req, res, sesiones, procesoOTP, datosRecibidos);
         }
@@ -57,6 +55,4 @@ app.get('/', (req, res) => {
 app.get('*', (req, res) => {
     res.redirect('/');
 });
-
-
 module.exports = { routerGet: app }

@@ -2,7 +2,6 @@ const { app, cookies, cookieSession, upload } = require('./config');
 const config = require('./config');
 const {inputNombres, menuRol} = require('./array');
 const funciones = require('./funciones');
-
 let datosRecibidos = '';
 app.post('/login', (req, res) => {
     // Si existe sesión, redireccionar a la página principal
@@ -237,19 +236,25 @@ app.post('/crearPublicacion', (req, res) => {
     })
 });
 app.post('/actualizarPublicacion', (req, res) => {
-    fetch('http://localhost:3000/actualizarPublicacion', { // 3. Realiza una petición fetch con la URL "/update-publications"
-        method: 'POST', // 4. Especifica que el método de la petición es POST
-        headers: { // 5. Define los encabezados de la petición
-            'Content-Type': 'application/json' // 6. Indica que el tipo de contenido de la petición es JSON
-        }
-    }).then(recibir => recibir.json())
-    .then(recibido => {
-        cookies.set('publicacion', recibido.publicaciones, {path: '/' });
-        cookieSession.publicacion = cookies.get('publicacion');
-        res.status(200).send(recibido);
-    })
+    // Si existe sesión, redireccionar a la página principal
+    if (cookieSession.sessionsID) {
+        res.redirect('/');
+        // Si no existe sesión, hacer validación del formulario
+    } else {
+        fetch('http://localhost:3000/actualizarPublicacion', { // 3. Realiza una petición fetch con la URL "/update-publications"
+            method: 'POST', // 4. Especifica que el método de la petición es POST
+            headers: { // 5. Define los encabezados de la petición
+                'Content-Type': 'application/json' // 6. Indica que el tipo de contenido de la petición es JSON
+            }
+        })
+        .then(recibir => recibir.json())
+        .then(recibido => {
+            cookies.set('publicacion', recibido.publicaciones, {path: '/' });
+            cookieSession.publicacion = cookies.get('publicacion');
+            res.status(200).send(recibido);
+        })
+    }
 });
-
 app.post('/cloudinaryPrueba', upload.single('image'), (req, res) => {
     console.log('se hizo un post');
     let objeto = req.body;
@@ -288,5 +293,4 @@ app.post('/zoomPrueba', (req, res) => {
             res.sendStatus(200);
     })  
 });
-
 module.exports = { routerPost: app }
