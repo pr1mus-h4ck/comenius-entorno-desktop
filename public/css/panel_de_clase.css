@@ -1,0 +1,11 @@
+.publicacion-item {
+    border: 1px solid #ccc; /* Borde alrededor de cada publicación */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 10px; /* Espaciado interno */
+    margin: 10px 0; /* Espaciado entre publicaciones */
+    background-color: #f9f9f9; /* Color de fondo */
+}
+
+.publicacion-item p {
+    margin: 0; /* Eliminar margen del contenido */
+}

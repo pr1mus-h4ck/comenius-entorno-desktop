@@ -44,37 +44,50 @@
 </div>
 </main>
 <!--TODO: para el equipo del back: modificar los comentarios, JUSTIN MAURO NO TOCAR PORFIS <3-->
-<% if (sesiones.sesion) { %>
-    <script>
-        const listaPublicacion = document.getElementById('listaPublicacion');
-        function actualizarPublicacion() { // 2. Define una función llamada "updatePublications"
-            fetch('/actualizarPublicacion', { // 3. Realiza una petición fetch con la URL "/update-publications"
-                method: 'POST', // 4. Especifica que el método de la petición es POST
-                headers: { // 5. Define los encabezados de la petición
-                    'Content-Type': 'application/json' // 6. Indica que el tipo de contenido de la petición es JSON
-                }
-            })
-            .then(recibir => recibir.json()) // 7. Convierte la respuesta de la petición a JSON
-            .then(recibido => { // 8. Ejecuta una función cuando la conversión a JSON es exitosa
-                console.log(recibido.publicaciones);
-                //listaPublicacion.innerHTML = ''; // 9. Limpia el contenido actual de la lista de publicaciones
-                recibido.forEach(publicacion => { // 10. Itera sobre cada publicación en la respuesta
-                    const article = document.createElement('article'); // 11. Crea un nuevo elemento <li>
-                    article.textContent = publicacion.content; // 12. Asigna el contenido de la publicación al elemento <li>
-                    listaPublicacion.appendChild(article); // 13. Agrega el elemento <li> a la lista de publicaciones
+    <% if (sesiones.sesion) { %>
+        <script>
+            const listaPublicacion = document.getElementById('listaPublicacion');
+            
+            function actualizarPublicacion() { 
+                fetch('/actualizarPublicacion', { 
+                    method: 'POST', 
+                    headers: { 
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(recibir => {
+                    if (!recibir.ok) {
+                        throw new Error('Error en la respuesta de la red');
+                    }
+                    return recibir.json();
+                })
+                .then(recibido => { 
+                    console.log(recibido.publicaciones);
+                    // Limpia el contenido actual
+                    // listaPublicacion.innerHTML = ''; 
+                    // Asegúrate de que 'recibido.publicaciones' sea un array
+                    const publicaciones = Array.isArray(recibido.publicaciones) ? recibido.publicaciones : [recibido.publicaciones];
+                    publicaciones.forEach(publicacion => { 
+                        const article = document.createElement('article'); 
+                        article.textContent = publicacion.content; 
+                        listaPublicacion.appendChild(article); 
+                    });
+                })
+                .catch(error => { 
+                    console.error('Error fetching data:', error); 
                 });
-            })
-            .catch(error => { // 14. Ejecuta una función si ocurre un error durante la petición
-                console.error('Error fetching data:', error); // 15. Imprime un mensaje de error en la consola
-            });
-        }
-        // Inicia el bucle de actualización cada 5 segundos
-        setInterval(actualizarPublicacion, 5000); // 16. Ejecuta la función "updatePublications" cada 5000 milisegundos (5 segundos)
-    </script>
-<% } else { %>
-    <script>
-        window.location.href = '/';
-    </script>
-<% } %>
+            }
+    
+            // Inicia el bucle de actualización cada 5 segundos
+            const intervalId = setInterval(() => {
+                actualizarPublicacion();
+                clearInterval(intervalId); // Detiene el intervalo después de la primera ejecución
+            }, 5000);
+        </script>
+    <% } else { %>
+        <script>
+            window.location.href = '/';
+        </script>
+    <% } %>
 </body>
 </html>

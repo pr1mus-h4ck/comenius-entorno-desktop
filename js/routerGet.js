@@ -40,8 +40,8 @@ app.get('/', (req, res) => {
             // Verificar si el rol existe en menuRol antes de pasarlo
             if (menuRol[sesiones.rol]) {
                 //res.render('zoom', {sesiones, almacenamiento});
-                //res.render('panel_de_clase', {publicaciones, sesiones});
-                funciones.index(req, res, sesiones, menuRol[sesiones.rol], datosRecibidos);
+                res.render('panel_de_clase', {publicaciones, sesiones});
+                //funciones.index(req, res, sesiones, menuRol[sesiones.rol], datosRecibidos);
             }
         } else {
             // Mostrar OTP
