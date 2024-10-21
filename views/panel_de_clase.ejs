@@ -59,16 +59,13 @@
                 })
                 .then(recibir => recibir.json())
                 .then(recibido => {
-                    console.log("He recibido esto desdel el servidor: " + recibido);
+                    window.location.href = '/';
                 })
                 .catch(error => { 
                     console.error('Error fetching data:', error); 
                 });
             }
-            const intervalId = setInterval(() => {
-                actualizarPublicacion();
-                clearInterval(intervalId); // Detiene el intervalo después de la primera ejecución
-            }, 5000);
+            setInterval(actualizarPublicacion, 5000);
         </script>
     <% } else { %>
         <script>

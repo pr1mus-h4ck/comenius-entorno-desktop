@@ -251,7 +251,7 @@ app.post('/actualizarPublicacion', (req, res) => {
             // Guardo la Cookie 'item' creada
             cookieSession.publicacion = cookies.get('publicacion');
             //console.log(cookieSession.publicacion);
-            res.status(200).send(cookieSession.publicacion);
+            res.status(200).send(recibido);
 
         })
         .catch(error => {
