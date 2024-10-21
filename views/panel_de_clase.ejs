@@ -61,20 +61,20 @@
                     }
                     return recibir.json();
                 })
-                .then(recibido => { 
-                    console.log(recibido.publicaciones);
-                    // Limpia el contenido actual
-                    // listaPublicacion.innerHTML = ''; 
-                    // Asegúrate de que 'recibido.publicaciones' sea un array
-                    const publicaciones = Array.isArray(recibido.publicaciones) ? recibido.publicaciones : [recibido.publicaciones];
+                .then(recibido => {
+                    if (recibido) {
+                        const publicaciones = Array.isArray(recibido.publicaciones) ? recibido.publicaciones : [recibido.publicaciones];
                     publicaciones.forEach(publicacion => { 
                         const article = document.createElement('article'); 
                         article.textContent = publicacion.content; 
                         listaPublicacion.appendChild(article); 
                     });
+                    } else { 
+                        window.location.href = '/';
+                    }
                 })
                 .catch(error => { 
-                    console.error('Error fetching data:', error); 
+                    //console.error('Error fetching data:', error); 
                 });
             }
     

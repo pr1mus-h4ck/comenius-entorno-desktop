@@ -223,13 +223,13 @@ app.post('/cargarPagina', (req, res) => {
 });
 app.post('/crearPublicacion', (req, res) => {
     const publicacion = req.body.publicacion;
-    console.log(publicacion);
+    //console.log(publicacion);
 
     let publi = {
         publicacion: publicacion,
     }
     let publiJSON = JSON.stringify(publi);
-    console.log(publiJSON);
+    //console.log(publiJSON);
     fetch(`http://localhost:3000/crearPublicacion`, {
         method: 'POST',
         body: publiJSON,
@@ -246,13 +246,16 @@ app.post('/actualizarPublicacion', (req, res) => {
         })
         .then(recibir => recibir.json())
         .then(recibido => {
-            cookies.set('publicacion', recibido.publicaciones, {path: '/' });
+            //console.log(recibido);
+            cookies.set('publicacion', recibido.publicaciones , {path: '/' });
+            // Guardo la Cookie 'item' creada
             cookieSession.publicacion = cookies.get('publicacion');
-            console.log(cookies.get('publicacion'));
-            res.status(200).send(recibido);
+            //console.log(cookieSession.publicacion);
+            res.status(200).send(cookieSession.publicacion);
+
         })
         .catch(error => {
-            console.log(error);
+            //console.log(error);
             // Elimino todas las Cookies de la app
             funciones.eliminarCookies(cookies);
             // Guardo las Cookies con el valor vacio
