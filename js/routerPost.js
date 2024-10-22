@@ -234,40 +234,29 @@ app.post('/crearPublicacion', (req, res) => {
         method: 'POST',
         body: publiJSON,
     })
+    .then(recibir => recibir.json())
+    .then(recibido => { 
+        //TODO: hacer alerta de exito para cuando se realiza la publicación
+        console.log(recibido);
+    })
 });
 app.post('/actualizarPublicacion', (req, res) => {
-    // Si existe sesión, redireccionar a la página principal
-    if (cookieSession.sessionsID) {
-        fetch('http://localhost:3000/actualizarPublicacion', { // 3. Realiza una petición fetch con la URL "/update-publications"
-            method: 'POST', // 4. Especifica que el método de la petición es POST
-            headers: { // 5. Define los encabezados de la petición
-                'Content-Type': 'application/json' // 6. Indica que el tipo de contenido de la petición es JSON
-            }
-        })
-        .then(recibir => recibir.json())
-        .then(recibido => {
-            //console.log(recibido);
-            cookies.set('publicacion', recibido.publicaciones , {path: '/' });
-            // Guardo la Cookie 'item' creada
-            cookieSession.publicacion = cookies.get('publicacion');
-            //console.log(cookieSession.publicacion);
-            res.status(200).send(recibido);
-
-        })
-        .catch(error => {
-            //console.log(error);
-            // Elimino todas las Cookies de la app
-            funciones.eliminarCookies(cookies);
-            // Guardo las Cookies con el valor vacio
-            funciones.getCookies(cookieSession, cookies);
-            // Establezco 'config.envioOTP' son su valor de origen
-            config.envioOTP =  false;
-            res.redirect('/');
-        });
-    } else {
-        res.redirect('/');
-        // Si no existe sesión, hacer validación del formulario
-    }
+    fetch('http://localhost:3000/actualizarPublicacion', { 
+        method: 'POST',
+        headers: { 
+            'Content-Type': 'application/json' 
+        }
+    })
+    .then(recibir => recibir.json())
+    .then(recibido => {
+        //TODO: crear cookie del array
+        cookies.set('publicacion', recibido, {path: '/' });
+        // Guardo la Cookie 'item' creada
+        cookieSession.publicacion = cookies.get('publicacion');
+        console.log(cookieSession.publicacion);
+        //FIXME: corregir res.status por una alerta u otra cosa y crearla en el panel_de_clase.ejs
+        res.status(200).json(recibido);
+    })
 });
 app.post('/cloudinaryPrueba', upload.single('image'), (req, res) => {
     console.log('se hizo un post');

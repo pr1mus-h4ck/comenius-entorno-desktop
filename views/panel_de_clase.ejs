@@ -21,56 +21,46 @@
 <div>
     <div><!--Lista de integrantes-->
         <h3>Integrantes</h3>
-        <div> <!--contenido con el nombre de los alumnos-->
-            <p><%- sesiones.sesion %></p>
+        <div> 
+            <p><%- publicaciones.publicacion[0] %></p>
         </div>
     </div> 
-    <!--TODO: modificar de DIV a CARD para el foro de la clase-->
-    <!--FIXME: TENGAN CUIDADO CON LA SUPERPOSICIÓN DE ELEMENTOS DE LOS INPUTS PARA EVITAR MODIFICAR LA FUNCIONALIDAD DE LA LOGICA-->
     <div class="publicacion">   <!--Foro de la materia-->
         <form action="/crearPublicacion" method="POST">
             <input type="text" id="" placeholder="Crear publicación" name="publicacion">
-            <input type="submit" value="enviar"> <!--EQUIPO FRONTEND: Agregar icono de avion de papel-->
+            <input type="submit" value="enviar"> 
         </form>
+        <!--TODO: HACER UN EVENTO en el div para que actualice cada 5 segundos el contenido de dicho div-->
+        <!--TODO: hacer que el evento del comentario anterior un bucle FOR para listar los arrays de la cookie-->
+        <!--TODO: logica dentro del FOR para cuando se elimina una publicación y reemplazar con la existente-->
         <div id="listaPublicacion">
             <% if (publicaciones.publicacion) { %>
-                <!-- TODO: Lograr que muestre el content en el article -->
                 <% publicaciones.publicacion.forEach(publicacion => { %>
                     <article>
                         <%= publicacion.content %>
                     </article>
                 <% }); %>
             <% } %>
-        </div>        
+        </div> 
     </div> 
 </div>
 </main>
-<!--TODO: para el equipo del back: modificar los comentarios, JUSTIN MAURO NO TOCAR PORFIS <3-->
-    <% if (sesiones.sesion) { %>
-        <script>
-            const listaPublicacion = document.getElementById('listaPublicacion');
-            
-            function actualizarPublicacion() { 
-                fetch('/actualizarPublicacion', { 
-                    method: 'POST', 
-                    headers: { 
-                        'Content-Type': 'application/json'
-                    }
-                })
-                .then(recibir => recibir.json())
-                .then(recibido => {
-                    window.location.href = '/';
-                })
-                .catch(error => { 
-                    console.error('Error fetching data:', error); 
-                });
+<script>
+    const listaPublicacion = document.getElementById('listaPublicacion');
+    function actualizarPublicacion() { 
+        fetch('/actualizarPublicacion', { 
+            method: 'POST', 
+            headers: { 
+                'Content-Type': 'application/json'
             }
-            setInterval(actualizarPublicacion, 5000);
-        </script>
-    <% } else { %>
-        <script>
-            window.location.href = '/';
-        </script>
-    <% } %>
+        })
+        .then(recibir => recibir.json())
+        .then(recibido => {
+            console.log(recibido);
+        })
+    }
+    //FIXME: corregir el setinterval
+    setInterval(actualizarPublicacion, 5000);
+</script>
 </body>
 </html>

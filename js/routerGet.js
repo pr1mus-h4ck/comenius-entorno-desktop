@@ -28,6 +28,7 @@ app.get('/', (req, res) => {
         zoomFirma: cookieSession.zoomFirma,
         clientId: cookieSession.clientId,
     }
+    //FIXME: corregir el objeto publicaciones para corregir la impresión del array en panel_de_clase.ejs
     let publicaciones = {
         publicacion: [
             { content: cookieSession.publicacion }
@@ -39,9 +40,9 @@ app.get('/', (req, res) => {
         if (cookieSession.verificacionOTP) {
             // Verificar si el rol existe en menuRol antes de pasarlo
             if (menuRol[sesiones.rol]) {
-                //res.render('zoom', {sesiones, almacenamiento});
-                res.render('panel_de_clase', {publicaciones, sesiones}); 
-                //funciones.index(req, res, sesiones, menuRol[sesiones.rol], datosRecibidos);
+                // res.render('zoom', {sesiones, almacenamiento});
+                //res.render('panel_de_clase', {publicaciones, sesiones}); 
+                funciones.index(req, res, sesiones, menuRol[sesiones.rol], datosRecibidos);
             }
         } else {
             // Mostrar OTP
