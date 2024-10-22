@@ -2,10 +2,8 @@
 const inputNombres = ['input2', 'input3', 'input4', 'input5', 'input6'];
 // Array del menú de la interfaz de la app con sus respectivos roles
 const menuRol = {
-    alumno: ['inicio', 'panel_materias', 'contactos', 'calendario', 'notificaciones', 'video_clase'],
-    instructor: ['inicio', 'panel_materias', 'contactos', 'calendario', 'notificaciones'],
-    usuario_especial: ['inicio'],
-    admin: ['inicio', 'reporte', 'bandeja_reporte', 'dashboard', 'calendario'],
+    alumno: ['inicio', 'panel_materias', 'contactos', 'notificaciones'],
+    instructor: ['inicio', 'panel_materias', 'contactos', 'notificaciones'],
 };
 // Exporto como módulos estos arrays
 module.exports = {
