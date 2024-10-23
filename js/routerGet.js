@@ -3,16 +3,17 @@ const config = require('./config');
 const funciones = require('./funciones');
 const {menuRol} = require('./array');
 const { json } = require('./zoom');
+const { text } = require('express');
 // Renderizar la página de index
 app.get('/', (req, res) => {
     // Crear un objeto de sesión
-    let sesiones = {
-        id: cookieSession.usuariosID,
-        sesion: cookieSession.sessionsID,
-        rol: cookieSession.rol,
-        item: cookieSession.item,
-        nombre: cookieSession.nombre,
-    }
+let sesiones = {
+    id: cookieSession.usuariosID,
+    sesion: cookieSession.sessionsID,
+    rol: cookieSession.rol,
+    item: cookieSession.item,
+    nombre: cookieSession.nombre,
+}
     // Crear un objeto para el proceso de OTP donde se verifica si se envío el correo al usuario con el código pertinente
     let procesoOTP = {
         envio: config.envioOTP,
@@ -30,10 +31,20 @@ app.get('/', (req, res) => {
     }
     //FIXME: corregir el objeto publicaciones para corregir la impresión del array en panel_de_clase.ejs
     let publicaciones = {
-        publicacion: [
-            { content: cookieSession.publicacion }
-        ]
+        publicacion: []  
+    };
+
+    if (cookieSession.publicacion) {
+        const cookieValue = JSON.stringify(cookieSession.publicacion);
+        const publicacionesArray = JSON.parse(cookieValue);
+        for (let i = 0; i < publicacionesArray.length; i++) {
+            // i++;  // Elimina esta línea
+            console.log('este es del front get: ' + publicacionesArray[i]);            
+        }
+    } else {
+        console.log('for de router get no funciona');
     }
+
     // Verificar si hay una sesión activa
     if (sesiones.sesion) {
         // Si OTP fue virificado mostrar el Index
@@ -41,8 +52,8 @@ app.get('/', (req, res) => {
             // Verificar si el rol existe en menuRol antes de pasarlo
             if (menuRol[sesiones.rol]) {
                 // res.render('zoom', {sesiones, almacenamiento});
-                //res.render('panel_de_clase', {publicaciones, sesiones}); 
-                funciones.index(req, res, sesiones, menuRol[sesiones.rol], datosRecibidos);
+                res.render('panel_de_clase', {publicaciones, sesiones}); 
+                // funciones.index(req, res, sesiones, menuRol[sesiones.rol], datosRecibidos);
             }
         } else {
             // Mostrar OTP
