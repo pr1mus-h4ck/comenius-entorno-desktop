@@ -21,9 +21,7 @@
 <div>
     <div><!--Lista de integrantes-->
         <h3>Integrantes</h3>
-        <div> 
-            <p><%- publicaciones.publicacion[0] %></p>
-        </div>
+        <div></div>
     </div> 
     <div class="publicacion">   <!--Foro de la materia-->
         <form action="/crearPublicacion" method="POST">
@@ -37,7 +35,7 @@
             <% if (publicaciones.publicacion) { %>
                 <% publicaciones.publicacion.forEach(publicacion => { %>
                     <article>
-                        <%= publicacion.content %>
+                        <%= JSON.stringify (publicacion.content) %>
                     </article>
                 <% }); %>
             <% } %>
