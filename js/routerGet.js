@@ -29,9 +29,8 @@ let sesiones = {
         zoomFirma: cookieSession.zoomFirma,
         clientId: cookieSession.clientId,
     }
-    //FIXME: corregir el objeto publicaciones para corregir la impresión del array en panel_de_clase.ejs
     let publicaciones = {
-        publicacion: [] // Inicializa un array vacío
+        publicacion: [], // Inicializa un array vacío
     };
     if (cookieSession.publicacion){
         // Crea un nuevo objeto para cada elemento en cookieSession.publicacion
@@ -43,6 +42,19 @@ let sesiones = {
             publicaciones.publicacion[i].content = cookieSession.publicacion[i];
         }
     }
+    let comentarios = {
+        comentario: [],
+    }
+    if (cookieSession.comentario){
+        // Crea un nuevo objeto para cada elemento en cookieSession.publicacion
+        for (let i = 0; i < cookieSession.comentario.length; i++) {
+            comentarios.comentario.push({ content: cookieSession.comentario[i] });
+        }
+        // Ahora puedes iterar y modificar el contenido
+        for (let i = 0; i < comentarios.comentario.length; i++) {
+            comentarios.comentario[i].content = cookieSession.comentario[i];
+        }
+    }
     // Verificar si hay una sesión activa
     if (sesiones.sesion) {
         // Si OTP fue virificado mostrar el Index
@@ -50,7 +62,7 @@ let sesiones = {
             // Verificar si el rol existe en menuRol antes de pasarlo
             if (menuRol[sesiones.rol]) {
                 // res.render('zoom', {sesiones, almacenamiento});
-                res.render('panel_de_clase', {publicaciones, sesiones}); 
+                res.render('panel_de_clase', {publicaciones, comentarios, sesiones}); 
                 // funciones.index(req, res, sesiones, menuRol[sesiones.rol], datosRecibidos);
             }
         } else {

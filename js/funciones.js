@@ -36,6 +36,8 @@ function getCookies (objeto, cookies) {
     objeto.clientId =  cookies.get('clientId');
     // Guardar la cookie de item
     objeto.publicacion =  cookies.get('publicacion');
+    // Guardar la cookie de item
+    objeto.publicacion =  cookies.get('comentario');
     return objeto;
 }
 function eliminarCookies(cookies) {
@@ -62,6 +64,8 @@ function eliminarCookies(cookies) {
     cookies.remove('clientId', {path: '/' });
     // Eliminar la cookie de item de menú del usuario
     cookies.remove('publicacion', {path: '/' });
+    // Eliminar la cookie de item de menú del usuario
+    cookies.remove('comentario', {path: '/' });
 }
 module.exports = {
     setCookies: setCookies,

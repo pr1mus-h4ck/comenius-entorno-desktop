@@ -23,30 +23,59 @@
         <h3>Integrantes</h3>
         <div></div>
     </div> 
+    <!-- FIXME: corregir la falta de la actualización de ventana con una barra de carga con HTML5 y CSS3 en unión con routerPost.js -->
     <div class="publicacion">   <!--Foro de la materia-->
         <form action="/crearPublicacion" method="POST">
             <input type="text" id="" placeholder="Crear publicación" name="publicacion">
             <input type="submit" value="enviar"> 
         </form>
         <!--TODO: HACER UN EVENTO en el div para que actualice cada 5 segundos el contenido de dicho div-->
-        <!--TODO: hacer que el evento del comentario anterior un bucle FOR para listar los arrays de la cookie-->
-        <!--TODO: logica dentro del FOR para cuando se elimina una publicación y reemplazar con la existente-->
         <div id="listaPublicacion">
             <% if (publicaciones.publicacion) { %>
                 <% publicaciones.publicacion.forEach(publicacion => { %>
-                    <article>
-                        <%= publicacion.content %> 
-                    </article>
+                    <section>
+                        <h1>
+                            <%= publicacion.content %>
+                        </h1>
+                        <!-- TODO: hacer lógica con EJS los ids de los formularios para comantar cada publicación creada -->
+                        <div id="listaComentario">
+                            <% if (comentarios.comentario) { %>
+                                <% comentarios.comentario.forEach(comentario => { %>
+                                    <article>
+                                        <%= comentario.content %>
+                                    </article>
+                                <% }); %>
+                            <% } %>
+                        </div>
+                        <form action="/crearComentario" method="POST">
+                            <input type="text" id="" placeholder="Escribir comentario..." name="comentario">
+                            <input type="submit" value="enviar"> 
+                        </form>
+                    </section>
                 <% }); %>
             <% } %>
         </div> 
     </div> 
 </div>
 </main>
+<!-- TODO: los script separarlos a otra carpeta y llamarlos con src -->
 <script>
     const listaPublicacion = document.getElementById('listaPublicacion');
     function actualizarPublicacion() { 
         fetch('/actualizarPublicacion', { 
+            method: 'POST', 
+            headers: { 
+                'Content-Type': 'application/json'
+            }
+        })
+    }
+    //FIXME: corregir el setinterval
+    setInterval(actualizarPublicacion, 5000);
+</script>
+<script>
+    const listaComentario = document.getElementById('listaComentario');
+    function actualizarComentario() { 
+        fetch('/actualizarComentario', { 
             method: 'POST', 
             headers: { 
                 'Content-Type': 'application/json'
@@ -58,7 +87,7 @@
         })
     }
     //FIXME: corregir el setinterval
-    setInterval(actualizarPublicacion, 5000);
+    setInterval(actualizarComentario, 5000);
 </script>
 </body>
 </html>

@@ -138,22 +138,6 @@ app.post('/confirmar-otp', (req, res) => {
         }
     }
 });
-app.post('/proxy', (req, res) => {
-    try {
-        const { url } = req.body;
-        https.get(url, (response) => {
-            let data = '';
-            response.on('data', (chunk) => {
-                data += chunk;
-            });
-            response.on('end', () => {
-                res.status(response.statusCode).json(JSON.parse(data));
-            });
-        });
-    } catch (error) {
-        res.status(500).json({ error: 'Error making GET request' });
-    }
-});
 app.post('/cerrar-sesion', (req, res) => {
     let sesiones = {
         id: cookieSession.usuariosID,
@@ -223,20 +207,18 @@ app.post('/cargarPagina', (req, res) => {
 });
 app.post('/crearPublicacion', (req, res) => {
     const publicacion = req.body.publicacion;
-    //console.log(publicacion);
-
+    // TODO: hacer la configuración fecha de la región Buenos Aires, Argentina para que imprima en el Back
     let publi = {
         publicacion: publicacion,
     }
     let publiJSON = JSON.stringify(publi);
-    //console.log(publiJSON);
     fetch(`http://localhost:3000/crearPublicacion`, {
         method: 'POST',
         body: publiJSON,
     })
     .then(recibir => recibir.json())
     .then(recibido => { 
-        //TODO: hacer alerta de exito para cuando se realiza la publicación
+    //TODO: hacer alerta de exito para cuando se realiza la publicación
         console.log(recibido);
     })
 });
@@ -253,9 +235,39 @@ app.post('/actualizarPublicacion', (req, res) => {
         const publicacionesArray = recibido.publicaciones;
         cookies.set('publicacion', publicacionesArray, {path: '/' });
         cookieSession.publicacion = cookies.get('publicacion');
+        console.log(cookieSession.publicacion);
+    })
+});
+app.post('/crearComentario', (req, res) => {
+    const comentario = req.body.comentario;
+    let publi = {
+        comentario: comentario,
+    }
+    let publiJSON = JSON.stringify(publi);
+    //console.log(publiJSON);
+    fetch(`http://localhost:3000/crearComentario`, {
+        method: 'POST',
+        body: publiJSON,
+    })
+    .then(recibir => recibir.json())
+    .then(recibido => { 
+        //TODO: hacer alerta de exito para cuando se realiza la publicación
         console.log(recibido);
-        //FIXME: corregir res.status por una alerta u otra cosa y crearla en el panel_de_clase.ejs
-        res.status(200).json(recibido);
+    })
+});
+app.post('/actualizarComentario', (req, res) => {
+    fetch('http://localhost:3000/actualizarComentario', { 
+        method: 'POST',
+        headers: { 
+            'Content-Type': 'application/json' 
+        }
+    })
+    .then(recibir => recibir.json())
+    .then(recibido => {
+        //TODO: crear cookie del array
+        const comentariosArray = recibido.comentarios;
+        cookies.set('comentario', comentariosArray, {path: '/' });
+        cookieSession.comentario = cookies.get('comentario');
     })
 });
 app.post('/cloudinaryPrueba', upload.single('image'), (req, res) => {

@@ -46,6 +46,7 @@ let cookieSession = {
 
     publicacion: cookies.get('publicacion'),
 
+    comentario: cookies.get('comentario'),
 }
 // Hago uso de cors en este archivo 'index.js'. Se agrega antes de cualquier controlador de ruta.
 app.use(cors());
