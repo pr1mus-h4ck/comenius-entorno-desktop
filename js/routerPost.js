@@ -250,10 +250,10 @@ app.post('/actualizarPublicacion', (req, res) => {
     .then(recibir => recibir.json())
     .then(recibido => {
         //TODO: crear cookie del array
-        cookies.set('publicacion', recibido, {path: '/' });
-        // Guardo la Cookie 'item' creada
+        const publicacionesArray = recibido.publicaciones;
+        cookies.set('publicacion', publicacionesArray, {path: '/' });
         cookieSession.publicacion = cookies.get('publicacion');
-        console.log(cookieSession.publicacion);
+        console.log(recibido);
         //FIXME: corregir res.status por una alerta u otra cosa y crearla en el panel_de_clase.ejs
         res.status(200).json(recibido);
     })

@@ -31,18 +31,19 @@ let sesiones = {
     }
     //FIXME: corregir el objeto publicaciones para corregir la impresión del array en panel_de_clase.ejs
     let publicaciones = {
-        publicacion: []  
-    };
-
+        publicacion: [
+            {content: cookieSession.publicacion}
+        ]
+    }
     if (cookieSession.publicacion) {
+        console.log('Contenido de cookieSession.publicacion:', cookieSession.publicacion); // Verifica el contenido
         const cookieValue = JSON.stringify(cookieSession.publicacion);
         const publicacionesArray = JSON.parse(cookieValue);
+
         for (let i = 0; i < publicacionesArray.length; i++) {
-            // i++;  // Elimina esta línea
-            console.log('este es del front get: ' + publicacionesArray[i]);            
+            console.log('este es del front get: ' + publicacionesArray[i].content);            
+            
         }
-    } else {
-        console.log('for de router get no funciona');
     }
 
     // Verificar si hay una sesión activa

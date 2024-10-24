@@ -35,7 +35,7 @@
             <% if (publicaciones.publicacion) { %>
                 <% publicaciones.publicacion.forEach(publicacion => { %>
                     <article>
-                        <%= JSON.stringify (publicacion.content) %>
+                        <%= publicacion.content %> 
                     </article>
                 <% }); %>
             <% } %>
