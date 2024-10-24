@@ -31,21 +31,18 @@ let sesiones = {
     }
     //FIXME: corregir el objeto publicaciones para corregir la impresión del array en panel_de_clase.ejs
     let publicaciones = {
-        publicacion: [
-            {content: cookieSession.publicacion}
-        ]
-    }
-    if (cookieSession.publicacion) {
-        console.log('Contenido de cookieSession.publicacion:', cookieSession.publicacion); // Verifica el contenido
-        const cookieValue = JSON.stringify(cookieSession.publicacion);
-        const publicacionesArray = JSON.parse(cookieValue);
-
-        for (let i = 0; i < publicacionesArray.length; i++) {
-            console.log('este es del front get: ' + publicacionesArray[i].content);            
-            
+        publicacion: [] // Inicializa un array vacío
+    };
+    if (cookieSession.publicacion){
+        // Crea un nuevo objeto para cada elemento en cookieSession.publicacion
+        for (let i = 0; i < cookieSession.publicacion.length; i++) {
+            publicaciones.publicacion.push({ content: cookieSession.publicacion[i] });
+        }
+        // Ahora puedes iterar y modificar el contenido
+        for (let i = 0; i < publicaciones.publicacion.length; i++) {
+            publicaciones.publicacion[i].content = cookieSession.publicacion[i];
         }
     }
-
     // Verificar si hay una sesión activa
     if (sesiones.sesion) {
         // Si OTP fue virificado mostrar el Index
