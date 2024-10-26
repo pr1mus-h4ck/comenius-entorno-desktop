@@ -207,18 +207,26 @@ app.post('/cargarPagina', (req, res) => {
 });
 app.post('/crearPublicacion', (req, res) => {
     const publicacion = req.body.publicacion;
-    // TODO: hacer la configuración fecha de la región Buenos Aires, Argentina para que imprima en el Back
+    //TODO: hacer condicional simple de la existencia de const publicacion, si existe se activa la barra de carga
+    const fechaHoraActual = new Date();
+
     let publi = {
         publicacion: publicacion,
+        fechaHora: fechaHoraActual,
     }
     let publiJSON = JSON.stringify(publi);
+    //TODO: SI FUNCIONA EL FETCH llegó al back, entonces se actualiza la barra de carga, si no funciona un catch (alerta)
     fetch(`http://localhost:3000/crearPublicacion`, {
         method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
         body: publiJSON,
     })
     .then(recibir => recibir.json())
-    .then(recibido => { 
-    //TODO: hacer alerta de exito para cuando se realiza la publicación
+    .then(recibido => {
+        //TODO: hacer alerta de exito para cuando se realiza la publicación 
+        //TODO: si devuelve del back un success hacer que la barra muestre 100%
         console.log(recibido);
     })
 });
@@ -231,7 +239,7 @@ app.post('/actualizarPublicacion', (req, res) => {
     })
     .then(recibir => recibir.json())
     .then(recibido => {
-        //TODO: crear cookie del array
+        //TODO: apenas recibe actualizaciones hacer que actualize la sección de las publicaciones
         const publicacionesArray = recibido.publicaciones;
         cookies.set('publicacion', publicacionesArray, {path: '/' });
         cookieSession.publicacion = cookies.get('publicacion');
@@ -240,18 +248,21 @@ app.post('/actualizarPublicacion', (req, res) => {
 });
 app.post('/crearComentario', (req, res) => {
     const comentario = req.body.comentario;
+    //TODO: hacer condicional simple de la existencia de const comentario, si existe se activa la barra de carga
+
     let publi = {
         comentario: comentario,
     }
     let publiJSON = JSON.stringify(publi);
-    //console.log(publiJSON);
+    //TODO: SI FUNCIONA EL FETCH llegó al back, entonces se actualiza la barra de carga, si no funciona un catch (alerta)
     fetch(`http://localhost:3000/crearComentario`, {
         method: 'POST',
         body: publiJSON,
     })
     .then(recibir => recibir.json())
     .then(recibido => { 
-        //TODO: hacer alerta de exito para cuando se realiza la publicación
+        //TODO: hacer alerta de exito para cuando se realiza el comentario
+        //TODO: si devuelve del back un success hacer que la barra muestre 100%
         console.log(recibido);
     })
 });

@@ -4,60 +4,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel de la clase</title>
+    <link rel="stylesheet" href="recursos/css/barra_progreso.css">
 </head>
 <body>
     <!--Menu horizontal del panel de la clase: Panel, Trabajos, Clase Virtual-->
     <div class="menu_materia"></div> 
 <main>
     <!--Todo esto es el PANEL DE LA CLASE DE LA MATERIA: ej, base de datos-->
-<div> <!--Sección informativa del panel de la clase: comision, turno, dias, etc-->
-    <div></div> <!--Titulo de la materia, ej: Base de datos-->
-    <div> <!--Divs con la información de la materia-->
-        <div></div> <!--comision, turno-->
-        <div></div> <!--fecha y hora de la materia-->
-        <div></div> <!--coordinador, profesor-->
-</div>
-<!--TODO: hacer el CSS con su flexbox y grid pero sin tocar el contenido de los div de la abajo-->
-<div>
+    <div> <!--Sección informativa del panel de la clase: comision, turno, dias, etc-->
+        <div></div> <!--Titulo de la materia, ej: Base de datos-->
+        <div> <!--Divs con la información de la materia-->
+            <div></div> <!--comision, turno-->
+            <div></div> <!--fecha y hora de la materia-->
+            <div></div> <!--coordinador, profesor-->
+    </div>
+    <!--TODO: hacer el CSS con su flexbox y grid pero sin tocar el contenido de los div de la abajo-->
     <div><!--Lista de integrantes-->
         <h3>Integrantes</h3>
         <div></div>
     </div> 
-    <!-- FIXME: corregir la falta de la actualización de ventana con una barra de carga con HTML5 y CSS3 en unión con routerPost.js -->
-    <div class="publicacion">   <!--Foro de la materia-->
-        <form action="/crearPublicacion" method="POST">
-            <input type="text" id="" placeholder="Crear publicación" name="publicacion">
-            <input type="submit" value="enviar"> 
-        </form>
-        <!--TODO: HACER UN EVENTO en el div para que actualice cada 5 segundos el contenido de dicho div-->
-        <div id="listaPublicacion">
-            <% if (publicaciones.publicacion) { %>
-                <% publicaciones.publicacion.forEach(publicacion => { %>
-                    <section>
-                        <h1>
-                            <%= publicacion.content %>
-                        </h1>
-                        <!-- TODO: hacer lógica con EJS los ids de los formularios para comantar cada publicación creada -->
-                        <div id="listaComentario">
-                            <% if (comentarios.comentario) { %>
-                                <% comentarios.comentario.forEach(comentario => { %>
-                                    <article>
-                                        <%= comentario.content %>
-                                    </article>
-                                <% }); %>
-                            <% } %>
-                        </div>
-                        <form action="/crearComentario" method="POST">
-                            <input type="text" id="" placeholder="Escribir comentario..." name="comentario">
-                            <input type="submit" value="enviar"> 
-                        </form>
-                    </section>
-                <% }); %>
-            <% } %>
+    <div>
+        <!-- FIXME: corregir la falta de la actualización de ventana con una barra de carga con HTML5 y CSS3 en unión con routerPost.js -->
+        <div class="publicacion">   <!--Foro de la materia-->
+            <form action="/crearPublicacion" method="POST">
+                <input type="text" id="" placeholder="Crear publicación" name="publicacion">
+                <input type="submit" value="enviar"> 
+
+            </form>
+            <!--TODO: HACER UN EVENTO en el div para que actualice cada 5 segundos el contenido de dicho div-->
+            <div id="listaPublicacion">
+                <% if (publicaciones.publicacion) { %>
+                    <% publicaciones.publicacion.forEach(publicacion => { %>
+                        <section>
+                            <h1>
+                                <%= publicacion.content %>
+                            </h1>
+                            <!-- TODO: hacer lógica con EJS los ids de los formularios para comantar cada publicación creada -->
+                            <div id="listaComentario">
+                                <% if (comentarios.comentario) { %>
+                                    <% comentarios.comentario.forEach(comentario => { %>
+                                        <article>
+                                            <%= comentario.content %>
+                                        </article>
+                                    <% }); %>
+                                <% } %>
+                            </div>
+                            <form action="/crearComentario" method="POST">
+                                <input type="text" id="" placeholder="Escribir comentario..." name="comentario">
+                                <input type="submit" value="enviar"> 
+                            </form>
+                        </section>
+                    <% }); %>
+                <% } %>
+            </div> 
         </div> 
-    </div> 
-</div>
+    </div>
 </main>
+<div class="progreso-contenedor"> <!--barra de carga de proceso-->
+    <div class="progreso-barra"></div>
+</div>
 <!-- TODO: los script separarlos a otra carpeta y llamarlos con src -->
 <script>
     const listaPublicacion = document.getElementById('listaPublicacion');
@@ -88,6 +93,21 @@
     }
     //FIXME: corregir el setinterval
     setInterval(actualizarComentario, 5000);
+</script>
+<script> 
+    /* TODO: 
+    *   - verificar primero si el servidor del back funciona
+    *   - si el servidor funciona le devuele el success al front para activar la barra de carga
+    *   - cuando recibe el .ok, empieza a hacer la peticion de crearPublicacion/crearComentario
+    *   - debe llenar la barra de carga al ir al routerPost del front, al routerPost del back
+    *   - si llega al 100%, quiere decir que finalizo todo el proceso de publicación y se actualiza la pagina despues de unos *     breves segundos (> 5 segundos)
+    */
+    
+    const progresoBarra = document.querySelector('.progreso-barra');
+    //TODO: crear una función que reciba la logica de los servidores front y back
+    //TODO: crear una función que actualice la barra de carga (0, 10, 50, 100 => hacer animación de la transición de los numeros por medio de css y js)
+    //TODO: crear evento para la transición de los numeros de la barra de carga
+    //TODO: hacer la función de la activación de la barra
 </script>
 </body>
 </html>

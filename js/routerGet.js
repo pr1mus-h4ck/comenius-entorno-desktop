@@ -32,6 +32,7 @@ let sesiones = {
     let publicaciones = {
         publicacion: [], // Inicializa un array vacío
     };
+    //TODO: lograr que esta condición simple se actualize solamente en la porción de la publicación
     if (cookieSession.publicacion){
         // Crea un nuevo objeto para cada elemento en cookieSession.publicacion
         for (let i = 0; i < cookieSession.publicacion.length; i++) {
@@ -45,6 +46,7 @@ let sesiones = {
     let comentarios = {
         comentario: [],
     }
+    //TODO: lograr que esta condición simple se actualize solamente en la porción de los comentarios
     if (cookieSession.comentario){
         // Crea un nuevo objeto para cada elemento en cookieSession.publicacion
         for (let i = 0; i < cookieSession.comentario.length; i++) {
@@ -62,8 +64,10 @@ let sesiones = {
             // Verificar si el rol existe en menuRol antes de pasarlo
             if (menuRol[sesiones.rol]) {
                 // res.render('zoom', {sesiones, almacenamiento});
-                //res.render('panel_de_clase', {publicaciones, comentarios, sesiones}); 
-                funciones.index(req, res, sesiones, menuRol[sesiones.rol], datosRecibidos);
+                // res.render('panel_de_clase', {publicaciones, comentarios, sesiones}); 
+                //TODO: subir en el res.render la logica del menu.rol
+                res.render('trabajo');
+                // funciones.index(req, res, sesiones, menuRol[sesiones.rol], datosRecibidos);
             }
         } else {
             // Mostrar OTP
