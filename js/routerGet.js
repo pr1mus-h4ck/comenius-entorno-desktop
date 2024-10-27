@@ -66,8 +66,8 @@ let sesiones = {
                 // res.render('zoom', {sesiones, almacenamiento});
                 // res.render('panel_de_clase', {publicaciones, comentarios, sesiones}); 
                 //TODO: subir en el res.render la logica del menu.rol
-                res.render('trabajo');
-                // funciones.index(req, res, sesiones, menuRol[sesiones.rol], datosRecibidos);
+                //res.render('trabajo');
+                funciones.index(req, res, sesiones, menuRol[sesiones.rol], datosRecibidos);
             }
         } else {
             // Mostrar OTP
