@@ -26,8 +26,8 @@
     <div>
         <!-- FIXME: corregir la falta de la actualización de ventana con una barra de carga con HTML5 y CSS3 en unión con routerPost.js -->
         <div class="publicacion">   <!--Foro de la materia-->
-            <form action="/crearPublicacion" method="POST">
-                <input type="text" id="" placeholder="Crear publicación" name="publicacion">
+            <form action="/crearPublicacion" method="POST" onsubmit="enviarPublicacion(event)">
+                <input type="text" id="publicacion" placeholder="Crear publicación" name="publicacion">
                 <input type="submit" value="enviar"> 
 
             </form>
@@ -60,10 +60,43 @@
         </div> 
     </div>
 </main>
-<div id="progreso-contenedor"> 
-    <div id="progreso-barra"></div>
-</div>
 <!-- TODO: los script separarlos a otra carpeta y llamarlos con src -->
+<script>
+    function enviarPublicacion(event) {
+        event.preventDefault(); // Evita el envío del formulario por defecto
+        const publicacion = document.querySelector('input[name="publicacion"]').value;
+        if (publicacion !== '') {
+            const fechaHoraActual = new Date();
+            let publi = {
+                publicacion: publicacion,
+                fechaHora: fechaHoraActual,
+            }
+            const publiJSON = JSON.stringify(publi);
+            fetch(`http://localhost:3000/crearPublicacion`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: publiJSON,
+            })
+            .then(recibir => recibir.json())
+            .then(recibido => {
+                if (recibido.ok) {
+                    console.log(recibido);
+                    // Recarga la página después de recibir la respuesta exitosa
+                    location.reload(); 
+                } else {
+                    console.log('error');
+                    // Muestra un mensaje de error al usuario
+                }
+            })
+            .catch(error => {
+                console.error('Error creando publicación:', error);
+                // Muestra un mensaje de error al usuario
+            });
+        }
+    }
+</script>
 <script>
     const listaPublicacion = document.getElementById('listaPublicacion');
     function actualizarPublicacion() { 
@@ -71,6 +104,12 @@
             method: 'POST', 
             headers: { 
                 'Content-Type': 'application/json'
+            }
+        })
+        .then(recibir => recibir.json())
+        .then(recibido => {
+            if (recibido.ok) {
+                location.reload('#listaPublicacion');
             }
         })
     }
@@ -102,25 +141,6 @@
     *   - debe llenar la barra de carga al ir al routerPost del front, al routerPost del back
     *   - si llega al 100%, quiere decir que finalizo todo el proceso de publicación y se actualiza la pagina despues de unos *     breves segundos (> 5 segundos)
     */
-    
-    let i = 0;
-    function move() {
-    if (i == 0) {
-        i = 1;
-        let elem = document.getElementById("progreso-barra");
-        let width = 1;
-        let id = setInterval(frame, 10);
-        function frame() {
-        if (width >= 100) {
-            clearInterval(id);
-            i = 0;
-        } else {
-            width++;
-            elem.style.width = width + "%";
-        }
-        }
-    }
-}
     //TODO: crear una función que reciba la logica de los servidores front y back
     //TODO: crear una función que actualice la barra de carga (0, 10, 50, 100 => hacer animación de la transición de los numeros por medio de css y js)
     //TODO: crear evento para la transición de los numeros de la barra de carga

@@ -205,37 +205,6 @@ app.post('/cargarPagina', (req, res) => {
     // Envio la respuesta de éxito a 'index.ejs'
     res.sendStatus(200);
 });
-app.post('/crearPublicacion', (req, res) => {
-    const publicacion = req.body.publicacion;
-    //TODO: hacer condicional simple de la existencia de const publicacion, si existe se activa la barra de carga
-    if (publicacion) {
-        const fechaHoraActual = new Date();
-    
-        let publi = {
-            publicacion: publicacion,
-            fechaHora: fechaHoraActual,
-        }
-        let publiJSON = JSON.stringify(publi);
-        //TODO: SI FUNCIONA EL FETCH llegó al back, entonces se actualiza la barra de carga, si no funciona un catch (alerta)
-        fetch(`http://localhost:3000/crearPublicacion`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: publiJSON,
-        })
-        .then(recibir => recibir.json())
-        .then(recibido => {
-            //TODO: hacer alerta de exito para cuando se realiza la publicación 
-            //TODO: si devuelve del back un success hacer que la barra muestre 100%
-            if (recibido.ok) {
-                console.log(recibido);
-            } else {
-                console.log('error');
-            }
-        })
-    }
-});
 app.post('/actualizarPublicacion', (req, res) => {
     fetch('http://localhost:3000/actualizarPublicacion', { 
         method: 'POST',
@@ -250,6 +219,9 @@ app.post('/actualizarPublicacion', (req, res) => {
         cookies.set('publicacion', publicacionesArray, {path: '/' });
         cookieSession.publicacion = cookies.get('publicacion');
         console.log(cookieSession.publicacion);
+        res.status(200).json({
+            ok: true,
+        })
     })
 });
 app.post('/crearComentario', (req, res) => {
