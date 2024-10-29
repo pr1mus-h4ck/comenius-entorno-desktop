@@ -1,0 +1,9 @@
+#progreso-contenedor {
+    width: 100%;
+    background-color: grey;
+}
+    
+#progreso-barra {
+    height: 30px;
+    background-color: green;
+}

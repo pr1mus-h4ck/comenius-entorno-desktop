@@ -60,8 +60,8 @@
         </div> 
     </div>
 </main>
-<div class="progreso-contenedor"> <!--barra de carga de proceso-->
-    <div class="progreso-barra"></div>
+<div id="progreso-contenedor"> 
+    <div id="progreso-barra"></div>
 </div>
 <!-- TODO: los script separarlos a otra carpeta y llamarlos con src -->
 <script>
@@ -103,7 +103,24 @@
     *   - si llega al 100%, quiere decir que finalizo todo el proceso de publicación y se actualiza la pagina despues de unos *     breves segundos (> 5 segundos)
     */
     
-    const progresoBarra = document.querySelector('.progreso-barra');
+    let i = 0;
+    function move() {
+    if (i == 0) {
+        i = 1;
+        let elem = document.getElementById("progreso-barra");
+        let width = 1;
+        let id = setInterval(frame, 10);
+        function frame() {
+        if (width >= 100) {
+            clearInterval(id);
+            i = 0;
+        } else {
+            width++;
+            elem.style.width = width + "%";
+        }
+        }
+    }
+}
     //TODO: crear una función que reciba la logica de los servidores front y back
     //TODO: crear una función que actualice la barra de carga (0, 10, 50, 100 => hacer animación de la transición de los numeros por medio de css y js)
     //TODO: crear evento para la transición de los numeros de la barra de carga

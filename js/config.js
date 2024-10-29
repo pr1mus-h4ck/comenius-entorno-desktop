@@ -13,13 +13,6 @@ const cookies = new Cookies();
 // Invoco la librería 'cors' en la constante llamada igualmente 'cors'
 const cors = require('cors');
 
-const multer  = require('multer');
-const { start } = require('repl');
-const upload = multer({
-    dest: 'uploads/',
-    limits: { fileSize: 5 * 1024 * 1024 } //5MB
-});
-
 let cookieSession = {
     // Crear variable 'usuariosID' para guardar como cookie la ID del usuario en la DDBB
     usuariosID: cookies.get('usuarioID'),
@@ -55,31 +48,6 @@ app.use(express.urlencoded({
     extended: true
 }));
 
-app.use(express.json({
-    type: '*/*',
-    limit: '5mb',
-    strict: false
-}));
-
-app.use((req, res, next) => {
-    if (req.headers['content-type'] && req.headers['content-type'].includes('multipart/form-data')) {
-        return next();
-    }
-    try {
-        return express.json()(req, res, next);
-    } catch (err) {
-        console.error('Error parsing JSON request:', err);
-        res.status(400).send({ error: 'Invalid JSON request' });
-    }
-});
-
-app.use((err, req, res, next) => {
-    if (err instanceof SyntaxError && err.status === 400 && 'body' in err) {
-        return res.status(400).send({ error: 'Invalid JSON request' });
-    }
-    next(err);
-});
-
 app.use((req, res, next) => {
     res.setHeader('Cache-Control', 'no-store');
     next();
@@ -94,5 +62,4 @@ module.exports = {
     cookieSession,
     // Crear variable de envioOTP inicializasa en false indicando que aún no se envío el código OTP al usuario en su casilla de e-mail
     envioOTP: false,
-    upload
 }

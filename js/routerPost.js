@@ -208,27 +208,33 @@ app.post('/cargarPagina', (req, res) => {
 app.post('/crearPublicacion', (req, res) => {
     const publicacion = req.body.publicacion;
     //TODO: hacer condicional simple de la existencia de const publicacion, si existe se activa la barra de carga
-    const fechaHoraActual = new Date();
-
-    let publi = {
-        publicacion: publicacion,
-        fechaHora: fechaHoraActual,
+    if (publicacion) {
+        const fechaHoraActual = new Date();
+    
+        let publi = {
+            publicacion: publicacion,
+            fechaHora: fechaHoraActual,
+        }
+        let publiJSON = JSON.stringify(publi);
+        //TODO: SI FUNCIONA EL FETCH llegó al back, entonces se actualiza la barra de carga, si no funciona un catch (alerta)
+        fetch(`http://localhost:3000/crearPublicacion`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: publiJSON,
+        })
+        .then(recibir => recibir.json())
+        .then(recibido => {
+            //TODO: hacer alerta de exito para cuando se realiza la publicación 
+            //TODO: si devuelve del back un success hacer que la barra muestre 100%
+            if (recibido.ok) {
+                console.log(recibido);
+            } else {
+                console.log('error');
+            }
+        })
     }
-    let publiJSON = JSON.stringify(publi);
-    //TODO: SI FUNCIONA EL FETCH llegó al back, entonces se actualiza la barra de carga, si no funciona un catch (alerta)
-    fetch(`http://localhost:3000/crearPublicacion`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: publiJSON,
-    })
-    .then(recibir => recibir.json())
-    .then(recibido => {
-        //TODO: hacer alerta de exito para cuando se realiza la publicación 
-        //TODO: si devuelve del back un success hacer que la barra muestre 100%
-        console.log(recibido);
-    })
 });
 app.post('/actualizarPublicacion', (req, res) => {
     fetch('http://localhost:3000/actualizarPublicacion', { 
@@ -279,16 +285,6 @@ app.post('/actualizarComentario', (req, res) => {
         const comentariosArray = recibido.comentarios;
         cookies.set('comentario', comentariosArray, {path: '/' });
         cookieSession.comentario = cookies.get('comentario');
-    })
-});
-app.post('/cloudinaryPrueba', upload.single('image'), (req, res) => {
-    console.log('se hizo un post');
-    let objeto = req.body;
-    let imagen = JSON.stringify(objeto);
-        // Envío en método POST al servidor con los datos del JSON
-        fetch(`http://localhost:3000/cloudinaryPrueba`, {
-            method: 'Post',
-            body: imagen
     })
 });
 app.post('/zoomPrueba', (req, res) => {
