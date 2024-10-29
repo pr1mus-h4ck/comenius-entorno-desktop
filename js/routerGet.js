@@ -64,10 +64,10 @@ let sesiones = {
             // Verificar si el rol existe en menuRol antes de pasarlo
             if (menuRol[sesiones.rol]) {
                 // res.render('zoom', {sesiones, almacenamiento});
-                res.render('panel_de_clase', {publicaciones, comentarios, sesiones}); 
+                // res.render('panel_de_clase', {publicaciones, comentarios, sesiones}); 
                 // TODO: subir en el res.render la logica del menu.rol
                 // res.render('trabajo');
-                // funciones.index(req, res, sesiones, menuRol[sesiones.rol], datosRecibidos);
+                funciones.index(req, res, sesiones, menuRol[sesiones.rol], datosRecibidos);
             }
         } else {
             // Mostrar OTP
