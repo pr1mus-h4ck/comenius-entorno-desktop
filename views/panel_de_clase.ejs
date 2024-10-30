@@ -31,35 +31,12 @@
                 <input type="submit" value="enviar"> 
             </form>
             <!--TODO: HACER UN EVENTO en el div para que actualice cada 5 segundos el contenido de dicho div-->
-            <div id="listaPublicacion">
-                <% if (publicaciones.publicacion) { %>
-                    <% publicaciones.publicacion.forEach(publicacion => { %>
-                        <section>
-                            <h1>
-                                <%= publicacion.content %>
-                            </h1>
-                            <!-- TODO: hacer lógica con EJS los ids de los formularios para comantar cada publicación creada -->
-                            <div id="listaComentario">
-                                <% if (comentarios.comentario) { %>
-                                    <% comentarios.comentario.forEach(comentario => { %>
-                                        <article>
-                                            <%= comentario.content %>
-                                        </article>
-                                    <% }); %>
-                                <% } %>
-                            </div>
-                            <form action="/crearComentario" method="POST">
-                                <input type="text" id="" placeholder="Escribir comentario..." name="comentario">
-                                <input type="submit" value="enviar"> 
-                            </form>
-                        </section>
-                    <% }); %>
-                <% } %>
-            </div> 
+            <div id="listaPublicacion"></div> 
         </div> 
     </div>
 </main>
 <!-- TODO: los script separarlos a otra carpeta y llamarlos con src -->
+<!-- Crear Publicación -->
 <script>
     function enviarPublicacion(event) {
         event.preventDefault(); // Evita el envío del formulario por defecto
@@ -82,25 +59,26 @@
             .then(recibido => {
                 // TODO: Reemplazar esta recarga con un 'alert'
                 if (recibido.ok) {
-                    console.log(recibido);
                     // Recarga la página después de recibir la respuesta exitosa
-                    location.reload(); 
+                    actualizarPublicacion(); 
+                    actualizarComentario();
                 } else {
-                    console.log('error');
-                    // Muestra un mensaje de error al usuario
+                    console.log('No se pudo enviar la publicación');
                 }
             })
             .catch(error => {
-                console.error('Error creando publicación:', error);
                 // Muestra un mensaje de error al usuario
+                console.error('Error al crear publicación:', error);
             });
         }
+        document.getElementById('publicacion').value = '';
     }
 </script>
+<!-- Fin de Crear Publicación -->
+<!-- Actualizar Publicaciones -->
 <script>
-    const listaPublicacion = document.getElementById('listaPublicacion');
-    function actualizarPublicacion() { 
-        fetch('/actualizarPublicacion', { 
+    function actualizarPublicacion(index) {
+        fetch('http://localhost:3000/actualizarPublicacion', { 
             method: 'POST', 
             headers: { 
                 'Content-Type': 'application/json'
@@ -108,18 +86,76 @@
         })
         .then(recibir => recibir.json())
         .then(recibido => {
-            if (recibido.ok) {
-                location.reload('#listaPublicacion');
-            }
+            const listaPublicacion = document.getElementById('listaPublicacion');
+            listaPublicacion.innerHTML = ''; // Limpia el contenido actual
+            recibido.publicaciones.forEach(publicacion => {
+                const listaPublicacion = document.getElementById('listaPublicacion');
+                listaPublicacion.innerHTML = ''; // Limpia el contenido actual
+                recibido.publicaciones.forEach(publicacion => {
+                    // Crea el HTML para cada publicación (sin comentarios)
+                    const html = `
+                        <section>
+                            <h1>${publicacion.content}</h1>
+                            <article id="listaComentario"></article>
+                            <form action="/crearComentario" method="POST" onsubmit="enviarComentario(event)">
+                                <input type="text" id="comentario" placeholder="Escribir comentario..." name="comentario">
+                                <input type="submit" value="enviar"> 
+                            </form>
+                        </section>
+                    `;
+                    // Agrega el HTML al contenedor
+                    listaPublicacion.innerHTML += html;
+                });
+            });
         })
     }
-    //FIXME: corregir el setinterval
-    setInterval(actualizarPublicacion, 5000);
+    // setInterval(actualizarPublicacion, 5000);
+    actualizarPublicacion();
+    actualizarComentario();
 </script>
+<!-- Fin de Actualizar Publicaciones -->
+<!-- Crear Comentarios -->
 <script>
-    const listaComentario = document.getElementById('listaComentario');
+    function enviarComentario(event) {
+        event.preventDefault(); // Evita el envío del formulario por defecto
+        const comentario = document.querySelector('input[name="comentario"]').value;
+        if (comentario !== '') {
+            const fechaHoraActual = new Date();
+            let publi = {
+                comentario: comentario,
+                fechaHora: fechaHoraActual,
+            }
+            const publiJSON = JSON.stringify(publi);
+            fetch(`http://localhost:3000/crearComentario`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: publiJSON,
+            })
+            .then(recibir => recibir.json())
+            .then(recibido => {
+                // TODO: Reemplazar esta recarga con un 'alert'
+                if (recibido.ok) {
+                    // Recarga la página después de recibir la respuesta exitosa
+                    actualizarComentario(); 
+                } else {
+                    console.log('No se pudo enviar el comentario');
+                }
+            })
+            .catch(error => {
+                // Muestra un mensaje de error al usuario
+                console.error('Error al crear comentario:', error);
+            });
+        }
+        document.getElementById('comentario').value = '';
+    }
+</script>
+<!-- Fin de Crear Comentarios -->
+<!-- Actualizar Comentarios -->
+<script>
     function actualizarComentario() { 
-        fetch('/actualizarComentario', { 
+        fetch('http://localhost:3000/actualizarComentario', { 
             method: 'POST', 
             headers: { 
                 'Content-Type': 'application/json'
@@ -127,24 +163,23 @@
         })
         .then(recibir => recibir.json())
         .then(recibido => {
-            console.log(recibido);
+        const listaComentario = document.getElementById('listaComentario');
+            listaComentario.innerHTML = ''; // Limpia el contenido actual
+            recibido.comentarios.forEach(comentario => {
+                const listaComentario = document.getElementById('listaComentario');
+                listaComentario.innerHTML = ''; // Limpia el contenido actual
+                recibido.comentarios.forEach(comentario => {
+                    // Crea el HTML para cada publicación (sin comentarios)
+                    const html = `<p>${comentario.content}</p>`;
+                    // Agrega el HTML al contenedor
+                    listaComentario.innerHTML += html;
+                });
+            });
         })
     }
-    //FIXME: corregir el setinterval
-    setInterval(actualizarComentario, 5000);
+    // setInterval(actualizarComentario, 5000);
+    actualizarComentario();
 </script>
-<script> 
-    /* TODO: 
-    *   - verificar primero si el servidor del back funciona
-    *   - si el servidor funciona le devuele el success al front para activar la barra de carga
-    *   - cuando recibe el .ok, empieza a hacer la peticion de crearPublicacion/crearComentario
-    *   - debe llenar la barra de carga al ir al routerPost del front, al routerPost del back
-    *   - si llega al 100%, quiere decir que finalizo todo el proceso de publicación y se actualiza la pagina despues de unos *     breves segundos (> 5 segundos)
-    */
-    //TODO: crear una función que reciba la logica de los servidores front y back
-    //TODO: crear una función que actualice la barra de carga (0, 10, 50, 100 => hacer animación de la transición de los numeros por medio de css y js)
-    //TODO: crear evento para la transición de los numeros de la barra de carga
-    //TODO: hacer la función de la activación de la barra
-</script>
+<!-- Fin de Actualizar Comentarios -->
 </body>
 </html>

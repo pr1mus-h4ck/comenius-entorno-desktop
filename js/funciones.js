@@ -34,10 +34,6 @@ function getCookies (objeto, cookies) {
     objeto.zoomFirma =  cookies.get('zoomFirma');
     // Guardar la cookie de item
     objeto.clientId =  cookies.get('clientId');
-    // Guardar la cookie de item
-    objeto.publicacion =  cookies.get('publicacion');
-    // Guardar la cookie de item
-    objeto.publicacion =  cookies.get('comentario');
     return objeto;
 }
 function eliminarCookies(cookies) {
@@ -45,6 +41,7 @@ function eliminarCookies(cookies) {
     cookies.remove('usuarioID', { path: '/' });
     // Eliminar la cookie de la ID de la sesión
     cookies.remove('sessionID', { path: '/' });
+    // Eliminar la cookie de nombre
     cookies.remove('nombre', { path: '/' });
     // Eliminar la cookie de si se requiere OTP o no
     cookies.remove('verificacion', { path: '/' });
@@ -62,10 +59,6 @@ function eliminarCookies(cookies) {
     cookies.remove('zoomFirma', {path: '/' });
     // Eliminar la cookie de item de menú del usuario
     cookies.remove('clientId', {path: '/' });
-    // Eliminar la cookie de item de menú del usuario
-    cookies.remove('publicacion', {path: '/' });
-    // Eliminar la cookie de item de menú del usuario
-    cookies.remove('comentario', {path: '/' });
 }
 module.exports = {
     setCookies: setCookies,
