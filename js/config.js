@@ -40,6 +40,8 @@ let cookieSession = {
     comision: cookies.get('comision'),
     // Crear variable de 'enlace' para ingresar a las distintas secciones de la comision
     enlace: cookies.get('enlace'),
+    // Crear variable de 'trabajo' para ingresar a los distintas trabajos publicados por el instructor
+    trabajo: cookies.get('trabajo'),
 }
 // Hago uso de cors en este archivo 'index.js'. Se agrega antes de cualquier controlador de ruta.
 app.use(cors());

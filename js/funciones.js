@@ -63,6 +63,8 @@ function eliminarCookies(cookies) {
     cookies.remove('comision', { path: '/' });
     // Eliminar la cookie de enlace, secciones de la comison
     cookies.remove('enlace', { path: '/' });
+    // Eliminar la cookie de trabajo, seccion de la publicación hecha por el instructor
+    cookies.remove('trabajo', { path: '/' });
 }
 module.exports = {
     setCookies: setCookies,

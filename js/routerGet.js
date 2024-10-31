@@ -13,6 +13,7 @@ app.get('/', (req, res) => {
         enlace: cookieSession.enlace,
         comision: cookieSession.comision,
         nombre: cookieSession.nombre,
+        trabajo: cookieSession.trabajo,
     }
     // Crear un objeto para el proceso de OTP donde se verifica si se envío el correo al usuario con el código pertinente
     let procesoOTP = {

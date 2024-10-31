@@ -8,7 +8,7 @@
 <!--TODO: NO TOCAR EL CSS DE ESTE DOCUMENTO HASTA QUE FINALIZE LA LOGICA-->
 <body>
     <!--el menu insertarlo en materia.ejs--> 
-    <!--TODO: CREAR BOTON DE SUBIR TRABAJO (ES UN ICONO)-->
+    <!-- TODO: Crear un botón para que aparezca el formulario para la creación de Trabajo pero... el botón debe desaparecer al ingresar a un Trabajo específico -->
     <div> 
         <div></div> 
         <div> 
@@ -16,13 +16,19 @@
             <div></div> 
             <div></div> 
     </div>
-    <div><!--Lista de integrantes-->
+    <!-- FIXME: Pensar sobre el destino de la sección duplicado de 'Integrantes' en deiversos archivos  -->
+    <!-- Lista de Integrantes de la comisión -->
+    <div>
         <h3>Integrantes</h3>
         <div></div>
-    </div> 
-    <!--TODO: CREAR FORMULARIO COMPLETO PARA LA SUBIDA DE TRABAJOS CON UN CONDICIONAL SIMPLE PARA EL ROL INSTRUCTOR-->
-    <!--TODO: las publicaciones consistiran con la foto de perfil del instructor, nombre del instructor, titulo del trabajo publicado, resumen con limitacion de CARACTERES, fecha y hora de la publicacion-->
-    <!--TODO: crear una condicion simple para agregar icono de la existencia de archivos en el caso que en la publicacion haya archivos-->
-    <div></div>
+    </div>
+    <!-- Fin de Lista de Integrantes de la comisión -->
+    <div>
+        <% if (sesiones.trabajo) { %>
+            <%- include(`${sesiones.trabajo}.ejs`) %>
+        <% } else { %>
+            <%- include('listaTrabajo.ejs') %>
+        <% } %>
+    </div>
 </body>
 </html>

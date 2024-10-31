@@ -1,0 +1,33 @@
+<!-- Formulario para crear Trabajos -->
+<form method="post" onsubmit="crearTrabajos()">
+    <!-- Título de trabajo -->
+    <div>
+        <label for="titulo">Título</label>
+        <input type="text" name="titulo" id="titulo" placeholder="Ingrese aquí el título...">
+    </div>
+    <!-- Fin de Título de trabajo -->
+    <!-- Contenido de trabajo -->
+    <div>
+        <label for="contenido">Contenido</label>
+        <textarea name="contenido" id="contenido" placeholder="Ingrese aquí el contenido..."></textarea>
+    </div>
+    <!-- Fin de Contenido de trabajo -->
+    <!-- Input para subir archivo de formato imágenes y diversos documentos -->
+    <div>
+        <label for="archivo"></label>
+        <input type="file" name="archivo" id="archivo" accept="image/*, application/pdf, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-powerpoint, application/vnd.openxmlformats-officedocument.presentationml.presentation" multiple>
+    </div>
+    <!-- Fin de  Input para subir archivo de formato imágenes y diversos documentos -->
+    <!-- Botón de Crear Trabajo -->
+    <div>
+        <input type="submit" value="Crear Trabajo">
+    </div>
+    <!-- Fin de Botón de Crear Trabajo -->
+</form>
+<!-- Fin de Formulario para crear Trabajos -->
+<!-- TODO: Aquí se listarán los trabajos publicados por el profesor -->
+<!-- TODO: las publicaciones consistiran con la foto de perfil del instructor, nombre del instructor, titulo del trabajo publicado, resumen con limitacion de CARACTERES, fecha y hora de la publicacion -->
+<!-- TODO: crear una condicion simple para agregar icono de la existencia de archivos en el caso que en la publicacion haya archivos -->
+<!-- Lista de Trabajos publicados -->
+<div></div>
+<!-- Fin de Lista de Trabajos publicados -->
