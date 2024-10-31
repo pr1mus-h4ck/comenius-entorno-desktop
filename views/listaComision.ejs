@@ -1,0 +1,36 @@
+<!-- Lista de Comisiones inscriptas -->
+<div id="listaComision"></div> 
+<!-- Fin de Lista de Comisiones inscriptas -->
+<!-- Actualizar Publicaciones -->
+<script>
+    function actualizarListaComision() {
+        fetch('http://localhost:3000/actualizarListaComision', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(recibir => recibir.json())
+        .then(recibido => {
+            const listaComision = document.getElementById('listaComision');
+            // Limpia el contenido actual
+            listaComision.innerHTML = '';
+            recibido.comisiones.forEach(comision => {
+                const listaComision = document.getElementById('listaComision');
+                // Limpia el contenido actual
+                listaComision.innerHTML = '';
+                recibido.comisiones.forEach(comision => {
+                    // Crea el HTML para cada comision
+                    const html = `
+                        <h1>${comision.content}</h1>
+                        <button type="submit" onclick="ingresarComisionClick('${comision.content}')">Ingresar</button>
+                    `;
+                    // Agrega el HTML al contenedor
+                    listaComision.innerHTML += html;
+                });
+            });
+        })
+    }
+    actualizarListaComision();
+</script>
+<!-- Fin de Actualizar Publicaciones -->

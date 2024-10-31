@@ -1,6 +1,6 @@
-const { app, cookies, cookieSession, upload } = require('./config');
+const {app, cookies, cookieSession} = require('./config');
 const config = require('./config');
-const {inputNombres, menuRol} = require('./array');
+const {inputNombres} = require('./array');
 const funciones = require('./funciones');
 let datosRecibidos = '';
 app.post('/login', (req, res) => {
@@ -197,12 +197,35 @@ app.post('/cancelar-autenticacion', (req, res) => {
     })
 });
 app.post('/cargarPagina', (req, res) => {
-    //console.log('Hicieron un POST en /cargarPagina');
-    // Creo la Cookie 'item' con el valor enviado desde 'index.ejs'
+    // Crea la Cookie 'item' con el valor enviado desde 'index.ejs'
     cookies.set('item', req.body.menu, {path: '/' });
-    // Guardo la Cookie 'item' creada
+    // Guarda la Cookie 'item' creada
     cookieSession.item = cookies.get('item');
-    // Envio la respuesta de éxito a 'index.ejs'
+    // Elimina la Cookie 'comision'
+    cookies.remove('comision', {path: '/' });
+    // Guarda la Cookie 'comision' sin valor
+    cookieSession.comision = cookies.get('comision');
+    // Elimina la Cookie 'enlace'
+    cookies.remove('enlace', {path: '/' });
+    // Guarda la Cookie 'enlace' sin valor
+    cookieSession.enlace = cookies.get('enlace');
+    // Envia la respuesta de éxito a 'index.ejs'
+    res.sendStatus(200);
+});
+app.post('/ingresarComision', (req, res) => {
+    // Crea la Cookie 'comision' con el valor enviado desde 'panel_materias.ejs'
+    cookies.set('comision', req.body.comision, {path: '/' });
+    // Guarda la Cookie 'comision' creada
+    cookieSession.comision = cookies.get('comision');
+    // Envia la respuesta de éxito a 'index.ejs'
+    res.sendStatus(200);
+});
+app.post('/cargarSeccion', (req, res) => {
+    // Crea la Cookie 'enlace' con el valor enviado desde 'materia.ejs'
+    cookies.set('enlace', req.body.menu, {path: '/' });
+    // Guarda la Cookie 'enlace' creada
+    cookieSession.enlace = cookies.get('enlace');
+    // Envia la respuesta de éxito a 'materia.ejs'
     res.sendStatus(200);
 });
 app.post('/zoomPrueba', (req, res) => {

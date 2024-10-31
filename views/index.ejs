@@ -45,19 +45,21 @@
     <script>
         // Función para manejar el clic en un elemento del menú
         function manejarMenuClick(item) {
-            // Guardo el valor de 'item' en la variable datos. Con 'menu:' le cambio el nombre item a menu
-            datos = { menu: item };
-            // Hace una petición en '/cargarPagina' con el método POST en el mismo puerto que corre el front, enviando 'datos' en formato JSON
-            fetch('/cargarPagina', {
+            const dato = {
+                menu: item,
+            }
+            const datoJson = JSON.stringify(dato);
+            // Hace una petición en '/cargarPagina' con el método POST en el mismo puerto que corre el front, enviando 'dato' en formato JSON
+            fetch(`/cargarPagina`, {
                 method: 'Post',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(datos)
+                body: datoJson,
             })
             .then(respuesta => {
                 // Si la respuesta es correcta
-                if (respuesta.ok) {
+                if (respuesta) {
                     // Cargar la ventana en la ruta '/'
                     window.location.href = '/';
                 } else {

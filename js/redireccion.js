@@ -58,9 +58,9 @@ function redireccionarLogin(req, res, datosRecibidos) {
     }
     // Fin de Lógica de Renderización
 }
-function redireccionarIndex(req, res, sesiones, menuRol) {
+function redireccionarIndex(req, res, sesiones, menuRol, menuMateria, almacenamiento) {
     // Renderizar a Index
-    res.render('index', {sesiones, menu: menuRol});
+    res.render('index', {sesiones, menu: menuRol, comision : menuMateria, almacenamiento});
 }
 function redireccionarOTP(req, res, sesiones, procesoOTP, datosRecibidos) {
     // Toda la lógica de las ventanas emergentes

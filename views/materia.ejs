@@ -1,3 +1,17 @@
-<!-- TODO:  El menú [Panel de la Clase; Video Clase; Tareas Asignadas; Asistencias] | Descripción de la Comosión o Materia | Rango de Horario  -->
-<!-- TODO: Habrá cuatro include: [Panel de la Clase], [Video Clase], [Tareas Asignadas], [Asistencia], [Menú, por defecto] -->
-<!-- TODO: En cada vista deberá contar con botones para retroceder pasos; Y en cualquier vista del menu podria acceder a una seccion de la materia por un menu desplegable -->
+<h1><%= sesiones.comision %></h1>
+<!-- Iteración del array 'comision' -->
+<% if (comision) { %>
+    <ul>
+        <% comision.forEach(item => { %>
+            <li><a href="#" onclick="manejarMateriaClick('<%= item %>')" title="<%= item %>"><%= item %></a></li>
+        <% }) %>
+    </ul>
+<% } %>
+<!-- Fin de Iteración del array 'comision' -->
+<!-- Contenido de cada item seleccionado -->
+<% if (sesiones.enlace) { %>
+    <%- include(`${sesiones.enlace}.ejs`) %>
+<% } else { %>
+    <%- include('portada.ejs') %>
+<% } %>
+<!-- Fin de Contenido de cada item seleccionado -->

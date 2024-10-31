@@ -5,8 +5,14 @@ const menuRol = {
     alumno: ['inicio', 'panel_materias'],
     instructor: ['inicio', 'panel_materias'],
 };
+// Array del menú de la interfaz de la app con sus respectivos roles en la sección de las comisiones
+const menuMateria = {
+    alumno: ['portada', 'panel_de_clase', 'videoclase', 'trabajos'],
+    instructor: ['portada', 'panel_de_clase', 'videoclase', 'trabajos'],
+};
 // Exporto como módulos estos arrays
 module.exports = {
     inputNombres: inputNombres,
-    menuRol: menuRol
+    menuRol: menuRol,
+    menuMateria: menuMateria,
 }

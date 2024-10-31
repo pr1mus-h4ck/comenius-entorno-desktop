@@ -51,14 +51,18 @@ function eliminarCookies(cookies) {
     cookies.remove('rol', { path: '/' });
     // Eliminar la cookie de item de menú del usuario
     cookies.remove('item', {path: '/' });
-    // Eliminar la cookie de item de menú del usuario
+    // Eliminar la cookie de id de la llamada de zoom
     cookies.remove('id', {path: '/' });
-    // Eliminar la cookie de item de menú del usuario
-    cookies.remove('password', {path: '/' })
-    // Eliminar la cookie de item de menú del usuario
-    cookies.remove('zoomFirma', {path: '/' });
-    // Eliminar la cookie de item de menú del usuario
-    cookies.remove('clientId', {path: '/' });
+    // Eliminar la cookie de la contraseña de la llamda de zoom
+    cookies.remove('password', { path: '/' })
+    // Eliminar la cookie de la firma de autenticacion a la llamda de zoom
+    cookies.remove('zoomFirma', { path: '/' });
+    // Eliminar la cookie del id del cliente para unirse a la llamada de zoom
+    cookies.remove('clientId', { path: '/' });
+    // Eliminar la cookie de comision
+    cookies.remove('comision', { path: '/' });
+    // Eliminar la cookie de enlace, secciones de la comison
+    cookies.remove('enlace', { path: '/' });
 }
 module.exports = {
     setCookies: setCookies,

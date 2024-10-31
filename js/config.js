@@ -18,7 +18,7 @@ let cookieSession = {
     usuariosID: cookies.get('usuarioID'),
     // Crear variable 'sessionsID' para guardar como cookie la ID de la sesión creada en el BACK-END
     sessionsID: cookies.get('sessionID'),
-    
+    // Crear variabe 'nombre' para guardar como cookie el nombre del usuario
     nombre: cookies.get('nombre'),
     // Crear variable de 'verificacionOTP' para guardar como cookie el acceso a OTP o index
     verificacionOTP: cookies.get('verificacion'),
@@ -28,27 +28,29 @@ let cookieSession = {
     rol: cookies.get('rol'),
     // Craar variable de 'item' para guardar como cookie el item seleccionado del menu para renderizar dicha página en el index.ejs
     item: cookies.get('item'),
-
+    // Crear variable de 'id' para guardar como cookie el ID de zoom para iniciar la videollamda
     id: cookies.get('id'),
-
+    // Crear variable de 'password' para guardar como cookie la contraseña para iniciar con el ID de zoom
     password: cookies.get('password'),
-    
+    // Crear variable de 'zoomfirma' para autenticar al usuario que ingresa a la llamada de zoom
     zoomFirma: cookies.get('zoomFirma'),
-
+    // Crear variable de 'clienteId' para autenticar el cliente de zoom
     clientId: cookies.get('clientId'),
+    // Crear variable de 'comision' para ingrear a las distintas comisiones inscriptas
+    comision: cookies.get('comision'),
+    // Crear variable de 'enlace' para ingresar a las distintas secciones de la comision
+    enlace: cookies.get('enlace'),
 }
 // Hago uso de cors en este archivo 'index.js'. Se agrega antes de cualquier controlador de ruta.
 app.use(cors());
-
 app.use(express.urlencoded({
     extended: true
 }));
-
+app.use(express.json());
 app.use((req, res, next) => {
     res.setHeader('Cache-Control', 'no-store');
     next();
 });
-
 app.use('/recursos', express.static('public'));
 module.exports = {
     app,
