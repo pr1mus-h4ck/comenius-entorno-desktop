@@ -1,5 +1,5 @@
 <!-- Formulario para crear Trabajos -->
-<form method="post" onsubmit="crearTrabajos()">
+<form method="post" onsubmit="crearTrabajos(event)" enctype="multipart/form-data">
     <!-- Título de trabajo -->
     <div>
         <label for="titulo">Título</label>
@@ -31,3 +31,24 @@
 <!-- Lista de Trabajos publicados -->
 <div></div>
 <!-- Fin de Lista de Trabajos publicados -->
+<script>
+    function crearTrabajos(event) {
+        event.preventDefault();
+        const titulo = document.querySelector('input[name="titulo"]').value;
+        const contenido = document.querySelector('textarea[name="contenido"]').value;
+        const archivo = document.querySelector('input[name="archivo"]').files;
+        if (titulo !== '' && contenido !== '') {
+            const formData = new FormData();
+            formData.append('titulo', titulo);
+            formData.append('contenido', contenido);
+            formData.append('archivo', archivo[0]);
+            fetch('http://localhost:3000/crearTrabajos', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                },   
+                body: formData,
+            })
+        }
+    }
+</script>
