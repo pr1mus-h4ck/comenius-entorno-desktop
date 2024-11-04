@@ -10,7 +10,7 @@
 <body>
     <h1>Index</h1>
     <!-- <p>La sesión iniciada <%= sesiones.sesion %></p> -->
-    <!-- Iteración del array 'menu' -->
+    <!-- Menú vertical -->
     <% if (menu) { %>
         <ul>
             <% menu.forEach(item => { %>
@@ -18,7 +18,15 @@
             <% }) %>
         </ul>
     <% } %>
-    <!-- Fin de Iteración del array 'menu' -->
+    <!-- Fin de Menú vertical -->
+    <!-- Menú horizontal -->
+    <div>
+        <!--TODO: HACER UNA FUNCION DE JS PARA ACTUALIZAR EL AVISO DE LAS NUEVAS NOTIFICACIONES CON UN COLOR --> 
+        <!--TODO: JUSTIN Y MAURO AL BOTON DE NOTIFICACIONES SI LO VAN A MODIFICAR UTILICEN LAS CLASES SOLAMENTE,LOS NAMES Y LOS IDS LOS RESERVAMOS PARA NOSOTROS -->
+        <button>Notificaciones</button> 
+    </div>
+    <!-- Fin de Menú horizontal -->
+
     <!-- Contenido de cada item seleccionado -->
     <% if (sesiones.item) { %>
         <%- include(`${sesiones.item}.ejs`) %>
