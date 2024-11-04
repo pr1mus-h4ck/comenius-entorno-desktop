@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<form method="post" onsubmit="crearTrabajos(); return false;">
+<form method="post" onsubmit="return crearTrabajos();">
     <div>
         <label for="titulo">Título</label>
         <input type="text" name="titulo" id="titulo" placeholder="Ingrese aquí el título..." required>
@@ -21,7 +21,7 @@
 
     <div>
         <label for="archivo">Archivos</label>
-        <input type="text" id="url-archivo" placeholder="URL del archivo subido..." readonly>
+        <input type="text" id="url-archivo" placeholder="URL del archivo subido..." readonly required>
         <button type="button" id="btn-subir-archivo">Subir Archivo</button>
     </div>
 
@@ -29,8 +29,6 @@
         <input type="submit" value="Crear Trabajo">
     </div>
 </form>
-
-<div></div>
 
 <script>
 'use strict';
@@ -45,7 +43,7 @@ let widgetCloudinary = cloudinary.createUploadWidget({
     if (!error && result && result.event === "success") {
         // Captura la URL del archivo subido
         urlArchivoInput.value = result.info.secure_url;
-        console.log("Archivo subido: ", result.info.secure_url);
+        // console.log("Archivo subido: ", result.info.secure_url);
     }
 });
 
@@ -55,16 +53,36 @@ btnSubirArchivo.addEventListener('click', () => {
 }, false);
 
 function crearTrabajos() {
-    const titulo = document.getElementById("titulo").value;
-    const contenido = document.getElementById("contenido").value;
     const urlArchivo = document.getElementById("url-archivo").value;
 
-    // Muestra los datos en la consola
-    console.log("Título:", titulo);
-    console.log("Contenido:", contenido);
-    console.log("URL del archivo:", urlArchivo);
+    // Crear un objeto JSON solo con la URL
+    const data = { urlArchivo: urlArchivo };
 
-    // Aquí puedes agregar lógica adicional si lo deseas
+    fetch('http://localhost:3000/crearTrabajos', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json' // Especificar que estamos enviando JSON
+        },
+        body: JSON.stringify(data), // Convertir el objeto a JSON
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Error en la solicitud');
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Limpiar campos de formulario
+        urlArchivoInput.value = '';
+        document.getElementById("titulo").value = '';  
+        document.getElementById("contenido").value = '';  
+        
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+
+    return false; // Evitar que se recargue la página
 }
 </script>
 
