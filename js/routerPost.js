@@ -2,6 +2,7 @@ const {app, cookies, cookieSession} = require('./config');
 const config = require('./config');
 const {inputNombres} = require('./array');
 const funciones = require('./funciones');
+const { default: Cookies } = require('universal-cookie');
 let datosRecibidos = '';
 app.post('/login', (req, res) => {
     // Si existe sesión, redireccionar a la página principal
@@ -229,31 +230,36 @@ app.post('/cargarSeccion', (req, res) => {
     res.sendStatus(200);
 });
 app.post('/zoomPrueba', (req, res) => {
-     //console.log(req.body);
-    let zoomPrueba = req.body;
-        let zoom = JSON.stringify(zoomPrueba);
-        fetch(`http://localhost:3000/zoomPrueba`, {
-            method: 'Post',
-            headers: {
-                'Content-Type': 'application/json'
-                },
-            body: zoom
-        }).then(recibir => recibir.json())
-        .then(recibido => {
+    const fechaHoraActual = new Date();
+    const datosEncuentro = {
+        topic: cookieSession.comision,
+        startTime: fechaHoraActual,
+        duration: 60
+    }
+    const JSONdatosEncuentro = JSON.stringify(datosEncuentro);
+    fetch(`http://localhost:3000/zoomPrueba`, {
+        method: 'Post',
+        headers: {
+            'Content-Type': 'application/json'
+            },
+        body: JSONdatosEncuentro,
+    })
+    .then(recibir => recibir.json())
+    .then(recibido => {
 
-            cookies.set('nombre', 'Mateo' , {path: '/' });
-            cookies.set('id', recibido.id, {path: '/' });
-            cookies.set('password', recibido.password, {path: '/' });
-            cookies.set('zoomFirma', recibido.zoomFirma, {path: '/' });
-            cookies.set('clientId', recibido.clientId, {path: '/' });
+        cookies.set('nombre', 'Mateo' , {path: '/' });
+        cookies.set('id', recibido.id, {path: '/' });
+        cookies.set('password', recibido.password, {path: '/' });
+        cookies.set('zoomFirma', recibido.zoomFirma, {path: '/' });
+        cookies.set('clientId', recibido.clientId, {path: '/' });
 
-            cookieSession.id = cookies.get('id');
-            cookieSession.password = cookies.get('password');
-            cookieSession.zoomFirma = cookies.get('zoomFirma');
-            cookieSession.clientId = cookies.get('clientId');
-            cookieSession.nombre = cookies.get('nombre');
+        cookieSession.id = cookies.get('id');
+        cookieSession.password = cookies.get('password');
+        cookieSession.zoomFirma = cookies.get('zoomFirma');
+        cookieSession.clientId = cookies.get('clientId');
+        cookieSession.nombre = cookies.get('nombre');
 
-            res.sendStatus(200);
-    })  
+        res.sendStatus(200);
+    })
 });
 module.exports = { routerPost: app }

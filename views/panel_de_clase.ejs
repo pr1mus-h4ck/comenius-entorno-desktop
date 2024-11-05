@@ -1,37 +1,15 @@
 <!-- Panel de Clase -->
-<div>
-    <!--Sección Informativa del Panel de la Clase -->
-    <div>
-        <div></div> <!--Titulo de la materia, ej: Base de datos-->
-        <!-- Información de la Comisión -->
-        <div>
-            <!-- Comision y Turno de la Comisión-->
-            <div></div> 
-            <!-- Fin de la Comision y Turno de la Comisión-->
-            <!-- Días y Horarios de la Comisión -->
-            <div></div>
-            <!-- Fin de Días y Horarios de la Comisión -->
-            <!-- Nombres de Coordinador de Carrera e Instructor de la Comisión -->
-            <div></div>
-            <!-- Fin de Nombres de Coordinador de Carrera e Instructor de la Comisión -->
-        </div>
-        <!-- Fin de Información de la Comisión -->
-    </div>
-    <!--Sección Informativa del Panel de la Clase -->
-    <!-- Sección Publicación -->
-    <div class="publicacion">
-        <!-- Formulario para la Creación de Publicación -->
-        <form action="/crearPublicacion" method="POST" onsubmit="enviarPublicacion(event)">
-            <input type="text" id="publicacion" placeholder="Crear publicación" name="publicacion">
-            <input type="submit" value="enviar"> 
-        </form>
-        <!-- Fin de Formulario para la Creación de Publicación -->
-        <!-- Lista de Publicación -->
-        <div id="listaPublicacion"></div>
-        <!-- Fin de Lista de Publicación -->
-    </div> 
-    <!-- Fin de Sección Publicación -->
-</div>
+<div class="publicacion">
+    <!-- Formulario para la Creación de Publicación -->
+    <form action="/crearPublicacion" method="POST" onsubmit="enviarPublicacion(event)">
+        <input type="text" id="publicacion" placeholder="Crear publicación" name="publicacion">
+        <input type="submit" value="enviar"> 
+    </form>
+    <!-- Fin de Formulario para la Creación de Publicación -->
+    <!-- Lista de Publicación -->
+    <div id="listaPublicacion"></div>
+    <!-- Fin de Lista de Publicación -->
+</div> 
 <!-- Fin de Panel de Clase -->
 <!-- TODO: los script separarlos a otra carpeta y llamarlos con src -->
 <!-- Crear Publicación -->
