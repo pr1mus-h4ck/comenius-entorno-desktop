@@ -1,24 +1,18 @@
-<!--TODO: NO TOCAR EL CSS DE ESTE DOCUMENTO HASTA QUE FINALIZE LA LOGICA-->
-<!--el menu insertarlo en materia.ejs--> 
 <!-- TODO: Crear un botón para que aparezca el formulario para la creación de Trabajo pero... el botón debe desaparecer al ingresar a un Trabajo específico -->
+<!-- Trabajos -->
 <div> 
     <div></div> 
     <div> 
         <div></div> 
         <div></div> 
         <div></div> 
+    </div>
+    <div>
+        <% if (sesiones.trabajo) { %>
+            <%- include(`${sesiones.trabajo}.ejs`) %>
+        <% } else { %>
+            <%- include('listaTrabajo.ejs') %>
+        <% } %>
+    </div>
 </div>
-<!-- FIXME: Pensar sobre el destino de la sección duplicado de 'Integrantes' en deiversos archivos  -->
-<!-- Lista de Integrantes de la comisión -->
-<div>
-    <h3>Integrantes</h3>
-    <div></div>
-</div>
-<!-- Fin de Lista de Integrantes de la comisión -->
-<div>
-    <% if (sesiones.trabajo) { %>
-        <%- include(`${sesiones.trabajo}.ejs`) %>
-    <% } else { %>
-        <%- include('listaTrabajo.ejs') %>
-    <% } %>
-</div>
+<!-- Fin de Trabajos -->
