@@ -43,6 +43,19 @@
             <!-- Fin de Botón de Inicio de Sesión -->
         </form> 
         <!-- Fin de Formulario del Login -->
+        <!-- Campo de las Credenciales -->
+        <div>
+            <h2>Correo de Alumno</h2>
+            <div>
+                <p id="correo1">h1yhzo1z5w@ibolinva.com</p>
+                <button onclick="copyText('correo1')">Copiar Correo</button>
+            </div>
+            <div>
+                <p id="clave1">54321</p>
+                <button onclick="copyText('clave1')">Copiar Contraseña</button>
+            </div>
+        </div>
+        <!-- Fin de Campo de las Credenciales -->
     </main>
     <!-- Etiquetas cuando se activa una alerta -->
     <div id="contenido" class="contenido"></div>
@@ -84,5 +97,26 @@
         </script>
     <% } %>
     <!-- Fin de Activación del Script si el velor 'arlert' esta activo -->
+    <script>
+        function copyText(id) {
+            // Obtén el elemento del párrafo con el ID proporcionado
+            var element = document.getElementById(id);
+
+            // Crea un elemento de texto temporal
+            var tempInput = document.createElement("input");
+            tempInput.value = element.textContent;
+            document.body.appendChild(tempInput);
+
+            // Selecciona el texto del elemento temporal
+            tempInput.select();
+            document.execCommand("copy");
+
+            // Elimina el elemento temporal
+            document.body.removeChild(tempInput);
+
+            // Muestra un mensaje de confirmación
+            alert("El texto se ha copiado al portapapeles.");
+        }   
+    </script>
 </body>
 </html>

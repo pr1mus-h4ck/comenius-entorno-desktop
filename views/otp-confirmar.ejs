@@ -28,6 +28,12 @@
         <button type="submit">Submit</button>
     </div>
 </form>
+<% if (sesiones.otp) { %>
+    <div>
+        <p id="otp"><%= sesiones.otp %></p>
+        <button onclick="copyText()">Copiar OTP</button>
+    </div>
+<% } %>
 <button onclick="avisoCancelar();">Cancelar</button>
 <script>
     function activateNextInput(currentInput, nextInputIndex) {
@@ -69,5 +75,22 @@
     }
     function redirigir() {
         window.location.href = '/';
+    }
+</script>
+<script>
+    function copyText() {
+         // Obtén el elemento del párrafo con el ID "otp"
+        let otpElement = document.getElementById("otp");
+        // Crea un elemento de texto temporal
+        let tempInput = document.createElement("input");
+        tempInput.value = otpElement.textContent;
+        document.body.appendChild(tempInput);
+        // Selecciona el texto del elemento temporal
+        tempInput.select();
+        document.execCommand("copy");
+        // Elimina el elemento temporal
+        document.body.removeChild(tempInput);
+        // Muestra un mensaje de confirmación
+        alert("El OTP se ha copiado al portapapeles.");
     }
 </script>

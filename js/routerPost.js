@@ -75,6 +75,10 @@ app.post('/enviar-otp', (req, res) => {
         .then(recibido => {
             // Guardar el objeto recibido
             config.envioOTP = recibido.correoEnviado;
+            // Crear la cookie de la otp
+            cookies.set('otp', recibido.otp, {path: '/' });
+            // Guardar la cookie de otp
+            cookieSession.otp = cookies.get('otp');
             const procesoOTP = {
                 envio: config.envioOTP,
                 correo: cookieSession.correoOTP
@@ -210,6 +214,22 @@ app.post('/cargarPagina', (req, res) => {
     cookies.remove('enlace', {path: '/' });
     // Guarda la Cookie 'enlace' sin valor
     cookieSession.enlace = cookies.get('enlace');
+    // Elimina la Cookie 'id'
+    cookies.remove('id', {path: '/' });
+    // Guarda la Cookie 'id' sin valor
+    cookieSession.id = cookies.get('id');
+    // Elimina la Cookie 'password'
+    cookies.remove('password', {path: '/' });
+    // Guarda la Cookie 'password' sin valor
+    cookieSession.password = cookies.get('password');
+    // Elimina la Cookie 'zoomFirma'
+    cookies.remove('zoomFirma', {path: '/' });
+    // Guarda la Cookie 'zoomFirma' sin valor
+    cookieSession.zoomFirma = cookies.get('zoomFirma');
+    // Elimina la Cookie 'clientId'
+    cookies.remove('clientId', {path: '/' });
+    // Guarda la Cookie 'clientId' sin valor
+    cookieSession.clientId = cookies.get('clientId');
     // Envia la respuesta de éxito a 'index.ejs'
     res.sendStatus(200);
 });
@@ -226,6 +246,20 @@ app.post('/cargarSeccion', (req, res) => {
     cookies.set('enlace', req.body.menu, {path: '/' });
     // Guarda la Cookie 'enlace' creada
     cookieSession.enlace = cookies.get('enlace');
+    // Guarda la Cookie 'id' sin valor
+    cookieSession.id = cookies.get('id');
+    // Elimina la Cookie 'password'
+    cookies.remove('password', {path: '/' });
+    // Guarda la Cookie 'password' sin valor
+    cookieSession.password = cookies.get('password');
+    // Elimina la Cookie 'zoomFirma'
+    cookies.remove('zoomFirma', {path: '/' });
+    // Guarda la Cookie 'zoomFirma' sin valor
+    cookieSession.zoomFirma = cookies.get('zoomFirma');
+    // Elimina la Cookie 'clientId'
+    cookies.remove('clientId', {path: '/' });
+    // Guarda la Cookie 'clientId' sin valor
+    cookieSession.clientId = cookies.get('clientId');
     // Envia la respuesta de éxito a 'materia.ejs'
     res.sendStatus(200);
 });

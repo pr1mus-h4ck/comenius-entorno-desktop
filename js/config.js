@@ -20,6 +20,8 @@ let cookieSession = {
     sessionsID: cookies.get('sessionID'),
     // Crear variabe 'nombre' para guardar como cookie el nombre del usuario
     nombre: cookies.get('nombre'),
+    // Crear variabe 'nombre' para guardar como cookie el nombre del usuario
+    otp: cookies.get('otp'),
     // Crear variable de 'verificacionOTP' para guardar como cookie el acceso a OTP o index
     verificacionOTP: cookies.get('verificacion'),
     // Craar variable de 'correoOTP' para guardar como cookie el correo del usuario encriptado

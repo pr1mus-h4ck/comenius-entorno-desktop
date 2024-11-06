@@ -43,6 +43,8 @@ function eliminarCookies(cookies) {
     cookies.remove('sessionID', { path: '/' });
     // Eliminar la cookie de nombre
     cookies.remove('nombre', { path: '/' });
+    // Eliminar la cookie de otp
+    cookies.remove('otp', { path: '/' });
     // Eliminar la cookie de si se requiere OTP o no
     cookies.remove('verificacion', { path: '/' });
     // Eliminar la cookie de correo encriptado
