@@ -32,67 +32,79 @@
     <div id="listaTrabajos"></div>
     <!-- Fin de Lista de Trabajos -->
 </div>
-<!-- Fin de Lista de Trabajo -->
+
 <script src="https://widget.cloudinary.com/v2.0/global/all.js"></script>
-<!-- Configuración de Cloudinary y la Creación de Trabajos -->
 <script>
-    const btnSubirArchivo = document.getElementById("btn-subir-archivo");
-    const urlArchivoInput = document.getElementById("url-archivo");
-    let widgetCloudinary = cloudinary.createUploadWidget({
-        cloudName: "dgilte6sf",
-        uploadPreset: "comenius_prueba",
-    }, (error, result) => {
-        if (!error && result && result.event === "success") {
-            // Captura la URL del archivo subido
-            urlArchivoInput.value = result.info.secure_url;
-            // console.log("Archivo subido: ", result.info.secure_url);
-        }
-    });
-    // Abre el widget al hacer clic en el botón
-    btnSubirArchivo.addEventListener('click', () => {
-        widgetCloudinary.open();
-    }, false);
-    function crearTrabajos(event) {
-        event.preventDefault();
-        const titulo = document.querySelector('input[name="titulo"]').value;
-        const contenido = document.querySelector('textarea[name="contenido"]').value;
-        const urlArchivo = document.getElementById("url-archivo").value;
-        // Crear un objeto JSON solo con la URL
-        const data = { 
-            titulo: titulo,
-            contenido: contenido,
-            urlArchivo: urlArchivo,
+const btnSubirArchivo = document.getElementById("btn-subir-archivo");
+const urlArchivoInput = document.getElementById("url-archivo");
+let uploadedFiles = []; // Array para almacenar información sobre los archivos subidos
+
+let widgetCloudinary = cloudinary.createUploadWidget({
+    cloudName: "dgilte6sf",
+    uploadPreset: "comenius_prueba",
+    multiple: true,
+}, (error, result) => {
+    if (!error && result && result.event === "success") {
+        // Captura la URL del archivo subido
+        const fileInfo = {
+            url: result.info.secure_url,
+            name: result.info.original_filename // Nombre original del archivo
+            // No necesitas agregar tipo MIME aquí, ya que lo extraerás en el backend.
         };
-        fetch('http://localhost:3000/crearTrabajos', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json' // Especificar que estamos enviando JSON
-            },
-            body: JSON.stringify(data), // Convertir el objeto a JSON
-        })
-        .then(recibir => {
-            if (!recibir.ok) {
-                throw new Error('Error en la solicitud');
-            }
-            return recibir.json();
-        })
-        .then(recibido => {
-            if (recibido.ok) {
-                // Limpiar campos de formulario
-                urlArchivoInput.value = '';
-                document.getElementById("titulo").value = '';  
-                document.getElementById("contenido").value = '';  
-                actualizarTrabajos();
-            }
-            
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-        return false; // Evitar que se recargue la página
+        
+        uploadedFiles.push(fileInfo); // Agregar información del archivo al array
+        urlArchivoInput.value = uploadedFiles.map(file => file.url).join(', '); // Mostrar todas las URLs
     }
+});
+
+// Abre el widget al hacer clic en el botón
+btnSubirArchivo.addEventListener('click', () => {
+    widgetCloudinary.open();
+}, false);
+
+function crearTrabajos(event) {
+    event.preventDefault();
+    const titulo = document.querySelector('input[name="titulo"]').value;
+    const contenido = document.querySelector('textarea[name="contenido"]').value;
+
+    // Crear un objeto JSON con todos los datos
+    const data = { 
+        titulo: titulo,
+        contenido: contenido,
+        urlArchivos: uploadedFiles, // Enviar array con información de cada archivo
+    };
+
+    fetch('http://localhost:3000/crearTrabajos', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json' // Especificar que estamos enviando JSON
+        },
+        body: JSON.stringify(data), // Convertir el objeto a JSON
+    })
+    .then(recibir => {
+        if (!recibir.ok) {
+            throw new Error('Error en la solicitud');
+        }
+        return recibir.json();
+    })
+    .then(recibido => {
+        if (recibido.ok) {
+            // Limpiar campos de formulario
+            uploadedFiles = []; // Reiniciar array
+            urlArchivoInput.value = '';
+            document.getElementById("titulo").value = '';  
+            document.getElementById("contenido").value = '';  
+            actualizarTrabajos();
+        }
+        
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
 </script>
-<!-- Fin de Configuración de Cloudinary y la Creación de Trabajos -->
+
+<!-- Actualizar Trabajos -->
 <!-- Actualizar Trabajos -->
 <script>
     function actualizarTrabajos() {
@@ -106,32 +118,34 @@
         .then(recibido => {
             const listaTrabajos = document.getElementById('listaTrabajos');
             listaTrabajos.innerHTML = ''; // Limpia el contenido actual
+            
             recibido.trabajos.forEach(trabajo => {
-                const listaTrabajos = document.getElementById('listaTrabajos');
-                listaTrabajos.innerHTML = ''; // Limpia el contenido actual
-                recibido.trabajos.forEach(trabajo => {
-                    const trabajoDiv = document.createElement('div');
-                    trabajoDiv.classList.add('trabajo'); 
-                    // Imprime Título
-                    const titulo = document.createElement('h2');
-                    titulo.textContent = trabajo.titulo; // Accede a 'titulo'
-                    trabajoDiv.appendChild(titulo);
-                    // Fin Imprime Título
-                    // Imprime Contenido
-                    const contenido = document.createElement('p');
-                    contenido.textContent = trabajo.contenido; // Accede a 'contenido'
-                    trabajoDiv.appendChild(contenido);
-                    // Fin Imprime Contenido
-                    // Imprime 'Ver Archivo'
-                    const urlArchivo = document.createElement('a');
-                    urlArchivo.href = trabajo.urlArchivo; // Accede a 'urlArchivo'
-                    urlArchivo.textContent = "Ver Archivo";
-                    trabajoDiv.appendChild(urlArchivo);
-                    // Fin Imprime 'Ver Archivo'
-                    listaTrabajos.appendChild(trabajoDiv);
+                const trabajoDiv = document.createElement('div');
+                trabajoDiv.classList.add('trabajo'); 
+                
+                // Imprime Título
+                const titulo = document.createElement('h2');
+                titulo.textContent = trabajo.titulo; // Accede a 'titulo'
+                trabajoDiv.appendChild(titulo);
+                
+                // Imprime Contenido
+                const contenido = document.createElement('p');
+                contenido.textContent = trabajo.contenido; // Accede a 'contenido'
+                trabajoDiv.appendChild(contenido);
+                
+                // Imprime directamente las URLs de los archivos
+                trabajo.archivos.forEach(file => {
+                    const archivoLink = document.createElement('a');
+                    archivoLink.href = file.url; // Accede a la URL del archivo
+                    archivoLink.textContent = file.url; // Muestra la URL como texto
+                    archivoLink.target = "_blank"; // Abre el enlace en una nueva pestaña
+                    trabajoDiv.appendChild(archivoLink);
+                    trabajoDiv.appendChild(document.createElement('br')); // Añade un salto de línea entre enlaces
                 });
+    
+                listaTrabajos.appendChild(trabajoDiv);
             });
-        })
+        });
     }
-</script>
-<!-- Fin de Actualizar Trabajos -->
+    </script>
+    <!-- Fin de Actualizar Trabajos -->
