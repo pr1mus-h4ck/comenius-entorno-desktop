@@ -1,7 +1,7 @@
 <!-- Lista de Trabajo -->
 <div>
     <!-- Formulario de la Creación de Trabajo -->
-    <form method="post" onsubmit="return crearTrabajos();">
+    <form action="/crearTrabajos" method="post" onsubmit="crearTrabajos(event)">
         <!-- Título -->
         <div>
             <label for="titulo">Título</label>
@@ -48,10 +48,17 @@ let widgetCloudinary = cloudinary.createUploadWidget({
 btnSubirArchivo.addEventListener('click', () => {
     widgetCloudinary.open();
 }, false);
-function crearTrabajos() {
+function crearTrabajos(event) {
+    event.preventDefault();
+    const titulo = document.querySelector('input[name="titulo"]').value;
+    const contenido = document.querySelector('textarea[name="contenido"]').value;
     const urlArchivo = document.getElementById("url-archivo").value;
     // Crear un objeto JSON solo con la URL
-    const data = { urlArchivo: urlArchivo };
+    const data = { 
+        titulo: titulo,
+        contenido: contenido,
+        urlArchivo: urlArchivo,
+    };
     fetch('http://localhost:3000/crearTrabajos', {
         method: 'POST',
         headers: {
