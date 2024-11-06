@@ -1,5 +1,5 @@
 <!-- Lista de Trabajo -->
-<div>
+<div class="trabajos">
     <!-- Formulario de la Creación de Trabajo -->
     <form action="/crearTrabajos" method="post" onsubmit="crearTrabajos(event)">
         <!-- Título -->
@@ -28,62 +28,110 @@
         <!-- Fin de Botón de 'Crear Trabajo' -->
     </form>
     <!-- Fin de Formulario de la Creación de Trabajo -->
+    <!-- Lista de Trabajos -->
+    <div id="listaTrabajos"></div>
+    <!-- Fin de Lista de Trabajos -->
 </div>
 <!-- Fin de Lista de Trabajo -->
 <script src="https://widget.cloudinary.com/v2.0/global/all.js"></script>
+<!-- Configuración de Cloudinary y la Creación de Trabajos -->
 <script>
-const btnSubirArchivo = document.getElementById("btn-subir-archivo");
-const urlArchivoInput = document.getElementById("url-archivo");
-let widgetCloudinary = cloudinary.createUploadWidget({
-    cloudName: "dgilte6sf",
-    uploadPreset: "comenius_prueba",
-}, (error, result) => {
-    if (!error && result && result.event === "success") {
-        // Captura la URL del archivo subido
-        urlArchivoInput.value = result.info.secure_url;
-        // console.log("Archivo subido: ", result.info.secure_url);
-    }
-});
-// Abre el widget al hacer clic en el botón
-btnSubirArchivo.addEventListener('click', () => {
-    widgetCloudinary.open();
-}, false);
-function crearTrabajos(event) {
-    event.preventDefault();
-    const titulo = document.querySelector('input[name="titulo"]').value;
-    const contenido = document.querySelector('textarea[name="contenido"]').value;
-    const urlArchivo = document.getElementById("url-archivo").value;
-    // Crear un objeto JSON solo con la URL
-    const data = { 
-        titulo: titulo,
-        contenido: contenido,
-        urlArchivo: urlArchivo,
-    };
-    fetch('http://localhost:3000/crearTrabajos', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json' // Especificar que estamos enviando JSON
-        },
-        body: JSON.stringify(data), // Convertir el objeto a JSON
-    })
-    .then(recibir => {
-        if (!recibir.ok) {
-            throw new Error('Error en la solicitud');
+    const btnSubirArchivo = document.getElementById("btn-subir-archivo");
+    const urlArchivoInput = document.getElementById("url-archivo");
+    let widgetCloudinary = cloudinary.createUploadWidget({
+        cloudName: "dgilte6sf",
+        uploadPreset: "comenius_prueba",
+    }, (error, result) => {
+        if (!error && result && result.event === "success") {
+            // Captura la URL del archivo subido
+            urlArchivoInput.value = result.info.secure_url;
+            // console.log("Archivo subido: ", result.info.secure_url);
         }
-        return recibir.json();
-    })
-    .then(recibido => {
-        if (recibido.ok) {
-            // Limpiar campos de formulario
-            urlArchivoInput.value = '';
-            document.getElementById("titulo").value = '';  
-            document.getElementById("contenido").value = '';  
-        }
-        
-    })
-    .catch(error => {
-        console.error('Error:', error);
     });
-    return false; // Evitar que se recargue la página
-}
+    // Abre el widget al hacer clic en el botón
+    btnSubirArchivo.addEventListener('click', () => {
+        widgetCloudinary.open();
+    }, false);
+    function crearTrabajos(event) {
+        event.preventDefault();
+        const titulo = document.querySelector('input[name="titulo"]').value;
+        const contenido = document.querySelector('textarea[name="contenido"]').value;
+        const urlArchivo = document.getElementById("url-archivo").value;
+        // Crear un objeto JSON solo con la URL
+        const data = { 
+            titulo: titulo,
+            contenido: contenido,
+            urlArchivo: urlArchivo,
+        };
+        fetch('http://localhost:3000/crearTrabajos', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json' // Especificar que estamos enviando JSON
+            },
+            body: JSON.stringify(data), // Convertir el objeto a JSON
+        })
+        .then(recibir => {
+            if (!recibir.ok) {
+                throw new Error('Error en la solicitud');
+            }
+            return recibir.json();
+        })
+        .then(recibido => {
+            if (recibido.ok) {
+                // Limpiar campos de formulario
+                urlArchivoInput.value = '';
+                document.getElementById("titulo").value = '';  
+                document.getElementById("contenido").value = '';  
+                actualizarTrabajos();
+            }
+            
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+        return false; // Evitar que se recargue la página
+    }
 </script>
+<!-- Fin de Configuración de Cloudinary y la Creación de Trabajos -->
+<!-- Actualizar Trabajos -->
+<script>
+    function actualizarTrabajos() {
+        fetch('http://localhost:3000/actualizarTrabajos', { 
+            method: 'POST', 
+            headers: { 
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(recibir => recibir.json())
+        .then(recibido => {
+            const listaTrabajos = document.getElementById('listaTrabajos');
+            listaTrabajos.innerHTML = ''; // Limpia el contenido actual
+            recibido.trabajos.forEach(trabajo => {
+                const listaTrabajos = document.getElementById('listaTrabajos');
+                listaTrabajos.innerHTML = ''; // Limpia el contenido actual
+                recibido.trabajos.forEach(trabajo => {
+                    const trabajoDiv = document.createElement('div');
+                    trabajoDiv.classList.add('trabajo'); 
+                    // Imprime Título
+                    const titulo = document.createElement('h2');
+                    titulo.textContent = trabajo.titulo; // Accede a 'titulo'
+                    trabajoDiv.appendChild(titulo);
+                    // Fin Imprime Título
+                    // Imprime Contenido
+                    const contenido = document.createElement('p');
+                    contenido.textContent = trabajo.contenido; // Accede a 'contenido'
+                    trabajoDiv.appendChild(contenido);
+                    // Fin Imprime Contenido
+                    // Imprime 'Ver Archivo'
+                    const urlArchivo = document.createElement('a');
+                    urlArchivo.href = trabajo.urlArchivo; // Accede a 'urlArchivo'
+                    urlArchivo.textContent = "Ver Archivo";
+                    trabajoDiv.appendChild(urlArchivo);
+                    // Fin Imprime 'Ver Archivo'
+                    listaTrabajos.appendChild(trabajoDiv);
+                });
+            });
+        })
+    }
+</script>
+<!-- Fin de Actualizar Trabajos -->
