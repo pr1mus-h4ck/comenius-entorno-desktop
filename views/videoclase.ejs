@@ -1,9 +1,11 @@
 <form action="/zoomPrueba" id="testZoom" method="post">
     <button type="submit">Entrar a la llamada</button>
 </form>
+<!--FIXME: Solucionar la funcion de base64Encode, si no, eliminarlo-->
 <% function base64Encode(str) { %>
     <%= btoa(unescape(encodeURIComponent(str))) %>
 <% } %>
+<!--FIXME: Si se saca la funcion base64Encode, actualizar el src del iframe-->
 <% if (almacenamiento.id && almacenamiento.password && sesiones.nombre && almacenamiento.clientId && almacenamiento.zoomFirma) { %>
     <iframe src="https://zoom.us/wc/<%= almacenamiento.id %>/join?pwd=<%= almacenamiento.password %>&wc=true&no_dr=true&no_titlebar=true&un=<%= base64Encode(sesiones.nombre) %>&clientId=<%= almacenamiento.clientId %>&zoomFirma=<%= almacenamiento.zoomFirma %>" frameborder="0" width="500" height="500"></iframe>
 <% } %>
