@@ -1,4 +1,4 @@
-<!-- Lista de Trabajo -->
+<!-- Trabajos -->
 <div class="trabajos">
     <!-- Formulario de la Creación de Trabajo -->
     <form action="/crearTrabajos" method="post" onsubmit="crearTrabajos(event)">
@@ -32,6 +32,7 @@
     <div id="listaTrabajos"></div>
     <!-- Fin de Lista de Trabajos -->
 </div>
+<!-- Fin de Trabajos -->
 <!-- Configuración de Cloudinary -->
 <script src="https://widget.cloudinary.com/v2.0/global/all.js"></script>
 <script>
@@ -56,7 +57,6 @@
             urlArchivoInput.value = uploadedFiles.map(file => file.url).join(', '); // Mostrar todas las URLs
         }
     });
-    
     // Abre el widget al hacer clic en el botón
     btnSubirArchivo.addEventListener('click', () => {
         widgetCloudinary.open();
@@ -69,14 +69,12 @@
         event.preventDefault();
         const titulo = document.querySelector('input[name="titulo"]').value;
         const contenido = document.querySelector('textarea[name="contenido"]').value;
-
         // Crear un objeto JSON con todos los datos
         const data = { 
             titulo: titulo,
             contenido: contenido,
             urlArchivos: uploadedFiles, // Enviar array con información de cada archivo
         };
-
         fetch('http://localhost:3000/crearTrabajos', {
             method: 'POST',
             headers: {
@@ -119,6 +117,8 @@
         .then(recibir => recibir.json())
         .then(recibido => {
             let html = ''; // Inicializa la variable html como una cadena vacía
+            // TODO: Agregar un onclick en el h2 de cada publicación
+            // TODO: Agregar un límite de caracteres en la etiqueta <p></p> de 100 a 120
             recibido.trabajos.forEach(trabajo => {
                 html += `
                     <div class="trabajo">

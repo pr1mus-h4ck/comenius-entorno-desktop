@@ -280,7 +280,6 @@ app.post('/zoomPrueba', (req, res) => {
     })
     .then(recibir => recibir.json())
     .then(recibido => {
-
         cookies.set('nombre', 'Mateo' , {path: '/' });
         cookies.set('id', recibido.id, {path: '/' });
         cookies.set('password', recibido.password, {path: '/' });
