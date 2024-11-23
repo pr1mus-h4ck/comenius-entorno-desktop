@@ -9,64 +9,72 @@
 </head>
 <body>
     <main>
-        <div>
-            <h1>Inicio Sesión</h1>
-        </div> 
-        <!--Formulario del Login -->
-        <form action="/login" method="post"> 
-            <!-- Casilla de email -->
-            <div>
-                <label for="correo">Correo</label>
-                <input type="email" name='correo'>
-            </div>
-            <!-- Fin de Casilla de email -->
-            <!-- Casilla de contraseña-->
-            <div>
-                <label for="contrasena">Contraseña</label>
-                <input type="password" name='contrasena' >
-            </div>
-            <!-- Fin de Casilla de contraseña-->
-            <!-- Checkbox para recordar el email -->
-            <div>
-                <div>
-                    <label for="###">
-                    <input type="checkbox" id="###">
-                        Recordar correo
-                    </label>
-                </div>
-            </div>
-            <!-- Fin de Checkbox para recordar el email -->
-            <!-- Botón de Inicio de Sesión -->
-            <div>
-                <button type="submit">Iniciar Sesión</button>
-            </div>
-            <!-- Fin de Botón de Inicio de Sesión -->
-        </form> 
-        <!-- Fin de Formulario del Login -->
-        <!-- Campo de las Credenciales -->
-        <div>
-            <div>
-                <div>
-                    <h2>Correo de Alumno</h2>
-                    <div>
-                        <p id="correo1">h1yhzo1z5w@ibolinva.com</p>
-                        <button onclick="copyText('correo1')">Copiar Correo</button>
+        <div class="container">
+            <!-- Login -->
+            <div class="form-box login">
+                <form action="/login" method="post">
+                    <div class="text-cabecera-login">
+                        <p>Bienvenido!</p>
+                        <h2>Inicia sesion</h2> 
+                        <p>con tu cuenta educativa</p>
                     </div>
-                </div>
-                <div>
-                    <h2>Correo de Instructor</h2>
-                    <div>
-                        <p id="correo2">ev1v4y5v7x@vvatxiy.com</p>
-                        <button onclick="copyText('correo2')">Copiar Correo</button>
+                    <div class="input-box">
+                        <label for="correo">Correo electronico</label>
+                        <input type="text" id="correo" name="correo" placeholder="Ingresa tu correo electronico">
                     </div>
-                </div>
+                    <div class="input-box">
+                        <label for="contrasena">Contraseña</label>
+                        <input type="password" id="contrasena" name="contrasena" placeholder="Ingresa tu contraseña">
+                    </div>
+                    <div>
+                        <button class="btn btn-aceptar" type="submit">INICIAR</button>
+                    </div>
+                </form>
             </div>
-            <div>
-                <p id="clave1">54321</p>
-                <button onclick="copyText('clave1')">Copiar Contraseña</button>
+            <!-- Credenciales -->
+            <div class="form-box register">
+                <form>
+                    <div class="contenido-credenciales">
+                        <div>
+                            <div>
+                                <h3>Correo de Alumno</h3>
+                                <div>
+                                    <p id="correo1">h1yhzo1z5w@ibolinva.com</p>
+                                    <button class="btn btn-credenciales" onclick="copyText('correo1')">Copiar Correo</button>
+                                </div>
+                            </div>
+                            <div>
+                                <h3>Correo de Instructor</h3>
+                                <div>
+                                    <p id="correo2">ev1v4y5v7x@vvatxiy.com</p>
+                                    <button class="btn btn-credenciales" onclick="copyText('correo2')">Copiar Correo</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3>Contraseña generica</h3>
+                            <p id="clave1">54321</p>
+                            <button class="btn btn-credenciales" onclick="copyText('clave1')">Copiar Contraseña</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- Tooggle-box -->
+            <div class="toggle-box">
+                <div class="toggle-panel toggle-left">
+                    <img src="./recursos/img/pre-logo.svg" alt="" class="imagen-form-login">
+                    <h2>Credenciales de Ingreso</h2>
+                    <p>Olvidaste tus credenciales?</p>
+                    <button class="btn register-btn">Visualizar</button>
+                </div>
+                <div class="toggle-panel toggle-right">
+                    <img src="./recursos/img/pre-logo.svg" alt="" class="imagen-form-login">
+                    <h2>Queres ingresar a CVS?</h2>
+                    <p>Recorda copiar las credenciales</p>
+                    <button class="btn login-btn">Ingresar</button>
+                </div>
             </div>
         </div>
-        <!-- Fin de Campo de las Credenciales -->
     </main>
     <!-- Etiquetas cuando se activa una alerta -->
     <div id="contenido" class="contenido"></div>
@@ -76,6 +84,19 @@
         <p id="mensaje-alerta-personalizada"></p>
         <button id="boton-alerta-personalizada" onclick="redirigir()">Aceptar</button>
     </div>
+    <script>
+        const container = document.querySelector('.container');
+        const registrationBtn = document.querySelector('.register-btn');
+        const loginBtn = document.querySelector('.login-btn');
+
+        registrationBtn.addEventListener('click',()=>{
+            container.classList.add('active');
+        })
+
+        loginBtn.addEventListener('click',()=>{
+            container.classList.remove('active');
+        })
+    </script>
     <!-- Fin de Etiquetas cuando se activa una alerta -->
     <!-- Activación del Script si el velor 'arlert' esta activo -->
     <% if (typeof alert != 'undefined') { %>
