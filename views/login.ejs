@@ -41,21 +41,22 @@
                                 <h3>Correo de Alumno</h3>
                                 <div>
                                     <p id="correo1">h1yhzo1z5w@ibolinva.com</p>
-                                    <input type="button" class="btn btn-credenciales" onclick="copyText('correo1')" value="Copiar Correo">
+                                    <input type="button" class="btn btn-credenciales" data-original-text="Copiar Correo" onclick="copyText('correo1', this)" value="Copiar Correo">
+
                                 </div>
                             </div>
                             <div>
                                 <h3>Correo de Instructor</h3>
                                 <div>
                                     <p id="correo2">ev1v4y5v7x@vvatxiy.com</p>
-                                    <input type="button" class="btn btn-credenciales" onclick="copyText('correo2')" value="Copiar Correo">
+                                    <input type="button" class="btn btn-credenciales" data-original-text="Copiar Correo" onclick="copyText('correo2', this)" value="Copiar Correo">
                                 </div>
                             </div>
                         </div>
                         <div>
                             <h3>Contraseña Genérica</h3>
                             <p id="clave1">54321</p>
-                            <input type="button" class="btn btn-credenciales" onclick="copyText('clave1')" value="Copiar Contraseña">
+                            <input type="button" class="btn btn-credenciales" data-original-text="Copiar Contraseña" onclick="copyText('clave1', this)" value="Copiar Contraseña">
                         </div>
                     </div>
                 </form>
@@ -66,7 +67,7 @@
                     <img src="./recursos/img/pre-logo.svg" alt="" class="imagen-form-login">
                     <h2>Credenciales de Ingreso</h2>
                     <p>¿Olvidaste tus credenciales?</p>
-                    <button class="btn register-btn">Visualizar</button>
+                    <button class="btn register-btn" onclick="clearMessages()">Visualizar</button>
                 </div>
                 <div class="toggle-panel toggle-right">
                     <img src="./recursos/img/pre-logo.svg" alt="" class="imagen-form-login">
@@ -131,7 +132,7 @@
     <% } %>
     <!-- Fin de Activación del Script si el velor 'arlert' esta activo -->
     <script>
-        function copyText(id) {
+        function copyText(id, button) {
             // Obtén el elemento del párrafo con el ID proporcionado
             var element = document.getElementById(id);
 
@@ -147,9 +148,20 @@
             // Elimina el elemento temporal
             document.body.removeChild(tempInput);
 
-            // Muestra un mensaje de confirmación
-            alert("El texto se ha copiado al portapapeles.");
+            if (id === 'correo1' || id === 'correo2') {
+                button.value = "¡Correo copiado!";
+            } else if (id === 'clave1') {
+                button.value = "¡Contraseña copiada!";
+            }
         }   
+
+        function clearMessages() {
+            // Limpiar los mensajes de los botones
+            const buttons = document.querySelectorAll('.btn-credenciales');
+            buttons.forEach(button => {
+                button.value = button.getAttribute('data-original-text'); // Restablecer al valor original
+            });
+        }
     </script>
 </body>
 </html>
