@@ -9,15 +9,15 @@
     <link rel="stylesheet" href="recursos/css/alerta.css">
 </head>
 <body>
-    <div>
-        <h1>OTP</h1>
-    </div>
-    <!-- Contenido de cada proceso del OTP -->
-    <% if (procesoOTP.envio === true) { %>
-        <%- include('otp-confirmar.ejs') %>
-    <% } else { %>
-        <%- include('otp-enviar.ejs') %>
-    <% } %>
+    <main>
+        <div class="container">
+         <% if (procesoOTP.envio === true) { %>
+             <%- include('otp-confirmar.ejs') %>
+         <% } else { %>
+             <%- include('otp-enviar.ejs') %>
+         <% } %>
+        </div>
+     </main>
     <!-- Fin de Contenido de cada proceso del OTP -->
     <!-- Etiquetas cuando se activa una alerta -->
     <div id="contenido" class="contenido"></div>

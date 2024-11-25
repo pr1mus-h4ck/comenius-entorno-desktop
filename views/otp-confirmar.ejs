@@ -1,40 +1,90 @@
-<h2>ESTOY EN OTP-CONFIRMAR</h2>
-<form action="/confirmar-otp" method="post"> 
-    <div>
-        <label for="input1"></label>
-        <input type="text" name='input1' maxlength="1" id="input1" oninput="activateNextInput(this, 2)">
+<div class="form-box login">
+    <div class="form-otp">
+    <div class="text-cabecera-login">
+        <p>Paso 2/2</p>
+        <h2>OTP Verificacion</h2> 
+        <p>Comprobacion por Email</p>
     </div>
-    <div>
-        <label for="input2"></label>
-        <input type="text" name='input2' maxlength="1" id="input2" oninput="activateNextInput(this, 3)" disabled>
+    <div class="text-content">
+        <p>Ingresa el código de 6 dígitos que hemos enviado al mismo correo que empleaste para iniciar sesión.</p>
     </div>
-    <div>
-        <label for="input3"></label>
-        <input type="text" name='input3' maxlength="1" id="input3" oninput="activateNextInput(this, 4)" disabled>
+    <form action="/confirmar-otp" method="post"> 
+        <div class="content-input-otp">
+        <div>
+            <label for="input1"></label>
+            <input type="text" name='input1' maxlength="1" id="input1" oninput="activateNextInput(this, 2)">
+        </div>
+        <div>
+            <label for="input2"></label>
+            <input type="text" name='input2' maxlength="1" id="input2" oninput="activateNextInput(this, 3)" disabled>
+        </div>
+        <div>
+            <label for="input3"></label>
+            <input type="text" name='input3' maxlength="1" id="input3" oninput="activateNextInput(this, 4)" disabled>
+        </div>
+        <div>
+            <label for="input4"></label>
+            <input type="text" name='input4' maxlength="1" id="input4" oninput="activateNextInput(this, 5)" disabled>
+        </div>
+        <div>
+            <label for="input5"></label>
+            <input type="text" name='input5' maxlength="1" id="input5" oninput="activateNextInput(this, 6)" disabled>
+        </div>
+        <div>
+            <label for="input6"></label>
+            <input type="text" name='input6' maxlength="1" id="input6" oninput="activateNextInput(this, 7)" disabled>
+        </div>
+        </div>
+        <div>
+            <button class="btn btn-aceptar" type="submit">Enviar</button>
+        </div>
+    </form>
+    <button class="btn btn-aceptar" onclick="avisoCancelar();">Cancelar</button>
+</div>
+</div>
+<div class="form-box register">
+    <form>
+        <div class="contenido-credenciales">
+            <% if (sesiones.otp) { %>
+                <div>
+                    <h3>Codigo OTP</h3>
+                <div>
+                    <p id="otp"><%= sesiones.otp %></p>
+                    <button class="btn btn-credenciales" onclick="copyText()">Copiar OTP</button>
+                </div>
+                </div>
+            <% } %>
+
+        </div>
+    </form>
+</div>
+<div class="toggle-box">
+    <div class="toggle-panel toggle-left">
+        <img src="./recursos/img/pre-logo.svg" alt="" class="imagen-form-login">
+        <h2>Credencial OTP</h2>
+        <p>Ver credenciales OTP por defecto.</p>
+        <button class="btn register-btn" onclick="clearMessages()">Visualizar</button>
     </div>
-    <div>
-        <label for="input4"></label>
-        <input type="text" name='input4' maxlength="1" id="input4" oninput="activateNextInput(this, 5)" disabled>
+    <div class="toggle-panel toggle-right">
+        <img src="./recursos/img/pre-logo.svg" alt="" class="imagen-form-login">
+        <h2>¿Querés ingresar el codigo OTP?</h2>
+        <p>Recorda copiar las credenciales</p>
+        <button class="btn login-btn">Ingresar</button>
     </div>
-    <div>
-        <label for="input5"></label>
-        <input type="text" name='input5' maxlength="1" id="input5" oninput="activateNextInput(this, 6)" disabled>
-    </div>
-    <div>
-        <label for="input6"></label>
-        <input type="text" name='input6' maxlength="1" id="input6" oninput="activateNextInput(this, 7)" disabled>
-    </div>
-    <div>
-        <button type="submit">Submit</button>
-    </div>
-</form>
-<% if (sesiones.otp) { %>
-    <div>
-        <p id="otp"><%= sesiones.otp %></p>
-        <button onclick="copyText()">Copiar OTP</button>
-    </div>
-<% } %>
-<button onclick="avisoCancelar();">Cancelar</button>
+</div>
+<script>
+    const container = document.querySelector('.container');
+    const registrationBtn = document.querySelector('.register-btn');
+    const loginBtn = document.querySelector('.login-btn');
+
+    registrationBtn.addEventListener('click',()=>{
+        container.classList.add('active');
+    })
+
+    loginBtn.addEventListener('click',()=>{
+        container.classList.remove('active');
+    })
+</script>
 <script>
     function activateNextInput(currentInput, nextInputIndex) {
         if (currentInput.value.length === 1) {

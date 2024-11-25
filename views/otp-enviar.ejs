@@ -1,8 +1,29 @@
-<h2>Te vamos a enviar un correo a esta casilla: <%= procesoOTP.correo %></h2>
-<form action="/enviar-otp" method="post">
-    <button type="submit">Submit</button>
-</form>
-<button onclick="avisoCancelar();">Cancelar</button>
+<div class="form-box login">
+    <div class="form-otp">
+        <div class="text-cabecera-login">
+            <p>Paso 1/2</p>
+            <h2>OTP Verificacion</h2> 
+            <p>Comprobacion por Email</p>
+        </div>
+        <div class="text-content">
+            <p>Te enviaremos un Email, con el código de verificación al siguiente correo que tenemos registrado: </p>
+        </div>
+        <div class="etiqueta-correo">
+            <%= procesoOTP.correo %>
+        </div>
+        <form action="/enviar-otp" method="post">
+            <button type="submit" class="btn btn-aceptar">Continuar</button>
+        </form>
+    </div>
+</div>
+<div class="toggle-box">
+    <div class="toggle-panel toggle-left">
+        <img src="./recursos/img/pre-logo.svg" alt="" class="imagen-form-login">
+        <h2>¿Email incorrecto?</h2>
+        <p>Haz click en "Cancelar" para volver a ingresar.</p>
+        <button class="btn btn-aceptar" onclick="avisoCancelar();">Cancelar</button>
+    </div>
+</div>
 <script>
     function avisoCancelar() {
         document.getElementById('contenido').style.display = 'block';
