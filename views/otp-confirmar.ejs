@@ -6,7 +6,7 @@
         <p>Comprobacion por Email</p>
     </div>
     <div class="text-content">
-        <p>Ingresa el código de 6 dígitos que hemos enviado al mismo correo que empleaste para iniciar sesión.</p>
+        <p>Ingresa el código de 6 dígitos para iniciar sesión.</p>
     </div>
     <form action="/confirmar-otp" method="post"> 
         <div class="content-input-otp">
@@ -36,7 +36,7 @@
         </div>
         </div>
         <div>
-            <button class="btn btn-aceptar" type="submit">Enviar</button>
+            <input type="button" class="btn btn-aceptar" type="submit" value="Enviar">
         </div>
     </form>
     <button class="btn btn-aceptar" onclick="avisoCancelar();">Cancelar</button>
@@ -50,7 +50,7 @@
                     <h3>Codigo OTP</h3>
                 <div>
                     <p id="otp"><%= sesiones.otp %></p>
-                    <button class="btn btn-credenciales" onclick="copyText()">Copiar OTP</button>
+                    <input type="button" class="btn btn-credenciales" data-original-text="Copiar OTP" onclick="copyText('otp', this)" value="Copiar OTP">
                 </div>
                 </div>
             <% } %>
@@ -128,19 +128,36 @@
     }
 </script>
 <script>
-    function copyText() {
-         // Obtén el elemento del párrafo con el ID "otp"
-        let otpElement = document.getElementById("otp");
+    let lastButtonClicked = null; // Variable para almacenar el último botón que fue clickeado
+
+    function copyText(id, button) {
+        // Obtén el elemento del párrafo con el ID proporcionado
+        let otpElement = document.getElementById(id);
+        
         // Crea un elemento de texto temporal
         let tempInput = document.createElement("input");
         tempInput.value = otpElement.textContent;
         document.body.appendChild(tempInput);
+        
         // Selecciona el texto del elemento temporal
         tempInput.select();
         document.execCommand("copy");
+        
         // Elimina el elemento temporal
         document.body.removeChild(tempInput);
-        // Muestra un mensaje de confirmación
-        alert("El OTP se ha copiado al portapapeles.");
+        
+        // Cambia el texto del botón para mostrar el mensaje de confirmación
+        button.value = "¡OTP copiado!";
+        
+        // Guarda el botón que fue clickeado
+        lastButtonClicked = button; 
+    }
+
+    function clearMessages() {
+        // Limpia el mensaje del botón que fue clickeado para copiar OTP
+        if (lastButtonClicked) {
+            lastButtonClicked.value = lastButtonClicked.getAttribute('data-original-text'); // Restablece al valor original
+            lastButtonClicked = null; // Resetea la variable
+        }
     }
 </script>
