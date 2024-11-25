@@ -6,7 +6,7 @@
         <p>Comprobacion por Email</p>
     </div>
     <div class="text-content">
-        <p>Ingresa el código de 6 dígitos para iniciar sesión.</p>
+        <p>Ingresa el código que hemos enviado.</p>
     </div>
     <form action="/confirmar-otp" method="post"> 
         <div class="content-input-otp">
@@ -36,7 +36,7 @@
         </div>
         </div>
         <div>
-            <input type="button" class="btn btn-aceptar" type="submit" value="Enviar">
+            <button class="btn btn-aceptar" type="submit">Enviar</button>
         </div>
     </form>
     <button class="btn btn-aceptar" onclick="avisoCancelar();">Cancelar</button>
@@ -50,7 +50,7 @@
                     <h3>Codigo OTP</h3>
                 <div>
                     <p id="otp"><%= sesiones.otp %></p>
-                    <input type="button" class="btn btn-credenciales" data-original-text="Copiar OTP" onclick="copyText('otp', this)" value="Copiar OTP">
+                    <input type="button" class="btn btn-credenciales" onclick="copyText('otp', this)" data-original-text="Copiar OTP" value="Copiar OTP" >
                 </div>
                 </div>
             <% } %>
@@ -62,14 +62,14 @@
     <div class="toggle-panel toggle-left">
         <img src="./recursos/img/pre-logo.svg" alt="" class="imagen-form-login">
         <h2>Credencial OTP</h2>
-        <p>Ver credenciales OTP por defecto.</p>
+        <p>Ver credenciales.</p>
         <button class="btn register-btn" onclick="clearMessages()">Visualizar</button>
     </div>
     <div class="toggle-panel toggle-right">
         <img src="./recursos/img/pre-logo.svg" alt="" class="imagen-form-login">
         <h2>¿Querés ingresar el codigo OTP?</h2>
-        <p>Recorda copiar las credenciales</p>
-        <button class="btn login-btn">Ingresar</button>
+        <p>¡Recorda copiar las credenciales!</p>
+        <button class="btn login-btn" onclick="resetCopyButton()">Ingresar</button>
     </div>
 </div>
 <script>
@@ -128,36 +128,30 @@
     }
 </script>
 <script>
-    let lastButtonClicked = null; // Variable para almacenar el último botón que fue clickeado
+function copyText(id, button) {
+    // Obtén el elemento del párrafo con el ID proporcionado
+    var element = document.getElementById(id);
 
-    function copyText(id, button) {
-        // Obtén el elemento del párrafo con el ID proporcionado
-        let otpElement = document.getElementById(id);
-        
-        // Crea un elemento de texto temporal
-        let tempInput = document.createElement("input");
-        tempInput.value = otpElement.textContent;
-        document.body.appendChild(tempInput);
-        
-        // Selecciona el texto del elemento temporal
-        tempInput.select();
-        document.execCommand("copy");
-        
-        // Elimina el elemento temporal
-        document.body.removeChild(tempInput);
-        
-        // Cambia el texto del botón para mostrar el mensaje de confirmación
-        button.value = "¡OTP copiado!";
-        
-        // Guarda el botón que fue clickeado
-        lastButtonClicked = button; 
-    }
+    // Crea un elemento de texto temporal
+    var tempInput = document.createElement("input");
+    tempInput.value = element.textContent;
+    document.body.appendChild(tempInput);
 
-    function clearMessages() {
-        // Limpia el mensaje del botón que fue clickeado para copiar OTP
-        if (lastButtonClicked) {
-            lastButtonClicked.value = lastButtonClicked.getAttribute('data-original-text'); // Restablece al valor original
-            lastButtonClicked = null; // Resetea la variable
-        }
+    // Selecciona el texto del elemento temporal
+    tempInput.select();
+    document.execCommand("copy");
+
+    // Elimina el elemento temporal
+    document.body.removeChild(tempInput);
+
+    // Cambia el valor del botón a "¡OTP Copiado!"
+    button.value = "¡OTP Copiado!";
+
+    // Restablece el texto original después de 2 segundos
+// Función para restablecer el texto del botón al hacer clic en "Ingresar"
+    function resetCopyButton() {
+        const copyButton = document.querySelector('.btn-credenciales');
+        copyButton.value = copyButton.getAttribute('data-original-text');
     }
+}
 </script>
