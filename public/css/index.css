@@ -210,7 +210,7 @@ input[type="password"]:focus, input[type="email"]:focus {
     box-shadow: none;
     transition: .5s;
 }
-.toggle-panel .btn:hover{
+.toggle-panel .btn:focus{
     background: #ffff;
     color: #14CC5E;
     border: none;
@@ -228,7 +228,6 @@ input[type="password"]:focus, input[type="email"]:focus {
 .content-input-otp{
     display: flex; /* Activa el modelo Flexbox */
     flex-wrap: wrap;
-    padding-bottom: 10px;
 }
 .content-input-otp div{
     display: inline-block; /* Hace que cada hijo se comporte como un bloque en línea */
@@ -241,7 +240,21 @@ input[type="password"]:focus, input[type="email"]:focus {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
-    margin-bottom: 25px;
+    text-align: center;
+    color: #149c4b;
+}
+.text-otp{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+}
+.text-otp p{
+    color: #149c4b;
+    background: #f6f6f6;
+    border: 1px solid #ccc;
+    padding: 12px;
+    border-radius: 4px;
 }
 /*Celular promedio*/ 
 @media (min-width: 300px) and (max-width: 649px){
