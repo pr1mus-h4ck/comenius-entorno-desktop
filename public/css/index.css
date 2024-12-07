@@ -3,12 +3,14 @@
     padding: 0;
     box-sizing: border-box;
 }
-body main{
-    background-color: #EEEEEE;
+html{
     font-family: "Lato", sans-serif;
     font-weight: 400;
     font-style: normal;
-    font-size: 18px;
+    font-size: 18px;   
+
+}
+body main{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,9 +22,10 @@ h1{
 h2{
     font-size: 23px;
 }
-p{
-    text-align: justify;
+h3{
+    
 }
+
 /*CSS Login*/
 .container {
     position: relative;
@@ -256,6 +259,304 @@ input[type="password"]:focus, input[type="email"]:focus {
     padding: 12px;
     border-radius: 4px;
 }
+/*CSS navbar*/
+.contenedor-index{
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: grid;
+    grid-template-columns: auto 1fr;
+}
+#sidebar{
+    box-sizing: border-box;
+    height: 100vh;
+    width: 75px;
+    padding: 6px;
+    background-color: #ffffff;  
+    border: 1px solid #ccc;  position: sticky;
+    top: 0;
+    align-self: start;
+    transition: 300ms ease-in-out;
+    overflow: hidden;
+    text-wrap: nowrap;
+  }
+  #sidebar ul{
+    list-style: none;
+  }
+  .icon-logo{
+    margin-top: 10px;
+  }
+  #sidebar ul li.active a{
+    color: #14CC5E;
+    
+    img{
+      fill: #14CC5E;
+    }
+  }
+  #sidebar ul li a:hover{
+    color: #ffffff;
+  
+    .hover-img{
+      filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(153deg) brightness(104%) contrast(106%);
+    }
+  
+  }
+  #sidebar a, #sidebar .dropdown-btn, #sidebar .logo{
+    border-radius: .5em;
+    padding: .85em;
+    text-decoration: none;
+    color: black;
+    display: flex;
+    align-items: center;
+    gap: 1.2em;
+  }
+  #sidebar a span, #sidebar{
+    flex-grow: 1;
+  }
+  #sidebar a:hover, #sidebar .dropdown-btn:hover{
+    background-color: #14CC5E;
+  }
+  #sidebar .sub-menu{
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: 300ms ease-in-out;
+  
+    > div{
+      overflow: hidden;
+    }
+  }
+  #sidebar .sub-menu.show{
+    grid-template-rows: 1fr;
+  }
+  .rotate svg:last-child{
+    rotate: 180deg;
+  }
+  .btn-notificaciones-exit{
+    border: none;
+    background: none;
+}
+/*CSS Navbar horizontal y contenedor de secciones*/
+.contenedor-secciones{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    background-color: #EEEEEE;
+    gap: 10px;
+    padding: 10px;
+}
+.item0{
+    grid-column: 1 / 13;
+    grid-row: 1 / 2;
+    background-color: #ffffff;
+    border-radius: 10px;
+    display: flex; /* Usamos flexbox para alinear los hijos */
+    justify-content: space-between; /* Espacio entre los hijos */
+    align-items: center; /* Alineamos verticalmente al centro */
+    padding: 10px 15px; /* Espaciado interno */
+    border: 1px solid #ccc; /* Opcional: borde para el contenedor */
+}
+.content-title-nav {
+    flex: 1; /* Permite que este div ocupe el espacio disponible */
+  }
+  .content-icons-nav {
+    display: flex; /* Usamos flexbox para alinear los iconos */
+    align-items: center; /* Alineamos verticalmente al centro */
+    gap: 15px; /* Espacio entre los iconos */
+  }
+  .icon-notificacion, .icon-perfil {
+    display: flex; /* Alineamos el contenido dentro de los iconos */
+    align-items: center; /* Alineamos verticalmente al centro */
+    background-color: #EEEEEE;
+    padding: 7px;
+    border-radius: 8px;
+  }
+  .btn-notificacion {
+    background: none; /* Sin fondo */
+    border: none; /* Sin borde */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    height: 32px;
+  }
+  .div-icon-alumno {
+    margin-left: 5px; /* Espacio entre el icono y el texto del alumno */
+  }
+
+/*CSS Home*/
+.item1{
+    grid-column: 1 / 5;
+    grid-row: 2 / 3;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 15px;
+  }
+    .content-item1{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      width: 100%;
+    }
+  .item2{
+    grid-column: 5 / 13;
+    grid-row: 2 / 3;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 15px;
+  }
+    .content-item2{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4%;
+    }
+    .content-item2 h2{
+      color: #14CC5E;
+      }
+  .item3{
+    grid-column: 1 / 13;
+    grid-row: 3 / 4;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 15px;
+  }
+  .item4{
+    grid-column: 1 / 13;
+    grid-row: 4 / 5;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 15px;
+  }
+  .title-content{
+    margin: 15px 0px;
+  }
+  .title-content h2{
+    color: #14CC5E;
+  }
+  .content-items-34{
+      display: flex; /* Activa el modelo Flexbox */
+      flex-wrap: wrap;       /* Permite el desplazamiento horizontal */
+      gap: 10px;
+  }
+  .content-items-34 div{
+    display: inline-block; /* Hace que cada hijo se comporte como un bloque en línea */
+    flex: 1 0 20%; 
+    background-color: #EEEEEE;
+    text-align: center;
+    padding: 1.5%;
+    border-radius: 10px; 
+    width: 100%;
+    margin: 0;   
+  }
+  .content-items-34 div h3{
+    color: #14CC5E;
+  }
+  .content-items-34 div h4{
+    color: #14CC5E;
+    margin-bottom: 5px;
+  }
+  .img-img{
+    max-width: 100%; /* La imagen no excederá el ancho de su contenedor */
+    height: auto;    /* Mantiene la proporción de la imagen */
+  }
+
+/*Querys de la navbar*/
+@media (min-width: 650px){
+    #sidebar{
+     display: flex;
+     flex-direction: column;
+    }
+    #sidebar ul{
+    display: flex;
+    flex-direction: column; 
+    flex-grow: 1;
+    gap: 10px;
+    }
+    .icon-exit{
+      margin-top: auto;
+      
+    }
+  }
+  @media(min-width: 300px) and (max-width: 649px){
+    .contenedor-index{
+      grid-template-columns: 1fr;
+    }
+    .contenedor-secciones{
+      padding: 5px 5px 70px 5px;
+      gap: 10px;
+    }
+    .item1{
+      display: none;
+    }
+    .item2{
+      display: none;
+    }
+    .item3{
+      display: none;
+    }
+    .item4{
+        grid-row: 2 / 3;
+    }
+    .content-items-34{
+      flex-direction: column;
+    }
+    .content-items-34 div{
+      padding: 5px 0px;
+    }
+    #sidebar{
+      height: 60px;
+      width: 100%;
+      border-right: none;
+      border-top: 2px solid #14CC5E;
+      padding: 0;
+      position: fixed;
+      top: unset;
+      bottom: 0;
+  
+      > ul{
+        padding: 0;
+        display: grid;
+        /* grid-auto-columns: 60px;
+        grid-auto-flow: column; */
+        align-items: center;
+        /* overflow-x: scroll; */
+        display: flex;
+        justify-content: center;
+      }
+      ul li{
+        height: 100%;
+      }
+      ul a, ul .dropdown-btn{
+        width: 60px;
+        height: 60px;
+        padding: 0;
+        border-radius: 0;
+        justify-content: center;
+      }
+  
+      ul li span, ul li:first-child, .dropdown-btn svg:last-child{
+        display: none;
+      }
+  
+      ul li .sub-menu.show{
+        position: fixed;
+        bottom: 60px;
+        left: 0;
+        box-sizing: border-box;
+        height: 60px;
+        width: 100%;
+        background-color: var(--hover-clr);
+        border-top: 1px solid var(--line-clr);
+        display: flex;
+        justify-content: center;
+  
+        > div{
+          overflow-x: auto;
+        }
+        li{
+          display: inline-flex;
+        }
+      }
+    }
+  }
+/*Querys responsive*/
 /*Celular promedio*/ 
 @media (min-width: 300px) and (max-width: 649px){
     .container {
@@ -278,7 +579,7 @@ input[type="password"]:focus, input[type="email"]:focus {
         margin-bottom: 8px;
     }
 }
-/*Tablet*/   
+/*Tablet y PC*/   
 @media screen and (max-width: 650px) {
     .container {
         height: calc(100vh - 20px);
