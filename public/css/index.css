@@ -15,6 +15,7 @@ body main{
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    background-color: #EEEEEE;
 }
 h1{
     font-size: 27px;
