@@ -11,13 +11,13 @@
 <body>
     <main>
         <div class="container">
-         <% if (procesoOTP.envio === true) { %>
-             <%- include('otp-confirmar.ejs') %>
-         <% } else { %>
-             <%- include('otp-enviar.ejs') %>
-         <% } %>
+            <% if (procesoOTP.envio === true) { %>
+                <%- include('otp-confirmar.ejs') %>
+            <% } else { %>
+                <%- include('otp-enviar.ejs') %>
+            <% } %>
         </div>
-     </main>
+    </main>
     <!-- Fin de Contenido de cada proceso del OTP -->
     <!-- Etiquetas cuando se activa una alerta -->
     <div id="contenido" class="contenido"></div>
