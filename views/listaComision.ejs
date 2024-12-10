@@ -1,5 +1,5 @@
 <!-- Lista de Comisiones inscriptas -->
-<div id="listaComision"></div> 
+<div id="listaComision" class="contenedor-lista-comision"></div> 
 <!-- Fin de Lista de Comisiones inscriptas -->
 <!-- Actualizar Publicaciones -->
 <script>
@@ -22,8 +22,16 @@
                 recibido.comisiones.forEach(comision => {
                     // Crea el HTML para cada comision
                     const html = `
-                        <h1>${comision.content}</h1>
-                        <button type="submit" onclick="ingresarComisionClick('${comision.content}')">Ingresar</button>
+                        <div class="card-materias">
+                        <div>
+                        <div><h2 class="title-content">${comision.content}</h2></div>
+                        <div class="content-card-materia">
+                        <div><p>Comision: XXI</p><p>Turno: Tarde</p></div>
+                        <div><p>Miercoles: 18:00 - 20:00</p><p>Viernes: 18:00 - 20:00</p></div>
+                        <div><p>Profesor: Profesor</p></div>
+                        <div><button class="btn-aceptar" type="submit" onclick="ingresarComisionClick('${comision.content}')">Ingresar</button></div> 
+                        </div>
+                        </div>
                     `;
                     // Agrega el HTML al contenedor
                     listaComision.innerHTML += html;
