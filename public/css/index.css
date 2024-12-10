@@ -369,6 +369,7 @@ input[type="password"]:focus, input[type="email"]:focus {
     background-color: #EEEEEE;
     padding: 7px;
     border-radius: 8px;
+    gap: 5px;
   }
   .btn-notificacion {
     background: none; /* Sin fondo */
