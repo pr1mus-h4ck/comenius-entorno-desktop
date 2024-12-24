@@ -12,17 +12,17 @@
     <div class="contenedor-index">
         <nav id="sidebar">
             <!-- Iteración del array 'menu' -->
-            <!-- <% if (menu) { %> -->
-                <!--   <ul>  -->
-                    <!-- <% menu.forEach(item => { %> --> 
-                        <!--   <li><a href="#" onclick="manejarMenuClick('<%= item %>')" title="<%= item %>"><%= item %></a></li>  -->
-                    <!-- <% }) %> -->
+            <% if (menu) { %>
+                <ul>
+                    <% menu.forEach(item => { %>
+                        <li><a href="#" onclick="manejarMenuClick('<%= item %>')" title="<%= item %>"><%= item %></a></li>
+                    <% }) %>
                 </ul> 
-            <!-- <% } %> -->
+            <% } %>
             <!-- Fin de Iteración del array 'menu' -->
             <!-- Botón que activa la función 'avisoCerrarSesion()' -->
-            <!--  <button onclick="avisoCerrarSesion()">Cerrar Sesión</button>  -->  
-            <ul>
+            <button onclick="avisoCerrarSesion()">Cerrar Sesión</button>
+            <!-- <ul>
                 <li class="icon-logo">
                     <img src="./recursos/img/icon-navbar1.svg" alt="">
                 </li>
@@ -43,7 +43,7 @@
                         </button>
                     </a>
                 </li>
-            </ul>
+            </ul> -->
         </nav>
         <div class="contenedor-secciones">
             <div class="item0">

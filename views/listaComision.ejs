@@ -2,43 +2,80 @@
 <div id="listaComision" class="contenedor-lista-comision"></div> 
 <!-- Fin de Lista de Comisiones inscriptas -->
 <!-- Actualizar Publicaciones -->
-<script>
-    function actualizarListaComision() {
-        fetch('http://localhost:3000/actualizarListaComision', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(recibir => recibir.json())
-        .then(recibido => {
-            const listaComision = document.getElementById('listaComision');
-            // Limpia el contenido actual
-            listaComision.innerHTML = '';
-            recibido.comisiones.forEach(comision => {
+<% if (sesiones.rol === 'alumno') { %>
+    <script>
+        function actualizarListaComision() {
+            fetch('/actualizarListaComision', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(recibir => recibir.json())
+            .then(recibido => {
                 const listaComision = document.getElementById('listaComision');
-                // Limpia el contenido actual
-                listaComision.innerHTML = '';
-                recibido.comisiones.forEach(comision => {
-                    // Crea el HTML para cada comision
+                listaComision.innerHTML = ''; // Limpia el contenedor solo una vez
+    
+                recibido.comisiones.forEach(comision => { // Usa 'comision', no 'comisiones'
                     const html = `
                         <div class="card-materias">
-                        <div>
-                        <div><h2 class="title-content">${comision.content}</h2></div>
-                        <div class="content-card-materia">
-                        <div><p>Comision: XXI</p><p>Turno: Tarde</p></div>
-                        <div><p>Miercoles: 18:00 - 20:00</p><p>Viernes: 18:00 - 20:00</p></div>
-                        <div><p>Profesor: Profesor</p></div>
-                        <div><button class="btn-aceptar" type="submit" onclick="ingresarComisionClick('${comision.content}')">Ingresar</button></div> 
-                        </div>
+                            <div>
+                                <div><h2 class="title-content">${comision.Materia}</h2></div>
+                                <div class="content-card-materia">
+                                    <div><p>Comision: ${comision.Comision}</p><p>Turno: ${comision.Turnos}</p></div>
+                                    <div><p>${comision.Horarios}</p></div>
+                                    <div><p>Profesor: ${comision.Instructores}</p></div>
+                                    <div><button class="btn-aceptar" type="submit" onclick="ingresarComisionClick('${comision.Materia}')">Ingresar</button></div> 
+                                </div>
+                            </div>
                         </div>
                     `;
+                    if (comision.Instructores) {
+                    } else {
+                    }
                     // Agrega el HTML al contenedor
                     listaComision.innerHTML += html;
                 });
             });
-        })
-    }
-    actualizarListaComision();
-</script>
+        }
+        actualizarListaComision();
+    </script>
+<% } else { %>
+    <script>
+        function actualizarListaComision() {
+            fetch('/actualizarListaComision', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(recibir => recibir.json())
+            .then(recibido => {
+                const listaComision = document.getElementById('listaComision');
+                listaComision.innerHTML = ''; // Limpia el contenedor solo una vez
+    
+                recibido.comisiones.forEach(comision => { // Usa 'comision', no 'comisiones'
+                    const html = `
+                        <div class="card-materias">
+                            <div>
+                                <div><h2 class="title-content">${comision.Materia}</h2></div>
+                                <div class="content-card-materia">
+                                    <div><p>Comision: ${comision.Comision}</p><p>Turno: ${comision.Turnos}</p></div>
+                                    <div><p>${comision.Horarios}</p></div>
+                                    <div><button class="btn-aceptar" type="submit" onclick="ingresarComisionClick('${comision.Materia}')">Ingresar</button></div> 
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    if (comision.Instructores) {
+                    } else {
+                    }
+                    // Agrega el HTML al contenedor
+                    listaComision.innerHTML += html;
+                });
+            });
+        }
+        actualizarListaComision();
+    </script>
+<% } %>
 <!-- Fin de Actualizar Publicaciones -->
