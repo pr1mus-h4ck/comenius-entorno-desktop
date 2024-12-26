@@ -1,4 +1,3 @@
-<h1><%= sesiones.comision %></h1>
 <!-- Iteración del array 'comision' -->
 <% if (comision) { %>
     <ul>
@@ -9,9 +8,11 @@
 <% } %>
 <!-- Fin de Iteración del array 'comision' -->
 <!--Sección Informativa de la Comisión -->
-<div>
+<div id="cabeceraComision">
     <!-- Título de la Comisión -->
-    <div></div>
+    <div>
+        <h1><%= sesiones.comision %></h1>
+    </div>
     <!-- Fin de Título de la Comisión -->
     <!-- Información de la Comisión -->
     <div>
@@ -35,3 +36,49 @@
     <%- include('portada.ejs') %>
 <% } %>
 <!-- Fin de Contenido de cada item seleccionado -->
+<script>
+    function actualizarComision() {
+        fetch('/actualizarComision', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(recibir => recibir.json())
+        .then(recibido => {
+            const listaComision = document.getElementById('cabeceraComision');
+            listaComision.innerHTML = ''; // Limpia el contenedor solo una vez
+            recibido.comisiones.forEach(comision => { // Usa 'comision', no 'comisiones'
+                const html = `
+                    <!-- Título de la Comisión -->
+                    <div>
+                        <h1>${comision.Materia}</h1>
+                    </div>
+                    <!-- Fin de Título de la Comisión -->
+                    <!-- Información de la Comisión -->
+                    <div>
+                        <!-- Comision y Turno de la Comisión-->
+                        <div>
+                            <p>Comision: ${comision.Comision}</p>
+                            <p>Turno: ${comision.Turnos}</p>
+                        </div>
+                        <!-- Fin de la Comision y Turno de la Comisión-->
+                        <!-- Días y Horarios de la Comisión -->
+                        <div>
+                            <p>${comision.Horarios}</p>
+                        </div>
+                        <!-- Fin de Días y Horarios de la Comisión -->
+                        <!-- Nombre/s de el/los Instructor/es -->
+                        <div>
+                            <p>Profesor: ${comision.Instructores}</p></div>
+                        <div>
+                    </div>
+                    <!-- Fin de Información de la Comisión -->
+                `;
+                // Agrega el HTML al contenedor
+                listaComision.innerHTML += html;
+            });
+        });
+    }
+    actualizarListaComision();
+</script>

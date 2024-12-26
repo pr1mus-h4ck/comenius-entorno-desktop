@@ -363,9 +363,30 @@ app.post('/actualizarPublicacion', (req, res) => {
         method: 'POST',
         body: sesionesJson,
     })
-        .then(recibir => recibir.json())
-        .then(recibido => {
-            res.json(recibido);
-        })
+    .then(recibir => recibir.json())
+    .then(recibido => {
+        res.json(recibido);
+    })
+});
+app.post('/actualizarComision', (req, res) => {
+    // Creo un objeto con los valores de las Cookies de la sesión
+    const sesiones = {
+        id: cookieSession.usuariosID,
+        session: cookieSession.sessionsID,
+        comisionID: cookieSession.comisionID,
+        rol: cookieSession.rol,
+        instructorId: cookieSession.instructorID,
+    }
+    // Convierto el objeto en un JSON
+    let sesionesJson = JSON.stringify(sesiones);
+    // Envío en método POST al servidor con los datos del JSON
+    fetch(`http://localhost:3000/actualizarComision`, {
+        method: 'Post',
+        body: sesionesJson
+    })
+    .then(recibir => recibir.json())
+    .then(recibido => {
+        res.json(recibido);
+    })
 })
 module.exports = { routerPost: app }
