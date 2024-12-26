@@ -82,7 +82,7 @@
                                     <span>${publicacion.FechaHora}</span>
                                 </div>
                                 <div>
-                                    <h2>${publicacion.Titulo}</h2>
+                                    ${publicacion.Titulo && publicacion.Titulo.trim() !== '' ? `<h2>${publicacion.Titulo}</h2>` : ''}
                                     <p>${publicacion.Contenido}</p>
                                 </div>
                             </article>
