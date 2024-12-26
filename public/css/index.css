@@ -267,6 +267,9 @@ border-color: #149c4b;
   display: grid;
   grid-template-columns: auto 1fr;
 }
+#formulario {
+  display: none;
+}
 #sidebar{
   box-sizing: border-box;
   height: 100vh;

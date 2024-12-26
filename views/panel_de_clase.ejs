@@ -2,7 +2,7 @@
 <div class="publicacion">
     <% if (sesiones.rol === 'instructor') { %>
         <!-- Formulario para la Creación de Publicación -->
-        <form action="/crearPublicacion" method="POST" onsubmit="enviarPublicacion(event)">
+        <form id="formulario" action="/crearPublicacion" method="POST" onsubmit="enviarPublicacion(event)">
             <input type="text" id="publicacion-titulo" placeholder="Ingresar un título (opcional)" name="publicacion-titulo">
             <input type="text" id="publicacion" placeholder="Crear publicación" name="publicacion">
             <input type="submit" value="enviar"> 
