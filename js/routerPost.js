@@ -327,14 +327,15 @@ app.post('/actualizarListaComision', (req, res) => {
 app.post('/crearPublicacion', (req, res) => {
     const titulo = req.body.titulo;
     const publicacion = req.body.publicacion;
-    const fechaHora = req.body.fechaHora;
+    const fechaHoraActual = new Date();
+    const timestamp = fechaHoraActual.getTime()
     // Creo un objeto con los valores de las Cookies de la sesión
     const sesiones = {
         id: cookieSession.usuariosID,
         session: cookieSession.sessionsID,
         titulo: titulo,
         publicacion: publicacion,
-        fechaHora: fechaHora,
+        fechaHora: timestamp,
         comisionID: cookieSession.comisionID,
         instructorId: cookieSession.instructorID,
     }

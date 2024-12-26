@@ -22,11 +22,9 @@
         const titulo = document.querySelector('input[name="publicacion-titulo"]').value;
         const publicacion = document.querySelector('input[name="publicacion"]').value;
         if (publicacion !== '') {
-            const fechaHoraActual = new Date();
             let publi = {
                 titulo: titulo,
                 publicacion: publicacion,
-                fechaHora: fechaHoraActual,
             }
             const publiJSON = JSON.stringify(publi);
             fetch(`/crearPublicacion`, {
