@@ -351,7 +351,6 @@ app.post('/crearPublicacion', (req, res) => {
         })
 });
 app.post('/actualizarPublicacion', (req, res) => {
-    console.log('Hizo un POST en "/actualizarPublicacion"');
     // Creo un objeto con los valores de las Cookies de la sesión
     const sesiones = {
         id: cookieSession.usuariosID,
@@ -366,7 +365,6 @@ app.post('/actualizarPublicacion', (req, res) => {
     })
         .then(recibir => recibir.json())
         .then(recibido => {
-            console.log('Se actualizó con Éxito!');
             res.json(recibido);
         })
 })
