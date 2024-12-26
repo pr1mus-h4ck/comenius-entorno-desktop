@@ -1,7 +1,7 @@
 const { app, cookies, cookieSession, cookieZoom } = require('./config');
 const config = require('./config');
 const funciones = require('./funciones');
-const {menuRol, menuMateria} = require('./array');
+const { menuRol, menuMateria } = require('./array');
 // Renderizar la página de index
 app.get('/', (req, res) => {
     // Crear un objeto de sesión
@@ -12,6 +12,7 @@ app.get('/', (req, res) => {
         item: cookieSession.item,
         enlace: cookieSession.enlace,
         comision: cookieSession.comision,
+        comisionID: cookieSession.comisionID,
         nombre: cookieSession.nombre,
         otp: cookieSession.otp,
         trabajo: cookieSession.trabajo,

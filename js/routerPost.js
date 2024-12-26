@@ -121,6 +121,10 @@ app.post('/confirmar-otp', (req, res) => {
                     cookieSession.verificacionOTP = cookies.get('verificacion');
                     cookieSession.rol = cookies.get('rol');
                     cookieSession.nombre = cookies.get('nombre');
+                    if (recibido.rol === 'instructor') {
+                        cookies.set('instructorID', recibido.instructorId, { path: '/' });
+                        cookieSession.instructorID = cookies.get('instructorID');
+                    }
                     const procesoOTP = {
                         envio: config.envioOTP,
                         correo: cookieSession.correoOTP
@@ -240,6 +244,11 @@ app.post('/ingresarComision', (req, res) => {
     cookies.set('comision', req.body.comision, { path: '/' });
     // Guarda la Cookie 'comision' creada
     cookieSession.comision = cookies.get('comision');
+    // console.log(cookieSession.comision);
+    // Crea la Cookie 'comision' con el valor enviado desde 'panel_materias.ejs'
+    cookies.set('comisionID', req.body.comisionID, { path: '/' });
+    // Guarda la Cookie 'comision' creada
+    cookieSession.comisionID = cookies.get('comisionID');
     // Envia la respuesta de éxito a 'index.ejs'
     res.sendStatus(200);
 });
@@ -314,5 +323,51 @@ app.post('/actualizarListaComision', (req, res) => {
         .then(recibido => {
             res.json(recibido);
         });
+});
+app.post('/crearPublicacion', (req, res) => {
+    const titulo = req.body.titulo;
+    const publicacion = req.body.publicacion;
+    const fechaHora = req.body.fechaHora;
+    // Creo un objeto con los valores de las Cookies de la sesión
+    const sesiones = {
+        id: cookieSession.usuariosID,
+        session: cookieSession.sessionsID,
+        titulo: titulo,
+        publicacion: publicacion,
+        fechaHora: fechaHora,
+        comisionID: cookieSession.comisionID,
+        instructorId: cookieSession.instructorID,
+    }
+    // Convierto el objeto en un JSON
+    let sesionesJson = JSON.stringify(sesiones);
+    // Envío en método POST al servidor con los datos del JSON
+    fetch(`http://localhost:3000/crearPublicacion`, {
+        method: 'Post',
+        body: sesionesJson
+    })
+        .then(recibir => recibir.json())
+        .then(recibido => {
+            res.json(recibido);
+        })
+});
+app.post('/actualizarPublicacion', (req, res) => {
+    console.log('Hizo un POST en "/actualizarPublicacion"');
+    // Creo un objeto con los valores de las Cookies de la sesión
+    const sesiones = {
+        id: cookieSession.usuariosID,
+        session: cookieSession.sessionsID,
+        comisionID: cookieSession.comisionID,
+    }
+    // Convierto el objeto en un JSON
+    let sesionesJson = JSON.stringify(sesiones);
+    fetch('http://localhost:3000/actualizarPublicacion', {
+        method: 'POST',
+        body: sesionesJson,
+    })
+        .then(recibir => recibir.json())
+        .then(recibido => {
+            console.log('Se actualizó con Éxito!');
+            res.json(recibido);
+        })
 })
 module.exports = { routerPost: app }

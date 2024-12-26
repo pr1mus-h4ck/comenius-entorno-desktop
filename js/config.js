@@ -28,6 +28,8 @@ let cookieSession = {
     correoOTP: cookies.get('correo'),
     // Craar variable de 'rol' para guardar como cookie el rol del usuario para la visualización del menú
     rol: cookies.get('rol'),
+    // Crear variable 'instructorID' para guardar como cookie la ID del usuario con el rol Instructor de la DDBB
+    instructorID: cookies.get('instructorID'),
     // Craar variable de 'item' para guardar como cookie el item seleccionado del menu para renderizar dicha página en el index.ejs
     item: cookies.get('item'),
     // Crear variable de 'id' para guardar como cookie el ID de zoom para iniciar la videollamda
@@ -40,6 +42,8 @@ let cookieSession = {
     clientId: cookies.get('clientId'),
     // Crear variable de 'comision' para ingrear a las distintas comisiones inscriptas
     comision: cookies.get('comision'),
+    // Crear variable 'comisionID' para guardar como cookie la ID del usuario con el rol Instructor de la DDBB
+    comisionID: cookies.get('comisionID'),
     // Crear variable de 'enlace' para ingresar a las distintas secciones de la comision
     enlace: cookies.get('enlace'),
     // Crear variable de 'trabajo' para ingresar a los distintas trabajos publicados por el instructor

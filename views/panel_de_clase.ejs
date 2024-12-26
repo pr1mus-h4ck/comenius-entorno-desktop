@@ -2,6 +2,7 @@
 <div class="publicacion">
     <!-- Formulario para la Creación de Publicación -->
     <form action="/crearPublicacion" method="POST" onsubmit="enviarPublicacion(event)">
+        <input type="text" id="publicacion-titulo" placeholder="Ingresar un título (opcional)" name="publicacion-titulo">
         <input type="text" id="publicacion" placeholder="Crear publicación" name="publicacion">
         <input type="submit" value="enviar"> 
     </form>
@@ -16,15 +17,17 @@
 <script>
     function enviarPublicacion(event) {
         event.preventDefault(); // Evita el envío del formulario por defecto
+        const titulo = document.querySelector('input[name="publicacion-titulo"]').value;
         const publicacion = document.querySelector('input[name="publicacion"]').value;
         if (publicacion !== '') {
             const fechaHoraActual = new Date();
             let publi = {
+                titulo: titulo,
                 publicacion: publicacion,
                 fechaHora: fechaHoraActual,
             }
             const publiJSON = JSON.stringify(publi);
-            fetch(`http://localhost:3000/crearPublicacion`, {
+            fetch(`/crearPublicacion`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -47,14 +50,15 @@
                 console.error('Error al crear publicación:', error);
             });
         }
+        document.getElementById('publicacion-titulo').value = '';
         document.getElementById('publicacion').value = '';
     }
 </script>
 <!-- Fin de Crear Publicación -->
 <!-- Actualizar Publicaciones -->
 <script>
-    function actualizarPublicacion(index) {
-        fetch('http://localhost:3000/actualizarPublicacion', { 
+    function actualizarPublicacion() {
+        fetch('/actualizarPublicacion', { 
             method: 'POST', 
             headers: { 
                 'Content-Type': 'application/json'
@@ -62,6 +66,7 @@
         })
         .then(recibir => recibir.json())
         .then(recibido => {
+            console.log(recibido);
             const listaPublicacion = document.getElementById('listaPublicacion');
             listaPublicacion.innerHTML = ''; // Limpia el contenido actual
             recibido.publicaciones.forEach(publicacion => {
@@ -71,8 +76,16 @@
                     // Crea el HTML para cada publicación (sin comentarios)
                     const html = `
                         <section>
-                            <h1>${publicacion.content}</h1>
-                            <article id="listaComentario"></article>
+                            <article id="listaComentario">
+                                <div>
+                                    <span>${publicacion.NombreCompleto}</span>
+                                    <span>${publicacion.FechaHora}</span>
+                                </div>
+                                <div>
+                                    <h2>${publicacion.Titulo}</h2>
+                                    <p>${publicacion.Contenido}</p>
+                                </div>
+                            </article>
                             <form action="/crearComentario" method="POST" onsubmit="enviarComentario(event)">
                                 <input type="text" id="comentario" placeholder="Escribir comentario..." name="comentario">
                                 <input type="submit" value="enviar"> 

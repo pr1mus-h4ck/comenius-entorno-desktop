@@ -7,10 +7,10 @@
 <% } %>
 <!-- Fin de Contenido de cada item seleccionado -->
 <script>
-    function ingresarComisionClick(content) {
-        console.log(content);
+    function ingresarComisionClick(comision, comisionID) {
         const materia = {
-            comision: content,
+            comision: comision,
+            comisionID: comisionID,
         };
         const materiaJson = JSON.stringify(materia);
         fetch(`/ingresarComision`, {
