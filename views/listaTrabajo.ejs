@@ -1,35 +1,32 @@
 <!-- Trabajos -->
 <div class="trabajos">
     <!-- Formulario de la Creación de Trabajo -->
-    <div class="contenedor-seccion-trabajos">
-        <form id="formulario" action="/crearTrabajos" method="post" onsubmit="crearTrabajos(event)">
-            <!-- Título -->
-            <div class=""><h3>Formulario de carga de TP</h3></div>
-            <div>
-                <label for="titulo">Título</label>
-                <input type="text" name="titulo" id="titulo" placeholder="Ingrese aquí el título..." required>
-            </div>
-            <!-- Fin de Título -->
-            <!-- Contenido -->
-            <div>
-                <label for="contenido">Contenido</label>
-                <textarea name="contenido" id="contenido" placeholder="Ingrese aquí el contenido..." required></textarea>
-            </div>
-            <!-- Fin de Contenido -->
-            <!-- Archivo -->
-            <div class="subir-archivo">
-                <label for="archivo">Archivos</label>
-                <input type="text" id="url-archivo" placeholder="URL del archivo subido..." readonly required>
-                <button class="btn-aceptar btn-style btn-form-tp" type="button" id="btn-subir-archivo">Subir Archivo</button>
-            </div>
-            <!-- Fin de Archivo -->
-            <!-- Botón de 'Crear Trabajo' -->
-            <div>
-                <input class="btn-aceptar btn-style btn-form-tp" type="submit" value="Crear Trabajo">
-            </div>
-            <!-- Fin de Botón de 'Crear Trabajo' -->
-        </form>
-    </div>
+    <form id="formulario" action="/crearTrabajos" method="post" onsubmit="crearTrabajos(event)">
+        <!-- Título -->
+        <div>
+            <label for="titulo">Título</label>
+            <input type="text" name="titulo" id="titulo" placeholder="Ingrese aquí el título..." required>
+        </div>
+        <!-- Fin de Título -->
+        <!-- Contenido -->
+        <div>
+            <label for="contenido">Contenido</label>
+            <textarea name="contenido" id="contenido" placeholder="Ingrese aquí el contenido..." required></textarea>
+        </div>
+        <!-- Fin de Contenido -->
+        <!-- Archivo -->
+        <div>
+            <label for="archivo">Archivos</label>
+            <input type="text" id="url-archivo" placeholder="URL del archivo subido..." readonly required>
+            <button type="button" id="btn-subir-archivo">Subir Archivo</button>
+        </div>
+        <!-- Fin de Archivo -->
+        <!-- Botón de 'Crear Trabajo' -->
+        <div>
+            <input type="submit" value="Crear Trabajo">
+        </div>
+        <!-- Fin de Botón de 'Crear Trabajo' -->
+    </form>
     <!-- Fin de Formulario de la Creación de Trabajo -->
     <!-- Lista de Trabajos -->
     <div id="listaTrabajos"></div>
@@ -125,12 +122,11 @@
             recibido.trabajos.forEach(trabajo => {
                 html += `
                     <div class="trabajo">
-                        <h3>${trabajo.titulo}</h3>
-                            <div>
-                            <p>${trabajo.contenido}</p>
-                            <ul>
-                                ${trabajo.archivos.map(archivo => `<li><a class="${archivo.tipo}" href="${archivo.url}" target="_blank">${archivo.nombre}</a></li>`).join('')} </ul>
-                            </div>
+                        <h2>${trabajo.titulo}</h2>
+                        <p>${trabajo.contenido}</p>
+                        <ul>
+                            ${trabajo.archivos.map(archivo => `<li><a class="${archivo.tipo}" href="${archivo.url}" target="_blank">${archivo.nombre}</a></li>`).join('')}
+                        </ul>
                     </div>
                 `;
             });
