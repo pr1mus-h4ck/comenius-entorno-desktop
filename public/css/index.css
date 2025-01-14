@@ -22,9 +22,10 @@ h1{
 }
 h2{
   font-size: 23px;
+  color: #14CC5E;
 }
-h3{
-  
+h3, h4{
+color: #14CC5E;  
 }
 
 /*CSS Login*/
@@ -49,6 +50,7 @@ h3{
 .text-cabecera-login h2{
   color: #149c4b;
 }
+
 .etiqueta-correo{
   width: 100%;
   padding: 12px;
@@ -103,7 +105,7 @@ form{
   background: #f6f6f6;
   /* border-bottom: 2px solid #eee; */
   border-radius: 8px;
-  border: 1px solid #ccc;
+  border: 2px solid #ccc;
   font-size: 16px;
   color: #333;
   font-weight: 500;
@@ -111,8 +113,16 @@ form{
 }
 input[type="text"]:focus,
 input[type="password"]:focus, input[type="email"]:focus {
-outline: none;
-border-color: #149c4b;
+  outline: none;
+  border-color: #14CC5E;
+}
+input[type="text"]:hover,
+input[type="password"]:hover, input[type="email"]:hover {
+  outline: none;
+  border-color: #14CC5E;
+  background-color: white;
+  transition: .2s;
+
 }
 .input-box input::placeholder {
   color: #888;
@@ -141,6 +151,16 @@ border-color: #149c4b;
 }
 .btn-credenciales{
   width: 100%;
+}
+.btn-style:hover{
+  background-color: white;
+  outline: 2px solid #14CC5E;
+  color: #14CC5E;
+  transition: .2s;
+}
+.btn-active:active{
+  background-color: #14CC5E;
+  color: white;
 }
 .imagen-form-login{
   margin-bottom: 10px;
@@ -187,6 +207,16 @@ border-color: #149c4b;
   z-index: 2;
   transition: .6s ease-in-out;
 }
+.toggle-panel.toggle-left h2{
+  color: white;
+  margin: 0px 20px;
+  text-align: center;
+}
+.toggle-panel.toggle-right h2{
+  color: white;
+  margin: 0px 20px;
+  text-align: center;
+}
 .toggle-panel.toggle-left {
   left: 0;
   transition-delay: 1.2s;
@@ -204,7 +234,8 @@ border-color: #149c4b;
   transition-delay: 1.2s;
 }
 .toggle-panel p {
-  margin-bottom: 20px;
+  margin: 0px 20px 20px 20px;
+  text-align: center;
 }
 .toggle-panel .btn {
   width: 160px;
@@ -214,7 +245,7 @@ border-color: #149c4b;
   box-shadow: none;
   transition: .5s;
 }
-.toggle-panel .btn:focus{
+.toggle-panel .btn:hover{
   background: #ffff;
   color: #14CC5E;
   border: none;
@@ -247,6 +278,11 @@ border-color: #149c4b;
   text-align: center;
   color: #149c4b;
 }
+.content-input-otp input:hover{
+  background-color: white;
+  outline: 1px solid #14CC5E;
+  color: #14CC5E;
+}
 .text-otp{
   display: flex;
   align-items: center;
@@ -260,21 +296,22 @@ border-color: #149c4b;
   padding: 12px;
   border-radius: 4px;
 }
+.text-otp p:hover{
+  background-color: white;
+  outline: 1px solid #14CC5E;
+}
 /*CSS navbar*/
 .contenedor-index{
   min-height: 100vh;
   min-height: 100dvh;
   display: grid;
-  grid-template-columns: auto 1fr;
-}
-#formulario {
-  display: none;
+  grid-template-columns: 65px auto;   /**/
 }
 #sidebar{
   box-sizing: border-box;
   height: 100vh;
-  width: 70px;
-  padding: 4px;
+  width: 65px;
+  padding: 2px;
   background-color: #ffffff;  
   border: 1px solid #ccc;  position: sticky;
   top: 0;
@@ -289,13 +326,14 @@ border-color: #149c4b;
 .icon-logo{
   margin-top: 10px;
 }
-#sidebar ul li.active a{
+#sidebar ul li a.active img{ /*Aca estaria el problema del active*/
   color: #14CC5E;
   
   img{
     fill: #14CC5E;
   }
 }
+
 #sidebar ul li a:hover{
   color: #ffffff;
 
@@ -342,7 +380,7 @@ border-color: #149c4b;
 .contenedor-secciones{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 70px auto;
+  grid-template-rows: 60px auto; 
   background-color: #EEEEEE;
   gap: 10px;
   padding: 10px;
@@ -353,8 +391,7 @@ border-color: #149c4b;
   background-color: #ffffff;
   border-radius: 10px;
   display: flex; /* Usamos flexbox para alinear los hijos */
-  justify-content: space-between; /* Espacio entre los hijos */
-  align-items: center; /* Alineamos verticalmente al centro */
+  justify-content: end; /* Espacio entre los hijos */
   padding: 10px 15px; /* Espaciado interno */
   border: 1px solid #ccc; /* Opcional: borde para el contenedor */
 }
@@ -369,25 +406,53 @@ border-color: #149c4b;
 .icon-notificacion, .icon-perfil {
   display: flex; /* Alineamos el contenido dentro de los iconos */
   align-items: center; /* Alineamos verticalmente al centro */
-  background-color: #EEEEEE;
   padding: 7px;
   border-radius: 8px;
   gap: 5px;
+}
+.icon-notificacion:hover{
+  background-color: #14CC5E;
+}
+.item0 .content-icons-nav .icon-notificacion .btn-notificacion a:hover{
+  color: #ffffff;
+  
+  .hover-img{
+    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(153deg) brightness(104%) contrast(106%);
+  }
+}
+.icon-perfil{
+  background-color: #EEEEEE;
+}
+.icon-perfil:hover{
+  background-color: #14CC5E;
+  color: white;
 }
 .btn-notificacion {
   background: none; /* Sin fondo */
   border: none; /* Sin borde */
   cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
-  height: 32px;
+  height: 30px;
 }
 .div-icon-alumno {
   margin-left: 5px; /* Espacio entre el icono y el texto del alumno */
 }
 
 /*CSS Home*/
-.item1{
+.contenedor-grilla-home{
+  display: flex;
+      flex-direction: column;
+      grid-column: 1 / 13;
+      grid-row: auto;
+      gap: 10px;
+      justify-content: center;
+}
+.item12-home{
+  display: grid;
+    gap: 10px;
+}
+.item1-home{
   grid-column: 1 / 5;
-  grid-row: 2 / 3;
+  grid-row: 1 / 2;
   background-color: #ffffff;
   border-radius: 10px;
   padding: 15px;
@@ -399,41 +464,34 @@ border-color: #149c4b;
     height: 100%;
     width: 100%;
   }
-.item2{
+.item2-home{
   grid-column: 5 / 13;
-  grid-row: 2 / 3;
+  grid-row: 1 / 2;
   background-color: #ffffff;
   border-radius: 10px;
   padding: 15px;
 }
-  .content-item2{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 4%;
+.content-item2{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4%;
   }
-  .content-item2 h2{
-    color: #14CC5E;
-    }
-.item3{
-  grid-column: 1 / 13;
-  grid-row: 3 / 4;
+.item3-home{
   background-color: #ffffff;
   border-radius: 10px;
-  padding: 15px;
+  padding: 10px;
 }
-.item4{
-  grid-column: 1 / 13;
-  grid-row: 4 / 5;
+.item3-home h2{
+  padding-bottom: 10px;
+}
+.item4-home h2{
+  padding-bottom: 10px;
+}
+.item4-home{
   background-color: #ffffff;
   border-radius: 10px;
-  padding: 15px;
-}
-.title-content{
-  margin: 10px 0px;
-}
-.title-content h2{
-  color: #14CC5E;
+  padding: 10px;
 }
 .content-items-34{
     display: flex; /* Activa el modelo Flexbox */
@@ -450,37 +508,42 @@ border-color: #149c4b;
   width: 100%;
   margin: 0;   
 }
-.content-items-34 div h3{
-  color: #14CC5E;
+.content-items-34 div:hover{
+  background-color:#C9FFE0;
 }
 .content-items-34 div h4{
-  color: #14CC5E;
   margin-bottom: 5px;
 }
 .img-img{
   max-width: 100%; /* La imagen no excederá el ancho de su contenedor */
   height: auto;    /* Mantiene la proporción de la imagen */
 }
-/*CSS Seccion materias*/
-.contenedor-lista-comision{
-  display: grid;
-  gap: 10px;
-  grid-column: 1 / 13;
+/*CSS Seccion materias-cursos*/
+.contenedor-grilla-lista-comision{
+  display: flex;
+      flex-direction: column;
+      grid-column: 1 / 13;
+      grid-row: auto;
+      gap: 10px;
+      /*justify-content: center;*/
 }
 .card-materias{
   background-color: white;
-  padding: 15px;
+  padding: 10px;
   border-radius: 10px;
 }
-.card-materias h2{
-  color: #14CC5E;
+.card-materias div h2{
+  padding-bottom: 10px;
 }
 .content-card-materia{
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   background-color: #EEEEEE;
   padding: 15px;
   border-radius: 10px;
+}
+.content-card-materia:hover{
+  background-color: #C9FFE0;
 }
 .btn-aceptar{
   background-color: #14CC5E;
@@ -492,8 +555,326 @@ border-color: #149c4b;
   width: 100%;
   height: 100%;
 }
-/*Querys de la navbar*/
-@media (min-width: 650px){
+/*
+CSS seccion portada y submenu
+*/
+.contenedor-materias{
+  grid-column: 1 / 13;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.contenedor-submenu{
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+}
+.contenedor-submenu ul{
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+.contenedor-submenu ul li{
+  list-style: none;
+}
+.contenedor-submenu ul li a{
+text-decoration: none;
+text-transform: capitalize;
+}
+.contenedor-grilla-portada{
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: auto;
+  gap: 10px;
+}
+.contenedor-grilla-portada div{
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px;
+}
+.contenedor-grilla-portada div h3{
+  padding-bottom: 10px;
+}
+.item1-portada{
+  grid-column: 1/8;
+  grid-row: 1/2;
+}
+.item1-portada p{
+  background-color: #EEEEEE;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: justify;
+}
+.item1-portada p:hover{
+  background-color: #C9FFE0;
+}
+.item2-portada{
+  grid-column: 8/13;
+  grid-row: 1/2;
+}
+.item3-portada{
+  grid-column: 1/6;
+  grid-row: 2/2;
+}
+.item3-portada p{
+  background-color: #EEEEEE;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: justify;
+}
+.item3-portada p:hover{
+  background-color: #C9FFE0;
+}
+.item4-portada{
+  grid-column: 6/13;
+  grid-row: 2/2;
+}
+.item4-portada p{
+  background-color: #EEEEEE;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: justify;
+}
+.item4-portada p:hover{
+  background-color: #C9FFE0;
+}
+/*CSS Seccion Panel de Clase*/
+.crear-publicacion {
+  display: flex;               /* Activar Flexbox en el contenedor principal */
+  flex-direction: column;      /* Apilar los hijos en columnas (uno debajo del otro) */
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 10px;
+}
+.crear-publicacion div {
+  display: flex;               /* Activar Flexbox en fila1 para alinear imagen y formulario */
+  align-items: center;         /* Centrar verticalmente los elementos dentro de fila1 */
+  gap: 10px;
+}
+.div-inputs {
+  flex: 1;                    /* Permitir que el div de inputs ocupe el espacio restante */
+}
+.form-comentario {
+  display: flex;              /* Hacer que el formulario use Flexbox */
+  width: 100%;    
+  gap: 10px;            /* Asegurarse de que el formulario ocupe el espacio disponible */
+}
+.input-publicacion {
+  flex: 1;                    /* Ocupa el espacio restante (90%) */
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;      /* Asegura que el padding y el borde se incluyan en el ancho total */
+}
+.input-submit {
+  width: 100px;               /* Puedes ajustar el ancho como desees */
+  padding: 12px;
+  border: none;  /* Cambia el color del borde si es necesario */
+  border-radius: 4px;
+  background-color: #14CC5E;  /* Color de fondo del botón */
+  color: white;                /* Color del texto del botón */
+  cursor: pointer;             /* Cambia el cursor al pasar por encima */
+}
+.height-user{
+  height: 41px;
+}    
+/*CSS comentario panelDelaClase*/
+  .contenido-comentario {
+      display: flex;
+      flex-direction: column; /* Los items estarán uno debajo del otro */
+      background-color: #ffffff;
+      border-radius: 10px;
+      
+  }
+  .item1-respuesta{
+      display: flex; /* Para alinear los hijos en línea */
+      padding: 10px 10px 0px 10px;
+      gap: 10px;
+  }
+  .item2-respuesta{
+      display: flex; /* Para alinear los hijos en línea */
+      padding: 10px;
+      gap: 10px;
+      border-top: 2px solid #C5C5C5;
+  }
+  .texto-respuesta {
+      display: flex;
+      flex-direction: column; /* Para que los párrafos estén uno debajo del otro */
+      margin-bottom: 15px;
+      background-color: #EEEEEE;
+      padding: 10px;
+      border-radius: 10px;
+      width: 100%;
+  }
+  .texto-respuesta:hover{
+    background-color: #C9FFE0;
+  }
+  .p-texto-publicacion{
+    text-align: justify;
+  }
+  .p-fecha{
+  margin-bottom: 10px;
+  }
+  .texto-comentario{
+    background-color: #EEEEEE;
+    padding: 10px;
+    border-radius: 10px;
+    width: 100%;
+  }
+  .texto-comentario:hover{
+    background-color: #C9FFE0;
+  }
+  .div-form-container {
+      display: flex; /* Para alinear la imagen y el formulario en línea */
+      align-items: center; /* Centrar verticalmente */
+  }
+  .publicacion-creada{
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+  }
+  .item1-comentario{
+      display: flex; /* Para alinear los hijos en línea */
+      gap: 10px;
+      border-top: 2px solid #C5C5C5;
+      padding: 10px 10px 10px 65px;
+  }
+/*CSS Seccion Trabajos*/
+.contenedor-seccion-trabajos{
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+}
+.contenedor-seccion-trabajos form{
+  background-color: #EEEEEE;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.contenedor-seccion-trabajos form h3{
+  text-align: center;
+}
+.contenedor-seccion-trabajos form label {
+  display: block; /* Hacer que las etiquetas ocupen toda la línea */
+  margin-bottom: 5px; /* Espaciado debajo de la etiqueta */
+  color: #333; /* Color del texto de la etiqueta */
+}
+
+/* Estilo para los inputs y textarea */
+.contenedor-seccion-trabajos form input[type="text"],
+.contenedor-seccion-trabajos form textarea {
+  width: 100%; /* Ancho completo */
+  padding: 12px; /* Espaciado interno */
+  border: 1px solid #ccc; /* Borde gris claro por defecto */
+  border-radius: 4px; /* Bordes redondeados */
+  box-sizing: border-box; /* Incluye padding y borde en el ancho total */
+}
+
+/* Estilo específico para el textarea */
+.contenedor-seccion-trabajos form textarea {
+  height: 120px; /* Altura fija de 200px */
+  resize: none; /* Desactivar la opción de redimensionar */
+}
+
+/* Cambiar el color del borde al hacer foco */
+.contenedor-seccion-trabajos form input[type="text"]:focus,
+.contenedor-seccion-trabajos form textarea:focus {
+  outline: none;
+  border-color: #14CC5E;
+}
+.subir-archivo button{
+  margin-top: 10px;
+}
+.btn-form-tp{
+  max-width: 500px;
+}
+.trabajo{
+  background-color: white;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 10px;
+}
+.trabajo div{
+  margin-top: 10px;
+  background-color: #EEEEEE;
+  padding: 10px;
+  border-radius: 10px;
+}
+.trabajo div:hover{
+  background-color: #C9FFE0;
+}
+.trabajo h3{
+  text-align: justify;
+}
+.trabajo p{
+  text-align: justify;
+}
+.trabajo ul{
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+}
+.trabajo ul li{
+  list-style: none;
+}
+.trabajo ul li a{
+  text-decoration: none;
+  color: black;
+}
+/*CSS Seccion Video Clase*/
+.prueba123{
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: auto;
+  gap: 10px;
+}
+.div-trabajo1{
+  grid-column: 1/10;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  gap: 10px;
+}
+.div-trabajo2{
+  grid-column: 10/13;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  max-height: 150px;
+  gap: 10px;
+}
+.div-trabajo2 input{
+  width: 100%;
+  height: 75%;
+}
+.div-trabajo2 button{
+  height: 25%;
+  width: 100%;
+  background-color: #14CC5E;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px;
+}
+.texto-trabajo{
+  background-color: #EEEEEE;
+  padding: 10px;
+  border-radius: 10px;
+}
+.texto-trabajo h3{
+  margin-bottom: 10px;
+}
+.texto-trabajo:hover{
+  background-color: #C9FFE0;
+}
+/*Querys de la navbar inferior que luego, se vuelve vertical para celular*/
+@media (min-width: 500px){
   #sidebar{
    display: flex;
    flex-direction: column;
@@ -506,27 +887,122 @@ border-color: #149c4b;
   }
   .icon-exit{
     margin-top: auto;
-    
   }
+
 }
-@media(min-width: 300px) and (max-width: 649px){
+/*Media Query particular del formato y distribucion del loguin*/   
+@media screen and (max-width: 768px) {
+  .container {
+      height: calc(100vh - 20px);
+      margin: 10px;
+  }
+  .imagen-form-login{
+      margin-top: 5px;
+      margin-bottom: 5px;
+      height: 80px;
+  }
+  .form-box {
+      bottom: 0;
+      width: 100%;
+      height: 70%;
+  }
+  .container.active .form-box {
+      right: 0;
+      bottom: 30%;
+  }
+  .toggle-box::before {
+      left: 0;
+      top: -270%;
+      width: 100%;
+      height: 300%;
+      border-radius: 20vw;
+  }
+  .container.active .toggle-box::before {
+      left: 0;
+      top: 70%;
+  }
+  .toggle-panel {
+      width: 100%;
+      height: 30%;
+  }
+  .toggle-panel.toggle-left {
+      top: 0;
+  }
+  .container.active .toggle-panel.toggle-panel.toggle-left {
+      left: 0;
+      top: -30%;
+  }
+  .toggle-panel.toggle-right {
+      right: 0;
+      bottom: -30%;
+  }
+  .container.active .toggle-panel.toggle-right {
+      bottom: 0;
+  }
+  /*Distribucion de la portada*/
+  .content-items-34 {
+    flex-direction: column;
+  }
+  .contenedor-grilla-portada{
+    display: flex;
+    flex-direction: column;
+  }
+  .prueba123{
+    display: flex;
+    flex-direction: column;
+  }
+
+}
+
+/*Querys Responsive*/
+
+/*Query para Celulares*/
+@media (max-width: 500px){ 
+  /*Seccion loguin y otp*/
+  .container {
+      height: calc(100vh - 10px) !important; 
+      margin: 5px !important;
+  }
+  .container h2{
+    margin: 0px; 
+  }
+  .form-box {
+      padding: 20px;
+  }
+  .toggle-panel h1 {
+      font-size: 30px;
+  }
+  .toggle-panel p {
+      margin-bottom: 10px;
+  }
+  .imagen-form-login{
+      height: 67px !important;
+  }
+  .toggle-panel .btn{
+      margin-bottom: 8px;
+  }
+  /*Grilla Index, home y navbar inferior*/
   .contenedor-index{
     grid-template-columns: 1fr;
+  }
+  .contenedor-grilla-home{
+    justify-content: normal;
+    gap: 0px;
   }
   .contenedor-secciones{
     padding: 5px 5px 70px 5px;
     gap: 10px;
   }
-  .item1{
+  .item1-home{
     display: none;
   }
-  .item2{
+  .item2-home{
     display: none;
   }
-  .item3{
+  .item3-home{
     display: none;
   }
-  .item4{
+  .item4-home{
       grid-row: 2 / 3;
   }
   .content-items-34{
@@ -591,77 +1067,61 @@ border-color: #149c4b;
       }
     }
   }
+   /*Seccion materias y portada*/
+   .contenedor-submenu ul{
+    gap: 10px;
+  }
+  .card-materias div h2{
+    text-align: center;
+  }
+  .item1-portada p{
+    padding: 10px;
+  }
+  .item3-portada p{
+    padding: 10px;
+  }
+  .item4-portada p{
+    padding: 10px;
+  }
+  .content-card-materia{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+    padding: 10px;
+  }
+  .item2-respuesta{
+    gap: 5px;
+  }
+  .texto-respuesta{
+    margin-bottom: 10px;
+  }
+  .crear-publicacion div{
+    gap: 5px;
+  }
+  .form-comentario{
+    gap: 5px;
+  }
+
 }
-/*Querys responsive*/
-/*Celular promedio*/ 
-@media (min-width: 300px) and (max-width: 649px){
-  .container {
-      height: calc(100vh - 10px) !important; 
-      margin: 5px !important;
-  }
-  .form-box {
-      padding: 20px;
-  }
-  .toggle-panel h1 {
-      font-size: 30px;
-  }
-  .toggle-panel p {
-      margin-bottom: 5px;
-  }
-  .imagen-form-login{
-      height: 67px !important;
-  }
-  .toggle-panel .btn{
-      margin-bottom: 8px;
-  }
+/*Query para Tablet Pequeña*/
+@media (min-width: 501px) and (max-width: 767.98px){
+
 }
-/*Tablet y PC*/   
-@media screen and (max-width: 650px) {
-  .container {
-      height: calc(100vh - 20px);
-      margin: 10px;
-  }
-  .imagen-form-login{
-      margin-top: 5px;
-      margin-bottom: 5px;
-      height: 80px;
-  }
-  .form-box {
-      bottom: 0;
-      width: 100%;
-      height: 70%;
-  }
-  .container.active .form-box {
-      right: 0;
-      bottom: 30%;
-  }
-  .toggle-box::before {
-      left: 0;
-      top: -270%;
-      width: 100%;
-      height: 300%;
-      border-radius: 20vw;
-  }
-  .container.active .toggle-box::before {
-      left: 0;
-      top: 70%;
-  }
-  .toggle-panel {
-      width: 100%;
-      height: 30%;
-  }
-  .toggle-panel.toggle-left {
-      top: 0;
-  }
-  .container.active .toggle-panel.toggle-panel.toggle-left {
-      left: 0;
-      top: -30%;
-  }
-  .toggle-panel.toggle-right {
-      right: 0;
-      bottom: -30%;
-  }
-  .container.active .toggle-panel.toggle-right {
-      bottom: 0;
-  }
+/*Query para Tablet Grande*/
+@media (min-width: 768px) and (max-width: 959.98px){
+  
+}
+/*Query para Notebook sm*/
+@media (min-width: 960px) and (max-width: 1023.98px){
+  
+}
+/*Query para Notebook md*/
+@media (min-width: 1024px) and (max-width: 1328px){
+
+}
+@media (min-width: 1329px){
+.contenedor-materias{
+  grid-column: 2 / 12;
+}
 }
