@@ -1,16 +1,23 @@
 <!-- Panel de Clase -->
 <div class="publicacion">
-    <% if (sesiones.rol === 'instructor') { %>
-        <!-- Formulario para la Creación de Publicación -->
-        <form id="formulario" action="/crearPublicacion" method="POST" onsubmit="enviarPublicacion(event)">
-            <input type="text" id="publicacion-titulo" placeholder="Ingresar un título (opcional)" name="publicacion-titulo">
-            <input type="text" id="publicacion" placeholder="Crear publicación" name="publicacion">
-            <input type="submit" value="enviar"> 
-        </form>
-        <!-- Fin de Formulario para la Creación de Publicación -->
-    <% } %>
+    <!-- Formulario para la Creación de Publicación -->
+    <div class="crear-publicacion">
+        <div>
+            <div class="height-user prueba123">
+                <img src="./recursos/img/img-comentario.svg" alt="">
+            </div>
+            <div class="div-inputs">
+                <form action="/crearPublicacion" method="POST" onsubmit="enviarPublicacion(event)" class="form-comentario">
+                    <input class="input-publicacion" type="text" id="publicacion" placeholder="Crear publicación" name="publicacion">
+                    <input class="input-submit btn-style" type="submit" value="Enviar"> 
+                </form>
+            </div>
+        </div>
+    </div> 
+    <!-- Fin de Formulario para la Creación de Publicación -->
     <!-- Lista de Publicación -->
-    <div id="listaPublicacion"></div>
+    <div id="listaPublicacion" class="publicacion-creada">
+    </div>
     <!-- Fin de Lista de Publicación -->
 </div> 
 <!-- Fin de Panel de Clase -->
