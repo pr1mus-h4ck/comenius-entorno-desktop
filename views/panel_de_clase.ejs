@@ -39,8 +39,7 @@
                 // TODO: Reemplazar esta recarga con un 'alert'
                 if (recibido.ok) {
                     // Recarga la página después de recibir la respuesta exitosa
-                    actualizarPublicacion(); 
-                    actualizarComentario();
+                    actualizarPublicacion();
                 } else {
                     console.log('No se pudo enviar la publicación');
                 }
@@ -70,36 +69,41 @@
             const listaPublicacion = document.getElementById('listaPublicacion');
             listaPublicacion.innerHTML = ''; // Limpia el contenido actual
             recibido.publicaciones.forEach(publicacion => {
-                const listaPublicacion = document.getElementById('listaPublicacion');
-                listaPublicacion.innerHTML = ''; // Limpia el contenido actual
-                recibido.publicaciones.forEach(publicacion => {
-                    // Crea el HTML para cada publicación (sin comentarios)
-                    const html = `
-                        <section>
-                            <article id="listaComentario">
-                                <div>
-                                    <span>${publicacion.NombreCompleto}</span>
-                                    <span>${publicacion.FechaHora}</span>
+                // Crea el HTML para cada publicación (sin comentarios)
+                const html = `
+                    <section>
+                        <article id="listaComentario">
+                            <div>
+                                <span>${publicacion.NombreCompleto}</span>
+                                <span>${publicacion.FechaHora}</span>
+                            </div>
+                            <div>
+                                ${publicacion.Titulo && publicacion.Titulo.trim() !== '' ? `<h2>${publicacion.Titulo}</h2>` : ''}
+                                <p>${publicacion.Contenido}</p>
+                            </div>
+                            ${publicacion.comentarios && publicacion.comentarios.length > 0 ? `
+                                <div id="comentarios-${publicacion.id}">
+                                    <div>
+                                        <span>${comentario.NombreCompletoComenterio}</span>
+                                        <span>${comentario.FechaHoraComentario}</span>
+                                    </div>
+                                    ${publicacion.comentarios.map(comentario => `<p>${comentario.ComentarioContenido}</p>`).join('')}
                                 </div>
-                                <div>
-                                    ${publicacion.Titulo && publicacion.Titulo.trim() !== '' ? `<h2>${publicacion.Titulo}</h2>` : ''}
-                                    <p>${publicacion.Contenido}</p>
-                                </div>
-                            </article>
-                            <form action="/crearComentario" method="POST" onsubmit="enviarComentario(event)">
-                                <input type="text" id="comentario" placeholder="Escribir comentario..." name="comentario">
-                                <input type="submit" value="enviar"> 
-                            </form>
-                        </section>
-                    `;
-                    // Agrega el HTML al contenedor
-                    listaPublicacion.innerHTML += html;
-                });
+                            ` : ''}
+                        </article>
+                        <form action="/crearComentario" method="POST" onsubmit="enviarComentario(event, ${publicacion.id})">
+                            <input type="hidden" name="publicacionId" value="${publicacion.id}">
+                            <input type="text" id="comentario-${publicacion.id}" placeholder="Escribir comentario..." name="comentario">
+                            <input type="submit" value="enviar">
+                        </form>
+                    </section>
+                `;
+                // Agrega el HTML al contenedor
+                listaPublicacion.innerHTML += html;
             });
         })
     }
     actualizarPublicacion();
-    actualizarComentario();
 </script>
 <!-- Fin de Actualizar Publicaciones -->
 <!-- Crear Comentarios -->

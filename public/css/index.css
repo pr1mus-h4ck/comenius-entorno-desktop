@@ -873,6 +873,9 @@ text-transform: capitalize;
 .texto-trabajo:hover{
   background-color: #C9FFE0;
 }
+#formulario {
+  display: none;
+}
 /*Querys de la navbar inferior que luego, se vuelve vertical para celular*/
 @media (min-width: 500px){
   #sidebar{
