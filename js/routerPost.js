@@ -2,7 +2,6 @@ const { app, cookies, cookieSession } = require('./config');
 const config = require('./config');
 const { inputNombres } = require('./array');
 const funciones = require('./funciones');
-const { default: Cookies } = require('universal-cookie');
 let datosRecibidos = '';
 app.post('/login', (req, res) => {
     // Si existe sesión, redireccionar a la página principal
@@ -328,7 +327,7 @@ app.post('/crearPublicacion', (req, res) => {
     const titulo = req.body.titulo;
     const publicacion = req.body.publicacion;
     const fechaHoraActual = new Date();
-    const timestamp = fechaHoraActual.getTime()
+    const timestamp = fechaHoraActual.getTime();
     // Creo un objeto con los valores de las Cookies de la sesión
     const sesiones = {
         id: cookieSession.usuariosID,
@@ -346,11 +345,37 @@ app.post('/crearPublicacion', (req, res) => {
         method: 'Post',
         body: sesionesJson
     })
-        .then(recibir => recibir.json())
-        .then(recibido => {
-            res.json(recibido);
-        })
+    .then(recibir => recibir.json())
+    .then(recibido => {
+        res.json(recibido);
+    })
 });
+app.post('/crearComentario', (req, res) => {
+    const comentario = req.body.comentario;
+    const publicacionId = req.body.publicacionId;
+    const fechaHoraActual = new Date();
+    const timestamp = fechaHoraActual.getTime();
+    // Creo un objeto con los valores de las Cookies de la sesión
+    const sesiones = {
+        id: cookieSession.usuariosID,
+        session: cookieSession.sessionsID,
+        publicacionId: publicacionId,
+        comentario: comentario,
+        fechaHora: timestamp,
+        comisionID: cookieSession.comisionID,
+    }
+    // Convierto el objeto en un JSON
+    let sesionesJson = JSON.stringify(sesiones);
+    // Envío en método POST al servidor con los datos del JSON
+    fetch(`http://localhost:3000/crearComentario`, {
+        method: 'Post',
+        body: sesionesJson
+    })
+    .then(recibir => recibir.json())
+    .then(recibido => {
+        res.json(recibido);
+    })
+})
 app.post('/actualizarPublicacion', (req, res) => {
     // Creo un objeto con los valores de las Cookies de la sesión
     const sesiones = {

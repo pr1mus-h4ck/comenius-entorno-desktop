@@ -72,31 +72,33 @@
                 // Crea el HTML para cada publicación (sin comentarios)
                 const html = `
                     <section>
-                        <article id="listaComentario">
-                            <div>
-                                <span>${publicacion.NombreCompleto}</span>
-                                <span>${publicacion.FechaHora}</span>
-                            </div>
-                            <div>
-                                ${publicacion.Titulo && publicacion.Titulo.trim() !== '' ? `<h2>${publicacion.Titulo}</h2>` : ''}
-                                <p>${publicacion.Contenido}</p>
-                            </div>
-                            ${publicacion.comentarios && publicacion.comentarios.length > 0 ? `
-                                <div id="comentarios-${publicacion.id}">
+                        <article id="publicacion-${publicacion.id}"> <div>
+                            <span>${publicacion.NombreCompleto}</span>
+                            <span>${publicacion.FechaHora}</span>
+                        </div>
+                        <div>
+                            ${publicacion.Titulo && publicacion.Titulo.trim() !== '' ? `<h2>${publicacion.Titulo}</h2>` : ''}
+                            <p>${publicacion.Contenido}</p>
+                        </div>
+                        ${publicacion.comentarios && publicacion.comentarios.length > 0 ? `
+                            <div id="comentarios-${publicacion.id}">
+                                <h3>Comentarios:</h3>
+                                ${publicacion.comentarios.map(comentario => `
                                     <div>
                                         <span>${comentario.NombreCompletoComenterio}</span>
                                         <span>${comentario.FechaHoraComentario}</span>
+                                        <p>${comentario.ComentarioContenido}</p>
                                     </div>
-                                    ${publicacion.comentarios.map(comentario => `<p>${comentario.ComentarioContenido}</p>`).join('')}
-                                </div>
-                            ` : ''}
-                        </article>
+                                `).join('')}
+                            </div>
+                        ` : ''}
                         <form action="/crearComentario" method="POST" onsubmit="enviarComentario(event, ${publicacion.id})">
                             <input type="hidden" name="publicacionId" value="${publicacion.id}">
                             <input type="text" id="comentario-${publicacion.id}" placeholder="Escribir comentario..." name="comentario">
                             <input type="submit" value="enviar">
                         </form>
-                    </section>
+                    </article>
+                </section>
                 `;
                 // Agrega el HTML al contenedor
                 listaPublicacion.innerHTML += html;
@@ -108,17 +110,16 @@
 <!-- Fin de Actualizar Publicaciones -->
 <!-- Crear Comentarios -->
 <script>
-    function enviarComentario(event) {
+    function enviarComentario(event, publicacionId) {
         event.preventDefault(); // Evita el envío del formulario por defecto
-        const comentario = document.querySelector('input[name="comentario"]').value;
+        const comentario = document.getElementById(`comentario-${publicacionId}`).value;
         if (comentario !== '') {
-            const fechaHoraActual = new Date();
             let publi = {
                 comentario: comentario,
-                fechaHora: fechaHoraActual,
+                publicacionId: publicacionId,
             }
             const publiJSON = JSON.stringify(publi);
-            fetch(`http://localhost:3000/crearComentario`, {
+            fetch(`/crearComentario`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -130,7 +131,7 @@
                 // TODO: Reemplazar esta recarga con un 'alert'
                 if (recibido.ok) {
                     // Recarga la página después de recibir la respuesta exitosa
-                    actualizarComentario(); 
+                    actualizarPublicacion(); 
                 } else {
                     console.log('No se pudo enviar el comentario');
                 }
@@ -144,31 +145,3 @@
     }
 </script>
 <!-- Fin de Crear Comentarios -->
-<!-- Actualizar Comentarios -->
-<script>
-    function actualizarComentario() { 
-        fetch('http://localhost:3000/actualizarComentario', { 
-            method: 'POST', 
-            headers: { 
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(recibir => recibir.json())
-        .then(recibido => {
-        const listaComentario = document.getElementById('listaComentario');
-            listaComentario.innerHTML = ''; // Limpia el contenido actual
-            recibido.comentarios.forEach(comentario => {
-                const listaComentario = document.getElementById('listaComentario');
-                listaComentario.innerHTML = ''; // Limpia el contenido actual
-                recibido.comentarios.forEach(comentario => {
-                    // Crea el HTML para cada publicación (sin comentarios)
-                    const html = `<p>${comentario.content}</p>`;
-                    // Agrega el HTML al contenedor
-                    listaComentario.innerHTML += html;
-                });
-            });
-        })
-    }
-    actualizarComentario();
-</script>
-<!-- Fin de Actualizar Comentarios -->
