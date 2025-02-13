@@ -1,16 +1,17 @@
 <!-- Panel de Clase -->
-<div class="publicacion">
+<div class="publicacion contenedor-publicacion">
     <% if (sesiones.rol === 'instructor') { %>
         <!-- Formulario para la Creación de Publicación -->
-        <form id="formulario" action="/crearPublicacion" method="POST" onsubmit="enviarPublicacion(event)">
-            <input type="text" id="publicacion-titulo" placeholder="Ingresar un título (opcional)" name="publicacion-titulo">
-            <input type="text" id="publicacion" placeholder="Crear publicación" name="publicacion">
-            <input type="submit" value="enviar"> 
+        
+        <form id="formulario" action="/crearPublicacion" method="POST" onsubmit="enviarPublicacion(event)" class="form-publicacion">
+            <input type="text" id="publicacion-titulo" placeholder="Titulo (opcional)" name="publicacion-titulo" class="input-respuesta titulo">
+            <input type="text" id="publicacion" placeholder="Contenido" name="publicacion" class="input-respuesta">
+            <input type="submit" value="Enviar" class="input-enviar btn-style"> 
         </form>
         <!-- Fin de Formulario para la Creación de Publicación -->
     <% } %>
     <!-- Lista de Publicación -->
-    <div id="listaPublicacion"></div>
+    <div id="listaPublicacion" class="contenido-publicacion"></div>
     <!-- Fin de Lista de Publicación -->
 </div> 
 <!-- Fin de Panel de Clase -->
@@ -71,33 +72,52 @@
             recibido.publicaciones.forEach(publicacion => {
                 // Crea el HTML para cada publicación (sin comentarios)
                 const html = `
-                    <section>
-                        <article id="publicacion-${publicacion.id}"> <div>
-                            <span>${publicacion.NombreCompleto}</span>
-                            <span>${publicacion.FechaHora}</span>
+                    <section class="section-publicacion">
+
+                        <div class="height-user">
+                            <img src="./recursos/img/img-comentario.svg" alt="">
                         </div>
-                        <div>
-                            ${publicacion.Titulo && publicacion.Titulo.trim() !== '' ? `<h2>${publicacion.Titulo}</h2>` : ''}
-                            <p>${publicacion.Contenido}</p>
-                        </div>
-                        ${publicacion.comentarios && publicacion.comentarios.length > 0 ? `
-                            <div id="comentarios-${publicacion.id}">
-                                <h3>Comentarios:</h3>
+
+                        <article class="article-publicacion" id="publicacion-${publicacion.id}">
+                            <div class="style-respuesta">
+                            <div>
+                                <span>${publicacion.NombreCompleto}</span>
+                                <span>${publicacion.FechaHora}</span>
+                            </div>
+                            <div>
+                                ${publicacion.Titulo && publicacion.Titulo.trim() !== '' ? `<h3>${publicacion.Titulo}</h3>` : ''}
+                                <p>${publicacion.Contenido}</p>
+                            </div>
+                            </div>
+                                ${publicacion.comentarios && publicacion.comentarios.length > 0 ? `
+
+                            <div class="contenido-respuesta" id="comentarios-${publicacion.id}">
+
                                 ${publicacion.comentarios.map(comentario => `
-                                    <div>
-                                        <span>${comentario.NombreCompletoComenterio}</span>
-                                        <span>${comentario.FechaHoraComentario}</span>
-                                        <p>${comentario.ComentarioContenido}</p>
+                                    <div class="div-respuesta"> 
+                                        <div class="height-user">
+                                            <img src="./recursos/img/img-comentario.svg" alt="">
+                                        </div>
+                                        <div class="style-comentario">
+                                            <span>${comentario.NombreCompletoComenterio}</span>
+                                            <span>${comentario.FechaHoraComentario}</span>
+                                            <p>${comentario.ComentarioContenido}</p>
+                                        </div>
                                     </div>
                                 `).join('')}
                             </div>
+                            
                         ` : ''}
-                        <form action="/crearComentario" method="POST" onsubmit="enviarComentario(event, ${publicacion.id})">
-                            <input type="hidden" name="publicacionId" value="${publicacion.id}">
-                            <input type="text" id="comentario-${publicacion.id}" placeholder="Escribir comentario..." name="comentario">
-                            <input type="submit" value="enviar">
-                        </form>
+
+                            <div class="div-input-respuesta">
+                                <form class="form-respuesta" action="/crearComentario" method="POST" onsubmit="enviarComentario(event, ${publicacion.id})">
+                                    <input type="hidden" name="publicacionId" value="${publicacion.id}">
+                                    <input class="input-respuesta" type="text" id="comentario-${publicacion.id}" placeholder="Escribir comentario..." name="comentario">
+                                    <input class="input-enviar btn-style" type="submit" value="Enviar">
+                                </form>
+                            </div>
                     </article>
+
                 </section>
                 `;
                 // Agrega el HTML al contenedor

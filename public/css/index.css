@@ -875,6 +875,116 @@ text-transform: capitalize;
 }
 #formulario {
   display: none;
+  gap: 5px;
+}
+
+/*CSS Seccion Publicacion Profesor-Alumno*/
+.contenedor-publicacion{
+  display: grid;
+  gap: 10px;
+}
+.form-publicacion{
+  display: flex;
+  background-color: white;
+  padding: 10px;
+  border-radius: 7px;
+}
+.contenido-publicacion{
+  display: grid;
+  gap: 10px;
+}
+.section-publicacion{
+  background-color: white;
+  padding: 10px;
+  border-radius: 7px;
+  display: flex;
+  gap: 10px;
+}
+.contenido-respuesta{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.div-respuesta{
+  display: flex;
+  gap: 10px;
+}
+.div-input-respuesta{
+  flex: 1; 
+}
+.article-publicacion{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.form-respuesta{
+  display: flex;
+  width: 100%;
+  gap: 10px;
+}
+.input-respuesta {
+  flex: 1;                    /* Ocupa el espacio restante (90%) */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;      /* Asegura que el padding y el borde se incluyan en el ancho total */
+}
+.input-enviar {
+  width: 100px;               /* Puedes ajustar el ancho como desees */
+  padding: 12px;
+  border: none;  /* Csambia el color del borde si es necesario */
+  border-radius: 4px;
+  background-color: #14CC5E;  /* Color de fondo del botón */
+  color: white;                /* Color del texto del botón */
+  cursor: pointer;             /* Cambia el cursor al pasar por encima */
+}
+.style-respuesta{
+  background-color: #EEEEEE;
+  margin-bottom: 10px;
+  border-radius: 7px;
+  padding: 10px;
+}
+.style-respuesta:hover{
+  background-color: #C9FFE0;
+}
+.style-comentario{
+  width: 100%;
+  background-color: #EEEEEE;
+  padding: 5px;
+  border-radius: 7px;
+}
+.style-comentario:hover{
+  background-color: #C9FFE0;
+
+}
+.titulo{
+  max-width: 120px;
+}
+
+.contenedor-portada{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.div-portada{
+  background-color: white;
+  padding: 10px;
+  border-radius: 7px;
+}
+.div-portada div{
+  background-color: #EEEEEE;
+  padding:10PX;
+  border-radius: 7PX;
+}
+.div-portada h3{
+  padding-bottom: 10px;
+}
+.div-portada div:hover{
+  background-color: #C9FFE0;
+}
+.div-portada p{
+  text-align: justify;
 }
 /*Querys de la navbar inferior que luego, se vuelve vertical para celular*/
 @media (min-width: 500px){
