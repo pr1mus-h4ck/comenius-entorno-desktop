@@ -80,9 +80,9 @@
 
                         <article class="article-publicacion" id="publicacion-${publicacion.id}">
                             <div class="style-respuesta">
-                            <div>
-                                <span>${publicacion.NombreCompleto}</span>
-                                <span>${publicacion.FechaHora}</span>
+                            <div class="f-span">
+                                <span class="bold">${publicacion.NombreCompleto}</span>
+                                <span class="bold">${publicacion.FechaHora}</span>
                             </div>
                             <div>
                                 ${publicacion.Titulo && publicacion.Titulo.trim() !== '' ? `<h3>${publicacion.Titulo}</h3>` : ''}
@@ -99,8 +99,11 @@
                                             <img src="./recursos/img/img-comentario.svg" alt="">
                                         </div>
                                         <div class="style-comentario">
-                                            <span>${comentario.NombreCompletoComenterio}</span>
-                                            <span>${comentario.FechaHoraComentario}</span>
+                                            <div class="f-span">
+                                                <span>${comentario.NombreCompletoComenterio}</span>
+                                                <span>${comentario.FechaHoraComentario}</span>
+                                            </div>
+                                            
                                             <p>${comentario.ComentarioContenido}</p>
                                         </div>
                                     </div>

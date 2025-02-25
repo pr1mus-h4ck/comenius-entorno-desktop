@@ -406,7 +406,7 @@ input[type="password"]:hover, input[type="email"]:hover {
 .icon-notificacion, .icon-perfil {
   display: flex; /* Alineamos el contenido dentro de los iconos */
   align-items: center; /* Alineamos verticalmente al centro */
-  padding: 7px;
+  padding: 5px;
   border-radius: 8px;
   gap: 5px;
 }
@@ -961,7 +961,11 @@ text-transform: capitalize;
 .titulo{
   max-width: 120px;
 }
+.f-span{
+display: flex;
+justify-content: space-between;
 
+}
 .contenedor-portada{
   display: flex;
   flex-direction: column;
@@ -1222,6 +1226,40 @@ text-transform: capitalize;
   }
 
 }
+/*Query para resolucion de IgnacioMauro*/
+@media (min-width: 1366px) and (max-width: 1366px) and (min-height: 641px) and (max-height: 641px) {
+  .content-items-34 div{
+    padding: 1%;
+  }
+  .item4-home h2 {
+    padding-bottom: 5px;
+  }
+  .item3-home h2 {
+    padding-bottom: 5px;
+  }
+  .item0{
+    padding: 10px;
+  }
+  .max-alt-1366{
+    max-height: 150px;
+  }
+  .item1-home{
+    padding: 10px;
+  }
+  .item2-home{
+    padding: 10px;
+  }
+  p{
+    font-size: 16px;
+  }
+  h2{
+    font-size: 21px;
+  }
+  h3{
+    font-size: 18px;
+  }
+}
+
 /*Query para Tablet Pequeña*/
 @media (min-width: 501px) and (max-width: 767.98px){
 
