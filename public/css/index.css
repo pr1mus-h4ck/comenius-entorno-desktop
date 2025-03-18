@@ -995,6 +995,108 @@ justify-content: space-between;
   width: 100%;
   height: 100%;
 }
+
+.btn-form{
+  margin-top: 10px;
+  width: 150px;
+}
+.btn-videoclase{
+  width: 150px;
+}
+
+
+
+
+/*CSS Seccion Trabajos*/
+.contenedor-lista-trabajos{
+  background-color: white; /*Revisar*/
+  padding: 10px; 
+  border-radius: 10px;
+}
+.contenedor-lista-trabajos form{
+  background-color: #EEEEEE;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.contenedor-lista-trabajos form h3{
+  text-align: center;
+}
+.contenedor-lista-trabajos form label {
+  display: block; /* Hacer que las etiquetas ocupen toda la línea */
+  margin-bottom: 5px; /* Espaciado debajo de la etiqueta */
+  color: #333; /* Color del texto de la etiqueta */
+}
+
+/* Estilo para los inputs y textarea */
+.contenedor-lista-trabajos form input[type="text"],
+.contenedor-lista-trabajos form textarea {
+  width: 100%; /* Ancho completo */
+  padding: 12px; /* Espaciado interno */
+  border: 1px solid #ccc; /* Borde gris claro por defecto */
+  border-radius: 4px; /* Bordes redondeados */
+  box-sizing: border-box; /* Incluye padding y borde en el ancho total */
+}
+
+/* Estilo específico para el textarea */
+.contenedor-lista-trabajos form textarea {
+  height: 120px; /* Altura fija de 200px */
+  resize: none; /* Desactivar la opción de redimensionar */
+}
+
+/* Cambiar el color del borde al hacer foco */
+.contenedor-lista-trabajos form input[type="text"]:focus,
+.contenedor-lista-trabajos form textarea:focus {
+  outline: none;
+  border-color: #14CC5E;
+}
+.subir-archivo button{
+  margin-top: 10px;
+}
+.btn-form-tp{
+  max-width: 500px;
+}
+.trabajo{
+  background-color: white;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 10px;
+}
+.trabajo div{
+  margin-top: 10px;
+  background-color: #EEEEEE;
+  padding: 10px;
+  border-radius: 10px;
+}
+.trabajo div:hover{
+  background-color: #C9FFE0;
+}
+.trabajo h3{
+  text-align: justify;
+}
+.trabajo p{
+  text-align: justify;
+}
+.trabajo ul{
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+}
+.trabajo ul li{
+  list-style: none;
+}
+.trabajo ul li a{
+  text-decoration: none;
+  color: black;
+}
+
+
+
+
+
+
 /*Querys de la navbar inferior que luego, se vuelve vertical para celular*/
 @media (min-width: 500px){
   #sidebar{
