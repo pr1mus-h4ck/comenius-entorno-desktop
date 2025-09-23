@@ -18,6 +18,8 @@ function getCookies(objeto, cookies) {
     objeto.sessionsID = cookies.get('sessionID');
     // Guardar la cookie de nombre
     objeto.nombre = cookies.get('nombre');
+    // Guardar la cookie de otp
+    objeto.otp = cookies.get('otp')
     // Guardar la cookie de verificacion
     objeto.verificacionOTP = cookies.get('verificacion');
     // Guardar la cookie de correo
@@ -34,6 +36,18 @@ function getCookies(objeto, cookies) {
     objeto.zoomFirma = cookies.get('zoomFirma');
     // Guardar la cookie de item
     objeto.clientId = cookies.get('clientId');
+    // Guardar la cookie de comision
+    objeto.comision = cookies.get('comision');
+    // Guardar la cookie de comisionID
+    objeto.comisionID = cookies.get('comisionID');
+    // Guardar la cookie de enlace
+    objeto.enlace = cookies.get('enlace');
+    // Guardar la cookie de trabajo
+    objeto.trabajo = cookies.get('trabajo')
+    // Guardar la cookie de instructorID
+    objeto.instructorID = cookies.get('instructorID');
+    // Guardar la cookie de listaAlumno
+    objeto.listaAlumno = cookies.get('listaAlumno');
     return objeto;
 }
 function eliminarCookies(cookies) {
@@ -69,6 +83,8 @@ function eliminarCookies(cookies) {
     cookies.remove('trabajo', { path: '/' });
     // Eliminar la cookie de instructorID, id de la Tabla Instructor en la BBDD del usuario
     cookies.remove('instructorID', { path: '/' });
+    // Eliminar la cookie de 'listaAlumno'
+    cookies.remove('listaAlumno', { path: '/' });
 }
 module.exports = {
     setCookies: setCookies,

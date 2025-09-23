@@ -14,7 +14,7 @@
         .then(recibido => {
             const listaComision = document.getElementById('listaComision');
             listaComision.innerHTML = ''; // Limpia el contenedor solo una vez
-            recibido.comisiones.forEach(comision => { // Usa 'comision', no 'comisiones'
+            recibido.comision.forEach(comision => { // Usa 'comision', no 'comisiones'
                 const html = `
                     <div class="card-materias">
                         <div>

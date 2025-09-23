@@ -14,7 +14,7 @@
     <!--Sección Informativa de la Comisión -->
     <div>
         <div id="cabeceraComision"></div>
-        <% if (sesiones.rol === 'instructor' && sesiones.enlace === 'panel_de_clase' || sesiones.rol === 'instructor' && sesiones.enlace === 'trabajos') { %>
+        <% if (sesiones.rol === 'instructor' && sesiones.enlace === 'panel_de_clase' && !sesiones.trabajo || sesiones.rol === 'instructor' && sesiones.enlace === 'trabajos' && !sesiones.trabajo) { %>
             <div>
                 <button id="miBoton" class="input-enviar btn-style btn-active btn-form">Mostrar Formulario</button>
             </div>
@@ -47,7 +47,7 @@
             listaComision.innerHTML = '';
             let html = ''; // Asegúrate de inicializar la variable html como una cadena vacía.
 
-            recibido.comisiones.forEach(comision => { // Iterar sobre cada comisión
+            recibido.comision.forEach(comision => { // Iterar sobre cada comisión
                 html += `
                     <div class="card-materias">
                         <div>

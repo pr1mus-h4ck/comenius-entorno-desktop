@@ -1,7 +1,7 @@
 const { app, cookies, cookieSession, cookieZoom } = require('./config');
 const config = require('./config');
 const funciones = require('./funciones');
-const { menuRol, menuMateria } = require('./array');
+const { menuRol, menuMateria, imagenTipo } = require('./array');
 // Renderizar la página de index
 app.get('/', (req, res) => {
     // Crear un objeto de sesión
@@ -16,6 +16,7 @@ app.get('/', (req, res) => {
         nombre: cookieSession.nombre,
         otp: cookieSession.otp,
         trabajo: cookieSession.trabajo,
+        alumno: cookieSession.listaAlumno,
     }
     // Crear un objeto para el proceso de OTP donde se verifica si se envío el correo al usuario con el código pertinente
     let procesoOTP = {
@@ -39,7 +40,7 @@ app.get('/', (req, res) => {
             // Verificar si el rol existe en menuRol antes de pasarlo
             if (menuRol[sesiones.rol]) {
                 // Mostrar Index
-                funciones.index(req, res, sesiones, menuRol[sesiones.rol], menuMateria[sesiones.rol], almacenamiento, datosRecibidos);
+                funciones.index(req, res, sesiones, menuRol[sesiones.rol], menuMateria[sesiones.rol], imagenTipo, almacenamiento, datosRecibidos);
             }
         } else {
             // Mostrar OTP

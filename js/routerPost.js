@@ -72,8 +72,10 @@ app.post('/enviar-otp', (req, res) => {
         })
             .then(recibir => recibir.json())
             .then(recibido => {
-                // Guardar el objeto recibido
-                config.envioOTP = recibido.correoEnviado;
+                if (recibido.correoEnviado === 'success') {
+                    // Guardar el objeto recibido
+                    config.envioOTP = true;
+                }
                 // Crear la cookie de la otp
                 cookies.set('otp', recibido.otp, { path: '/' });
                 // Guardar la cookie de otp
@@ -235,6 +237,14 @@ app.post('/cargarPagina', (req, res) => {
     cookies.remove('clientId', { path: '/' });
     // Guarda la Cookie 'clientId' sin valor
     cookieSession.clientId = cookies.get('clientId');
+    // Elimina la Cookie 'trabajo'
+    cookies.remove('trabajo', { path: '/' });
+    // Guarda la Cookie 'trabajo' sin valor
+    cookieSession.trabajo = cookies.get('trabajo');
+    // Elimina la Cookie 'trabajo'
+    cookies.remove('listaAlumno', { path: '/' });
+    // Guarda la Cookie 'trabajo' sin valor
+    cookieSession.listaAlumno = cookies.get('listaAlumno');
     // Envia la respuesta de éxito a 'index.ejs'
     res.sendStatus(200);
 });
@@ -270,6 +280,14 @@ app.post('/cargarSeccion', (req, res) => {
     cookies.remove('clientId', { path: '/' });
     // Guarda la Cookie 'clientId' sin valor
     cookieSession.clientId = cookies.get('clientId');
+    // Elimina la Cookie 'trabajo'
+    cookies.remove('trabajo', { path: '/' });
+    // Guarda la Cookie 'trabajo' sin valor
+    cookieSession.trabajo = cookies.get('trabajo');
+    // Elimina la Cookie 'listaAlumno'
+    cookies.remove('listaAlumno', { path: '/' });
+    // Guarda la Cookie 'trabajo' sin valor
+    cookieSession.listaAlumno = cookies.get('listaAlumno');
     // Envia la respuesta de éxito a 'materia.ejs'
     res.sendStatus(200);
 });
@@ -362,7 +380,6 @@ app.post('/crearComentario', (req, res) => {
         publicacionId: publicacionId,
         comentario: comentario,
         fechaHora: timestamp,
-        comisionID: cookieSession.comisionID,
     }
     // Convierto el objeto en un JSON
     let sesionesJson = JSON.stringify(sesiones);
@@ -375,7 +392,55 @@ app.post('/crearComentario', (req, res) => {
     .then(recibido => {
         res.json(recibido);
     })
-})
+});
+app.post('/crearTrabajos', (req, res) => {
+    const titulo = req.body.titulo;
+    const contenido = req.body.contenido;
+    const urlArchivos = req.body.urlArchivos;
+    const fechaHoraActual = new Date();
+    const timestamp = fechaHoraActual.getTime();
+    const sesiones = {
+        id: cookieSession.usuariosID,
+        session: cookieSession.sessionsID,
+        titulo: titulo,
+        contenido: contenido,
+        urlArchivos: urlArchivos,
+        fechaHora: timestamp,
+        comisionID: cookieSession.comisionID,
+        instructorId: cookieSession.instructorID,
+    }
+    // Convierto el objeto en un JSON
+    let sesionesJson = JSON.stringify(sesiones);
+    // Envío en método POST al servidor con los datos del JSON
+    fetch(`http://localhost:3000/crearTrabajos`, {
+        method: 'Post',
+        body: sesionesJson
+    })
+    .then(recibir => recibir.json())
+    .then(recibido => {
+        res.json(recibido);
+    })
+});
+app.post('/crearTrabajosAlumnos', (req, res) => {
+    const urlArchivos = req.body.urlArchivos
+    const fechaHoraActual = new Date();
+    const timestamp = fechaHoraActual.getTime();
+    const sesiones = {
+        id: cookieSession.usuariosID,
+        session: cookieSession.sessionsID,
+        urlArchivos: urlArchivos,
+        fechaHora: timestamp,
+        comisionID: cookieSession.comisionID,
+        trabajoID: cookieSession.trabajo,
+    }
+    // Convierto el objeto en un JSON
+    let sesionesJson = JSON.stringify(sesiones);
+    // Envío en método POST al servidor con los datos del JSON
+    fetch(`http://localhost:3000/crearTrabajosAlumnos`, {
+        method: 'Post',
+        body: sesionesJson
+    })
+});
 app.post('/actualizarPublicacion', (req, res) => {
     // Creo un objeto con los valores de las Cookies de la sesión
     const sesiones = {
@@ -414,5 +479,105 @@ app.post('/actualizarComision', (req, res) => {
     .then(recibido => {
         res.json(recibido);
     })
+});
+app.post('/actualizarTrabajos', (req, res) => {
+    // Creo un objeto con los valores de las Cookies de la sesión
+    const sesiones = {
+        id: cookieSession.usuariosID,
+        session: cookieSession.sessionsID,
+        comisionID: cookieSession.comisionID
+    }
+    // Convierto el objeto en un JSON
+    let sesionesJson = JSON.stringify(sesiones);
+    // Envío en método POST al servidor con los datos del JSON
+    fetch(`http://localhost:3000/actualizarTrabajos`, {
+        method: 'Post',
+        body: sesionesJson
+    })
+    .then(recibir => recibir.json())
+    .then(recibido => {
+        res.json(recibido);
+    })
+});
+app.post('/actualizarAlumnos', (req, res) => {
+    // Creo un objeto con los valores de las Cookies de la sesión
+    const sesiones = {
+        id: cookieSession.usuariosID,
+        session: cookieSession.sessionsID,
+        comisionID: cookieSession.comisionID,
+        instructorId: cookieSession.instructorID
+    }
+    // Convierto el objeto en un JSON
+    let sesionesJson = JSON.stringify(sesiones);
+    fetch('http://localhost:3000/actualizarAlumnos', {
+        method: 'POST',
+        body: sesionesJson,
+    })
+    .then(recibir => recibir.json())
+    .then(recibido => {
+        res.json(recibido);
+    })
+});
+app.post('/actualizarTrabajoInstructor', (req, res) => {
+    // Creo un objeto con los valores de las Cookies de la sesión
+    const sesiones = {
+        id: cookieSession.usuariosID,
+        session: cookieSession.sessionsID,
+        comisionID: cookieSession.comisionID,
+        trabajo: cookieSession.trabajo,
+    }
+    // Convierto el objeto en un JSON
+    let sesionesJson = JSON.stringify(sesiones);
+    // Envío en método POST al servidor con los datos del JSON
+    fetch(`http://localhost:3000/actualizarTrabajoInstructor`, {
+        method: 'Post',
+        body: sesionesJson
+    })
+    .then(recibir => recibir.json())
+    .then(recibido => {
+        res.json(recibido);
+    })
 })
+app.post('/actualizarTrabajoAlumno', (req, res) => {
+    const sesiones = {
+        id: cookieSession.usuariosID,
+        session: cookieSession.sessionsID,
+        comisionID: cookieSession.comisionID,
+        trabajo: cookieSession.trabajo,
+        instructorId: cookieSession.instructorID,
+        rol: cookieSession.rol,
+        listaAlumno: cookieSession.listaAlumno,
+    }
+    // Convierto el objeto en un JSON
+    let sesionesJson = JSON.stringify(sesiones);
+    // Envío en método POST al servidor con los datos del JSON
+    fetch(`http://localhost:3000/actualizarTrabajoAlumno`, {
+        method: 'Post',
+        body: sesionesJson
+    })
+    .then(recibir => recibir.json())
+    .then(recibido => {
+        res.json(recibido);
+    })
+});
+app.post('/seccionTrabajo', (req, res) => {
+    cookies.set('trabajo', req.body.trabajo, { path: '/' });
+    cookieSession.trabajo = cookies.get('trabajo');
+    // Envia la respuesta de éxito a 'index.ejs'
+    res.sendStatus(200);
+});
+app.post('/seccionListaAlumno', (req, res) => {
+    cookies.set('listaAlumno', req.body.listaAlumno, { path: '/' });
+    cookieSession.listaAlumno = cookies.get('listaAlumno');
+    // Envia la respuesta de éxito a 'index.ejs'
+    res.sendStatus(200);
+});
+app.post('/irListaAlumnos', (req, res) => {
+    // Elimina la Cookie 'listaAlumno'
+    cookies.remove('listaAlumno', { path: '/' });
+    // Guarda la Cookie 'listaAlumno' sin valor
+    cookieSession.listaAlumno = cookies.get('listaAlumno');
+    // Envia la respuesta de éxito a 'index.ejs'
+    res.sendStatus(200);
+});
 module.exports = { routerPost: app }

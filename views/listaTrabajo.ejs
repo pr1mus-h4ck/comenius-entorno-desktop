@@ -1,35 +1,37 @@
 <!-- Trabajos -->
 <div class="trabajos">
     <!-- Formulario de la Creación de Trabajo -->
-    <div class="contenedor-lista-trabajos">
-        <form id="formulario" action="/crearTrabajos" method="post" onsubmit="crearTrabajos(event)">
-            <!-- Título -->
-            <div class=""><h3>Formulario de carga de TP</h3></div>
-            <div>
-                <label for="titulo">Título</label>
-                <input type="text" name="titulo" id="titulo" placeholder="Ingrese aquí el título..." required>
-            </div>
-            <!-- Fin de Título -->
-            <!-- Contenido -->
-            <div>
-                <label for="contenido">Contenido</label>
-                <textarea name="contenido" id="contenido" placeholder="Ingrese aquí el contenido..." required></textarea>
-            </div>
-            <!-- Fin de Contenido -->
-            <!-- Archivo -->
-            <div class="subir-archivo">
-                <label for="archivo">Archivos</label>
-                <input type="text" id="url-archivo" placeholder="URL del archivo subido..." readonly required>
-                <button class="btn-aceptar btn-style btn-form-tp" type="button" id="btn-subir-archivo">Subir Archivo</button>
-            </div>
-            <!-- Fin de Archivo -->
-            <!-- Botón de 'Crear Trabajo' -->
-            <div>
-                <input class="btn-aceptar btn-style btn-form-tp" type="submit" value="Crear Trabajo">
-            </div>
-            <!-- Fin de Botón de 'Crear Trabajo' -->
-        </form>
-    </div>
+    <% if (sesiones.rol === 'instructor' && !sesiones.trabajo) { %>
+        <div class="contenedor-lista-trabajos">
+            <form id="formulario" action="/crearTrabajos" method="post" onsubmit="crearTrabajos(event)">
+                <!-- Título -->
+                <div class=""><h3>Formulario de carga de TP</h3></div>
+                <div>
+                    <label for="titulo">Título</label>
+                    <input type="text" name="titulo" id="titulo" placeholder="Ingrese aquí el título..." required>
+                </div>
+                <!-- Fin de Título -->
+                <!-- Contenido -->
+                <div>
+                    <label for="contenido">Contenido</label>
+                    <textarea name="contenido" id="contenido" placeholder="Ingrese aquí el contenido..." required></textarea>
+                </div>
+                <!-- Fin de Contenido -->
+                <!-- Archivo -->
+                <div class="subir-archivo">
+                    <label for="archivo">Archivos</label>
+                    <input type="text" id="url-archivo" placeholder="URL del archivo subido..." readonly required>
+                    <button class="btn-aceptar btn-style btn-form-tp" type="button" id="btn-subir-archivo">Subir Archivo</button>
+                </div>
+                <!-- Fin de Archivo -->
+                <!-- Botón de 'Crear Trabajo' -->
+                <div>
+                    <input class="btn-aceptar btn-style btn-form-tp" type="submit" value="Crear Trabajo">
+                </div>
+                <!-- Fin de Botón de 'Crear Trabajo' -->
+            </form>
+        </div>
+    <% } %>
     <!-- Fin de Formulario de la Creación de Trabajo -->
     <!-- Lista de Trabajos -->
     <div id="listaTrabajos"></div>
@@ -73,12 +75,12 @@
         const titulo = document.querySelector('input[name="titulo"]').value;
         const contenido = document.querySelector('textarea[name="contenido"]').value;
         // Crear un objeto JSON con todos los datos
-        const data = { 
+        const data = {
             titulo: titulo,
             contenido: contenido,
             urlArchivos: uploadedFiles, // Enviar array con información de cada archivo
         };
-        fetch('http://localhost:3000/crearTrabajos', {
+        fetch('/crearTrabajos', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json' // Especificar que estamos enviando JSON
@@ -111,7 +113,7 @@
 <!-- Actualizar Trabajos -->
 <script>
     function actualizarTrabajos() {
-        fetch('http://localhost:3000/actualizarTrabajos', { 
+        fetch('/actualizarTrabajos', { 
             method: 'POST', 
             headers: { 
                 'Content-Type': 'application/json'
@@ -125,11 +127,8 @@
             recibido.trabajos.forEach(trabajo => {
                 html += `
                     <div class="trabajo">
-                        <h2>${trabajo.titulo}</h2>
-                        <p>${trabajo.contenido}</p>
-                        <ul>
-                            ${trabajo.archivos.map(archivo => `<li><a class="${archivo.tipo}" href="${archivo.url}" target="_blank">${archivo.nombre}</a></li>`).join('')}
-                        </ul>
+                        <a href="#" onclick="guardarIdEnCookie('${trabajo.id}')"><h2>${trabajo.Titulo}</h2></a>
+                        <p>${trabajo.Contenido}</p>
                     </div>
                 `;
             });
@@ -137,5 +136,29 @@
             listaTrabajos.innerHTML = html; // Asigna el HTML generado a la lista
         });
     }
+    function guardarIdEnCookie(id) {
+        const dato = {
+            trabajo: `${id}`,
+        }
+        const datoJson = JSON.stringify(dato);
+        fetch('/seccionTrabajo', { 
+            method: 'POST', 
+            headers: { 
+                'Content-Type': 'application/json'
+            },
+            body: datoJson
+        })
+        .then(respuesta => {
+            // Si la respuesta es correcta
+            if (respuesta) {
+                // Cargar la ventana en la ruta '/'
+                window.location.href = '/';
+            } else {
+                // Si sale error cargar en la consola del Navegador el error
+                console.error('Error al hacer la petición');
+            }
+        })
+    }
+    actualizarTrabajos();
 </script>
 <!-- Fin de Actualizar Trabajos -->

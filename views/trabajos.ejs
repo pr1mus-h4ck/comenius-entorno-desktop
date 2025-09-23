@@ -1,10 +1,21 @@
-<!-- TODO: Crear un botón para que aparezca el formulario para la creación de Trabajo pero... el botón debe desaparecer al ingresar a un Trabajo específico -->
 <!-- Trabajos -->
 <div>
-    <% if (sesiones.trabajo) { %>
-        <%- include(`${sesiones.trabajo}.ejs`) %>
-    <% } else { %>
-        <%- include('listaTrabajo.ejs') %>
+    <% if (sesiones.rol === 'alumno') { %> <!-- Si es alumno -->
+        <% if (sesiones.trabajo) { %>
+            <%- include('trabajo.ejs') %>
+        <% } else { %>
+            <%- include('listaTrabajo.ejs') %>
+        <% } %>
+    <% } else { %> <!-- Si es instructor -->
+        <% if (sesiones.trabajo) { %>
+            <% if (!sesiones.alumno) { %>
+                <%- include('listaAlumno.ejs') %>
+            <% } else { %>
+                <%- include('trabajo.ejs') %>
+            <% } %>
+        <% } else { %>
+            <%- include('listaTrabajo.ejs') %>
+        <% } %>
     <% } %>
 </div>
 <!-- Fin de Trabajos -->

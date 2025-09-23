@@ -69,7 +69,7 @@
             console.log(recibido);
             const listaPublicacion = document.getElementById('listaPublicacion');
             listaPublicacion.innerHTML = ''; // Limpia el contenido actual
-            recibido.publicaciones.forEach(publicacion => {
+            recibido.panelClase.forEach(publicacion => {
                 // Crea el HTML para cada publicación (sin comentarios)
                 const html = `
                     <section class="section-publicacion">
