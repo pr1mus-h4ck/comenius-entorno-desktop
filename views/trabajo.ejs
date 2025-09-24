@@ -24,7 +24,7 @@
             </div>
             <!-- Fin del Botón de 'Subir Archivo' -->
             <!-- Botón de 'Crear Trabajo Alumnos' -->
-            <div>
+            <div id="realiza-entrega" style="display: none;">
                 <button type="submit">Realizar Entraga</button>
             </div>
             <!-- Fin de Botón de 'Crear Trabajo Alumnos' -->
@@ -145,7 +145,7 @@
                 // Si sale error cargar en la consola del Navegador el error
                 console.error('Error al hacer la petición');
             }
-        })
+        });
     }
 </script>
 <!-- Fin de la Funsión irListaAlumnos -->
@@ -153,8 +153,9 @@
 <script src="https://widget.cloudinary.com/v2.0/global/all.js"></script>
 <script>
     const btnSubirArchivo = document.getElementById("btn-subir-archivo");
+    const realizaEntrega = document.getElementById("realiza-entrega");
     let uploadedFiles = []; // Array para almacenar información sobre los archivos subidos
-    
+
     let widgetCloudinary = cloudinary.createUploadWidget({
         cloudName: "dgilte6sf",
         uploadPreset: "comenius_prueba",
@@ -169,6 +170,13 @@
             };
             
             uploadedFiles.push(fileInfo); // Agregar información del archivo al array
+            // Mostrar el botón de entrega
+            realizaEntrega.style.display = "block";
+        } else {
+            // Ocultar el botón de entrega si no hay archivos subidos
+            if (uploadedFiles.length === 0) {
+                realizaEntrega.style.display = "none";
+            }
         }
     });
     // Abre el widget al hacer clic en el botón
@@ -192,6 +200,16 @@
             },
             body: JSON.stringify(data), // Convertir el objeto a JSON
         })
+        .then(respuesta => {
+            // Si la respuesta es correcta
+            if (respuesta.ok) {
+                // Cargar la ventana en la ruta '/'
+                window.location.href = '/';
+            } else {
+                // Si sale error cargar en la consola del Navegador el error
+                console.error('Error al hacer la petición');
+            }
+        });
     }
 </script>
 <!-- Fid de la Funsión de Crear Trabajos de Alumnos -->

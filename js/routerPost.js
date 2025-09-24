@@ -419,7 +419,7 @@ app.post('/crearTrabajos', (req, res) => {
     .then(recibir => recibir.json())
     .then(recibido => {
         res.json(recibido);
-    })
+    });
 });
 app.post('/crearTrabajosAlumnos', (req, res) => {
     const urlArchivos = req.body.urlArchivos
@@ -440,6 +440,10 @@ app.post('/crearTrabajosAlumnos', (req, res) => {
         method: 'Post',
         body: sesionesJson
     })
+    .then(recibir => recibir.json())
+    .then(recibido => {
+        res.json(recibido);
+    });
 });
 app.post('/actualizarPublicacion', (req, res) => {
     // Creo un objeto con los valores de las Cookies de la sesión
