@@ -338,6 +338,10 @@ app.post('/actualizarListaComision', (req, res) => {
     })
         .then(recibir => recibir.json())
         .then(recibido => {
+            if (cookieSession.rol === 'alumno') {
+                cookies.set('instructorID', recibido.comision[0].instructor_id, { path: '/' });
+                cookieSession.instructorID = cookies.get('instructorID');
+            }
             res.json(recibido);
         });
 });
@@ -583,5 +587,29 @@ app.post('/irListaAlumnos', (req, res) => {
     cookieSession.listaAlumno = cookies.get('listaAlumno');
     // Envia la respuesta de éxito a 'index.ejs'
     res.sendStatus(200);
+});
+app.post('/crearChatTrabajo', async (req, res) => {
+    const chat = req.body.chat
+    const fechaHoraActual = new Date();
+    const timestamp = fechaHoraActual.getTime();
+    const sesiones = {
+        id: cookieSession.usuariosID,
+        session: cookieSession.sessionsID,
+        instructorId: cookieSession.instructorID,
+        listaAlumno: cookieSession.listaAlumno,
+        chat: chat,
+        fechaHora: timestamp,
+        comisionID: cookieSession.comisionID,
+        trabajoID: cookieSession.trabajo,
+        rol: cookieSession.rol,
+    }
+    // console.log('instructorId: '+cookieSession.instructorID);
+    // Convierto el objeto en un JSON
+    let sesionesJson = JSON.stringify(sesiones);
+    // Envío en método POST al servidor con los datos del JSON
+    fetch(`http://localhost:3000/crearChatTrabajo`, {
+        method: 'Post',
+        body: sesionesJson
+    })
 });
 module.exports = { routerPost: app }

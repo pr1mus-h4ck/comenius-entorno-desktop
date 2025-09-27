@@ -13,9 +13,9 @@
     <!-- Fin de Entraga del Alumno -->
 </div>
 <!-- Fin del 1° Contenedor -->
-<% if (sesiones.rol === 'alumno') { %>
-    <!-- 2° Contenedor -->
-    <div>
+<!-- 2° Contenedor -->
+<div>
+    <% if (sesiones.rol === 'alumno') { %>
         <!-- Subida y Entraga de Archivos de los Alumnos -->
         <form action="/crearTrabajosAlumnos" method="post" onsubmit="crearTrabajosAlumnos(event)">
             <!-- Botón de 'Subir Archivo' -->
@@ -30,12 +30,21 @@
             <!-- Fin de Botón de 'Crear Trabajo Alumnos' -->
         </form>
         <!-- Fin de la Subida y Entraga de Archivos de los Alumnos -->
-        <!-- Chat -->
-        <div id="trabajoChat"></div>
-        <!-- Fin del Chat -->
+    <% } %>
+    <!-- Chat -->
+    <div id="trabajoChat">
+        <div id="chat"></div>
+        <div>
+            <form action="/crearChat" method="post" onsubmit="crearChatTrabajo(event)">
+                <label for="chatInput" style="display: none;">Mensaje:</label>
+                <textarea name="chatInput" id="chatInput" placeholder="Escribe tu mensaje aquí..." required></textarea>
+                <button type="submit">Realizar Entraga</button>
+            </form>
+        </div>
     </div>
-    <!-- Fin del 2° Contenedor -->
-<% } %>
+    <!-- Fin del Chat -->
+</div>
+<!-- Fin del 2° Contenedor -->
 <!-- Funsión actualizarTrabajoInstructor -->
 <script>
     function actualizarTrabajoInstructor() {
@@ -213,3 +222,27 @@
     }
 </script>
 <!-- Fid de la Funsión de Crear Trabajos de Alumnos -->
+<!-- Función de Crear Chat -->
+<script>
+    function crearChatTrabajo(event) {
+        event.preventDefault();
+        const contenidoChat = document.getElementById("chatInput").value.trimStart();
+        if (!contenidoChat || contenidoChat.trim() === '') {
+            alert("El campo de chat es obligatorio.");
+            return; // Detener el envío del formulario
+        } else {
+            // Crear un objeto JSON con todos los datos
+            const data = {
+                chat: contenidoChat, // Enviar array con información de cada archivo
+            };
+            fetch('/crearChatTrabajo', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json' // Especificar que estamos enviando JSON
+                },
+                body: JSON.stringify(data), // Convertir el objeto a JSON
+            })
+        }
+    }
+</script>
+<!-- Fin de Función de Crear Chat -->
