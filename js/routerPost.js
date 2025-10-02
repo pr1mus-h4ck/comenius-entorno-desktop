@@ -603,13 +603,35 @@ app.post('/crearChatTrabajo', async (req, res) => {
         trabajoID: cookieSession.trabajo,
         rol: cookieSession.rol,
     }
-    // console.log('instructorId: '+cookieSession.instructorID);
     // Convierto el objeto en un JSON
     let sesionesJson = JSON.stringify(sesiones);
     // Envío en método POST al servidor con los datos del JSON
     fetch(`http://localhost:3000/crearChatTrabajo`, {
         method: 'Post',
         body: sesionesJson
+    })
+    .then(recibir => recibir.json())
+    .then(recibido => {
+        res.json(recibido);
+    })
+});
+app.post('/actualizarChatTrabajo', async (req, res) => {
+    const sesiones = {
+        session: cookieSession.sessionsID,
+        id: cookieSession.usuariosID,
+        trabajo: cookieSession.trabajo,
+        comision: cookieSession.comisionID,
+    }
+    // Convierto el objeto en un JSON
+    let sesionesJson = JSON.stringify(sesiones);
+    // Envío en método POST al servidor con los datos del JSON
+    fetch(`http://localhost:3000/actualizarChatTrabajo`, {
+        method: 'Post',
+        body: sesionesJson
+    })
+    .then(recibir => recibir.json())
+    .then(recibido => {
+        res.json(recibido);
     })
 });
 module.exports = { routerPost: app }

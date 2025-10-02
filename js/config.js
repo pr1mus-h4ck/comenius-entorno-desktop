@@ -38,7 +38,7 @@ let cookieSession = {
     zoomFirma: cookies.get('zoomFirma'),
     // Crear variable de 'clienteId' para autenticar el cliente de zoom
     clientId: cookies.get('clientId'),
-    // Crear variable de 'comision' para ingrear a las distintas comisiones inscriptas
+    // Crear variable de 'comision' para ingresar a las distintas comisiones inscriptas
     comision: cookies.get('comision'),
     // Crear variable 'comisionID' para guardar como cookie la ID del usuario con el rol Instructor de la DDBB
     comisionID: cookies.get('comisionID'),

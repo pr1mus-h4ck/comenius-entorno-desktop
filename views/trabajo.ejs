@@ -242,7 +242,45 @@
                 },
                 body: JSON.stringify(data), // Convertir el objeto a JSON
             })
+            .then(respuesta => {
+            // Si la respuesta es correcta
+            if (respuesta.ok) {
+                // Cargar la ventana en la ruta '/'
+                window.location.href = '/';
+            } else {
+                // Si sale error cargar en la consola del Navegador el error
+                console.error('Error al hacer la petición');
+            }
+        });
         }
     }
 </script>
 <!-- Fin de Función de Crear Chat -->
+<script>
+    function actualizarChatTrabajo() {
+        fetch('/actualizarChatTrabajo', { 
+            method: 'POST', 
+            headers: { 
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(recibir => recibir.json())
+        .then(recibido => {
+            const listarChat = document.getElementById('chat');
+            listarChat.innerHTML = ''; // Limpia el contenedor solo una vez
+            recibido.chat.forEach(chat => { // Usa 'comision', no 'comisiones'
+                const html = `
+                    <div>
+                        <p>${chat.FechaHora}</p>
+                    </div>
+                    <div>
+                        <p>${chat.Contenido}</p>
+                    </div>
+                `;
+                // Agrega el HTML al contenedor
+                listarChat.innerHTML += html;
+            });
+        });
+    }
+    actualizarChatTrabajo();
+</script>
