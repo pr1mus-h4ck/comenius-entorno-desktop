@@ -1012,8 +1012,9 @@ justify-content: space-between;
   background-color: white; /*Revisar*/
   padding: 10px; 
   border-radius: 10px;
+  width: 550px;
 }
-.contenedor-lista-trabajos form{
+.contenedor-lista-trabajos div{
   background-color: #EEEEEE;
   padding: 10px;
   border-radius: 10px;
@@ -1092,6 +1093,12 @@ justify-content: space-between;
   color: black;
 }
 
+.grid-template-entrega{
+      display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 10px;
+}
 
 
 
@@ -1175,7 +1182,7 @@ justify-content: space-between;
     display: flex;
     flex-direction: column;
   }
-
+  
 }
 
 /*Querys Responsive*/

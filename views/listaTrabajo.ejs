@@ -2,9 +2,12 @@
 <div class="trabajos">
     <!-- Formulario de la Creación de Trabajo -->
     <% if (sesiones.rol === 'instructor' && !sesiones.trabajo) { %>
-        <div class="contenedor-lista-trabajos">
+        <div>
             <form id="formulario" action="/crearTrabajos" method="post" onsubmit="crearTrabajos(event)">
-                <!-- Título -->
+                <div class="contenedor-lista-trabajos">
+                
+                <div>
+                    <!-- Título -->
                 <div class=""><h3>Formulario de carga de TP</h3></div>
                 <div>
                     <label for="titulo">Título</label>
@@ -29,7 +32,9 @@
                     <input class="btn-aceptar btn-style btn-form-tp" type="submit" value="Crear Trabajo">
                 </div>
                 <!-- Fin de Botón de 'Crear Trabajo' -->
+                 </div>    
             </form>
+            </div>
         </div>
     <% } %>
     <!-- Fin de Formulario de la Creación de Trabajo -->
