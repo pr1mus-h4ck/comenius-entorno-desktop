@@ -112,16 +112,16 @@
                             
                         ` : ''}
 
-                            <div class="div-input-respuesta">
+
+                    </article>
+                </section>
+                                            <div class="div-input-respuesta">
                                 <form class="form-respuesta" action="/crearComentario" method="POST" onsubmit="enviarComentario(event, ${publicacion.id})">
                                     <input type="hidden" name="publicacionId" value="${publicacion.id}">
                                     <input class="input-respuesta" type="text" id="comentario-${publicacion.id}" placeholder="Escribir comentario..." name="comentario">
                                     <input class="input-enviar btn-style" type="submit" value="Enviar">
                                 </form>
                             </div>
-                    </article>
-
-                </section>
                 `;
                 // Agrega el HTML al contenedor
                 listaPublicacion.innerHTML += html;
