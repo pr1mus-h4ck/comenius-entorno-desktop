@@ -964,7 +964,7 @@ text-transform: capitalize;
 .f-span{
 display: flex;
 justify-content: space-between;
-
+margin-bottom: 5px;
 }
 .contenedor-portada{
   display: flex;
@@ -1003,7 +1003,9 @@ justify-content: space-between;
 .btn-videoclase{
   width: 150px;
 }
-
+.article-publicacion{
+ text-align: justify;
+}
 
 
 
@@ -1333,7 +1335,9 @@ justify-content: space-between;
   .form-comentario{
     gap: 5px;
   }
-
+  .f-span{
+    flex-direction: column-reverse;
+  }
 }
 /*Query para resolucion de IgnacioMauro*/
 @media (min-width: 1366px) and (max-width: 1366px) and (min-height: 641px) and (max-height: 641px) {
