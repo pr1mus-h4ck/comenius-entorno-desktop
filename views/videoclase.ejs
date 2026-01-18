@@ -2,11 +2,11 @@
     <button type="submit" class="input-enviar btn-style btn-active btn-videoclase">Entrar a la llamada</button>
 </form>
 <!--FIXME: Solucionar la funcion de base64Encode, si no, eliminarlo-->
-<% function base64Encode(str) { %>
+<!--<% function base64Encode(str) { %>
     <%= btoa(unescape(encodeURIComponent(str))) %>
-<% } %>
+<% } %>-->
 <!--FIXME: Si se saca la funcion base64Encode, actualizar el src del iframe-->
-<% if (almacenamiento.id && almacenamiento.password && sesiones.nombre && almacenamiento.clientId && almacenamiento.zoomFirma) { %>
+<!--<% if (almacenamiento.id && almacenamiento.password && sesiones.nombre && almacenamiento.clientId && almacenamiento.zoomFirma) { %>
     <iframe src="https://zoom.us/wc/<%= almacenamiento.id %>/join?pwd=<%= almacenamiento.password %>&wc=true&no_dr=true&no_titlebar=true&un=<%= base64Encode(sesiones.nombre) %>&clientId=<%= almacenamiento.clientId %>&zoomFirma=<%= almacenamiento.zoomFirma %>" frameborder="0" class="prueba-zoom"></iframe>
 <% } %>
 <script src="https://source.zoom.us/3.9.0/lib/vendor/react.min.js"></script>
@@ -37,6 +37,6 @@
         })
     })
     .catch(error => console.error('Error al hacer la petición:', error));
-</script>
+</script>-->
 
 
