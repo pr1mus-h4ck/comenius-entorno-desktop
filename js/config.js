@@ -30,14 +30,6 @@ let cookieSession = {
     rol: cookies.get('rol'),
     // Craar variable de 'item' para guardar como cookie el item seleccionado del menu para renderizar dicha página en el index.ejs
     item: cookies.get('item'),
-    // Crear variable de 'id' para guardar como cookie el ID de zoom para iniciar la videollamda
-    id: cookies.get('id'),
-    // Crear variable de 'password' para guardar como cookie la contraseña para iniciar con el ID de zoom
-    password: cookies.get('password'),
-    // Crear variable de 'zoomfirma' para autenticar al usuario que ingresa a la llamada de zoom
-    zoomFirma: cookies.get('zoomFirma'),
-    // Crear variable de 'clienteId' para autenticar el cliente de zoom
-    clientId: cookies.get('clientId'),
     // Crear variable de 'comision' para ingresar a las distintas comisiones inscriptas
     comision: cookies.get('comision'),
     // Crear variable 'comisionID' para guardar como cookie la ID del usuario con el rol Instructor de la DDBB

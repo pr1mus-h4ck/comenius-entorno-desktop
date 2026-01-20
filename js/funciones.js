@@ -28,14 +28,6 @@ function getCookies(objeto, cookies) {
     objeto.rol = cookies.get('rol');
     // Guardar la cookie de item
     objeto.item = cookies.get('item');
-    // Guardar la cookie de item
-    objeto.id = cookies.get('id');
-    // Guardar la cookie de item
-    objeto.password = cookies.get('password');
-    // Guardar la cookie de item
-    objeto.zoomFirma = cookies.get('zoomFirma');
-    // Guardar la cookie de item
-    objeto.clientId = cookies.get('clientId');
     // Guardar la cookie de comision
     objeto.comision = cookies.get('comision');
     // Guardar la cookie de comisionID
@@ -67,14 +59,6 @@ function eliminarCookies(cookies) {
     cookies.remove('rol', { path: '/' });
     // Eliminar la cookie de item de menú del usuario
     cookies.remove('item', { path: '/' });
-    // Eliminar la cookie de id de la llamada de zoom
-    cookies.remove('id', { path: '/' });
-    // Eliminar la cookie de la contraseña de la llamda de zoom
-    cookies.remove('password', { path: '/' })
-    // Eliminar la cookie de la firma de autenticacion a la llamda de zoom
-    cookies.remove('zoomFirma', { path: '/' });
-    // Eliminar la cookie del id del cliente para unirse a la llamada de zoom
-    cookies.remove('clientId', { path: '/' });
     // Eliminar la cookie de comision
     cookies.remove('comision', { path: '/' });
     // Eliminar la cookie de enlace, secciones de la comison

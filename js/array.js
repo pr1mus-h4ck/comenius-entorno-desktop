@@ -2,13 +2,13 @@
 const inputNombres = ['input2', 'input3', 'input4', 'input5', 'input6'];
 // Array del menú de la interfaz de la app con sus respectivos roles
 const menuRol = {
-    alumno: ['inicio', 'panel_materias'],
-    instructor: ['inicio', 'panel_materias'],
+    alumno: ['inicio',],
+    instructor: ['inicio',],
 };
 // Array del menú de la interfaz de la app con sus respectivos roles en la sección de las comisiones
 const menuMateria = {
-    alumno: ['portada', 'panel_de_clase', 'videoclase', 'trabajos'],
-    instructor: ['portada', 'panel_de_clase', 'videoclase', 'trabajos'],
+    alumno: ['portada', 'panel_de_clase', 'trabajos'],
+    instructor: ['portada', 'panel_de_clase', 'trabajos'],
 };
 const imagenTipo = {
     'aep': './recursos/img/type/text_line_aep.svg',

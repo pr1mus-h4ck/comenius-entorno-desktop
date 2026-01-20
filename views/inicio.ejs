@@ -1,1 +1,54 @@
-<%- include(`${sesiones.rol}.ejs`) %>
+<!-- FIXME: JUSTIN Y MAURO NO TOQUEN LOGICA DE ACA, NO SE PREOCUPEN -->
+<!-- Contenido de cada item seleccionado -->
+<% if (sesiones.comision) { %>
+    <%- include('materia.ejs') %>
+<% } else { %>
+    <%- include('listaComision.ejs') %>
+<% } %>
+<!-- Fin de Contenido de cada item seleccionado -->
+<script>
+    function ingresarComisionClick(comision, comisionID) {
+        const materia = {
+            comision: comision,
+            comisionID: comisionID,
+        };
+        const materiaJson = JSON.stringify(materia);
+        fetch(`/ingresarComision`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: materiaJson,
+        })
+        .then(recibido => {
+            window.location.href = '/';
+        })
+    }
+</script>
+<script>
+    function manejarMateriaClick(item) {
+        console.log(item);
+            const dato = {
+                menu: item,
+            }
+            const datoJson = JSON.stringify(dato);
+            // Hace una petición en '/cargarPagina' con el método POST en el mismo puerto que corre el front, enviando 'datos' en formato JSON
+            fetch(`/cargarSeccion`, {
+                method: 'Post',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: datoJson,
+            })
+            .then(respuesta => {
+                // Si la respuesta es correcta
+                if (respuesta) {
+                    // Cargar la ventana en la ruta '/'
+                    window.location.href = '/';
+                } else {
+                    // Si sale error cargar en la consola del Navegador el error
+                    console.error('Error al hacer la petición');
+                }
+            })
+    }
+</script>

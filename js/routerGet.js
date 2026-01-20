@@ -27,12 +27,6 @@ app.get('/', (req, res) => {
         tipo: null,
         intentos: null,
     }
-    let almacenamiento = {
-        id: cookieSession.id,
-        password: cookieSession.password,
-        zoomFirma: cookieSession.zoomFirma,
-        clientId: cookieSession.clientId,
-    }
     // Verificar si hay una sesión activa
     if (sesiones.sesion) {
         // Si OTP fue virificado mostrar el Index
@@ -40,7 +34,7 @@ app.get('/', (req, res) => {
             // Verificar si el rol existe en menuRol antes de pasarlo
             if (menuRol[sesiones.rol]) {
                 // Mostrar Index
-                funciones.index(req, res, sesiones, menuRol[sesiones.rol], menuMateria[sesiones.rol], imagenTipo, almacenamiento, datosRecibidos);
+                funciones.index(req, res, sesiones, menuRol[sesiones.rol], menuMateria[sesiones.rol], imagenTipo, datosRecibidos);
             }
         } else {
             // Mostrar OTP
