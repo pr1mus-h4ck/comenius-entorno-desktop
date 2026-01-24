@@ -221,22 +221,6 @@ app.post('/cargarPagina', (req, res) => {
     cookies.remove('enlace', { path: '/' });
     // Guarda la Cookie 'enlace' sin valor
     cookieSession.enlace = cookies.get('enlace');
-    // Elimina la Cookie 'id'
-    cookies.remove('id', { path: '/' });
-    // Guarda la Cookie 'id' sin valor
-    cookieSession.id = cookies.get('id');
-    // Elimina la Cookie 'password'
-    cookies.remove('password', { path: '/' });
-    // Guarda la Cookie 'password' sin valor
-    cookieSession.password = cookies.get('password');
-    // Elimina la Cookie 'zoomFirma'
-    cookies.remove('zoomFirma', { path: '/' });
-    // Guarda la Cookie 'zoomFirma' sin valor
-    cookieSession.zoomFirma = cookies.get('zoomFirma');
-    // Elimina la Cookie 'clientId'
-    cookies.remove('clientId', { path: '/' });
-    // Guarda la Cookie 'clientId' sin valor
-    cookieSession.clientId = cookies.get('clientId');
     // Elimina la Cookie 'trabajo'
     cookies.remove('trabajo', { path: '/' });
     // Guarda la Cookie 'trabajo' sin valor
@@ -266,20 +250,6 @@ app.post('/cargarSeccion', (req, res) => {
     cookies.set('enlace', req.body.menu, { path: '/' });
     // Guarda la Cookie 'enlace' creada
     cookieSession.enlace = cookies.get('enlace');
-    // Guarda la Cookie 'id' sin valor
-    cookieSession.id = cookies.get('id');
-    // Elimina la Cookie 'password'
-    cookies.remove('password', { path: '/' });
-    // Guarda la Cookie 'password' sin valor
-    cookieSession.password = cookies.get('password');
-    // Elimina la Cookie 'zoomFirma'
-    cookies.remove('zoomFirma', { path: '/' });
-    // Guarda la Cookie 'zoomFirma' sin valor
-    cookieSession.zoomFirma = cookies.get('zoomFirma');
-    // Elimina la Cookie 'clientId'
-    cookies.remove('clientId', { path: '/' });
-    // Guarda la Cookie 'clientId' sin valor
-    cookieSession.clientId = cookies.get('clientId');
     // Elimina la Cookie 'trabajo'
     cookies.remove('trabajo', { path: '/' });
     // Guarda la Cookie 'trabajo' sin valor
@@ -290,38 +260,6 @@ app.post('/cargarSeccion', (req, res) => {
     cookieSession.listaAlumno = cookies.get('listaAlumno');
     // Envia la respuesta de éxito a 'materia.ejs'
     res.sendStatus(200);
-});
-app.post('/zoomPrueba', (req, res) => {
-    const fechaHoraActual = new Date();
-    const datosEncuentro = {
-        topic: cookieSession.comision,
-        startTime: fechaHoraActual,
-        duration: 60
-    }
-    const JSONdatosEncuentro = JSON.stringify(datosEncuentro);
-    fetch(`http://localhost:3000/zoomPrueba`, {
-        method: 'Post',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSONdatosEncuentro,
-    })
-        .then(recibir => recibir.json())
-        .then(recibido => {
-            cookies.set('nombre', 'Mateo', { path: '/' });
-            cookies.set('id', recibido.id, { path: '/' });
-            cookies.set('password', recibido.password, { path: '/' });
-            cookies.set('zoomFirma', recibido.zoomFirma, { path: '/' });
-            cookies.set('clientId', recibido.clientId, { path: '/' });
-
-            cookieSession.id = cookies.get('id');
-            cookieSession.password = cookies.get('password');
-            cookieSession.zoomFirma = cookies.get('zoomFirma');
-            cookieSession.clientId = cookies.get('clientId');
-            cookieSession.nombre = cookies.get('nombre');
-
-            res.sendStatus(200);
-        })
 });
 app.post('/actualizarListaComision', (req, res) => {
     // Creo un objeto con los valores de las Cookies de la sesión
