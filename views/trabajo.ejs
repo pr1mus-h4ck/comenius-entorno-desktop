@@ -95,18 +95,21 @@
                 <div id="archivosTrabajo">
                     <ul id="listaArchivos">
             `;
-            // Iterar sobre los archivos y crear los elementos de la lista
-            recibido.Archivos.forEach(archivo => {
+            // Si el Trabajo de Instructor tiene Archivos
+            if (recibido.Archivos) {
+                // Iterar sobre los archivos y crear los elementos de la lista
+                recibido.Archivos.forEach(archivo => {
+                    html += `
+                        <li>
+                            <a href="${archivo.URL}" target="_blank" data-tipo="${archivo.Tipo}">${archivo.Nombre}</a>
+                        </li>
+                    `;
+                });
                 html += `
-                    <li>
-                        <a href="${archivo.URL}" target="_blank" data-tipo="${archivo.Tipo}">${archivo.Nombre}</a>
-                    </li>
+                        </ul>
+                    </div>
                 `;
-            });
-            html += `
-                    </ul>
-                </div>
-            `;
+            }
             // Insertar el HTML en el contenedor principal
             document.getElementById('trabajoInstructor').innerHTML = html;
         })
@@ -114,7 +117,7 @@
             console.error('Error al actualizar los trabajos:', error);
         });
     }
-    // actualizarTrabajoInstructor(); 
+    actualizarTrabajoInstructor(); 
 </script>
 <!-- Fin de la Funsión actualizarTrabajoInstructor -->
 <!-- Funsión actualizarTrabajoAlumno -->
