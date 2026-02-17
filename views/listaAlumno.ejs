@@ -1,8 +1,13 @@
+<div class="lista-alumno-trabajo">
+<div class="lista-alumno-fondo">
 <h2>Lista de Usuarios Asignados</h2>
 <!-- Lista de Alumnos -->
 <div id="listaAlumnos"></div>
 <!-- Fin de Lista de Alumnos -->
 <!-- Actualización de la Lista de Alumnos -->
+</div>
+</div>
+
 <script>
     function actualizarAlumnos() {
         fetch('/actualizarAlumnos', { 
@@ -18,8 +23,8 @@
             let html = ''; // Inicializa la variable html como una cadena vacía
             recibido.listaAlumnos.forEach(alumno => {
                 html += `
-                    <div class="alumno">
-                        <a href="#" onclick="guardarIdEnCookie('${alumno.id}')"><h3>${alumno.Nombre}</h3></a>
+                    <div class="alumno fondo-alumno">
+                        <a href="#" onclick="guardarIdEnCookie('${alumno.id}')"><p>${alumno.Nombre}</p></a>
                     </div>
                 `;
             });
