@@ -1,6 +1,6 @@
 <% if (sesiones.alumno) { %>
     <!-- Boton para volver a la Lista de los Alumnos -->
-    <button onclick="irListaAlumnos()">Volver</button>
+    <button class="btn-volver btn-style" onclick="irListaAlumnos()">Volver</button>
     <!-- Fin de Boton para volver a la Lista de los Alumnos -->
 <% } %>
 <div class="grid-template-entrega">
@@ -8,28 +8,6 @@
 <div>
     <!-- Trabajo creado por Instructor -->
     <div id="trabajoInstructor">
-
-        <div class="">
-            <div>
-                <section class="section-publicacion">
-                        <div class="height-user">
-                            <img src="./recursos/img/img-comentario.svg" alt="">
-                        </div>
-                        <div>
-                            <div class="text-align: justify;"> 
-                                <div class="f-span">
-                                     <span class="bold">Nombre del Prefsor</span>
-                                     <span class="bold">Fecha de publicacion</span>
-                                </div>
-                                <h3>Titulo de Prueba</h3>
-                            </div>
-                            <div>
-                                <p>Texto de Prueba</p>
-                            </div>
-                        </div>
-
-            </div>
-        </div>
 
     </div>
     <!-- Fin de Trabajo creado por Instructor -->
@@ -39,18 +17,18 @@
 </div>
 <!-- Fin del 1° Contenedor -->
 <!-- 2° Contenedor -->
-<div>
+<div class="style-chat">
     <% if (sesiones.rol === 'alumno') { %>
         <!-- Subida y Entraga de Archivos de los Alumnos -->
         <form action="/crearTrabajosAlumnos" method="post" onsubmit="crearTrabajosAlumnos(event)">
             <!-- Botón de 'Subir Archivo' -->
             <div>
-                <button id="btn-subir-archivo" type="button" required>Subir Archivo</button>
+                <button class="btn-volver btn-style" id="btn-subir-archivo" type="button" required>Subir Archivo</button>
             </div>
             <!-- Fin del Botón de 'Subir Archivo' -->
             <!-- Botón de 'Crear Trabajo Alumnos' -->
             <div id="realiza-entrega" style="display: none;">
-                <button type="submit">Realizar Entraga</button>
+                <button class="btn-volver btn-style" type="submit">Enviar</button>
             </div>
             <!-- Fin de Botón de 'Crear Trabajo Alumnos' -->
         </form>
@@ -63,7 +41,7 @@
             <form action="/crearChat" method="post" onsubmit="crearChatTrabajo(event)">
                 <label for="chatInput" style="display: none;">Mensaje:</label>
                 <textarea name="chatInput" id="chatInput" placeholder="Escribe tu mensaje aquí..." required></textarea>
-                <button type="submit">Realizar Entraga</button>
+                <button class="btn-volver btn-style" type="submit">Enviar</button>
             </form>
         </div>
     </div>
@@ -86,7 +64,7 @@
             // Div para la información del trabajo
             html += `
                 <div id="publicacionTrabajo">
-                    <h2>${recibido.Titulo}</h2>
+                    <h3>${recibido.Titulo}</h3>
                     <p id="contenidoTrabajo">${recibido.Contenido}</p>
                 </div>
             `;
