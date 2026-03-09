@@ -559,6 +559,8 @@ app.post('/actualizarChatTrabajo', async (req, res) => {
         id: cookieSession.usuariosID,
         trabajo: cookieSession.trabajo,
         comision: cookieSession.comisionID,
+        listaAlumno: cookieSession.listaAlumno,
+        rol: cookieSession.rol,
     }
     // Convierto el objeto en un JSON
     let sesionesJson = JSON.stringify(sesiones);
