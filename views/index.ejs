@@ -15,7 +15,11 @@
             <% if (menu) { %>
                 <ul>
                     <% menu.forEach(item => { %>
-                        <li><a href="#" onclick="manejarMenuClick('<%= item %>')" title="<%= item %>"><%= item %></a></li>
+                         <li>
+                            <a href="#" onclick="manejarMenuClick('<%= item.label %>')" title="<%= item.label %>">
+                                <img src="<%= item.image %>" alt="<%= item.label %>" style="width: 20px; height: 20px;">
+                            </a>
+                        </li>
                     <% }) %>
                 </ul> 
             <% } %>
