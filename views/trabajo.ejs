@@ -49,7 +49,48 @@
 </div>
 <!-- Fin del 2° Contenedor -->
 </div>
-<!-- Funsión actualizarTrabajoInstructor -->
+<script>
+    const imagenTipo = {
+        'aep': './recursos/img/type/text_line_aep.svg',
+        'ai': './recursos/img/type/text_line_ai.svg',
+        'avi': './recursos/img/type/text_line_avi.svg',
+        'blend': './recursos/img/type/text_line_blend.svg',
+        'c4d': './recursos/img/type/text_line_c4d.svg',
+        'cdr': './recursos/img/type/text_line_cdr.svg',
+        'css': './recursos/img/type/text_line_css.svg',
+        'csv': './recursos/img/type/text_line_csv.svg',
+        'dmg': './recursos/img/type/text_line_dmg.svg',
+        'doc': './recursos/img/type/text_line_doc.svg',
+        'exe': './recursos/img/type/text_line_exe.svg',
+        'fig': './recursos/img/type/text_line_fig.svg',
+        'gif': './recursos/img/type/text_line_gif.svg',
+        'html': './recursos/img/type/text_line_html.svg',
+        'ico': './recursos/img/type/text_line_ico.svg',
+        'java': './recursos/img/type/text_line_java.svg',
+        'jpeg': './recursos/img/type/text_line_jpeg.svg',
+        'jpg': './recursos/img/type/text_line_jpg.svg',
+        'js': './recursos/img/type/text_line_js.svg',
+        'json': './recursos/img/type/text_line_json.svg',
+        'mov': './recursos/img/type/text_line_mov.svg',
+        'mp3': './recursos/img/type/text_line_mp3.svg',
+        'mp4': './recursos/img/type/text_line_mp4.svg',
+        'mpg': './recursos/img/type/text_line_mpg.svg',
+        'pdf': './recursos/img/type/text_line_pdf.svg',
+        'png': './recursos/img/type/text_line_png.svg',
+        'ppt': './recursos/img/type/text_line_ppt.svg',
+        'psd': './recursos/img/type/text_line_psd.svg',
+        'rar': './recursos/img/type/text_line_rar.svg',
+        'skt': './recursos/img/type/text_line_skt.svg',
+        'svg': './recursos/img/type/text_line_svg.svg',
+        'tiff': './recursos/img/type/text_line_tiff.svg',
+        'txt': './recursos/img/type/text_line_txt.svg',
+        'wav': './recursos/img/type/text_line_wav.svg',
+        'webp': './recursos/img/type/text_line_webp.svg',
+        'xls': './recursos/img/type/text_line_xls.svg',
+        'zip': './recursos/img/type/text_line_zip.svg',
+        'default': './recursos/img/type/text_line_txt.svg',
+    };
+</script>
 <script>
     function actualizarTrabajoInstructor() {
         fetch('/actualizarTrabajoInstructor', { 
@@ -77,9 +118,13 @@
             if (recibido.Archivos) {
                 // Iterar sobre los archivos y crear los elementos de la lista
                 recibido.Archivos.forEach(archivo => {
+                    const imgSrc = imagenTipo[archivo.Tipo] || imagenTipo['default'];
                     html += `
                         <li>
-                            <a href="${archivo.URL}" target="_blank" data-tipo="${archivo.Tipo}">${archivo.Nombre}</a>
+                            <a href="${archivo.URL}" target="_blank" data-tipo="${archivo.Tipo}" title="${archivo.Nombre+'.'+archivo.Tipo}">
+                                <img src="${imgSrc}" alt="${archivo.Tipo}">
+                                ${archivo.Nombre}
+                            </a>
                         </li>
                     `;
                 });
@@ -122,9 +167,13 @@
                 `;
                 // Iterar sobre los archivos y crear los elementos de la lista
                 recibido.archivosEntregas.Archivos.forEach(archivo => {
+                    const imgSrc = imagenTipo[archivo.Tipo] || imagenTipo['default'];
                     html += `
                         <li>
-                            <a href="${archivo.URL}" target="_blank" data-tipo="${archivo.Tipo}">${archivo.Nombre}</a>
+                            <a href="${archivo.URL}" target="_blank" data-tipo="${archivo.Tipo}" title="${archivo.Nombre+'.'+archivo.Tipo}">
+                                <img src="${imgSrc}" alt="${archivo.Tipo}">
+                                ${archivo.Nombre}
+                            </a>
                         </li>
                     `;
                 });

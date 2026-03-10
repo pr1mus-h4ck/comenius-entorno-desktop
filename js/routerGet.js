@@ -1,7 +1,7 @@
-const { app, cookies, cookieSession, cookieZoom } = require('./config');
+const { app, cookies, cookieSession } = require('./config');
 const config = require('./config');
 const funciones = require('./funciones');
-const { menuRol, menuMateria, imagenTipo } = require('./array');
+const { menuRol, menuMateria } = require('./array');
 // Renderizar la página de index
 app.get('/', (req, res) => {
     // Crear un objeto de sesión
@@ -34,7 +34,7 @@ app.get('/', (req, res) => {
             // Verificar si el rol existe en menuRol antes de pasarlo
             if (menuRol[sesiones.rol]) {
                 // Mostrar Index
-                funciones.index(req, res, sesiones, menuRol[sesiones.rol], menuMateria[sesiones.rol], imagenTipo, datosRecibidos);
+                funciones.index(req, res, sesiones, menuRol[sesiones.rol], menuMateria[sesiones.rol], datosRecibidos);
             }
         } else {
             // Mostrar OTP
