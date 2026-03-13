@@ -1176,6 +1176,10 @@ text-decoration: none;
 #archivosTrabajo{
   padding: 10px;
 }
+.prueba-iconos{
+  height: 35px;
+}
+
 
 /*Querys de la navbar inferior que luego, se vuelve vertical para celular*/
 @media (min-width: 500px){
