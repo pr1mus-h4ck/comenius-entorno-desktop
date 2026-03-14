@@ -985,7 +985,7 @@ margin-bottom: 5px;
 }
 .btn-form{
   margin-top: 10px;
-  width: 150px;
+  width: 20%;
 }
 .btn-videoclase{
   width: 150px;
@@ -1378,6 +1378,25 @@ text-decoration: none;
 }
 .grid-template-entrega{
     grid-template-columns: 1fr;
+}
+.div-titulo-url{
+  flex-direction: column;
+}
+.div-titulo-url input{
+  width: 100%;
+}
+.div-btn-textarea{
+  flex-direction: column;
+}
+.div-btn-textarea textarea{
+  width: 100%;
+}
+.div-btn-textarea button, .div-btn-textarea input{
+  width: 100%;
+  padding: 5px;
+}
+.btn-form{
+  width: 100%;
 }
 }
 /*Query para resolucion de IgnacioMauro*/
