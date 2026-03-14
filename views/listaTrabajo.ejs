@@ -2,21 +2,23 @@
 <div class="trabajos">
     <!-- Formulario de la Creación de Trabajo -->
     <% if (sesiones.rol === 'instructor' && !sesiones.trabajo) { %>
-        
-            <form id="formulario" action="/crearTrabajos" method="post" onsubmit="crearTrabajos(event)" class="form-publicacion form-trabajo">               
-                <div class="div-titulo-url">
-                    <input type="text" name="titulo" id="titulo" placeholder="Titulo" required>
-                    <input type="text" id="url-archivo" placeholder="URL del archivo" readonly required>
-                </div>
-                <!-- Archivo -->
-                <div class="div-btn-textarea">
-                    <textarea name="contenido" id="contenido" placeholder="Contenido" required></textarea>
-                    <button class="btn-style" type="button" id="btn-subir-archivo">Subir Archivo</button>
-                    <input class="btn-style" type="submit" value="Crear Trabajo">
-                </div>
-            </form>
-</div>
-        
+        <form id="formulario" action="/crearTrabajos" method="post" onsubmit="crearTrabajos(event)" class="form-publicacion form-trabajo">               
+            <div class="div-titulo-url">
+                <!-- Título -->
+                <input type="text" name="titulo" id="titulo" placeholder="Titulo" required>
+                <!-- Fin de Título -->
+                 <!-- Archivo -->
+                <input type="text" id="url-archivo" placeholder="URL del archivo" readonly required>
+                <!-- Fin de Archivo -->
+            </div>
+            <div class="div-btn-textarea">
+                <!-- Contenido -->
+                <textarea name="contenido" id="contenido" placeholder="Contenido" required></textarea>
+                <!-- Fin de Contenido -->
+                <button class="btn-style" type="button" id="btn-subir-archivo">Subir Archivo</button>
+                <input class="btn-style" type="submit" value="Crear Trabajo">
+            </div>
+        </form>
     <% } %>
     <!-- Fin de Formulario de la Creación de Trabajo -->
     <!-- Lista de Trabajos -->

@@ -2,7 +2,6 @@
 <div class="publicacion contenedor-publicacion">
     <% if (sesiones.rol === 'instructor') { %>
         <!-- Formulario para la Creación de Publicación -->
-        
         <form id="formulario" action="/crearPublicacion" method="POST" onsubmit="enviarPublicacion(event)" class="form-publicacion">
             <input type="text" id="publicacion-titulo" placeholder="Titulo (opcional)" name="publicacion-titulo" class="input-respuesta titulo">
             <input type="text" id="publicacion" placeholder="Contenido" name="publicacion" class="input-respuesta">
@@ -15,7 +14,6 @@
     <!-- Fin de Lista de Publicación -->
 </div> 
 <!-- Fin de Panel de Clase -->
-<!-- TODO: los script separarlos a otra carpeta y llamarlos con src -->
 <!-- Crear Publicación -->
 <script>
     function enviarPublicacion(event) {

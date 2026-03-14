@@ -4,7 +4,11 @@
         <% if (comision) { %>
             <ul>
                 <% comision.forEach(item => { %>
-                    <li><a href="#" onclick="manejarMateriaClick('<%= item %>')" title="<%= item %>"><%= item %></a></li>
+                    <li>
+                        <a href="#" onclick="manejarMateriaClick('<%= item.label %>')" title="<%= item.label %>">
+                            <img src="<%= item.image %>" alt="<%= item.label %>" style="width: 25px; height: 25px;">
+                        </a>
+                    </li>
                 <% }) %>
             </ul>
         <% } %>

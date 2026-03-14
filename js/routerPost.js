@@ -246,6 +246,12 @@ app.post('/ingresarComision', (req, res) => {
     res.sendStatus(200);
 });
 app.post('/cargarSeccion', (req, res) => {
+    if (req.body.menu == "Panel de Clase") {
+        req.body.menu = "panel_de_clase";
+    }
+    if (req.body.menu == "Trabajos") {
+         req.body.menu = "trabajos";
+    }
     // Crea la Cookie 'enlace' con el valor enviado desde 'materia.ejs'
     cookies.set('enlace', req.body.menu, { path: '/' });
     // Guarda la Cookie 'enlace' creada
