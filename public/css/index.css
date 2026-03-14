@@ -1023,9 +1023,19 @@ margin-bottom: 5px;
 }
 .div-btn-textarea input{
   width: 8%;
+  border: none;
+    border-radius: 4px;
+    background-color: #14CC5E;
+    color: white;
+    cursor: pointer;
 }
 .div-btn-textarea button{
   width: 8%;
+  border: none;
+    border-radius: 4px;
+    background-color: #14CC5E;
+    color: white;
+    cursor: pointer;
 }
 
 /*CSS Seccion EntregaTrabajos */
@@ -1109,7 +1119,6 @@ text-decoration: none;
   background-color: #EEEEEE;
   padding: 5px;
   border-radius: 7px;
-
 }
 .prueba-chat{
   margin-top: 7px;
@@ -1129,6 +1138,8 @@ text-decoration: none;
 .btn-100{
   width: 100%;
 }
+
+
 /*Querys de la navbar inferior que luego, se vuelve vertical para celular*/
 @media (min-width: 500px){
   #sidebar{
