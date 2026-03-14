@@ -20,15 +20,15 @@
 <div class="style-chat">
     <% if (sesiones.rol === 'alumno') { %>
         <!-- Subida y Entraga de Archivos de los Alumnos -->
-        <form action="/crearTrabajosAlumnos" method="post" onsubmit="crearTrabajosAlumnos(event)">
+        <form action="/crearTrabajosAlumnos" method="post" onsubmit="crearTrabajosAlumnos(event)" class="prueba-botones-row">
             <!-- Botón de 'Subir Archivo' -->
-            <div>
-                <button class="btn-volver btn-style" id="btn-subir-archivo" type="button" required>Subir Archivo</button>
+            <div class="btn-50">
+                <button class="btn-chat btn-style btn-100" id="btn-subir-archivo" type="button" required>Subir Archivo</button>
             </div>
             <!-- Fin del Botón de 'Subir Archivo' -->
             <!-- Botón de 'Crear Trabajo Alumnos' -->
-            <div id="realiza-entrega" style="display: none;">
-                <button class="btn-volver btn-style" type="submit">Enviar</button>
+            <div id="realiza-entrega" style="display: none;" class="btn-50">
+                <button class="btn-volver btn-chat btn-style btn-100" type="submit">Enviar</button>
             </div>
             <!-- Fin de Botón de 'Crear Trabajo Alumnos' -->
         </form>
@@ -36,12 +36,12 @@
     <% } %>
     <!-- Chat -->
     <div id="trabajoChat">
-        <div id="chat"></div>
+        <div id="chat" class="prueba-fondo-chat"></div>
         <div>
-            <form action="/crearChat" method="post" onsubmit="crearChatTrabajo(event)">
+            <form action="/crearChat" class="btn-chat-form" method="post" onsubmit="crearChatTrabajo(event)">
                 <label for="chatInput" style="display: none;">Mensaje:</label>
                 <textarea name="chatInput" id="chatInput" placeholder="Escribe tu mensaje aquí..." required></textarea>
-                <button class="btn-volver btn-style" type="submit">Enviar</button>
+                <button class="btn-enviar-chat btn-style" type="submit">Enviar</button>
             </form>
         </div>
     </div>
@@ -122,7 +122,7 @@
                     html += `
                         <li>
                             <a href="${archivo.URL}" target="_blank" data-tipo="${archivo.Tipo}" title="${archivo.Nombre+'.'+archivo.Tipo}">
-                                <img src="${imgSrc}" alt="${archivo.Tipo}">
+                                <img src="${imgSrc}" class="prueba-iconos" alt="${archivo.Tipo}">
                                 ${archivo.Nombre}
                             </a>
                         </li>
@@ -326,6 +326,7 @@
             listarChat.innerHTML = ''; // Limpia el contenedor solo una vez
             recibido.chat.forEach(chat => { // Usa 'comision', no 'comisiones'
                 const html = `
+                    <div class="prueba-chat">
                     <div>
                         <p>${chat.FechaHora}</p>
                     </div>
@@ -334,6 +335,7 @@
                     </div>
                     <div>
                         <p>${chat.Contenido}</p>
+                    </div>
                     </div>
                 `;
                 // Agrega el HTML al contenedor
