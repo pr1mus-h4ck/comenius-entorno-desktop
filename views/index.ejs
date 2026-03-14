@@ -17,7 +17,7 @@
                     <% menu.forEach(item => { %>
                          <li>
                             <a href="#" onclick="manejarMenuClick('<%= item.label %>')" title="<%= item.label %>">
-                                <img src="<%= item.image %>" alt="<%= item.label %>" style="width: 20px; height: 20px;">
+                                <img src="<%= item.image %>" alt="<%= item.label %>">
                             </a>
                         </li>
                     <% }) %>
@@ -26,7 +26,7 @@
             <!-- Fin de Iteración del array 'menu' -->
             <!-- Botón que activa la función 'avisoCerrarSesion()' -->
             <button onclick="avisoCerrarSesion()" title="Cerrar Sesión">
-                <img src="./recursos/img/icon-navbar4.svg" alt="Cerrar Sesión" style="width: 20px; height: 20px;">
+                <img src="./recursos/img/logout-black.svg" alt="Cerrar Sesión">
             </button>
             <!-- Fin de Botón que activa la función 'avisoCerrarSesion()' -->
         </nav>

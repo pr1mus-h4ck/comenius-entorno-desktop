@@ -113,6 +113,7 @@
             recibido.trabajos.forEach(trabajo => {
                 html += `
                     <div class="trabajo">
+                        
                         <a href="#" onclick="guardarIdEnCookie('${trabajo.id}')"><h3>${trabajo.Titulo}</h3></a>
                         <p>${trabajo.Contenido}</p>
                     </div>

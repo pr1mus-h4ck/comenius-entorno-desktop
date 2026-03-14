@@ -3,10 +3,10 @@ const inputNombres = ['input2', 'input3', 'input4', 'input5', 'input6'];
 // Array del menú de la interfaz de la app con sus respectivos roles
 const menuRol = {
     alumno: [
-        { image: './recursos/img/icon-navbar2.svg', label: 'Inicio' },
+        { image: './recursos/img/icon-inicio-black.svg', label: 'Inicio' },
     ],
     instructor: [
-        { image: './recursos/img/icon-navbar2.svg', label: 'Inicio' },
+        { image: './recursos/img/icon-inicio-black.svg', label: 'Inicio' },
     ],
 }
 // Array del menú de la interfaz de la app con sus respectivos roles en la sección de las comisiones

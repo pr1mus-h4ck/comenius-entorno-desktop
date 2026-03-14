@@ -321,15 +321,17 @@ input[type="password"]:hover, input[type="email"]:hover {
 }
 #sidebar ul{
   list-style: none;
+  align-items: center;
 }
-.icon-logo{
-  margin-top: 10px;
+#sidebar ul li a img, #sidebar button img{
+  height: 32px;
+  width: 32px;
 }
+
 #sidebar ul li a.active img{ /*Aca estaria el problema del active*/
   color: #14CC5E;
-  
   img{
-    fill: #14CC5E;
+    fill: white;
   }
 }
 
