@@ -122,7 +122,6 @@ input[type="password"]:hover, input[type="email"]:hover {
   border-color: #14CC5E;
   background-color: white;
   transition: .2s;
-
 }
 .input-box input::placeholder {
   color: #888;
@@ -529,7 +528,7 @@ input[type="password"]:hover, input[type="email"]:hover {
 }
 .card-materias{
   background-color: white;
-  padding: 10px;
+  padding: 8px;
   border-radius: 10px;
 }
 .card-materias div h2{
@@ -539,7 +538,7 @@ input[type="password"]:hover, input[type="email"]:hover {
   display: flex;
   justify-content: space-around;
   background-color: #EEEEEE;
-  padding: 15px;
+  padding: 8px;
   border-radius: 10px;
 }
 .content-card-materia:hover{
@@ -740,57 +739,8 @@ text-transform: capitalize;
       border-top: 2px solid #C5C5C5;
       padding: 10px 10px 10px 65px;
   }
-/*CSS Seccion Trabajos*/
-.contenedor-seccion-trabajos{
-  background-color: white;
-  padding: 10px;
-  border-radius: 10px;
-}
-.contenedor-seccion-trabajos form{
-  background-color: #EEEEEE;
-  padding: 10px;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.contenedor-seccion-trabajos form h3{
-  text-align: center;
-}
-.contenedor-seccion-trabajos form label {
-  display: block; /* Hacer que las etiquetas ocupen toda la línea */
-  margin-bottom: 5px; /* Espaciado debajo de la etiqueta */
-  color: #333; /* Color del texto de la etiqueta */
-}
 
-/* Estilo para los inputs y textarea */
-.contenedor-seccion-trabajos form input[type="text"],
-.contenedor-seccion-trabajos form textarea {
-  width: 100%; /* Ancho completo */
-  padding: 12px; /* Espaciado interno */
-  border: 1px solid #ccc; /* Borde gris claro por defecto */
-  border-radius: 4px; /* Bordes redondeados */
-  box-sizing: border-box; /* Incluye padding y borde en el ancho total */
-}
-
-/* Estilo específico para el textarea */
-.contenedor-seccion-trabajos form textarea {
-  height: 120px; /* Altura fija de 200px */
-  resize: none; /* Desactivar la opción de redimensionar */
-}
-
-/* Cambiar el color del borde al hacer foco */
-.contenedor-seccion-trabajos form input[type="text"]:focus,
-.contenedor-seccion-trabajos form textarea:focus {
-  outline: none;
-  border-color: #14CC5E;
-}
-.subir-archivo button{
-  margin-top: 10px;
-}
-.btn-form-tp{
-  max-width: 500px;
-}
+/* CSS lista de Trabajos Publicados */
 .trabajo{
   background-color: white;
   padding: 10px;
@@ -808,6 +758,7 @@ text-transform: capitalize;
 }
 .trabajo h3{
   text-align: justify;
+  padding-bottom: 5px;
 }
 .trabajo p{
   text-align: justify;
@@ -829,12 +780,12 @@ text-transform: capitalize;
 }
 .trabajo p{
   background-color: #EEEEEE;
-    padding: 10PX;
+    padding: 8px;
     border-radius: 7PX;
+    text-align: justify;
 }
 .trabajo h2{
   padding-bottom: 5px;
-
 }
 
 /*CSS Seccion Video Clase*/
@@ -913,6 +864,8 @@ text-transform: capitalize;
 a:visited {
   color: #000000;
 }
+
+
 /*CSS Seccion Publicacion Profesor-Alumno*/
 .contenedor-publicacion{
   display: grid;
@@ -921,7 +874,7 @@ a:visited {
 .form-publicacion{
   display: flex;
   background-color: white;
-  padding: 10px;
+  padding: 8px;
   border-radius: 7px;
 }
 .contenido-publicacion{
@@ -960,7 +913,7 @@ a:visited {
 }
 .input-respuesta {
   flex: 1;                    /* Ocupa el espacio restante (90%) */
-  padding: 10px;
+  padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;      /* Asegura que el padding y el borde se incluyan en el ancho total */
@@ -1013,7 +966,7 @@ margin-bottom: 5px;
 }
 .div-portada div{
   background-color: #EEEEEE;
-  padding:10PX;
+  padding: 8px;
   border-radius: 7PX;
 }
 .div-portada h3{
@@ -1030,7 +983,6 @@ margin-bottom: 5px;
   width: 100%;
   height: 100%;
 }
-
 .btn-form{
   margin-top: 10px;
   width: 150px;
@@ -1042,93 +994,41 @@ margin-bottom: 5px;
  text-align: justify;
 }
 
-
-
-/*CSS Seccion Trabajos*/
-.contenedor-lista-trabajos{
-  background-color: white; /*Revisar*/
-  padding: 10px; 
-  border-radius: 10px;
-  width: 550px;
-}
-.contenedor-lista-trabajos div{
-  background-color: #EEEEEE;
-  padding: 10px;
-  border-radius: 10px;
+/*CSS Form CargaTrabajo*/
+.form-trabajo{
   display: flex;
   flex-direction: column;
-  gap: 10px;
 }
-.contenedor-lista-trabajos form h3{
-  text-align: center;
-}
-.contenedor-lista-trabajos form label {
-  display: block; /* Hacer que las etiquetas ocupen toda la línea */
-  margin-bottom: 5px; /* Espaciado debajo de la etiqueta */
-  color: #333; /* Color del texto de la etiqueta */
-}
-
-/* Estilo para los inputs y textarea */
-.contenedor-lista-trabajos form input[type="text"],
-.contenedor-lista-trabajos form textarea {
-  width: 100%; /* Ancho completo */
-  padding: 12px; /* Espaciado interno */
-  border: 1px solid #ccc; /* Borde gris claro por defecto */
-  border-radius: 4px; /* Bordes redondeados */
-  box-sizing: border-box; /* Incluye padding y borde en el ancho total */
-}
-
-/* Estilo específico para el textarea */
-.contenedor-lista-trabajos form textarea {
-  height: 120px; /* Altura fija de 200px */
-  resize: none; /* Desactivar la opción de redimensionar */
-}
-
-/* Cambiar el color del borde al hacer foco */
-.contenedor-lista-trabajos form input[type="text"]:focus,
-.contenedor-lista-trabajos form textarea:focus {
-  outline: none;
-  border-color: #14CC5E;
-}
-.subir-archivo button{
-  margin-top: 10px;
-}
-.btn-form-tp{
-  max-width: 500px;
-}
-.trabajo{
-  background-color: white;
-  padding: 10px;
-  margin-top: 10px;
-  border-radius: 10px;
-}
-.trabajo div{
-  margin-top: 10px;
-  background-color: #EEEEEE;
-  padding: 10px;
-  border-radius: 10px;
-}
-.trabajo div:hover{
-  background-color: #C9FFE0;
-}
-.trabajo h3{
-  text-align: justify;
-}
-.trabajo p{
-  text-align: justify;
-}
-.trabajo ul{
+.div-titulo-url{
   display: flex;
   gap: 5px;
-  flex-direction: column;
 }
-.trabajo ul li{
-  list-style: none;
+.div-titulo-url input{
+  width: 50%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
-.trabajo ul li a{
-  text-decoration: none;
-  color: black;
+.div-btn-textarea{
+  display: flex;
+  gap: 5px;
 }
+.div-btn-textarea textarea{
+  width: 84%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.div-btn-textarea input{
+  width: 8%;
+}
+.div-btn-textarea button{
+  width: 8%;
+}
+
+/*CSS Seccion EntregaTrabajos */
 .grid-template-entrega{
       display: grid;
     grid-template-columns: 1fr 30%;
@@ -1137,21 +1037,21 @@ margin-bottom: 5px;
 }
 #trabajoInstructor{
   background-color: white;
-  padding: 10px;
+  padding: 8px;
   border-radius: 10px;
 }
 #publicacionTrabajo p{
   text-align: justify;
   background-color: #EEEEEE;
     border-radius: 7px;
-    padding: 10px;
+    padding: 8px;
 }
 #publicacionTrabajo h3{
  padding-bottom: 5px; 
 }
 .style-chat{
 background-color: white;
- padding: 10px;
+ padding: 8px;
   border-radius: 10px;
 }
 .style-chat form{
@@ -1444,7 +1344,7 @@ text-decoration: none;
     flex-direction: column;
     text-align: center;
     gap: 10px;
-    padding: 10px;
+    padding: 8px;
   }
   .item2-respuesta{
     gap: 5px;
