@@ -110,14 +110,12 @@
         .then(recibir => recibir.json())
         .then(recibido => {
             let html = ''; // Inicializa la variable html como una cadena vacía
-            // TODO: Agregar un onclick en el h2 de cada publicación
-            // TODO: Agregar un límite de caracteres en la etiqueta <p></p> de 100 a 120
             recibido.trabajos.forEach(trabajo => {
                 html += `
-                    <div class="trabajo">
-                        
+                <div class="trabajo">
+                        <img src="./recursos/img/icon-listatrabajo-black.svg" alt="icon-listatrabajo-black">
                         <a href="#" onclick="guardarIdEnCookie('${trabajo.id}')"><h3>${trabajo.Titulo}</h3></a>
-                        <p>${trabajo.Contenido}</p>
+                        <p>${trabajo.FechaHora}</p>
                     </div>
                 `;
             });
