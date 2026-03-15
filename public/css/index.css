@@ -572,7 +572,7 @@ CSS seccion portada y submenu
 }
 .contenedor-submenu ul{
   display: flex;
-  gap: 40px;
+  gap: 20px;
   justify-content: center;
 }
 .contenedor-submenu ul li{
@@ -1289,9 +1289,6 @@ text-decoration: none;
     position: fixed;
     top: unset;
     bottom: 0;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
 
     > ul{
       padding: 0;
@@ -1315,7 +1312,10 @@ text-decoration: none;
       justify-content: center;
     }
 
-  
+    ul li span, ul li:first-child, .dropdown-btn svg:last-child{
+      display: none;
+    }
+
     ul li .sub-menu.show{
       position: fixed;
       bottom: 60px;
@@ -1335,11 +1335,10 @@ text-decoration: none;
         display: inline-flex;
       }
     }
-    
   }
    /*Seccion materias y portada*/
    .contenedor-submenu ul{
-    gap: 40px;
+    gap: 10px;
   }
   .card-materias div h2{
     text-align: center;
