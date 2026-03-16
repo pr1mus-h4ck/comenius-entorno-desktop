@@ -580,4 +580,25 @@ app.post('/actualizarChatTrabajo', async (req, res) => {
         res.json(recibido);
     })
 });
+app.post('/actualizarPortada', async (req, res) => {
+    // Creo un objeto con los valores de las Cookies de la sesión
+    const sesiones = {
+        id: cookieSession.usuariosID,
+        session: cookieSession.sessionsID,
+        comisionID: cookieSession.comisionID,
+    }
+    // Convierto el objeto en un JSON
+    let sesionesJson = JSON.stringify(sesiones);
+    fetch('http://localhost:3000/actualizarPortada', {
+        method: 'POST',
+        headers: { 
+            'Content-Type': 'application/json'
+        },
+        body: sesionesJson,
+    })
+    .then(recibir => recibir.json())
+    .then(recibido => {
+        res.json(recibido);
+    })
+});
 module.exports = { routerPost: app }

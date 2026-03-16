@@ -1,24 +1,39 @@
-<div class="contenedor-portada">
-    <div class="div-portada">
-        <h3>OBJETIVOS</h3>
-        <div>
-            <p>● Dominar conceptos básicos de la comunicación
-                ● Relacionar los conceptos básicos de la comunicación con su utilización
-                ● Reconocer las variadas funciones de la imagen como recurso visual
-                ● Vincular el acto comunicativo con las herramientas informáticas apropiadas</p>
-        </div>
-    </div>
-    <div class="div-portada">
-        <h3>Evaluación de la cursada
-        </h3>
-        <div>
-            <p>La evaluación de la cursada consta de: <br>
-                ● 2 exámenes parciales evaluados mediante trabajos prácticos. Cada trabajo
-                posee una instancia de presentación y defensa en las fechas designadas como
-                evaluación parcial de la asignatura. <br>
-                ● Ejercitación de los diferentes temas, mediante ejercicios específicos de cada
-                temática o integradores y un trabajo práctico integrador desarrollado a lo largo
-                de la cursada</p>
-        </div>
-    </div>
-</div>
+<!-- Información de la Comisión -->
+<div id="contenidoPortada"  class="contenedor-portada"></div>
+<!-- Fin de Información de la Comisión -->
+<!-- Actualizar Información de Portada -->
+<script>
+    function actualizarPortada() {
+        fetch('/actualizarPortada', { 
+            method: 'POST', 
+            headers: { 
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(recibir => recibir.json())
+        .then(recibido => {
+            const contenidoPortada = document.getElementById('contenidoPortada');
+            contenidoPortada.innerHTML = ''; // Limpia el contenido actual
+            recibido.portada.forEach(portada => {
+                const html = `
+                <div class="div-portada">
+                    <h3>Objetivos</h3>
+                    <div>
+                        <p>${portada.Objetivo}</p>
+                    </div>
+                </div>
+                <div class="div-portada">
+                    <h3>Evaluación de la cursada</h3>
+                    <div>
+                        <p>${portada.EvaluacionCursada}</p>
+                    </div>
+                </div>
+                `;
+                // Agrega el HTML al contenedor
+                contenidoPortada.innerHTML += html;
+            })
+        });
+    }
+    actualizarPortada();
+</script>
+<!-- Fin de Actualizar Información de Portada -->

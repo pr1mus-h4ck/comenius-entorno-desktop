@@ -312,6 +312,7 @@
     }
 </script>
 <!-- Fin de Función de Crear Chat -->
+<!-- Función de Actualizar Chat -->
 <script>
     function actualizarChatTrabajo() {
         fetch('/actualizarChatTrabajo', { 
@@ -324,7 +325,7 @@
         .then(recibido => {
             const listarChat = document.getElementById('chat');
             listarChat.innerHTML = ''; // Limpia el contenedor solo una vez
-            recibido.chat.forEach(chat => { // Usa 'comision', no 'comisiones'
+            recibido.chat.forEach(chat => {
                 const html = `
                     <div class="prueba-chat">
                     <div>
@@ -345,3 +346,4 @@
     }
     actualizarChatTrabajo();
 </script>
+<!-- Fin de Función de Actualizar Chat -->

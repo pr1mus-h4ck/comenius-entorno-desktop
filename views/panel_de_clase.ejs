@@ -64,7 +64,6 @@
         })
         .then(recibir => recibir.json())
         .then(recibido => {
-            console.log(recibido);
             const listaPublicacion = document.getElementById('listaPublicacion');
             listaPublicacion.innerHTML = ''; // Limpia el contenido actual
             recibido.panelClase.forEach(publicacion => {
