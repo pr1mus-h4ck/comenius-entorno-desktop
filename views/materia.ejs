@@ -6,7 +6,7 @@
                 <% comision.forEach(item => { %>
                     <li>
                         <a href="#" onclick="manejarMateriaClick('<%= item.label %>')" title="<%= item.label %>">
-                            <img src="<%= item.image %>" alt="<%= item.label %>" style="width: 25px; height: 25px;">
+                            <img src="<%= item.image %>" alt="<%= item.label %>" class="navbar-panelmaterias">
                         </a>
                     </li>
                 <% }) %>
