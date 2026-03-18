@@ -66,63 +66,65 @@
         .then(recibido => {
             const listaPublicacion = document.getElementById('listaPublicacion');
             listaPublicacion.innerHTML = ''; // Limpia el contenido actual
-            recibido.panelClase.forEach(publicacion => {
-                // Crea el HTML para cada publicación (sin comentarios)
-                const html = `
-                    <section class="section-publicacion">
-
-                        <div class="height-user">
-                            <img src="./recursos/img/img-comentario.svg" alt="">
-                        </div>
-
-                        <article class="article-publicacion" id="publicacion-${publicacion.id}">
-                            <div class="style-respuesta">
-                            <div class="f-span">
-                                <span class="bold">${publicacion.NombreCompleto}</span>
-                                <span class="bold">${publicacion.FechaHora}</span>
+            if (!recibido.tipo) {
+                recibido.panelClase.forEach(publicacion => {
+                    // Crea el HTML para cada publicación con o sin comentarios
+                    const html = `
+                        <section class="section-publicacion">
+    
+                            <div class="height-user">
+                                <img src="./recursos/img/img-comentario.svg" alt="">
                             </div>
-                            <div>
-                                ${publicacion.Titulo && publicacion.Titulo.trim() !== '' ? `<h3>${publicacion.Titulo}</h3>` : ''}
-                                <p>${publicacion.Contenido}</p>
-                            </div>
-                            </div>
+    
+                            <article class="article-publicacion" id="publicacion-${publicacion.id}">
+                                <div class="style-respuesta">
+                                <div class="f-span">
+                                    <span class="bold">${publicacion.NombreCompleto}</span>
+                                    <span class="bold">${publicacion.FechaHora}</span>
+                                </div>
+                                <div>
+                                    ${publicacion.Titulo && publicacion.Titulo.trim() !== '' ? `<h3>${publicacion.Titulo}</h3>` : ''}
+                                    <p>${publicacion.Contenido}</p>
+                                </div>
+                                </div>
                                 ${publicacion.comentarios && publicacion.comentarios.length > 0 ? `
-
-                            <div class="contenido-respuesta" id="comentarios-${publicacion.id}">
-
-                                ${publicacion.comentarios.map(comentario => `
-                                    <div class="div-respuesta"> 
-                                        <div class="height-user">
-                                            <img src="./recursos/img/img-comentario.svg" alt="">
-                                        </div>
-                                        <div class="style-comentario">
-                                            <div class="f-span">
-                                                <span>${comentario.NombreCompletoComenterio}</span>
-                                                <span>${comentario.FechaHoraComentario}</span>
+                                    <div class="contenido-respuesta" id="comentarios-${publicacion.id}">
+                                        ${publicacion.comentarios.map(comentario => `
+                                            <div class="div-respuesta"> 
+                                                <div class="height-user">
+                                                    <img src="./recursos/img/img-comentario.svg" alt="">
+                                                </div>
+                                                <div class="style-comentario">
+                                                    <div class="f-span">
+                                                        <span>${comentario.NombreCompletoComenterio}</span>
+                                                        <span>${comentario.FechaHoraComentario}</span>
+                                                    </div> 
+                                                    <p>${comentario.ComentarioContenido}</p>
+                                                </div>
                                             </div>
-                                            
-                                            <p>${comentario.ComentarioContenido}</p>
-                                        </div>
+                                        `).join('')}
                                     </div>
-                                `).join('')}
-                            </div>
-                            
-                        ` : ''}
-
-
-                    </article>
-                </section>
-                                            <div class="div-input-respuesta">
-                                <form class="form-respuesta" action="/crearComentario" method="POST" onsubmit="enviarComentario(event, ${publicacion.id})">
-                                    <input type="hidden" name="publicacionId" value="${publicacion.id}">
-                                    <input class="input-respuesta" type="text" id="comentario-${publicacion.id}" placeholder="Escribir comentario..." name="comentario">
-                                    <input class="input-enviar btn-style" type="submit" value="Enviar">
-                                </form>
-                            </div>
+                                ` : ''}
+                            </article>
+                        </section>
+                        <div class="div-input-respuesta">
+                            <form class="form-respuesta" action="/crearComentario" method="POST" onsubmit="enviarComentario(event, ${publicacion.id})">
+                                <input type="hidden" name="publicacionId" value="${publicacion.id}">
+                                <input class="input-respuesta" type="text" id="comentario-${publicacion.id}" placeholder="Escribir comentario..." name="comentario">
+                                <input class="input-enviar btn-style" type="submit" value="Enviar">
+                            </form>
+                        </div>
+                    `;
+                    // Agrega el HTML al contenedor
+                    listaPublicacion.innerHTML += html;
+                });
+            } else {
+                const html = `
+                    <p>${recibido.mensaje}</p>
                 `;
                 // Agrega el HTML al contenedor
                 listaPublicacion.innerHTML += html;
-            });
+            }
         })
     }
     actualizarPublicacion();
