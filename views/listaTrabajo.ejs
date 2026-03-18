@@ -110,7 +110,7 @@
         .then(recibir => recibir.json())
         .then(recibido => {
             let html = ''; // Inicializa la variable html como una cadena vacía
-            if (!recibido.tipo) {
+            if (!recibido.tipo == 'empty') {
                 recibido.trabajos.forEach(trabajo => {
                     html += `
                     <div class="trabajo">
