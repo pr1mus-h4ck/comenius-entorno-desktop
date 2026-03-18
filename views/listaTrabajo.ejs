@@ -110,15 +110,21 @@
         .then(recibir => recibir.json())
         .then(recibido => {
             let html = ''; // Inicializa la variable html como una cadena vacía
-            recibido.trabajos.forEach(trabajo => {
+            if (!recibido.tipo) {
+                recibido.trabajos.forEach(trabajo => {
+                    html += `
+                    <div class="trabajo">
+                            <img src="./recursos/img/icon-listatrabajo-black.svg" alt="icon-listatrabajo-black">
+                            <a href="#" onclick="guardarIdEnCookie('${trabajo.id}')"><h3>${trabajo.Titulo}</h3></a>
+                            <p>${trabajo.FechaHora}</p>
+                        </div>
+                    `;
+                });
+            } else {
                 html += `
-                <div class="trabajo">
-                        <img src="./recursos/img/icon-listatrabajo-black.svg" alt="icon-listatrabajo-black">
-                        <a href="#" onclick="guardarIdEnCookie('${trabajo.id}')"><h3>${trabajo.Titulo}</h3></a>
-                        <p>${trabajo.FechaHora}</p>
-                    </div>
+                    <p>${recibido.mensaje}</p>
                 `;
-            });
+            }
             const listaTrabajos = document.getElementById('listaTrabajos');
             listaTrabajos.innerHTML = html; // Asigna el HTML generado a la lista
         });

@@ -432,7 +432,6 @@ app.post('/actualizarComision', (req, res) => {
         res.json(recibido);
     })
 });
-// FIXME:
 app.post('/actualizarTrabajos', (req, res) => {
     // Creo un objeto con los valores de las Cookies de la sesión
     const sesiones = {
