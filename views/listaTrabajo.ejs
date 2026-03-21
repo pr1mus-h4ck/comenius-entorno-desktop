@@ -2,7 +2,7 @@
 <div class="trabajos">
     <!-- Formulario de la Creación de Trabajo -->
     <% if (sesiones.rol === 'instructor' && !sesiones.trabajo) { %>
-        <form id="formulario" action="/crearTrabajos" method="post" onsubmit="crearTrabajos(event)" class="form-publicacion form-trabajo">               
+        <form id="formulario" action="/crearTrabajos" method="post" onsubmit="crearTrabajos(event)" class="form-publicacion form-trabajo">
             <div class="div-titulo-url">
                 <!-- Título -->
                 <input type="text" name="titulo" id="titulo" placeholder="Titulo" required>
@@ -32,7 +32,7 @@
     const btnSubirArchivo = document.getElementById("btn-subir-archivo");
     const urlArchivoInput = document.getElementById("url-archivo");
     let uploadedFiles = []; // Array para almacenar información sobre los archivos subidos
-    
+
     let widgetCloudinary = cloudinary.createUploadWidget({
         cloudName: "dgilte6sf",
         uploadPreset: "comenius_prueba",
@@ -45,7 +45,7 @@
                 name: result.info.original_filename // Nombre original del archivo
                 // No necesitas agregar tipo MIME aquí, ya que lo extraerás en el backend.
             };
-            
+
             uploadedFiles.push(fileInfo); // Agregar información del archivo al array
             urlArchivoInput.value = uploadedFiles.map(file => file.url).join(', '); // Mostrar todas las URLs
         }
@@ -86,24 +86,24 @@
                 // Limpiar campos de formulario
                 uploadedFiles = []; // Reiniciar array
                 urlArchivoInput.value = '';
-                document.getElementById("titulo").value = '';  
-                document.getElementById("contenido").value = '';  
+                document.getElementById("titulo").value = '';
+                document.getElementById("contenido").value = '';
                 actualizarTrabajos();
             }
-            
+
         })
         .catch(error => {
             console.error('Error:', error);
         });
     }
-</script> 
+</script>
 <!-- Fin de Crear Trabajos -->
 <!-- Actualizar Trabajos -->
 <script>
     function actualizarTrabajos() {
-        fetch('/actualizarTrabajos', { 
-            method: 'POST', 
-            headers: { 
+        fetch('/actualizarTrabajos', {
+            method: 'POST',
+            headers: {
                 'Content-Type': 'application/json'
             }
         })
@@ -112,11 +112,15 @@
             let html = ''; // Inicializa la variable html como una cadena vacía
             if (!recibido.tipo) {
                 recibido.trabajos.forEach(trabajo => {
+                    // Genera un ID único para cada imagen SVG
+                    const svgId = `miSvg-${trabajo.id}`;
                     html += `
-                    <div class="trabajo">
+                        <div class="trabajo">
                             <div>
-                            <img src="./recursos/img/icon-listatrabajo-black.svg" alt="icon-listatrabajo-black">
-                            <a href="#" onclick="guardarIdEnCookie('${trabajo.id}')"><h3>${trabajo.Titulo}</h3></a>
+                                <img id="${svgId}" class="svg-hover-image" src="./recursos/img/icon-listatrabajo-black.svg" alt="icon-listatrabajo-black">
+                                <a href="#" onclick="guardarIdEnCookie('${trabajo.id}')">
+                                    <h3>${trabajo.Titulo}</h3>
+                                </a>
                             </div>
                             <p>${trabajo.FechaHora}</p>
                         </div>
@@ -129,6 +133,27 @@
             }
             const listaTrabajos = document.getElementById('listaTrabajos');
             listaTrabajos.innerHTML = html; // Asigna el HTML generado a la lista
+            // --- Código del Hover ---
+            recibido.trabajos.forEach(trabajo => {
+                const svgId = `miSvg-${trabajo.id}`;
+                const miSvgElement = document.getElementById(svgId);
+                // Asegurarse de que el elemento existe
+                if (miSvgElement) {
+                    // Ruta a tu SVG original
+                    const svgNormalSrc = './recursos/img/icon-listatrabajo-black.svg';
+                    // Ruta a tu SVG para el hover
+                    const svgHoverSrc = './recursos/img/icon-listatrabajo-white.svg';
+                    // Evento al hacer Hover
+                    miSvgElement.addEventListener('mouseover', () => {
+                        miSvgElement.src = svgHoverSrc;
+                    });
+                    // Evento al finalizar el Hover
+                    miSvgElement.addEventListener('mouseout', () => {
+                        miSvgElement.src = svgNormalSrc;
+                    });
+                }
+            });
+            // --- Fin del Código del Hover ---
         });
     }
     function guardarIdEnCookie(id) {
@@ -136,9 +161,9 @@
             trabajo: `${id}`,
         }
         const datoJson = JSON.stringify(dato);
-        fetch('/seccionTrabajo', { 
-            method: 'POST', 
-            headers: { 
+        fetch('/seccionTrabajo', {
+            method: 'POST',
+            headers: {
                 'Content-Type': 'application/json'
             },
             body: datoJson
