@@ -96,7 +96,7 @@
             console.error('Error:', error);
         });
     }
-</script>
+</script> 
 <!-- Fin de Crear Trabajos -->
 <!-- Actualizar Trabajos -->
 <script>
@@ -114,8 +114,10 @@
                 recibido.trabajos.forEach(trabajo => {
                     html += `
                     <div class="trabajo">
+                            <div>
                             <img src="./recursos/img/icon-listatrabajo-black.svg" alt="icon-listatrabajo-black">
                             <a href="#" onclick="guardarIdEnCookie('${trabajo.id}')"><h3>${trabajo.Titulo}</h3></a>
+                            </div>
                             <p>${trabajo.FechaHora}</p>
                         </div>
                     `;

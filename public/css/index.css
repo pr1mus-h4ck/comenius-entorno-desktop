@@ -758,22 +758,14 @@ text-transform: capitalize;
   padding: 10px;
   margin-top: 10px;
   border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .trabajo div{
-  margin-top: 10px;
-  background-color: #EEEEEE;
-  padding: 10px;
-  border-radius: 10px;
-}
-.trabajo div:hover{
-  background-color: #C9FFE0;
-}
-.trabajo h3{
-  text-align: justify;
-  padding-bottom: 5px;
-}
-.trabajo p{
-  text-align: justify;
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 .trabajo ul{
   display: flex;
@@ -790,16 +782,22 @@ text-transform: capitalize;
 .trabajo a{
   text-decoration: none;
 }
-.trabajo p{
-  background-color: #EEEEEE;
-    padding: 8px;
-    border-radius: 7PX;
-    text-align: justify;
-}
 .trabajo h2{
   padding-bottom: 5px;
 }
-
+.trabajo div img{
+  height: 28px;
+  width: 28px;
+}
+/*TODO:*/
+.trabajo p{
+    background-color: #EEEEEE;
+    padding: 8px;
+    border-radius: 10px;
+}
+.trabajo p:hover{
+  background-color: #C9FFE0;
+}
 /*CSS Seccion Video Clase*/
 .prueba123{
   display: grid;
@@ -853,10 +851,6 @@ text-transform: capitalize;
   display: none;
   gap: 5px;
 }
-.lista-alumno-trabajo{
-  display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-}
 .lista-alumno-fondo{
   background-color: white;
     padding: 10px;
@@ -869,6 +863,9 @@ text-transform: capitalize;
   background-color: #EEEEEE;
     padding: 10PX;
     border-radius: 7PX;
+}
+.alumno:hover{
+ background-color: #C9FFE0; 
 }
 .alumno a{
   text-decoration: none;
@@ -1032,6 +1029,7 @@ margin-bottom: 5px;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+  font-family: "Lato", sans-serif;
 }
 .div-btn-textarea input{
   width: 8%;
@@ -1106,6 +1104,13 @@ background-color: white;
   display: flex;
   flex-direction: column;
 }
+.btn-chat-form textarea{
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family: "Lato", sans-serif;
+}
 .btn-enviar-chat{
   padding: 12px;
     margin-top: 10px;
@@ -1126,6 +1131,11 @@ text-decoration: none;
 }
 .prueba-iconos{
   height: 46px;
+}
+#listaArchivos li a{
+   align-items: center;
+    display: flex;
+    gap: 20px;
 }
 .prueba-fondo-chat{
   background-color: #EEEEEE;
