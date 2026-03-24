@@ -154,6 +154,20 @@ app.post('/confirmar-otp', (req, res) => {
                     datosRecibidos = recibido;
                     funciones.otp(req, res, sesiones, procesoOTP, datosRecibidos);
                 })
+                // Si la petición al Back-End no funciona
+            .catch(error => {
+                let datosRecibidos = {
+                    tipo: 'problemaServidorOTP'
+                }
+                // Elimino todas las Cookies de la app
+                funciones.eliminarCookies(cookies);
+                // Guardo las Cookies con el valor vacio
+                funciones.getCookies(cookieSession, cookies);
+                // Establezco 'config.envioOTP' son su valor de origen
+                config.envioOTP = false;
+                // Renderizar a Login
+                funciones.login(req, res, datosRecibidos);
+            })
         } else {
             // Muestro un alert indicando que debe completar los campos obligatorios del formulario llevandolo nuevamente al 'login'
             let sesiones = {
