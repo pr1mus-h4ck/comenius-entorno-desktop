@@ -26,28 +26,37 @@ app.post('/login', (req, res) => {
                 method: 'Post',
                 body: iniciarJson
             })
-                .then(recibir => recibir.json())
-                .then(recibido => {
-                    // Si la validación es correcta guardo la ID de la sesión y verificación de OTP
-                    if (recibido.usuarioID && recibido.sessionID) {
-                        // Creo las Cookies con los valores recibidos desde el Back-End
-                        funciones.setCookies(recibido, cookies);
-                        // Guardo las Cookies creadas
-                        funciones.getCookies(cookieSession, cookies);
-                    }
-                    // Guardo el mensaje completo enviado desde el Back-End
-                    datosRecibidos = recibido;
-                    // Si 'recibido.tipo' es verdadero. Es decir, si 'recibido.tipo' tiene un valor guardado.
-                    if (recibido.tipo) {
-                        // Renderizar a Login
-                        funciones.login(req, res, datosRecibidos);
-                    }
-                })
+            .then(recibir => recibir.json())
+            .then(recibido => {
+                // Si la validación es correcta guardo la ID de la sesión y verificación de OTP
+                if (recibido.usuarioID && recibido.sessionID) {
+                    // Creo las Cookies con los valores recibidos desde el Back-End
+                    funciones.setCookies(recibido, cookies);
+                    // Guardo las Cookies creadas
+                    funciones.getCookies(cookieSession, cookies);
+                }
+                // Guardo el mensaje completo enviado desde el Back-End
+                datosRecibidos = recibido;
+                // Si 'recibido.tipo' es verdadero. Es decir, si 'recibido.tipo' tiene un valor guardado.
+                if (recibido.tipo) {
+                    // Renderizar a Login
+                    funciones.login(req, res, datosRecibidos);
+                }
+            })
+            // Si la petición al Back-End no funciona
+            .catch(error => {
+                let datosRecibidos = {
+                    tipo: 'problemaServidor'
+                }
+                // Renderizar a Login
+                funciones.login(req, res, datosRecibidos);
+            })
         } else {
             // Muestro un alert indicando que debe completar los campos obligatorios del formulario llevandolo nuevamente al 'login'
             datosRecibidos = {
                 tipo: 'obligatorio',
             }
+            // Renderizar a Login
             funciones.login(req, res, datosRecibidos);
         }
     }

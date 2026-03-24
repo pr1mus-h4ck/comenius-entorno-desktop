@@ -35,6 +35,13 @@ function redireccionarLogin(req, res, datosRecibidos) {
         alertMessage: '¡Se ha Finalizado la Sesión con Éxito!',
         type: 'exito',
     }
+    // Mensaje de Alerta cuando la petición al Back-End no funciona
+    let problemaServidor = {
+         alert: true,
+         alertTitle: 'Error',
+         alertMessage: 'No se pudo iniciar la sesión, vuelva intentarlo más tarde',
+        type: 'error',
+    }
     // Fin de Toda la lógica de las ventanas emergentes
     // Lógica de Renderización
     if (datosRecibidos.tipo === 'exito') {
@@ -51,6 +58,9 @@ function redireccionarLogin(req, res, datosRecibidos) {
         res.render('login');
     } else if (datosRecibidos.tipo === 'cerrarSesion') {
         res.locals.alert = cerrarSesion;
+        res.render('login');
+    } else if (datosRecibidos.tipo === 'problemaServidor') {
+        res.locals.alert = problemaServidor;
         res.render('login');
     } else {
         // Si no hay 'datosRecibidos.tipo', renderizar siempre a Login
