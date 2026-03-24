@@ -133,28 +133,28 @@ app.post('/confirmar-otp', (req, res) => {
                 method: 'Post',
                 body: otpJson
             })
-                .then(recibir => recibir.json())
-                .then(recibido => {
-                    // Crear la cookie de si se requiere OTP o no
-                    cookies.set('verificacion', recibido.verificacion, { path: '/' });
-                    cookies.set('rol', recibido.rol, { path: '/' });
-                    cookies.set('nombre', recibido.nombre, { path: '/' });
-                    // Guardar la cookie de verificacion
-                    cookieSession.verificacionOTP = cookies.get('verificacion');
-                    cookieSession.rol = cookies.get('rol');
-                    cookieSession.nombre = cookies.get('nombre');
-                    if (recibido.rol === 'instructor') {
-                        cookies.set('instructorID', recibido.instructorId, { path: '/' });
-                        cookieSession.instructorID = cookies.get('instructorID');
-                    }
-                    const procesoOTP = {
-                        envio: config.envioOTP,
-                        correo: cookieSession.correoOTP
-                    }
-                    datosRecibidos = recibido;
-                    funciones.otp(req, res, sesiones, procesoOTP, datosRecibidos);
-                })
-                // Si la petición al Back-End no funciona
+            .then(recibir => recibir.json())
+            .then(recibido => {
+                // Crear la cookie de si se requiere OTP o no
+                cookies.set('verificacion', recibido.verificacion, { path: '/' });
+                cookies.set('rol', recibido.rol, { path: '/' });
+                cookies.set('nombre', recibido.nombre, { path: '/' });
+                // Guardar la cookie de verificacion
+                cookieSession.verificacionOTP = cookies.get('verificacion');
+                cookieSession.rol = cookies.get('rol');
+                cookieSession.nombre = cookies.get('nombre');
+                if (recibido.rol === 'instructor') {
+                    cookies.set('instructorID', recibido.instructorId, { path: '/' });
+                    cookieSession.instructorID = cookies.get('instructorID');
+                }
+                const procesoOTP = {
+                    envio: config.envioOTP,
+                    correo: cookieSession.correoOTP
+                }
+                datosRecibidos = recibido;
+                funciones.otp(req, res, sesiones, procesoOTP, datosRecibidos);
+            })
+            // Si la petición al Back-End no funciona
             .catch(error => {
                 let datosRecibidos = {
                     tipo: 'problemaServidorOTP'
@@ -226,22 +226,36 @@ app.post('/cancelar-autenticacion', (req, res) => {
         method: 'Post',
         body: sesionesJson
     })
-        .then(recibir => recibir.json())
-        .then(recibido => {
-            // Si la Sesión del Back-End fue cerrada
-            if (recibido.cerrarSesion) {
-                // Elimino todas las Cookies de la app
-                funciones.eliminarCookies(cookies);
-                // Guardo las Cookies con el valor vacio
-                funciones.getCookies(cookieSession, cookies);
-                // Establezco 'config.envioOTP' son su valor de origen
-                config.envioOTP = false;
-                // Todo el mensaje recibido desde el Back-End lo guardo en 'datosRecibidos' para poder renderizar al Login
-                datosRecibidos = recibido;
-                // Renderizo el Login
-                funciones.login(req, res, datosRecibidos);
-            }
-        })
+    .then(recibir => recibir.json())
+    .then(recibido => {
+        // Si la Sesión del Back-End fue cerrada
+        if (recibido.cerrarSesion) {
+            // Elimino todas las Cookies de la app
+            funciones.eliminarCookies(cookies);
+            // Guardo las Cookies con el valor vacio
+            funciones.getCookies(cookieSession, cookies);
+            // Establezco 'config.envioOTP' son su valor de origen
+            config.envioOTP = false;
+            // Todo el mensaje recibido desde el Back-End lo guardo en 'datosRecibidos' para poder renderizar al Login
+            datosRecibidos = recibido;
+            // Renderizo el Login
+            funciones.login(req, res, datosRecibidos);
+        }
+    })
+    // Si la petición al Back-End no funciona
+    .catch(error => {
+        let datosRecibidos = {
+            tipo: 'cerrarSesion'
+        }
+        // Elimino todas las Cookies de la app
+        funciones.eliminarCookies(cookies);
+        // Guardo las Cookies con el valor vacio
+        funciones.getCookies(cookieSession, cookies);
+        // Establezco 'config.envioOTP' son su valor de origen
+        config.envioOTP = false;
+        // Renderizar a Login
+        funciones.login(req, res, datosRecibidos);
+    })
 });
 app.post('/cargarPagina', (req, res) => {
     // Crea la Cookie 'item' con el valor enviado desde 'index.ejs'
@@ -315,14 +329,28 @@ app.post('/actualizarListaComision', (req, res) => {
         method: 'POST',
         body: sesionesJson
     })
-        .then(recibir => recibir.json())
-        .then(recibido => {
-            if (cookieSession.rol === 'alumno') {
-                cookies.set('instructorID', recibido.comision[0].instructor_id, { path: '/' });
-                cookieSession.instructorID = cookies.get('instructorID');
-            }
-            res.json(recibido);
-        });
+    .then(recibir => recibir.json())
+    .then(recibido => {
+        if (cookieSession.rol === 'alumno') {
+            cookies.set('instructorID', recibido.comision[0].instructor_id, { path: '/' });
+            cookieSession.instructorID = cookies.get('instructorID');
+        }
+        res.json(recibido);
+    })
+    // Si la petición al Back-End no funciona
+    .catch(error => {
+        let datosRecibidos = {
+            tipo: 'problemaServidorIndex'
+        }
+        // Elimino todas las Cookies de la app
+        funciones.eliminarCookies(cookies);
+        // Guardo las Cookies con el valor vacio
+        funciones.getCookies(cookieSession, cookies);
+        // Establezco 'config.envioOTP' son su valor de origen
+        config.envioOTP = false;
+        // Renderizar a Login
+        funciones.login(req, res, datosRecibidos);
+    })
 });
 app.post('/crearPublicacion', (req, res) => {
     const titulo = req.body.titulo;
@@ -350,6 +378,20 @@ app.post('/crearPublicacion', (req, res) => {
     .then(recibido => {
         res.json(recibido);
     })
+    // Si la petición al Back-End no funciona
+    .catch(error => {
+        let datosRecibidos = {
+            tipo: 'problemaServidorIndex'
+        }
+        // Elimino todas las Cookies de la app
+        funciones.eliminarCookies(cookies);
+        // Guardo las Cookies con el valor vacio
+        funciones.getCookies(cookieSession, cookies);
+        // Establezco 'config.envioOTP' son su valor de origen
+        config.envioOTP = false;
+        // Renderizar a Login
+        funciones.login(req, res, datosRecibidos);
+    })
 });
 app.post('/crearComentario', (req, res) => {
     const comentario = req.body.comentario;
@@ -374,6 +416,20 @@ app.post('/crearComentario', (req, res) => {
     .then(recibir => recibir.json())
     .then(recibido => {
         res.json(recibido);
+    })
+    // Si la petición al Back-End no funciona
+    .catch(error => {
+        let datosRecibidos = {
+            tipo: 'problemaServidorIndex'
+        }
+        // Elimino todas las Cookies de la app
+        funciones.eliminarCookies(cookies);
+        // Guardo las Cookies con el valor vacio
+        funciones.getCookies(cookieSession, cookies);
+        // Establezco 'config.envioOTP' son su valor de origen
+        config.envioOTP = false;
+        // Renderizar a Login
+        funciones.login(req, res, datosRecibidos);
     })
 });
 app.post('/crearTrabajos', (req, res) => {
@@ -402,7 +458,21 @@ app.post('/crearTrabajos', (req, res) => {
     .then(recibir => recibir.json())
     .then(recibido => {
         res.json(recibido);
-    });
+    })
+    // Si la petición al Back-End no funciona
+    .catch(error => {
+        let datosRecibidos = {
+            tipo: 'problemaServidorIndex'
+        }
+        // Elimino todas las Cookies de la app
+        funciones.eliminarCookies(cookies);
+        // Guardo las Cookies con el valor vacio
+        funciones.getCookies(cookieSession, cookies);
+        // Establezco 'config.envioOTP' son su valor de origen
+        config.envioOTP = false;
+        // Renderizar a Login
+        funciones.login(req, res, datosRecibidos);
+    })
 });
 app.post('/crearTrabajosAlumnos', (req, res) => {
     const urlArchivos = req.body.urlArchivos
@@ -426,7 +496,21 @@ app.post('/crearTrabajosAlumnos', (req, res) => {
     .then(recibir => recibir.json())
     .then(recibido => {
         res.json(recibido);
-    });
+    })
+    // Si la petición al Back-End no funciona
+    .catch(error => {
+        let datosRecibidos = {
+            tipo: 'problemaServidorIndex'
+        }
+        // Elimino todas las Cookies de la app
+        funciones.eliminarCookies(cookies);
+        // Guardo las Cookies con el valor vacio
+        funciones.getCookies(cookieSession, cookies);
+        // Establezco 'config.envioOTP' son su valor de origen
+        config.envioOTP = false;
+        // Renderizar a Login
+        funciones.login(req, res, datosRecibidos);
+    })
 });
 app.post('/actualizarPublicacion', (req, res) => {
     // Creo un objeto con los valores de las Cookies de la sesión
@@ -444,6 +528,20 @@ app.post('/actualizarPublicacion', (req, res) => {
     .then(recibir => recibir.json())
     .then(recibido => {
         res.json(recibido);
+    })
+    // Si la petición al Back-End no funciona
+    .catch(error => {
+        let datosRecibidos = {
+            tipo: 'problemaServidorIndex'
+        }
+        // Elimino todas las Cookies de la app
+        funciones.eliminarCookies(cookies);
+        // Guardo las Cookies con el valor vacio
+        funciones.getCookies(cookieSession, cookies);
+        // Establezco 'config.envioOTP' son su valor de origen
+        config.envioOTP = false;
+        // Renderizar a Login
+        funciones.login(req, res, datosRecibidos);
     })
 });
 app.post('/actualizarComision', (req, res) => {
@@ -466,6 +564,20 @@ app.post('/actualizarComision', (req, res) => {
     .then(recibido => {
         res.json(recibido);
     })
+    // Si la petición al Back-End no funciona
+    .catch(error => {
+        let datosRecibidos = {
+            tipo: 'problemaServidorIndex'
+        }
+        // Elimino todas las Cookies de la app
+        funciones.eliminarCookies(cookies);
+        // Guardo las Cookies con el valor vacio
+        funciones.getCookies(cookieSession, cookies);
+        // Establezco 'config.envioOTP' son su valor de origen
+        config.envioOTP = false;
+        // Renderizar a Login
+        funciones.login(req, res, datosRecibidos);
+    })
 });
 app.post('/actualizarTrabajos', (req, res) => {
     // Creo un objeto con los valores de las Cookies de la sesión
@@ -484,6 +596,20 @@ app.post('/actualizarTrabajos', (req, res) => {
     .then(recibir => recibir.json())
     .then(recibido => {
         res.json(recibido);
+    })
+    // Si la petición al Back-End no funciona
+    .catch(error => {
+        let datosRecibidos = {
+            tipo: 'problemaServidorIndex'
+        }
+        // Elimino todas las Cookies de la app
+        funciones.eliminarCookies(cookies);
+        // Guardo las Cookies con el valor vacio
+        funciones.getCookies(cookieSession, cookies);
+        // Establezco 'config.envioOTP' son su valor de origen
+        config.envioOTP = false;
+        // Renderizar a Login
+        funciones.login(req, res, datosRecibidos);
     })
 });
 app.post('/actualizarAlumnos', (req, res) => {
@@ -504,6 +630,20 @@ app.post('/actualizarAlumnos', (req, res) => {
     .then(recibido => {
         res.json(recibido);
     })
+    // Si la petición al Back-End no funciona
+    .catch(error => {
+        let datosRecibidos = {
+            tipo: 'problemaServidorIndex'
+        }
+        // Elimino todas las Cookies de la app
+        funciones.eliminarCookies(cookies);
+        // Guardo las Cookies con el valor vacio
+        funciones.getCookies(cookieSession, cookies);
+        // Establezco 'config.envioOTP' son su valor de origen
+        config.envioOTP = false;
+        // Renderizar a Login
+        funciones.login(req, res, datosRecibidos);
+    })
 });
 app.post('/actualizarTrabajoInstructor', (req, res) => {
     // Creo un objeto con los valores de las Cookies de la sesión
@@ -523,6 +663,20 @@ app.post('/actualizarTrabajoInstructor', (req, res) => {
     .then(recibir => recibir.json())
     .then(recibido => {
         res.json(recibido);
+    })
+    // Si la petición al Back-End no funciona
+    .catch(error => {
+        let datosRecibidos = {
+            tipo: 'problemaServidorIndex'
+        }
+        // Elimino todas las Cookies de la app
+        funciones.eliminarCookies(cookies);
+        // Guardo las Cookies con el valor vacio
+        funciones.getCookies(cookieSession, cookies);
+        // Establezco 'config.envioOTP' son su valor de origen
+        config.envioOTP = false;
+        // Renderizar a Login
+        funciones.login(req, res, datosRecibidos);
     })
 })
 app.post('/actualizarTrabajoAlumno', (req, res) => {
@@ -545,6 +699,20 @@ app.post('/actualizarTrabajoAlumno', (req, res) => {
     .then(recibir => recibir.json())
     .then(recibido => {
         res.json(recibido);
+    })
+    // Si la petición al Back-End no funciona
+    .catch(error => {
+        let datosRecibidos = {
+            tipo: 'problemaServidorIndex'
+        }
+        // Elimino todas las Cookies de la app
+        funciones.eliminarCookies(cookies);
+        // Guardo las Cookies con el valor vacio
+        funciones.getCookies(cookieSession, cookies);
+        // Establezco 'config.envioOTP' son su valor de origen
+        config.envioOTP = false;
+        // Renderizar a Login
+        funciones.login(req, res, datosRecibidos);
     })
 });
 app.post('/seccionTrabajo', (req, res) => {
@@ -593,6 +761,20 @@ app.post('/crearChatTrabajo', async (req, res) => {
     .then(recibido => {
         res.json(recibido);
     })
+    // Si la petición al Back-End no funciona
+    .catch(error => {
+        let datosRecibidos = {
+            tipo: 'problemaServidorIndex'
+        }
+        // Elimino todas las Cookies de la app
+        funciones.eliminarCookies(cookies);
+        // Guardo las Cookies con el valor vacio
+        funciones.getCookies(cookieSession, cookies);
+        // Establezco 'config.envioOTP' son su valor de origen
+        config.envioOTP = false;
+        // Renderizar a Login
+        funciones.login(req, res, datosRecibidos);
+    })
 });
 app.post('/actualizarChatTrabajo', async (req, res) => {
     const sesiones = {
@@ -614,6 +796,20 @@ app.post('/actualizarChatTrabajo', async (req, res) => {
     .then(recibido => {
         res.json(recibido);
     })
+    // Si la petición al Back-End no funciona
+    .catch(error => {
+        let datosRecibidos = {
+            tipo: 'problemaServidorIndex'
+        }
+        // Elimino todas las Cookies de la app
+        funciones.eliminarCookies(cookies);
+        // Guardo las Cookies con el valor vacio
+        funciones.getCookies(cookieSession, cookies);
+        // Establezco 'config.envioOTP' son su valor de origen
+        config.envioOTP = false;
+        // Renderizar a Login
+        funciones.login(req, res, datosRecibidos);
+    })
 });
 app.post('/actualizarPortada', async (req, res) => {
     // Creo un objeto con los valores de las Cookies de la sesión
@@ -634,6 +830,20 @@ app.post('/actualizarPortada', async (req, res) => {
     .then(recibir => recibir.json())
     .then(recibido => {
         res.json(recibido);
+    })
+    // Si la petición al Back-End no funciona
+    .catch(error => {
+        let datosRecibidos = {
+            tipo: 'problemaServidorIndex'
+        }
+        // Elimino todas las Cookies de la app
+        funciones.eliminarCookies(cookies);
+        // Guardo las Cookies con el valor vacio
+        funciones.getCookies(cookieSession, cookies);
+        // Establezco 'config.envioOTP' son su valor de origen
+        config.envioOTP = false;
+        // Renderizar a Login
+        funciones.login(req, res, datosRecibidos);
     })
 });
 module.exports = { routerPost: app }

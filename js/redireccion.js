@@ -49,6 +49,13 @@ function redireccionarLogin(req, res, datosRecibidos) {
          alertMessage: 'No se pudo validar su identidad, vuelva intentarlo más tarde',
         type: 'error',
     }
+    // Mensaje de Alerta cuando la petición al Back-End no funciona
+    let problemaServidorIndex = {
+         alert: true,
+         alertTitle: 'Error',
+         alertMessage: 'En este momento ha ocurrido un error al establecer conexión con el servidor, vuelva intentarlo más tarde',
+        type: 'error',
+    }
     // Fin de Toda la lógica de las ventanas emergentes
     // Lógica de Renderización
     if (datosRecibidos.tipo === 'exito') {
@@ -71,6 +78,9 @@ function redireccionarLogin(req, res, datosRecibidos) {
         res.render('login');
     } else if (datosRecibidos.tipo === 'problemaServidorOTP') {
         res.locals.alert = problemaServidorOTP;
+        res.render('login');
+    } else if (datosRecibidos.tipo === 'problemaServidorIndex') {
+        res.locals.alert = problemaServidorIndex;
         res.render('login');
     } else {
         // Si no hay 'datosRecibidos.tipo', renderizar siempre a Login
