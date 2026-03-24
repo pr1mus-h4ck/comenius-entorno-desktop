@@ -95,7 +95,19 @@ app.post('/enviar-otp', (req, res) => {
                 }
                 datosRecibidos = recibido;
                 funciones.otp(req, res, sesiones, procesoOTP, datosRecibidos);
-            });
+            })
+            // Si la petición al Back-End no funciona
+            .catch(error => {
+                let datosRecibidos = {
+                    tipo: 'problemaServidorOTP'
+                }
+                // Elimino todas las Cookies de la app
+                funciones.eliminarCookies(cookies);
+                // Guardo las Cookies con el valor vacio
+                funciones.getCookies(cookieSession, cookies);
+                // Renderizar a Login
+                funciones.login(req, res, datosRecibidos);
+            })
     }
 });
 app.post('/confirmar-otp', (req, res) => {
