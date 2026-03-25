@@ -159,10 +159,23 @@
             })
             .then(recibir => recibir.json())
             .then(recibido => {
-                // TODO: Reemplazar esta recarga con un 'alert'
                 if (recibido.ok) {
-                    // Recarga la página después de recibir la respuesta exitosa
-                    actualizarPublicacion(); 
+                    // Limpiar campo textarea el input de crear comentario
+                    document.getElementById(`comentario-${publicacionId}`).value = '';
+                    // Activo el estilo bloqueado, '#contenido' por 'alertas.css'
+                    document.getElementById('contenido').style.display = 'block';
+                    // Activo el estilo bloqueado, '#alerta-personalizada' por 'alertas.css'
+                    document.getElementById('alerta-personalizada').style.display = 'block';
+                    // Agrego texto a la etiqueta con la ID '#titulo-alerta-personalizada'
+                    document.getElementById('titulo-alerta-personalizada').innerText = '¡Muy Bien!';
+                    // Agrego texto a la etiqueta con la ID '#mensaje-alerta-personalizada'
+                    document.getElementById('mensaje-alerta-personalizada').innerText = '¡Se ha enviado su comentario con éxito!';
+                    // Agrego una clase a la etiqueca con la ID '#alerta-personalizada' para cambiar el color de la alerta
+                    document.getElementById('alerta-personalizada').classList.add('exito');
+                    setTimeout(function(){
+                        // Redireccionar a la página principal después de 1500 milisegundos en caso de éxito
+                        window.location.href = '/';
+                    }, 1500);
                 } else {
                     console.log('No se pudo enviar el comentario');
                 }
