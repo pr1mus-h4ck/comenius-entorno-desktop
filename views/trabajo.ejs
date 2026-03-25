@@ -91,6 +91,7 @@
         'default': './recursos/img/type/text_line_txt.svg',
     };
 </script>
+<!-- Funsión actualizarTrabajoInstructor -->
 <script>
     function actualizarTrabajoInstructor() {
         fetch('/actualizarTrabajoInstructor', { 
@@ -314,6 +315,8 @@
             .then(respuesta => {
             // Si la respuesta es correcta
             if (respuesta.ok) {
+                // Limpiar campo textarea del chat
+                document.getElementById("chatInput").value = '';
                 // Activo el estilo bloqueado, '#contenido' por 'alertas.css'
                 document.getElementById('contenido').style.display = 'block';
                 // Activo el estilo bloqueado, '#alerta-personalizada' por 'alertas.css'
