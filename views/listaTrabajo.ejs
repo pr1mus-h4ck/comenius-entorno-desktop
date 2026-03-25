@@ -13,7 +13,7 @@
             </div>
             <div class="div-btn-textarea">
                 <!-- Contenido -->
-                <textarea name="contenido" id="contenido" placeholder="Contenido" required></textarea>
+                <textarea name="contenidos" id="contenidos" placeholder="Contenido" required></textarea>
                 <!-- Fin de Contenido -->
                 <button class="btn-style" type="button" id="btn-subir-archivo">Subir Archivo</button>
                 <input class="btn-style" type="submit" value="Crear Trabajo">
@@ -61,7 +61,7 @@
     function crearTrabajos(event) {
         event.preventDefault();
         const titulo = document.querySelector('input[name="titulo"]').value;
-        const contenido = document.querySelector('textarea[name="contenido"]').value;
+        const contenido = document.querySelector('textarea[name="contenidos"]').value;
         // Crear un objeto JSON con todos los datos
         const data = {
             titulo: titulo,
@@ -87,8 +87,21 @@
                 uploadedFiles = []; // Reiniciar array
                 urlArchivoInput.value = '';
                 document.getElementById("titulo").value = '';
-                document.getElementById("contenido").value = '';
-                actualizarTrabajos();
+                document.getElementById("contenidos").value = '';
+                // Activo el estilo bloqueado, '#contenido' por 'alertas.css'
+                document.getElementById('contenido').style.display = 'block';
+                // Activo el estilo bloqueado, '#alerta-personalizada' por 'alertas.css'
+                document.getElementById('alerta-personalizada').style.display = 'block';
+                // Agrego texto a la etiqueta con la ID '#titulo-alerta-personalizada'
+                document.getElementById('titulo-alerta-personalizada').innerText = '¡Muy Bien!';
+                // Agrego texto a la etiqueta con la ID '#mensaje-alerta-personalizada'
+                document.getElementById('mensaje-alerta-personalizada').innerText = '¡Se ha creado la publicación con éxito!';
+                // Agrego una clase a la etiqueca con la ID '#alerta-personalizada' para cambiar el color de la alerta
+                document.getElementById('alerta-personalizada').classList.add('exito');
+                setTimeout(function(){
+                    // Redireccionar a la página principal después de 1500 milisegundos en caso de éxito
+                    window.location.href = '/';
+                }, 1500);
             }
 
         })
