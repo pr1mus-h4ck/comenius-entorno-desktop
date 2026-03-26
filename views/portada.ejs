@@ -14,24 +14,32 @@
         .then(recibido => {
             const contenidoPortada = document.getElementById('contenidoPortada');
             contenidoPortada.innerHTML = ''; // Limpia el contenido actual
-            recibido.portada.forEach(portada => {
+            if (!recibido.tipo) {
+                recibido.portada.forEach(portada => {
+                    const html = `
+                    <div class="div-portada">
+                        <h3>Objetivos</h3>
+                        <div>
+                            <p>${portada.Objetivo}</p>
+                        </div>
+                    </div>
+                    <div class="div-portada">
+                        <h3>Evaluación de la cursada</h3>
+                        <div>
+                            <p>${portada.EvaluacionCursada}</p>
+                        </div>
+                    </div>
+                    `;
+                    // Agrega el HTML al contenedor
+                    contenidoPortada.innerHTML += html;
+                })
+            } else {
                 const html = `
-                <div class="div-portada">
-                    <h3>Objetivos</h3>
-                    <div>
-                        <p>${portada.Objetivo}</p>
-                    </div>
-                </div>
-                <div class="div-portada">
-                    <h3>Evaluación de la cursada</h3>
-                    <div>
-                        <p>${portada.EvaluacionCursada}</p>
-                    </div>
-                </div>
+                    <p>${recibido.mensaje}</p>
                 `;
                 // Agrega el HTML al contenedor
-                contenidoPortada.innerHTML += html;
-            })
+                listaPublicacion.innerHTML += html;
+            }
         });
     }
     actualizarPortada();
