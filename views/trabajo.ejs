@@ -354,23 +354,31 @@
         .then(recibido => {
             const listarChat = document.getElementById('chat');
             listarChat.innerHTML = ''; // Limpia el contenedor solo una vez
-            recibido.chat.forEach(chat => {
+            if (!recibido.tipo) {
+                recibido.chat.forEach(chat => {
+                    const html = `
+                        <div class="prueba-chat">
+                        <div>
+                            <p>${chat.FechaHora}</p>
+                        </div>
+                        <div>
+                            <p>${chat.EmisorNombreCompleto}</p>
+                        </div>
+                        <div>
+                            <p>${chat.Contenido}</p>
+                        </div>
+                        </div>
+                    `;
+                    // Agrega el HTML al contenedor
+                    listarChat.innerHTML += html;
+                });
+            } else {
                 const html = `
-                    <div class="prueba-chat">
-                    <div>
-                        <p>${chat.FechaHora}</p>
-                    </div>
-                    <div>
-                        <p>${chat.EmisorNombreCompleto}</p>
-                    </div>
-                    <div>
-                        <p>${chat.Contenido}</p>
-                    </div>
-                    </div>
+                    <p>${recibido.mensaje}</p>
                 `;
                 // Agrega el HTML al contenedor
                 listarChat.innerHTML += html;
-            });
+            }
         });
     }
     actualizarChatTrabajo();
