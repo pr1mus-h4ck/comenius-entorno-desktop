@@ -153,6 +153,14 @@ app.post('/confirmar-otp', (req, res) => {
                 }
                 datosRecibidos = recibido;
                 funciones.otp(req, res, sesiones, procesoOTP, datosRecibidos);
+                if (datosRecibidos.intentos === 0 || datosRecibidos.tipo === 'errorConfirmar') {
+                    // Elimino todas las Cookies de la app
+                    funciones.eliminarCookies(cookies);
+                    // Guardo las Cookies con el valor vacio
+                    funciones.getCookies(cookieSession, cookies);
+                    // Establezco 'config.envioOTP' son su valor de origen
+                    config.envioOTP = false;
+                }
             })
             // Si la petición al Back-End no funciona
             .catch(error => {
@@ -197,22 +205,22 @@ app.post('/cerrar-sesion', (req, res) => {
         method: 'Post',
         body: sesionesJson
     })
-        .then(recibir => recibir.json())
-        .then(recibido => {
-            // Si la Sesión del Back-End fue cerrada
-            if (recibido.cerrarSesion) {
-                // Elimino todas las Cookies de la app
-                funciones.eliminarCookies(cookies);
-                // Guardo las Cookies con el valor vacio
-                funciones.getCookies(cookieSession, cookies);
-                // Establezco 'config.envioOTP' son su valor de origen
-                config.envioOTP = false;
-                // Todo el mensaje recibido desde el Back-End lo guardo en 'datosRecibidos' para poder renderizar al Login
-                datosRecibidos = recibido;
-                // Renderizo el Login
-                funciones.login(req, res, datosRecibidos);
-            }
-        })
+    .then(recibir => recibir.json())
+    .then(recibido => {
+        // Si la Sesión del Back-End fue cerrada
+        if (recibido.cerrarSesion) {
+            // Elimino todas las Cookies de la app
+            funciones.eliminarCookies(cookies);
+            // Guardo las Cookies con el valor vacio
+            funciones.getCookies(cookieSession, cookies);
+            // Establezco 'config.envioOTP' son su valor de origen
+            config.envioOTP = false;
+            // Todo el mensaje recibido desde el Back-End lo guardo en 'datosRecibidos' para poder renderizar al Login
+            datosRecibidos = recibido;
+            // Renderizo el Login
+            funciones.login(req, res, datosRecibidos);
+        }
+    })
 });
 app.post('/cancelar-autenticacion', (req, res) => {
     let sesiones = {

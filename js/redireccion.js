@@ -148,11 +148,16 @@ function redireccionarOTP(req, res, sesiones, procesoOTP, datosRecibidos) {
         res.locals.alert = confirmarOtp;
         res.render('otp', {sesiones, procesoOTP});
     } else if (datosRecibidos.tipo === 'aviso') {
-        res.locals.alert = avisoIntentosOtp;
-        res.render('otp', {sesiones, procesoOTP});
+        if (datosRecibidos.intentos === 0) {
+            res.locals.alert = avisoIntentosOtp;
+            res.render('login');
+        } else {
+            res.locals.alert = avisoIntentosOtp;
+            res.render('otp', {sesiones, procesoOTP});
+        }
     } else if (datosRecibidos.tipo === 'errorConfirmar') {
         res.locals.alert = sinConfirmarOtp;
-        res.render('otp', {sesiones, procesoOTP});
+        res.render('login');
     } else if (datosRecibidos.tipo === 'obligatorio') {
         res.locals.alert = obligatorioOtp;
         res.render('otp', {sesiones, procesoOTP});
