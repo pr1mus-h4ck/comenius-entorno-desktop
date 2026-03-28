@@ -22,7 +22,7 @@ h1{
 }
 h2{
   font-size: 23px;
-  color: #14CC5E;
+
 }
 h3, h4{
 color: #14CC5E;  
@@ -545,6 +545,7 @@ width: 28px;
 }
 .card-materias div h2{
   padding-bottom: 5px;
+  color: #14CC5E;
 }
 .content-card-materia{
   display: flex;
@@ -875,8 +876,40 @@ text-transform: capitalize;
 a:visited {
   color: #000000;
 }
-
-
+#trabajoAlumno p{
+  background: white;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 8px;
+    text-align: center;
+}
+#trabajoAlumno p:hover{
+  background-color: #C9FFE0;
+}
+#archivosEntrega{
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
+}
+#archivosEntrega ul{
+  display: flex;
+    gap: 10px;
+}
+#archivosEntrega ul li{
+    list-style: none;
+    background-color: #eeeeee;
+    padding: 8px;
+    border-radius: 8px;
+}
+#archivosEntrega ul li a{
+    align-items: center;
+    display: flex;
+    gap: 15px;
+    text-decoration: none;
+}
+#archivosEntrega ul li:hover{
+  background-color: #C9FFE0;
+}
 /*CSS Seccion Publicacion Profesor-Alumno*/
 .contenedor-publicacion{
   display: grid;
@@ -1061,12 +1094,16 @@ margin-bottom: 5px;
   background-color: white;
   padding: 8px;
   border-radius: 10px;
+  margin-bottom: 10px;
 }
 #publicacionTrabajo p{
   text-align: justify;
   background-color: #EEEEEE;
     border-radius: 7px;
     padding: 8px;
+}
+#publicacionTrabajo p:hover{
+  background-color: #C9FFE0;
 }
 #publicacionTrabajo h3{
  padding-bottom: 5px; 
@@ -1137,7 +1174,7 @@ text-decoration: none;
 #listaArchivos li a{
    align-items: center;
     display: flex;
-    gap: 20px;
+    gap: 15px;
 }
 .prueba-fondo-chat{
   background-color: #EEEEEE;
