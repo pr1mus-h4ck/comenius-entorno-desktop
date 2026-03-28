@@ -1022,22 +1022,22 @@ margin-bottom: 5px;
 .div-portada p{
   text-align: justify;
 }
-.prueba-zoom{
-  display: flex;
-  width: 100%;
-  height: 100%;
-}
 .btn-form{
   margin-top: 10px;
   width: 20%;
 }
-.btn-videoclase{
-  width: 150px;
-}
 .article-publicacion{
  text-align: justify;
 }
-
+.texto-informacion{
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+}
+.texto-informacion:hover{
+  background-color: #C9FFE0;
+}
 /*CSS Form CargaTrabajo*/
 .form-trabajo{
   display: flex;
@@ -1165,7 +1165,7 @@ text-decoration: none;
 #listaArchivos li{
   list-style: none;
 }
-#archivosTrabajo{
+#listaArchivos{
   padding: 10px;
 }
 .prueba-iconos{
