@@ -64,12 +64,31 @@
     padding: 10px;
 }
 .alerta-personalizada.exito {
-    background-color: #4caf50;
+    background-color: #C9FFE0;
+}
+.alerta-personalizada.exito h2 {
+    color: #14CC5E;
 }
 .alerta-personalizada.aviso {
-    background-color: #ffc107;
+    background-color: #FFEEB8;
+}
+.alerta-personalizada.aviso h2 {
+    color: #FFCE2E;
+}
+.alerta-personalizada.aviso button {
+    background-color: #FFCE2E;
+    color: #ffffff;
 }
 .alerta-personalizada.error,
 .alerta-personalizada.obligatorio {
-    background-color: #f44336;
+    background-color: #FBBFBB;
+}
+.alerta-personalizada.error h2,
+.alerta-personalizada.obligatorio h2 {
+    color: #F21C0D;
+}
+.alerta-personalizada.error button,
+.alerta-personalizada.obligatorio button {
+    background-color: #F21C0D;
+    color: #ffffff;
 }
