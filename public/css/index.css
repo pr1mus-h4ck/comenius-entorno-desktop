@@ -318,37 +318,36 @@ input[type="password"]:hover, input[type="email"]:hover {
   transition: 300ms ease-in-out;
   overflow: hidden;
   text-wrap: nowrap;
-
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-
 }
 #sidebar ul{
   list-style: none;
   align-items: center;
 }
+#sidebar button{
+    border: none;
+    background-color: transparent;
+    box-shadow: none;
+    cursor: pointer;
+    padding: 12px;
+    border-radius: .5em;
+}
 #sidebar ul li a img, #sidebar button img{
   height: 32px;
   width: 32px;
 }
-
-#sidebar ul li a.active img{ /*Aca estaria el problema del active*/
-  color: #14CC5E;
-  img{
-    fill: white;
-  }
+#sidebar ul li a.active{ /*Aca estaria el problema del active*/
+  background-color: #14CC5E;
 }
-
 #sidebar ul li a:hover{
   color: #ffffff;
-
   .hover-img{
     filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(153deg) brightness(104%) contrast(106%);
   }
-
 }
-#sidebar a, #sidebar .dropdown-btn, #sidebar .logo{
+#sidebar a, #sidebar .dropdown-btn, #sidebar .logo, #sidebar button{
   border-radius: .5em;
   padding: .85em;
   text-decoration: none;
@@ -360,7 +359,9 @@ input[type="password"]:hover, input[type="email"]:hover {
 #sidebar a span, #sidebar{
   flex-grow: 1;
 }
-#sidebar a:hover, #sidebar .dropdown-btn:hover{
+#sidebar a:hover, 
+#sidebar .dropdown-btn:hover, 
+#sidebar button:hover{
   background-color: #14CC5E;
 }
 #sidebar .sub-menu{
