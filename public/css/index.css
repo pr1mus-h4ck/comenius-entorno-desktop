@@ -1370,10 +1370,6 @@ text-decoration: none;
       border-radius: 0;
       justify-content: center;
     }
-    /* FIXME: Completar el valor de la propiedad */
-    ul li span, ul li:first-child, .dropdown-btn svg:last-child{
-      display: ;
-    }
 
     ul li .sub-menu.show{
       position: fixed;
@@ -1396,9 +1392,6 @@ text-decoration: none;
     }
   }
    /*Seccion materias y portada*/
-   /* FIXME: Decidir se se competa la regla o se elimina */
-   .contenedor-submenu ul{
-    
   }
   .card-materias div h2{
     text-align: center;
