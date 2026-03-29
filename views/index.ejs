@@ -16,7 +16,7 @@
                 <ul>
                     <% menu.forEach(item => { %>
                          <li>
-                            <a class="<%= (sesiones.item === item.label && !sesiones.enlace && !sesiones.comision) ? 'active' : '' %>" href="#" onclick="manejarMenuClick('<%= item.label %>')" title="<%= item.label %>">
+                            <a class="<%= (sesiones.rol && !sesiones.enlace && !sesiones.comision || sesiones.item === item.label && !sesiones.enlace && !sesiones.comision) ? 'active' : '' %>" href="#" onclick="manejarMenuClick('<%= item.label %>')" title="<%= item.label %>">
                                 <img src="<%= item.image %>" alt="<%= item.label %>">
                             </a>
                         </li>
