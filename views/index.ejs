@@ -19,7 +19,7 @@
                             // Determina la fuente de imagen correcta
                             let imgSrc = item.image;
                             let isActive = sesiones.rol && !sesiones.enlace && !sesiones.comision || sesiones.item === item.label && !sesiones.enlace && !sesiones.comision;
-                            // Si el elemento está activo y se proporciona un imageHover, úsalo. De lo contrario, usa la imagen predeterminada.
+                            // Si el elemento está activo y se proporciona un imageHover.
                             if (isActive && item.imageHover) {
                                 imgSrc = item.imageHover;
                             }
