@@ -15,9 +15,18 @@
             <% if (menu) { %>
                 <ul>
                     <% menu.forEach(item => { %>
+                        <%
+                            // Determina la fuente de imagen correcta
+                            let imgSrc = item.image;
+                            let isActive = sesiones.rol && !sesiones.enlace && !sesiones.comision || sesiones.item === item.label && !sesiones.enlace && !sesiones.comision;
+                            // Si el elemento está activo y se proporciona un imageHover, úsalo. De lo contrario, usa la imagen predeterminada.
+                            if (isActive && item.imageHover) {
+                                imgSrc = item.imageHover;
+                            }
+                        %>
                          <li>
-                            <a class="<%= (sesiones.rol && !sesiones.enlace && !sesiones.comision || sesiones.item === item.label && !sesiones.enlace && !sesiones.comision) ? 'active' : '' %>" href="#" onclick="manejarMenuClick('<%= item.label %>')" title="<%= item.label %>">
-                                <img src="<%= item.image %>" alt="<%= item.label %>">
+                            <a class="<%= (isActive) ? 'active' : '' %>" href="#" onclick="manejarMenuClick('<%= item.label %>')" title="<%= item.label %>" data-default-src="<%= item.image %>" data-hover-src="<%= item.imageHover || item.image %>" onmouseover="if (!this.classList.contains('active')) { this.querySelector('img').src = this.dataset.hoverSrc; }" onmouseout="if (!this.classList.contains('active')) { this.querySelector('img').src = this.dataset.defaultSrc; }">
+                                <img src="<%= imgSrc %>" alt="<%= item.label %>">
                             </a>
                         </li>
                     <% }) %>
