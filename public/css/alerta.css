@@ -73,10 +73,12 @@
     background-color: #FFEEB8;
 }
 .alerta-personalizada.aviso h2 {
-    color: #FFCE2E;
+    /* color: #FFCE2E; */
+    color: #FF8C01
 }
 .alerta-personalizada.aviso button {
-    background-color: #FFCE2E;
+    /* background-color: #FFCE2E; */
+    background-color: #FF8C01;
     color: #ffffff;
 }
 .alerta-personalizada.error,
