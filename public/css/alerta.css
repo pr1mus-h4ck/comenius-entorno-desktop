@@ -45,11 +45,9 @@
 #boton-alerta-no-cerrar,
 #aviso-cancelar{
     display: none;
-    padding: 10px;
     border-radius: 4px;
     border: none;
     margin-top: 10px;
-    font-weight: bold;
 }
 #boton-alerta-cerrar button{
     padding: 10px;
@@ -61,7 +59,6 @@
     border-radius: 4px; 
     border: none;
     width: 100%;
-    padding: 10px;
 }
 .alerta-personalizada.exito {
     background-color: #C9FFE0;
@@ -76,10 +73,24 @@
     /* color: #FFCE2E; */
     color: #FF8C01
 }
+.alerta-personalizada.aviso button,
+.alerta-personalizada.error button,
+.alerta-personalizada.obligatorio button {
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 10px;
+}
 .alerta-personalizada.aviso button {
     /* background-color: #FFCE2E; */
     background-color: #FF8C01;
     color: #ffffff;
+}
+.alerta-personalizada.aviso button:hover {
+    background-color: #ffffff;
+    outline: 2px solid #FF8C01;
+    color: #FF8C01;
+    transition: .2s;
 }
 .alerta-personalizada.error,
 .alerta-personalizada.obligatorio {
@@ -93,4 +104,11 @@
 .alerta-personalizada.obligatorio button {
     background-color: #F21C0D;
     color: #ffffff;
+}
+.alerta-personalizada.error button:hover,
+.alerta-personalizada.obligatorio button:hover {
+  background-color: #ffffff;
+  outline: 2px solid #F21C0D;
+  color: #F21C0D;
+  transition: .2s;
 }
