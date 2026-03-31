@@ -4,7 +4,7 @@
         <% if (comision) { %>
             <ul>
                 <% comision.forEach(item => { %>
-                    <li>
+                    <li class="active">
                         <a href="#" onclick="manejarMateriaClick('<%= item.label %>')" title="<%= item.label %>">
                             <img src="<%= item.image %>" alt="<%= item.label %>" class="navbar-panelmaterias">
                         </a>

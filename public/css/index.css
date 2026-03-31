@@ -589,10 +589,18 @@ CSS seccion portada y submenu
 }
 .contenedor-submenu ul li{
   list-style: none;
+  align-items: center;
+  border-radius: .5em;
+  padding: 5px 10px;
+  
 }
 .contenedor-submenu ul li a{
-text-decoration: none;
-text-transform: capitalize;
+  text-decoration: none;
+  text-transform: capitalize;
+  
+}
+.contenedor-submenu ul li.active{
+  background-color: #14CC5E;
 }
 .contenedor-grilla-portada{
   display: grid;
