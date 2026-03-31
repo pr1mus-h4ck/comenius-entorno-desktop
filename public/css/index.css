@@ -763,6 +763,11 @@ CSS seccion portada y submenu
   }
 
 /* CSS lista de Trabajos Publicados */
+.trabajos{
+display: flex;
+flex-direction: column;
+gap: 10px;
+}
 .trabajo{
   background-color: white;
   padding: 10px;
@@ -870,6 +875,7 @@ CSS seccion portada y submenu
 }
 .lista-alumno-fondo h2{
   padding-bottom: 5px;
+  color: #14CC5E;
 }
 .alumno{
   background-color: #EEEEEE;
@@ -881,6 +887,11 @@ CSS seccion portada y submenu
 }
 .alumno a{
   text-decoration: none;
+}
+#listaAlumnos{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 a:visited {
   color: #000000;
@@ -1189,6 +1200,7 @@ text-decoration: none;
   background-color: #EEEEEE;
   padding: 5px;
   border-radius: 7px;
+  height: 350px;
 }
 .prueba-chat{
   margin-top: 7px;
