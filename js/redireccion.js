@@ -126,7 +126,7 @@ function redireccionarOTP(req, res, sesiones, procesoOTP, datosRecibidos) {
     let sinConfirmarOtp = {
         alert: true,
         alertTitle: 'Error',
-        alertMessage: 'Alcanzaste el límite',
+        alertMessage: datosRecibidos.mensaje,
         type: 'error',
     }
     // Mensaje de Alerta cuando se intenta Confirmar Código OTP sin ingresar algún valor a los input
@@ -148,13 +148,8 @@ function redireccionarOTP(req, res, sesiones, procesoOTP, datosRecibidos) {
         res.locals.alert = confirmarOtp;
         res.render('otp', {sesiones, procesoOTP});
     } else if (datosRecibidos.tipo === 'aviso') {
-        if (datosRecibidos.intentos === 0) {
-            res.locals.alert = avisoIntentosOtp;
-            res.render('login');
-        } else {
-            res.locals.alert = avisoIntentosOtp;
-            res.render('otp', {sesiones, procesoOTP});
-        }
+        res.locals.alert = avisoIntentosOtp;
+        res.render('otp', {sesiones, procesoOTP});
     } else if (datosRecibidos.tipo === 'errorConfirmar') {
         res.locals.alert = sinConfirmarOtp;
         res.render('login');
