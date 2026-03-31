@@ -1079,7 +1079,7 @@ margin-bottom: 5px;
   gap: 5px;
 }
 .div-btn-textarea textarea{
-  width: 84%;
+  width: 80%;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -1087,7 +1087,7 @@ margin-bottom: 5px;
   font-family: "Lato", sans-serif;
 }
 .div-btn-textarea input{
-  width: 8%;
+  width: 10%;
   border: none;
     border-radius: 4px;
     background-color: #14CC5E;
@@ -1095,7 +1095,7 @@ margin-bottom: 5px;
     cursor: pointer;
 }
 .div-btn-textarea button{
-  width: 8%;
+  width: 10%;
   border: none;
     border-radius: 4px;
     background-color: #14CC5E;
