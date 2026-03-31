@@ -56,6 +56,13 @@ function redireccionarLogin(req, res, datosRecibidos) {
          alertMessage: 'En este momento ha ocurrido un error al establecer conexión con el servidor, vuelva intentarlo más tarde',
         type: 'error',
     }
+    // Mensaje de Alerta cuando la cuenta usuario está bloqueado
+    let sinConfirmarLogin = {
+        alert: true,
+        alertTitle: 'Error',
+        alertMessage: datosRecibidos.mensaje,
+        type: 'error',
+    }
     // Fin de Toda la lógica de las ventanas emergentes
     // Lógica de Renderización
     if (datosRecibidos.tipo === 'exito') {
@@ -81,6 +88,9 @@ function redireccionarLogin(req, res, datosRecibidos) {
         res.render('login');
     } else if (datosRecibidos.tipo === 'problemaServidorIndex') {
         res.locals.alert = problemaServidorIndex;
+        res.render('login');
+    } else if (datosRecibidos.tipo === 'errorLogin') {
+        res.locals.alert = sinConfirmarLogin;
         res.render('login');
     } else {
         // Si no hay 'datosRecibidos.tipo', renderizar siempre a Login
