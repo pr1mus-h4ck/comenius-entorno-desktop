@@ -1093,6 +1093,13 @@ margin-bottom: 5px;
   box-sizing: border-box;
   font-family: "Lato", sans-serif;
 }
+.div-btn-textarea textarea:hover{
+  border: 1px solid #14CC5E;
+}
+.div-btn-textarea textarea:focus{
+  outline: none;
+  border: 1px solid #14CC5E;
+}
 .div-btn-textarea input{
   width: 10%;
   border: none;
@@ -1176,6 +1183,13 @@ background-color: white;
     border-radius: 4px;
     box-sizing: border-box;
     font-family: "Lato", sans-serif;
+}
+.btn-chat-form textarea:hover{
+   border-color: #14CC5E;
+}
+.btn-chat-form textarea:focus{
+  outline: none;
+  border-color: 1px solid #14CC5E;
 }
 .btn-enviar-chat{
   padding: 12px;
@@ -1480,6 +1494,15 @@ text-decoration: none;
 }
 .btn-form{
   width: 100%;
+}
+.form-publicacion{
+  flex-direction: column;
+}
+.form-publicacion input{
+  width: 100%;
+}
+.titulo{
+  max-width: 100%;
 }
 }
 /*Query para resolucion de IgnacioMauro*/
