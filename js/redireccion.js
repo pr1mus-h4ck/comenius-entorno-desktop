@@ -18,7 +18,7 @@ function redireccionarLogin(req, res, datosRecibidos) {
     let limiteAlcanzado = {
         alert: true,
         alertTitle: 'Error',
-        alertMessage: 'Alcanzaste el límite',
+        alertMessage: datosRecibidos.mensaje,
         type: 'error',
     }
     // Mensaje de Alerta cuando se intenta Iniciar la Sesión sin ingresar algún valor a los input
