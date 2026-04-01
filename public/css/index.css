@@ -153,7 +153,7 @@ input[type="password"]:hover, input[type="email"]:hover {
 }
 .btn-style:hover{
   background-color: white;
-  outline: 2px solid #14CC5E;
+  outline: 3px solid #14CC5E;
   color: #14CC5E;
   transition: .2s;
 }
@@ -1112,9 +1112,15 @@ margin-bottom: 5px;
   width: 10%;
   border: none;
     border-radius: 4px;
-    background-color: #14CC5E;
+    background-color: #14CCBA;
     color: white;
     cursor: pointer;
+}
+.div-btn-textarea button:hover{
+  background-color: white;
+  outline: 3px solid #14CCBA;
+  color: #14CCBA;
+  transition: .2s
 }
 
 /*CSS Seccion EntregaTrabajos */
