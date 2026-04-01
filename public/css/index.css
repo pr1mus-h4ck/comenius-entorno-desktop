@@ -338,6 +338,10 @@ input[type="password"]:hover, input[type="email"]:hover {
   height: 32px;
   width: 32px;
 }
+#sidebar button:hover img {
+    /* Estilos para la imagen en estado hover */
+    content: url('../img/logout-white.svg'); /* Cambia la imagen */
+}
 #sidebar ul li a.active{ /*Aca estaria el problema del active*/
   background-color: #14CC5E;
 }
