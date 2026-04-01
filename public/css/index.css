@@ -602,6 +602,9 @@ CSS seccion portada y submenu
 .contenedor-submenu ul li.active{
   background-color: #14CC5E;
 }
+.contenedor-submenu ul li:hover{
+  background-color: #14CC5E;
+}
 .contenedor-grilla-portada{
   display: grid;
   grid-template-columns: repeat(12, 1fr);

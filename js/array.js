@@ -12,14 +12,14 @@ const menuRol = {
 // Array del menú de la interfaz de la app con sus respectivos roles en la sección de las comisiones
 const menuMateria = {
     alumno: [
-        { image: './recursos/img/icon-portada-black.svg', label: 'Portada' },
-        { image: './recursos/img/icon-panel-clase-black.svg', label: 'Panel de Clase' },
-        { image: './recursos/img/icon-trabajos-black.svg', label: 'Trabajos' },
+        { image: './recursos/img/icon-portada-black.svg', label: 'Portada', imageHover: './recursos/img/icon-portada-white.svg' },
+        { image: './recursos/img/icon-panel-clase-black.svg', label: 'Panel de Clase', imageHover: './recursos/img/icon-panel-clase-white.svg' },
+        { image: './recursos/img/icon-trabajos-black.svg', label: 'Trabajos', imageHover: './recursos/img/icon-trabajos-white.svg' },
     ],
     instructor: [
-        { image: './recursos/img/icon-portada-black.svg', label: 'Portada' },
-        { image: './recursos/img/icon-panel-clase-black.svg', label: 'Panel de Clase' },
-        { image: './recursos/img/icon-trabajos-black.svg', label: 'Trabajos' },
+        { image: './recursos/img/icon-portada-black.svg', label: 'Portada', imageHover: './recursos/img/icon-portada-white.svg' },
+        { image: './recursos/img/icon-panel-clase-black.svg', label: 'Panel de Clase', imageHover: './recursos/img/icon-panel-clase-white.svg' },
+        { image: './recursos/img/icon-trabajos-black.svg', label: 'Trabajos', imageHover: './recursos/img/icon-trabajos-white.svg' },
     ],
 }
 // Exporto como módulos estos arrays
