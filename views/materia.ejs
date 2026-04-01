@@ -7,7 +7,7 @@
                     <%
                         // Determina la fuente de imagen correcta
                         let imgSrc = item.image;
-                        let isActive = sesiones.item && !sesiones.enlace && item.label === 'Portada' || sesiones.enlace === 'Portada' && item.label === 'Portada' || sesiones.enlace === 'panel_de_clase' && item.label === 'Panel de Clase' || sesiones.enlace === 'trabajos' && item.label === 'Trabajos';
+                        let isActive = sesiones.rol && !sesiones.enlace && item.label === 'Portada' || sesiones.enlace === 'Portada' && item.label === 'Portada' || sesiones.enlace === 'panel_de_clase' && item.label === 'Panel de Clase' || sesiones.enlace === 'trabajos' && item.label === 'Trabajos';
                         // Lógica para determinar si el elemento está activo
                         if (isActive && item.imageHover) {
                             imgSrc = item.imageHover;
