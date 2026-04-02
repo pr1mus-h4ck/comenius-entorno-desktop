@@ -341,6 +341,16 @@
     }
 </script>
 <!-- Fin de Función de Crear Chat -->
+<!-- Función para desplazar el chat al final -->
+<script>
+    function desplazarChatAbajo() {
+        const chatDiv = document.getElementById('chat');
+        if (chatDiv) {
+            chatDiv.scrollTop = chatDiv.scrollHeight;
+        }
+    }
+</script>
+<!-- Fin de Función para desplazar el chat al final -->
 <!-- Función de Actualizar Chat -->
 <script>
     function actualizarChatTrabajo() {
@@ -372,6 +382,8 @@
                     // Agrega el HTML al contenedor
                     listarChat.innerHTML += html;
                 });
+                // Llama a desplazarChatAbajo DESPUÉS de que el contenido se haya añadido
+                desplazarChatAbajo();
             } else {
                 const html = `
                     <p>${recibido.mensaje}</p>
