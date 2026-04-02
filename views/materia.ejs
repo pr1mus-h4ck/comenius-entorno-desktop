@@ -95,10 +95,18 @@
         if(!visible) {
             formulario.style.display = 'flex';
             boton.textContent = 'Ocultar Formulario';
+            boton.classList.add('btn-ocultar'); // Añade la clase para el estado ocultar
+            boton.classList.remove('input-enviar'); // Remueve la clase para el estado mostrar
+            boton.classList.remove('btn-style'); // Remueve la clase para el estado mostrar
+            boton.classList.remove('btn-active'); // Remueve la clase para el estado mostrar
             visible = true;
         } else {
             formulario.style.display = 'none';
             boton.textContent = 'Mostrar Formulario';
+            boton.classList.add('input-enviar'); // Añade la clase para el estado ocultar
+            boton.classList.add('btn-style'); // Añade la clase para el estado ocultar
+            boton.classList.add('btn-active'); // Añade la clase para el estado ocultar
+            boton.classList.remove('btn-ocultar'); // Remueve la clase para el estado mostrar
             visible = false;
         }
     })
