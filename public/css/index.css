@@ -395,6 +395,9 @@ input[type="password"]:hover, input[type="email"]:hover {
 #sidebar .sub-menu.show{
   grid-template-rows: 1fr;
 }
+#sidebar .iconCVSMobile {
+  display: none;
+}
 .rotate svg:last-child{
   rotate: 180deg;
 }
@@ -1308,7 +1311,6 @@ text-decoration: none;
   .icon-exit{
     margin-top: auto;
   }
-
 }
 /*Media Query particular del formato y distribucion del loguin*/   
 @media screen and (max-width: 768px) {
@@ -1483,8 +1485,14 @@ text-decoration: none;
       }
     }
   
-   /*Seccion materias y portada*/
   }
+  #sidebar .iconCVSWeb {
+    display: none;
+  }
+  #sidebar .iconCVSMobile {
+    display: block;
+  }
+  /*Seccion materias y portada*/
   .card-materias div h2{
     text-align: center;
   }
