@@ -1297,10 +1297,11 @@ text-decoration: none;
 
 
 /*Querys de la navbar inferior que luego, se vuelve vertical para celular*/
-@media (min-width: 500px){
+@media (min-width: 501px){
   #sidebar{
    display: flex;
    flex-direction: column;
+   
   }
   #sidebar ul{
   display: flex;
@@ -1442,6 +1443,7 @@ text-decoration: none;
     position: fixed;
     top: unset;
     bottom: 0;
+    align-items: center;
 
     > ul{
       padding: 0;
@@ -1491,6 +1493,7 @@ text-decoration: none;
   }
   #sidebar .iconCVSMobile {
     display: block;
+    height: 50px;
   }
   /*Seccion materias y portada*/
   .card-materias div h2{
