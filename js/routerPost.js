@@ -221,6 +221,19 @@ app.post('/cerrar-sesion', (req, res) => {
             funciones.login(req, res, datosRecibidos);
         }
     })
+    .catch(error => {
+        // Elimino todas las Cookies de la app
+        funciones.eliminarCookies(cookies);
+        // Guardo las Cookies con el valor vacio
+        funciones.getCookies(cookieSession, cookies);
+        // Establezco 'config.envioOTP' son su valor de origen
+        config.envioOTP = false;
+        let datosRecibidos = {
+            tipo: "cerrarSesion",
+        }
+        // Renderizo el Login
+        funciones.login(req, res, datosRecibidos);
+    })
 });
 app.post('/cancelar-autenticacion', (req, res) => {
     let sesiones = {

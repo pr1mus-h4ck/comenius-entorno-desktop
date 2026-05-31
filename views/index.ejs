@@ -140,6 +140,22 @@
             // Mostrar el botón en caso de error o advertencia
             document.getElementById('boton-alerta-personalizada').style.display = 'block';
         }
+        function servidorAviso() {
+            // Activo el estilo bloqueado, '#contenido' por 'alertas.css'
+            document.getElementById('contenido').style.display = 'block';
+            // Activo el estilo bloqueado, '#alerta-personalizada' por 'alertas.css'
+            document.getElementById('alerta-personalizada').style.display = 'block';
+            // Agrego una clase a la etiqueca con la ID '#alerta-personalizada' para cambiar el color de la alerta
+            document.getElementById('alerta-personalizada').classList.add('error');
+            // Agrego texto a la etiqueta con la ID '#titulo-alerta-personalizada'
+            document.getElementById('titulo-alerta-personalizada').innerHTML = 'Error';
+            // Agrego texto a la etiqueta con la ID '#mensaje-alerta-personalizada'
+            document.getElementById('mensaje-alerta-personalizada').innerHTML = 'En este momento ha ocurrido un error al establecer conexión con el servidor, vuelva intentarlo más tarde';
+            // Mostrar el botón en caso de error o advertencia
+            document.getElementById('boton-alerta-cerrar').style.display = 'block';
+            // Línea para modificar el botón #boton-alerta-cerrar
+            document.querySelector('#boton-alerta-cerrar > button').innerHTML = 'Aceptar';
+        }
         // Función para redirigir a la ruta '/'
         function redirigir() {
             // Carga la ventana en la ruta '/'

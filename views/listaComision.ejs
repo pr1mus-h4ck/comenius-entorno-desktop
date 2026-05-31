@@ -31,6 +31,9 @@
                 // Agrega el HTML al contenedor
                 listaComision.innerHTML += html;
             });
+        })
+        .catch(error => {
+            servidorAviso();
         });
     }
     actualizarListaComision();
