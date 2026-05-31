@@ -4,7 +4,7 @@
         <!-- Formulario para la Creación de Publicación -->
         <form id="formulario" action="/crearPublicacion" method="POST" onsubmit="enviarPublicacion(event)" class="form-publicacion">
             <input type="text" id="publicacion-titulo" placeholder="Titulo (opcional)" name="publicacion-titulo" class="input-respuesta titulo">
-            <input type="text" id="publicacion" placeholder="Contenido" name="publicacion" class="input-respuesta">
+            <input type="text" id="publicacion" placeholder="Contenido" name="publicacion" class="input-respuesta" required>
             <input type="submit" value="Enviar" class="input-enviar btn-style"> 
         </form>
         <!-- Fin de Formulario para la Creación de Publicación -->
@@ -58,6 +58,8 @@
                 // Muestra un mensaje de error al usuario
                 console.error('Error al crear publicación:', error);
             });
+        } else {
+            panelClaseAviso();
         }
         document.getElementById('publicacion-titulo').value = '';
         document.getElementById('publicacion').value = '';

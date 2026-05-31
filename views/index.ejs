@@ -125,6 +125,21 @@
             // Mostrar el botón en caso de error o advertencia
             document.getElementById('boton-alerta-personalizada').style.display = 'block';
         }
+        // Función para visualizar campos obligatorios panel_de_clase.ejs
+        function panelClaseAviso() {
+            // Activo el estilo bloqueado, '#contenido' por 'alertas.css'
+            document.getElementById('contenido').style.display = 'block';
+            // Activo el estilo bloqueado, '#alerta-personalizada' por 'alertas.css'
+            document.getElementById('alerta-personalizada').style.display = 'block';
+            // Agrego una clase a la etiqueca con la ID '#alerta-personalizada' para cambiar el color de la alerta
+            document.getElementById('alerta-personalizada').classList.add('obligatorio');
+            // Agrego texto a la etiqueta con la ID '#titulo-alerta-personalizada'
+            document.getElementById('titulo-alerta-personalizada').innerHTML = 'Campos Obligatorios';
+            // Agrego texto a la etiqueta con la ID '#mensaje-alerta-personalizada'
+            document.getElementById('mensaje-alerta-personalizada').innerHTML = 'El campo "Contenido" es obligatorio';
+            // Mostrar el botón en caso de error o advertencia
+            document.getElementById('boton-alerta-personalizada').style.display = 'block';
+        }
         // Función para redirigir a la ruta '/'
         function redirigir() {
             // Carga la ventana en la ruta '/'
