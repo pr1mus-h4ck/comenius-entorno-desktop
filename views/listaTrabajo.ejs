@@ -8,7 +8,7 @@
                 <input type="text" name="titulo" id="titulo" placeholder="Titulo" required>
                 <!-- Fin de Título -->
                  <!-- Archivo -->
-                <input type="text" id="url-archivo" placeholder="URL del archivo" readonly required>
+                <input type="text" id="url-archivo" placeholder="URL del archivo" readonly>
                 <!-- Fin de Archivo -->
             </div>
             <div class="div-btn-textarea">
@@ -62,52 +62,56 @@
         event.preventDefault();
         const titulo = document.querySelector('input[name="titulo"]').value;
         const contenido = document.querySelector('textarea[name="contenidos"]').value;
-        // Crear un objeto JSON con todos los datos
-        const data = {
-            titulo: titulo,
-            contenido: contenido,
-            urlArchivos: uploadedFiles, // Enviar array con información de cada archivo
-        };
-        fetch('/crearTrabajos', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json' // Especificar que estamos enviando JSON
-            },
-            body: JSON.stringify(data), // Convertir el objeto a JSON
-        })
-        .then(recibir => {
-            if (!recibir.ok) {
-                throw new Error('Error en la solicitud');
-            }
-            return recibir.json();
-        })
-        .then(recibido => {
-            if (recibido.ok) {
-                // Limpiar campos de formulario
-                uploadedFiles = []; // Reiniciar array
-                urlArchivoInput.value = '';
-                document.getElementById("titulo").value = '';
-                document.getElementById("contenidos").value = '';
-                // Activo el estilo bloqueado, '#contenido' por 'alertas.css'
-                document.getElementById('contenido').style.display = 'block';
-                // Activo el estilo bloqueado, '#alerta-personalizada' por 'alertas.css'
-                document.getElementById('alerta-personalizada').style.display = 'block';
-                // Agrego texto a la etiqueta con la ID '#titulo-alerta-personalizada'
-                document.getElementById('titulo-alerta-personalizada').innerText = '¡Muy Bien!';
-                // Agrego texto a la etiqueta con la ID '#mensaje-alerta-personalizada'
-                document.getElementById('mensaje-alerta-personalizada').innerText = '¡Se ha creado la publicación con éxito!';
-                // Agrego una clase a la etiqueca con la ID '#alerta-personalizada' para cambiar el color de la alerta
-                document.getElementById('alerta-personalizada').classList.add('exito');
-                setTimeout(function(){
-                    // Redireccionar a la página principal después de 1500 milisegundos en caso de éxito
-                    window.location.href = '/';
-                }, 1500);
-            }
-
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+        if (titulo !== '' && contenido !== '') {
+            // Crear un objeto JSON con todos los datos
+            const data = {
+                titulo: titulo,
+                contenido: contenido,
+                urlArchivos: uploadedFiles, // Enviar array con información de cada archivo
+            };
+            fetch('/crearTrabajos', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json' // Especificar que estamos enviando JSON
+                },
+                body: JSON.stringify(data), // Convertir el objeto a JSON
+            })
+            .then(recibir => {
+                if (!recibir.ok) {
+                    throw new Error('Error en la solicitud');
+                }
+                return recibir.json();
+            })
+            .then(recibido => {
+                if (recibido.ok) {
+                    // Limpiar campos de formulario
+                    uploadedFiles = []; // Reiniciar array
+                    urlArchivoInput.value = '';
+                    document.getElementById("titulo").value = '';
+                    document.getElementById("contenidos").value = '';
+                    // Activo el estilo bloqueado, '#contenido' por 'alertas.css'
+                    document.getElementById('contenido').style.display = 'block';
+                    // Activo el estilo bloqueado, '#alerta-personalizada' por 'alertas.css'
+                    document.getElementById('alerta-personalizada').style.display = 'block';
+                    // Agrego texto a la etiqueta con la ID '#titulo-alerta-personalizada'
+                    document.getElementById('titulo-alerta-personalizada').innerText = '¡Muy Bien!';
+                    // Agrego texto a la etiqueta con la ID '#mensaje-alerta-personalizada'
+                    document.getElementById('mensaje-alerta-personalizada').innerText = '¡Se ha creado la publicación con éxito!';
+                    // Agrego una clase a la etiqueca con la ID '#alerta-personalizada' para cambiar el color de la alerta
+                    document.getElementById('alerta-personalizada').classList.add('exito');
+                    setTimeout(function(){
+                        // Redireccionar a la página principal después de 1500 milisegundos en caso de éxito
+                        window.location.href = '/';
+                    }, 1500);
+                }
+    
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        } else {
+            listaTrabajosAviso();
+        }
     }
 </script>
 <!-- Fin de Crear Trabajos -->

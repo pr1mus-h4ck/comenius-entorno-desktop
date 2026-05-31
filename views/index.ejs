@@ -57,13 +57,14 @@
     <div id="contenido" class="contenido"></div>
     <div id="alerta-personalizada" class="alerta-personalizada">
         <div class="contenido-alerta-personalizada">
-        <h2 id="titulo-alerta-personalizada"></h2>
-        <p id="mensaje-alerta-personalizada"></p>
-        <button id="boton-alerta-personalizada" onclick="redirigir()">Aceptar</button>
-        <form id="boton-alerta-cerrar" action="/cerrar-sesion" method="post">
-            <button type="submit">Si, quiero Cerrar la Sesión</button>
-        </form>
-        <button id="boton-alerta-no-cerrar" onclick="redirigir()">No, me equivoque</button>
+            <h2 id="titulo-alerta-personalizada"></h2>
+            <p id="mensaje-alerta-personalizada"></p>
+            <button id="boton-alerta-personalizada" onclick="redirigir()">Aceptar</button>
+            <form id="boton-alerta-cerrar" action="/cerrar-sesion" method="post">
+                <button type="submit">Si, quiero Cerrar la Sesión</button>
+            </form>
+            <button id="boton-alerta-no-cerrar" onclick="redirigir()">No, me equivoque</button>
+        </div>
     </div>
     <!-- Fin de Etiquetas cuando se activa una alerta -->
     <script>
@@ -108,6 +109,21 @@
             document.getElementById('boton-alerta-cerrar').style.display = 'block';
             // Activo el estilo bloqueado, '#boton-alerta-no-cerrar' por 'alertas.css'
             document.getElementById('boton-alerta-no-cerrar').style.display = 'block';
+        }
+        // Función para visualizar campos obligatorios listaTrabajos.ejs
+        function listaTrabajosAviso() {
+            // Activo el estilo bloqueado, '#contenido' por 'alertas.css'
+            document.getElementById('contenido').style.display = 'block';
+            // Activo el estilo bloqueado, '#alerta-personalizada' por 'alertas.css'
+            document.getElementById('alerta-personalizada').style.display = 'block';
+            // Agrego una clase a la etiqueca con la ID '#alerta-personalizada' para cambiar el color de la alerta
+            document.getElementById('alerta-personalizada').classList.add('obligatorio');
+            // Agrego texto a la etiqueta con la ID '#titulo-alerta-personalizada'
+            document.getElementById('titulo-alerta-personalizada').innerHTML = 'Campos Obligatorios';
+            // Agrego texto a la etiqueta con la ID '#mensaje-alerta-personalizada'
+            document.getElementById('mensaje-alerta-personalizada').innerHTML = 'Los campos "Título" y "Contenido" son obligatorios';
+            // Mostrar el botón en caso de error o advertencia
+            document.getElementById('boton-alerta-personalizada').style.display = 'block';
         }
         // Función para redirigir a la ruta '/'
         function redirigir() {
