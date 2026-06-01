@@ -141,7 +141,7 @@
             document.getElementById('trabajoInstructor').innerHTML = html;
         })
         .catch(error => {
-            console.error('Error al actualizar los trabajos:', error);
+            servidorAviso();
         });
     }
     actualizarTrabajoInstructor(); 
@@ -190,7 +190,7 @@
             document.getElementById('trabajoAlumno').innerHTML = html;
         })
         .catch(error => {
-            console.error('Error al actualizar los trabajos:', error);
+            servidorAviso();
         });
     }
     actualizarTrabajoAlumno();
@@ -291,7 +291,10 @@
                 // Si sale error cargar en la consola del Navegador el error
                 console.error('Error al hacer la petición');
             }
-        });
+        })
+        .catch(error => {
+            servidorAviso();
+        })
     }
 </script>
 <!-- Fid de la Funsión de Crear Trabajos de Alumnos -->
@@ -316,30 +319,33 @@
                 body: JSON.stringify(data), // Convertir el objeto a JSON
             })
             .then(respuesta => {
-            // Si la respuesta es correcta
-            if (respuesta.ok) {
-                // Limpiar campo textarea del chat
-                document.getElementById("chatInput").value = '';
-                // Activo el estilo bloqueado, '#contenido' por 'alertas.css'
-                document.getElementById('contenido').style.display = 'block';
-                // Activo el estilo bloqueado, '#alerta-personalizada' por 'alertas.css'
-                document.getElementById('alerta-personalizada').style.display = 'block';
-                // Agrego texto a la etiqueta con la ID '#titulo-alerta-personalizada'
-                document.getElementById('titulo-alerta-personalizada').innerText = '¡Muy Bien!';
-                // Agrego texto a la etiqueta con la ID '#mensaje-alerta-personalizada'
-                document.getElementById('mensaje-alerta-personalizada').innerText = '¡Se ha enviado su mensaje con éxito';
-                // Agrego una clase a la etiqueca con la ID '#alerta-personalizada' para cambiar el color de la alerta
-                document.getElementById('alerta-personalizada').classList.add('exito');
-                setTimeout(function(){
-                    // Redireccionar a la página principal después de 1500 milisegundos en caso de éxito
-                    window.location.href = '/';
-                }, 1500);
-            } else {
-                // FIXME: cambiar el cosole.error por una ventana emergente
-                // Si sale error cargar en la consola del Navegador el error
-                console.error('Error al hacer la petición');
-            }
-        });
+                // Si la respuesta es correcta
+                if (respuesta.ok) {
+                    // Limpiar campo textarea del chat
+                    document.getElementById("chatInput").value = '';
+                    // Activo el estilo bloqueado, '#contenido' por 'alertas.css'
+                    document.getElementById('contenido').style.display = 'block';
+                    // Activo el estilo bloqueado, '#alerta-personalizada' por 'alertas.css'
+                    document.getElementById('alerta-personalizada').style.display = 'block';
+                    // Agrego texto a la etiqueta con la ID '#titulo-alerta-personalizada'
+                    document.getElementById('titulo-alerta-personalizada').innerText = '¡Muy Bien!';
+                    // Agrego texto a la etiqueta con la ID '#mensaje-alerta-personalizada'
+                    document.getElementById('mensaje-alerta-personalizada').innerText = '¡Se ha enviado su mensaje con éxito';
+                    // Agrego una clase a la etiqueca con la ID '#alerta-personalizada' para cambiar el color de la alerta
+                    document.getElementById('alerta-personalizada').classList.add('exito');
+                    setTimeout(function(){
+                        // Redireccionar a la página principal después de 1500 milisegundos en caso de éxito
+                        window.location.href = '/';
+                    }, 1500);
+                } else {
+                    // FIXME: cambiar el cosole.error por una ventana emergente
+                    // Si sale error cargar en la consola del Navegador el error
+                    console.error('Error al hacer la petición');
+                }
+            })
+            .catch(error => {
+                servidorAviso();
+            })
         }
     }
 </script>
@@ -394,7 +400,10 @@
                 // Agrega el HTML al contenedor
                 listarChat.innerHTML += html;
             }
-        });
+        })
+        .catch(error => {
+            servidorAviso();
+        })
     }
     actualizarChatTrabajo();
 </script>

@@ -83,7 +83,10 @@
                 `;
             });
             listaComision.innerHTML = html;
-        });
+        })
+        .catch(error => {
+            servidorAviso();
+        })
     }
     actualizarComision();
 </script>

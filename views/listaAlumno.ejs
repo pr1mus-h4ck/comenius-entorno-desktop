@@ -30,7 +30,10 @@
             });
             const listaAlumnos = document.getElementById('listaAlumnos');
             listaAlumnos.innerHTML = html; // Asigna el HTML generado a la lista
-        });
+        })
+        .catch(error => {
+            servidorAviso();
+        })
     }
     function guardarIdEnCookie(id) {
         const dato = {

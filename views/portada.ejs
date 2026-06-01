@@ -40,7 +40,10 @@
                 // Agrega el HTML al contenedor
                 contenidoPortada.innerHTML += html;
             }
-        });
+        })
+        .catch(error => {
+            servidorAviso();
+        })
     }
     actualizarPortada();
 </script>

@@ -107,7 +107,7 @@
     
             })
             .catch(error => {
-                console.error('Error:', error);
+                servidorAviso();
             });
         } else {
             listaTrabajosAviso();
@@ -171,7 +171,10 @@
                 }
             });
             // --- Fin del Código del Hover ---
-        });
+        })
+        .catch(error => {
+            servidorAviso();
+        })
     }
     function guardarIdEnCookie(id) {
         const dato = {

@@ -55,8 +55,7 @@
                 }
             })
             .catch(error => {
-                // Muestra un mensaje de error al usuario
-                console.error('Error al crear publicación:', error);
+                servidorAviso();
             });
         } else {
             panelClaseAviso();
@@ -137,6 +136,9 @@
                 listaPublicacion.innerHTML += html;
             }
         })
+        .catch(error => {
+            servidorAviso();
+        })
     }
     actualizarPublicacion();
 </script>
@@ -183,8 +185,7 @@
                 }
             })
             .catch(error => {
-                // Muestra un mensaje de error al usuario
-                console.error('Error al crear comentario:', error);
+                servidorAviso();
             });
         }
         document.getElementById('comentario').value = '';
