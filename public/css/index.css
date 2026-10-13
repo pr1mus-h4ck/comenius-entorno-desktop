@@ -341,6 +341,10 @@ input[type="password"]:hover, input[type="email"]:hover {
   list-style: none;
   align-items: center;
 }
+#sidebar .iconCVSWeb{
+margin-bottom: 10%;
+}
+
 #sidebar button{
     border: none;
     background-color: transparent;
@@ -1294,14 +1298,18 @@ text-decoration: none;
 .btn-100{
   width: 100%;
 }
-
+.section-publicacion,
+.contenido-respuesta,
+.prueba-chat{
+    overflow: hidden;
+    overflow-wrap: anywhere;
+}
 
 /*Querys de la navbar inferior que luego, se vuelve vertical para celular*/
 @media (min-width: 501px){
   #sidebar{
    display: flex;
    flex-direction: column;
-   
   }
   #sidebar ul{
   display: flex;
